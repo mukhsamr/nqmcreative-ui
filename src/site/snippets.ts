@@ -9,7 +9,7 @@
 
 export const install = `bun add @nqmcreative/ui`;
 
-export const installGit = `bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git`;
+export const installGit = `bun add github:mukhsamr/nqmcreative-ui`;
 
 export const installTarball = `# in the library repo
 bun run build && bun pm pack

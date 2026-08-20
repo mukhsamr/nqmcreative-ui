@@ -120,10 +120,10 @@
 
 	<h3 class="pt-2 font-sans text-sm font-medium text-text">Straight from GitHub</h3>
 	<p class="font-sans text-sm leading-relaxed text-text-secondary">
-		Tracks <code class="font-mono text-brand">main</code> rather than a release. Use
-		<code class="font-mono text-brand">git+ssh://</code>, not
-		<code class="font-mono text-brand">git+https://</code> — bun resolves https GitHub URLs through the
-		API, which 404s on a private repo.
+		Tracks <code class="font-mono text-brand">main</code> rather than a release. The repo is public,
+		so this needs no authentication — no SSH key, no token.
+		<code class="font-mono text-brand">git+https://github.com/…</code> resolves to the same thing;
+		bun rewrites both to <code class="font-mono text-brand">github:owner/repo#sha</code>.
 	</p>
 	<CodeBlock code={code.installGit} label="terminal" />
 

@@ -235,7 +235,7 @@ bun run build     # svelte-package + publint -> dist/
 Consuming projects read from `dist/`, not `src/`, and nothing builds it for
 them: bun blocks a dependency's `prepare` script, and even once trusted it
 runs without `node_modules/.bin` on PATH, so `svelte-kit` is not found.
-Shipping the build output is what keeps `bun add git+ssh://…` working.
+Shipping the build output is what keeps installing from GitHub working.
 
 ```bash
 bun run build && git add dist
@@ -291,12 +291,15 @@ Update with `bun update @nqmcreative/ui`.
 Tracks `main` rather than a release.
 
 ```bash
-bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+bun add github:mukhsamr/nqmcreative-ui
 ```
 
+The repo is public, so this needs no authentication — no SSH key, no token.
+`git+https://github.com/mukhsamr/nqmcreative-ui.git` resolves to the same
+thing; bun rewrites both to `github:owner/repo#sha`.
+
 `dist/` is committed, so this works as-is: nothing has to be built at install
-time. Use `git+ssh://` rather than `git+https://` — bun resolves https GitHub
-URLs through the API, which 404s on a private repo.
+time.
 
 > bun caches git dependencies by URL and will not notice new commits. Pin a
 > commit or tag with `#sha`, or clear the cache with `bun pm cache rm`.
@@ -372,7 +375,7 @@ cd myapp && bun add -d tailwindcss @tailwindcss/vite
 ```
 
 ```bash
-bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+bun add @nqmcreative/ui
 ```
 
 Register the Tailwind plugin **before** `sveltekit()` in `vite.config.ts`:
