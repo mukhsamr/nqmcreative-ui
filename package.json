@@ -4,16 +4,17 @@
 	"description": "Svelte 5 + Tailwind CSS component library styled after nqmcreative.com",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run prepack",
+		"build": "vite build && npm run package && publint",
+		"package": "svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"prepack": "svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && publint",
+		"prepare": "svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs",
+		"prepack": "publint",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write .",
 		"test": "vitest run",
-		"test:watch": "vitest"
+		"test:watch": "vitest",
+		"lint": "prettier --check . && eslint .",
+		"format": "prettier --write ."
 	},
 	"files": [
 		"dist",
@@ -68,5 +69,11 @@
 		"tailwindcss",
 		"components",
 		"design-system"
-	]
+	],
+	"license": "MIT",
+	"author": "NQM Creative",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mukhsamr/nqmcreative-ui.git"
+	}
 }

@@ -242,43 +242,108 @@ Tests cover the logic that is easy to get quietly wrong: the date helpers
 (flip and viewport clamping), `Table` (numeric vs. string sorting, selection
 after a sort), and `Dropzone` (type, size and count rules).
 
-## Using it in another project
+## Installing it in another project
 
-Not published to npm — install it from a local build. Two routes, both verified
-on Windows against a fresh Vite + Svelte 5 + Tailwind v4 project:
+Not on npm. Three routes — pick by how you work.
 
-**Option A — a packed tarball (recommended).** Portable, works with bun and npm,
-and is what you would copy to a colleague or a CI cache.
+### Option A — straight from GitHub (recommended)
+
+`prepare` builds `dist/` after the clone, so nothing needs to be packed or
+copied by hand.
 
 ```bash
-# in this repo
-npm pack          # runs the build, writes nqmcreative-ui-0.0.1.tgz
+npm i git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+```
+
+While the repo is private, the installing machine needs access to it — an SSH
+key on the account, or `gh auth login`. Use `git+ssh://` rather than
+`git+https://` so nothing prompts for a password.
+
+Pull later changes with `npm update @nqmcreative/ui`, which tracks the tip of
+`main`. To pin instead, tag a release and append it:
+
+```bash
+npm i git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git#v0.0.1
+```
+
+### Option B — a packed tarball
+
+Portable, no repo access needed — hand it to a colleague or drop it in a CI
+cache.
+
+```bash
+npm pack                      # in this repo; writes nqmcreative-ui-0.0.1.tgz
 ```
 
 ```bash
-# in your other project
-bun add ./path/to/nqmcreative-ui-0.0.1.tgz
+bun add ./nqmcreative-ui-0.0.1.tgz   # in your other project
 ```
 
 Re-pack and re-add after every change to `src/lib`.
 
-**Option B — a live symlink, for developing both at once.** Use npm here:
+### Option C — a live symlink, for developing both at once
 
 ```bash
-# in your other project
 npm install file:../path/to/nqmcreative-ui
 ```
 
-npm symlinks the folder, so `bun run build` in this repo is picked up without
-reinstalling.
+npm symlinks the folder, so `npm run build` here shows up without reinstalling.
 
-> **`bun link` and `bun add file:<dir>` do not work here on Windows.** Both fail
-> with `EBUSY: failed opening cache/package/version dir` — bun tries to copy the
-> whole source directory, `node_modules` (160 MB) included, into its cache. The
-> tarball in option A sidesteps it; so does npm's symlink.
+> **`bun link` and `bun add file:<dir>` do not work on Windows.** Both fail with
+> `EBUSY: failed opening cache/package/version dir` — bun copies the whole
+> source directory, `node_modules` (160 MB) included, into its cache. Options A
+> and B avoid it; so does npm's symlink.
 
-**2. Peer requirements** — the consuming project brings its own `svelte` ^5 and
+### Then, in every case
+
+**1. Peer requirements** — the consuming project brings its own `svelte` ^5 and
 Tailwind CSS v4. The package itself has no runtime dependencies.
+
+**2. SvelteKit from scratch**, start to finish:
+
+```bash
+npx sv create myapp --template minimal --types ts --install npm
+cd myapp
+npm i -D tailwindcss @tailwindcss/vite
+npm i git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+```
+
+Register the Tailwind plugin **before** `sveltekit()` in `vite.config.ts`:
+
+```ts
+import tailwindcss from '@tailwindcss/vite';
+import { sveltekit } from '@sveltejs/kit/vite';
+
+export default defineConfig({
+	plugins: [tailwindcss(), sveltekit()]
+});
+```
+
+Import the CSS once, in `src/routes/+layout.svelte`, and mount `Toaster` there
+if you use toasts:
+
+```svelte
+<script lang="ts">
+	import '../app.css';
+	import { Toaster, setLocale, idID } from '@nqmcreative/ui';
+
+	setLocale(idID);
+
+	let { children } = $props();
+</script>
+
+{@render children()}
+
+<Toaster position="bottom-right" />
+```
+
+Add the font preconnect to `src/app.html`, above `%sveltekit.head%` — it belongs
+in plain HTML, because Svelte parses a bare `crossorigin` attribute as boolean
+`true` and `svelte-check` rejects it:
+
+```html
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+```
 
 **3. Wire up the CSS.** In your app's Tailwind entry CSS:
 
@@ -287,8 +352,8 @@ Tailwind CSS v4. The package itself has no runtime dependencies.
 @import '@nqmcreative/ui/theme.css';
 @import '@nqmcreative/ui/fonts.css'; /* optional */
 
-/* Tailwind v4 ignores node_modules by default — tell it to scan the
-   linked package's dist for the utility classes used inside components */
+/* Tailwind v4 ignores node_modules by default — point it at the package's
+   dist so the class names used inside the components are generated */
 @source '../node_modules/@nqmcreative/ui/dist';
 ```
 
@@ -342,3 +407,7 @@ One more rule worth knowing: never put two same-property colour utilities on
 one element (`border-hairline` + `border-brand`), because CSS order — not class
 order — decides the winner. Use the side-specific map (`toneBorderLeft`) or set
 the colour once per variant.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
