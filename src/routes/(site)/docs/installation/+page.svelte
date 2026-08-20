@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Alert from '$lib/components/Alert.svelte';
-	import CodeBlock from '$lib/site/CodeBlock.svelte';
-	import * as code from '$lib/site/snippets.js';
+	import CodeBlock from '$site/CodeBlock.svelte';
+	import * as code from '$site/snippets.js';
 </script>
 
 <svelte:head>
@@ -15,8 +15,8 @@
 <header class="flex flex-col gap-3">
 	<h1 class="font-heading text-3xl font-medium tracking-tight">Installation</h1>
 	<p class="font-sans text-lg leading-relaxed text-text-secondary">
-		The package is not on npm — install it from the repo. Everything below is verified against a
-		fresh SvelteKit project on Windows.
+		Published on npm as <code class="font-mono text-brand">@nqmcreative/ui</code>. Everything below
+		is verified against a fresh SvelteKit project on Windows.
 	</p>
 </header>
 
@@ -44,12 +44,7 @@
 	<h2 class="font-heading text-xl font-medium tracking-tight">Or by hand</h2>
 
 	<h3 class="font-sans text-sm font-medium text-text">1. Install</h3>
-	<CodeBlock code={code.installGit} label="terminal" />
-	<p class="font-sans text-sm leading-relaxed text-text-secondary">
-		Use <code class="font-mono text-brand">git+ssh://</code>, not
-		<code class="font-mono text-brand">git+https://</code> — bun resolves https GitHub URLs through the
-		API, which 404s on a private repo. The machine needs an SSH key with access.
-	</p>
+	<CodeBlock code={code.install} label="terminal" />
 
 	<h3 class="pt-2 font-sans text-sm font-medium text-text">2. The Tailwind plugin</h3>
 	<CodeBlock code={code.viteConfig} label="vite.config.ts" />
@@ -108,10 +103,10 @@
 <section class="flex flex-col gap-4">
 	<h2 class="font-heading text-xl font-medium tracking-tight">Updating</h2>
 	<CodeBlock code={code.update} label="terminal" />
-	<Alert tone="info" title="bun caches git dependencies by URL">
-		It will not notice new commits on its own. Pin a commit or a tag with
-		<code class="font-mono">#sha</code>, or clear the cache with
-		<code class="font-mono">bun pm cache rm</code>.
+	<Alert tone="info" title="Only if you installed from GitHub">
+		bun caches git dependencies by URL and will not notice new commits on its own. Pin a commit or a
+		tag with <code class="font-mono">#sha</code>, or clear the cache with
+		<code class="font-mono">bun pm cache rm</code>. Installing from npm has no such problem.
 	</Alert>
 </section>
 
@@ -122,6 +117,15 @@
 		Portable, and needs no repo access.
 	</p>
 	<CodeBlock code={code.installTarball} label="terminal" />
+
+	<h3 class="pt-2 font-sans text-sm font-medium text-text">Straight from GitHub</h3>
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Tracks <code class="font-mono text-brand">main</code> rather than a release. Use
+		<code class="font-mono text-brand">git+ssh://</code>, not
+		<code class="font-mono text-brand">git+https://</code> — bun resolves https GitHub URLs through the
+		API, which 404s on a private repo.
+	</p>
+	<CodeBlock code={code.installGit} label="terminal" />
 
 	<h3 class="pt-2 font-sans text-sm font-medium text-text">A live symlink</h3>
 	<p class="font-sans text-sm leading-relaxed text-text-secondary">

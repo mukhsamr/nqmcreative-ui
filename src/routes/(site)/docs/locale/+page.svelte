@@ -4,8 +4,8 @@
 	import Pagination from '$lib/components/Pagination.svelte';
 	import SegmentedControl from '$lib/components/SegmentedControl.svelte';
 	import Table from '$lib/components/Table.svelte';
-	import CodeBlock from '$lib/site/CodeBlock.svelte';
-	import * as code from '$lib/site/snippets.js';
+	import CodeBlock from '$site/CodeBlock.svelte';
+	import * as code from '$site/snippets.js';
 	import { enUS, idID } from '$lib/locale.svelte.js';
 
 	let lang = $state('id');

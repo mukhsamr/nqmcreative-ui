@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { categories, count } from '$lib/site/catalogue.js';
+	import { categories, count } from '$site/catalogue.js';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
-	import CodeBlock from '$lib/site/CodeBlock.svelte';
+	import CodeBlock from '$site/CodeBlock.svelte';
 	import { TONES } from '$lib/tones.js';
 
 	const swatches = [
@@ -16,7 +16,7 @@
 		{ tone: 'neutral', base: 'bg-neutral', light: 'bg-neutral-light' }
 	];
 
-	const install = `bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+	const install = `bun add @nqmcreative/ui
 bunx nqm-ui init`;
 
 	// Deliberately without the surrounding <script> tags: a literal closing tag

@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { bySlug, components } from '$lib/site/catalogue.js';
+import { bySlug, components } from '$site/catalogue.js';
 
 /** Every component page is prerendered — the site is static on Cloudflare. */
 export const prerender = true;

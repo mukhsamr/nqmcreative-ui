@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { categories, components, count } from '$lib/site/catalogue.js';
-	import { docs } from '$lib/site/docs.js';
+	import { categories, components, count } from '$site/catalogue.js';
+	import { docs } from '$site/docs.js';
 	import CommandPalette from '$lib/components/CommandPalette.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Kbd from '$lib/components/Kbd.svelte';

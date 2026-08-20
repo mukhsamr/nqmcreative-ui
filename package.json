@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
-	"version": "0.0.1",
-	"description": "Svelte 5 + Tailwind CSS component library styled after nqmcreative.com",
+	"version": "0.1.0",
+	"description": "Svelte 5 + Tailwind CSS v4 design system \u2014 57 components, eight tones, light and dark, no runtime dependencies.",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-exports.mjs && node scripts/generate-registry.mjs && publint",
@@ -14,7 +14,8 @@
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"lint": "prettier --check . && eslint . && node scripts/generate-exports.mjs --check && node scripts/generate-registry.mjs --check",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"prepublishOnly": "npm run check && npm run test && npm run package && publint"
 	},
 	"files": [
 		"dist",
@@ -320,9 +321,14 @@
 	"keywords": [
 		"svelte",
 		"svelte5",
+		"sveltekit",
 		"tailwindcss",
+		"tailwind-v4",
 		"components",
-		"design-system"
+		"component-library",
+		"design-system",
+		"ui",
+		"runes"
 	],
 	"license": "MIT",
 	"author": "NQM Creative",
@@ -332,5 +338,12 @@
 	},
 	"bin": {
 		"nqm-ui": "./cli/index.mjs"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"homepage": "https://github.com/mukhsamr/nqmcreative-ui#readme",
+	"bugs": {
+		"url": "https://github.com/mukhsamr/nqmcreative-ui/issues"
 	}
 }

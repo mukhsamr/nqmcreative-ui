@@ -3,8 +3,8 @@
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import CodeBlock from '$lib/site/CodeBlock.svelte';
-	import * as code from '$lib/site/snippets.js';
+	import CodeBlock from '$site/CodeBlock.svelte';
+	import * as code from '$site/snippets.js';
 	import { TONES } from '$lib/tones.js';
 
 	const steps = [

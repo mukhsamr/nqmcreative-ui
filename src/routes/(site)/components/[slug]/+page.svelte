@@ -2,7 +2,7 @@
 	import Badge from '$lib/components/Badge.svelte';
 	import Card from '$lib/components/Card.svelte';
 	import Link from '$lib/components/Link.svelte';
-	import CodeBlock from '$lib/site/CodeBlock.svelte';
+	import CodeBlock from '$site/CodeBlock.svelte';
 
 	let { data } = $props();
 

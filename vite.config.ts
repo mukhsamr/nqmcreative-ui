@@ -16,7 +16,11 @@ export default defineConfig({
 
 			// The docs site is fully prerendered, so Cloudflare serves it as static
 			// files with a Worker only for the 404 fallback.
-			adapter: adapter()
+			adapter: adapter(),
+
+			// The site lives outside src/lib so svelte-package does not ship the
+			// docs — demos, snippets and all — to consumers.
+			alias: { $site: 'src/site' }
 		})
 	],
 

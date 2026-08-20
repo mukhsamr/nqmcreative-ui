@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Alert from '$lib/components/Alert.svelte';
 	import Steps from '$lib/components/Steps.svelte';
-	import CodeBlock from '$lib/site/CodeBlock.svelte';
-	import * as code from '$lib/site/snippets.js';
+	import CodeBlock from '$site/CodeBlock.svelte';
+	import * as code from '$site/snippets.js';
 </script>
 
 <svelte:head>
@@ -31,7 +31,7 @@
 		items={[
 			{ label: 'Write the component', description: 'src/lib/components/Callout.svelte' },
 			{ label: 'Export it', description: 'src/lib/index.ts, under a category comment' },
-			{ label: 'Write a demo', description: 'src/lib/site/demos/callout.svelte' },
+			{ label: 'Write a demo', description: 'src/site/demos/callout.svelte' },
 			{ label: 'Regenerate and build', description: 'registry, exports, dist' }
 		]}
 	/>
@@ -69,7 +69,7 @@
 		<em>and</em> shown as the code sample, so the two can never drift apart. Import from
 		<code class="font-mono text-sm text-brand">$lib/components/…</code>, not from the package.
 	</p>
-	<CodeBlock code={code.newDemo} label="src/lib/site/demos/callout.svelte" />
+	<CodeBlock code={code.newDemo} label="src/site/demos/callout.svelte" />
 </section>
 
 <section class="flex flex-col gap-4">

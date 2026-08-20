@@ -272,10 +272,23 @@ after a sort), and `Dropzone` (type, size and count rules).
 > `bun run dev` to read them locally. What follows is the same ground in
 > short form.
 
-Not on npm — install it from the repo. **bun is the package manager here**;
-`bun.lock` is the committed lockfile.
+**bun is the package manager here**; `bun.lock` is the committed lockfile.
 
-### Option A — straight from GitHub (recommended)
+### Option A — npm (recommended)
+
+```bash
+bun add @nqmcreative/ui
+```
+
+```bash
+bunx nqm-ui init
+```
+
+Update with `bun update @nqmcreative/ui`.
+
+### Option A2 — straight from GitHub
+
+Tracks `main` rather than a release.
 
 ```bash
 bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
@@ -283,15 +296,11 @@ bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
 
 `dist/` is committed, so this works as-is: nothing has to be built at install
 time. Use `git+ssh://` rather than `git+https://` — bun resolves https GitHub
-URLs through the API, which 404s on a private repo. The installing machine
-needs an SSH key on an account with access.
+URLs through the API, which 404s on a private repo.
 
-Pull later changes with `bun update @nqmcreative/ui`, which tracks the tip of
-`main`. To pin instead, tag a release and append it:
-
-```bash
-bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git#v0.0.1
-```
+> bun caches git dependencies by URL and will not notice new commits. Pin a
+> commit or tag with `#sha`, or clear the cache with `bun pm cache rm`.
+> Installing from npm avoids this entirely.
 
 ### Option B — a packed tarball
 
@@ -303,7 +312,7 @@ bun run build && bun pm pack     # in this repo
 ```
 
 ```bash
-bun add ./nqmcreative-ui-0.0.1.tgz    # in your other project
+bun add ./nqmcreative-ui-0.1.0.tgz    # in your other project
 ```
 
 ### Option C — a live symlink, for developing both at once

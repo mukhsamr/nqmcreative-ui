@@ -137,7 +137,7 @@ async function init() {
 
 	if (!project.hasUi) {
 		warn('the package is not installed yet — add it first:');
-		log(c.cyan('    bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git'));
+		log(c.cyan('    bun add @nqmcreative/ui'));
 		log();
 	}
 

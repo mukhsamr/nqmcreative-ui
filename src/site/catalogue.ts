@@ -6,7 +6,7 @@
  * component appears here — and on the site — without touching this file.
  */
 import type { Component } from 'svelte';
-import data from '../../../registry.json' with { type: 'json' };
+import data from '../../registry.json' with { type: 'json' };
 
 export interface CatalogueEntry {
 	name: string;

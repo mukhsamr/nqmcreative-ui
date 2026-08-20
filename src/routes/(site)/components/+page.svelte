@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { categories, count } from '$lib/site/catalogue.js';
+	import { categories, count } from '$site/catalogue.js';
 	import Input from '$lib/components/Input.svelte';
 
 	let query = $state('');

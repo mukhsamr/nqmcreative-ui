@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { docs } from '$lib/site/docs.js';
+	import { docs } from '$site/docs.js';
 
 	let { children } = $props();
 
