@@ -373,11 +373,14 @@ class names that live inside the package.
 `@source` scans the whole package, so the generated CSS covers every component,
 not only the ones you import — roughly 48 kB, 9 kB gzipped, for the full set.
 
-**4. Use the components**
+**4. Use the components.** Import each one on its own:
 
 ```svelte
 <script>
-	import { Button, Badge, Field, Input } from '@nqmcreative/ui';
+	import Button from '@nqmcreative/ui/button';
+	import Badge from '@nqmcreative/ui/badge';
+	import Field from '@nqmcreative/ui/field';
+	import Input from '@nqmcreative/ui/input';
 
 	let email = $state('');
 </script>
@@ -390,6 +393,27 @@ not only the ones you import — roughly 48 kB, 9 kB gzipped, for the full set.
 	<Input bind:value={email} placeholder="you@example.com" />
 </Field>
 ```
+
+Every component has its own subpath — the file name in kebab-case, so
+`AvatarGroup` is `@nqmcreative/ui/avatar-group` and `DatePicker` is
+`@nqmcreative/ui/date-picker`. The shared modules are there too:
+`/tones`, `/locale`, `/date`, `/toast`, `/actions/anchor`,
+`/actions/dismissable`.
+
+The barrel still works if you prefer it:
+
+```js
+import { Button, Badge } from '@nqmcreative/ui';
+```
+
+Both produce the same bundle — measured on the same app, barrel and subpaths
+came out byte-identical, because the barrel tree-shakes. Subpaths are about
+being explicit about what a file uses, and they cut the module graph the
+bundler walks (177 modules to 123 in that test), not the output.
+
+Update with `bun update @nqmcreative/ui`. The `exports` map is generated from
+`src/lib` by `bun run exports`, and `bun run lint` fails if it is stale — a new
+component cannot ship without its subpath.
 
 ## Adding more components
 
