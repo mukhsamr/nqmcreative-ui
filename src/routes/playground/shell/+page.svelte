@@ -14,7 +14,6 @@
 		Stat,
 		Steps,
 		ThemeToggle,
-		Toaster,
 		toast
 	} from '$lib/index.js';
 
@@ -41,7 +40,7 @@
 		]}
 	>
 		{#snippet brand()}
-			<a href="/" class="font-heading text-base font-medium tracking-tight text-text">
+			<a href="/playground" class="font-heading text-base font-medium tracking-tight text-text">
 				nqm<span class="text-brand">.</span>
 			</a>
 		{/snippet}
@@ -165,7 +164,7 @@
 				<p class="font-sans text-sm text-text-muted">
 					Narrow the window below <Badge tone="neutral" size="sm">768px</Badge> — the sidebar drops away
 					and the navbar switches to a drawer.
-					<Link href="/">Back to the component preview</Link>
+					<Link href="/playground">Back to the component preview</Link>
 				</p>
 			</div>
 		</main>
@@ -177,8 +176,8 @@
 			{
 				title: 'Product',
 				links: [
-					{ label: 'Components', href: '/' },
-					{ label: 'App shell', href: '/shell' },
+					{ label: 'Components', href: '/components' },
+					{ label: 'App shell', href: '/playground/shell' },
 					{ label: 'Changelog', href: '#' }
 				]
 			},
@@ -210,5 +209,3 @@
 		{/snippet}
 	</Footer>
 </div>
-
-<Toaster position="bottom-right" />

@@ -241,8 +241,24 @@ Shipping the build output is what keeps `bun add git+ssh://…` working.
 bun run build && git add dist
 ```
 
-`src/routes` holds two preview pages: `/` for the components and `/shell` for
-the app shell — navbar, sidebar, footer — at a realistic size.
+`src/routes` is the docs site:
+
+| route                | what it is                                                  |
+| -------------------- | ----------------------------------------------------------- |
+| `/`                  | landing — palette, install, the full catalogue              |
+| `/components`        | filterable index of all 57                                  |
+| `/components/[slug]` | one page per component: live demo, source, what it pulls in |
+| `/playground`        | the old kitchen-sink preview                                |
+| `/playground/shell`  | navbar + sidebar + footer at a realistic size               |
+
+Component pages are generated from `registry.json`, and each demo lives in
+`src/lib/site/demos/<slug>.svelte` — the file is both rendered live and shown
+as its own source. Add a component and it appears in the nav, the index, the
+command palette and the sidebar with no further wiring; only the demo file is
+written by hand.
+
+The site is fully prerendered and built with `@sveltejs/adapter-cloudflare`,
+so `.svelte-kit/cloudflare` can be uploaded as-is.
 
 Tests cover the logic that is easy to get quietly wrong: the date helpers
 (timezone drift, impossible dates, per-locale parsing), the `anchored` action

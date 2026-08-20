@@ -28,7 +28,6 @@
 		Table,
 		Tabs,
 		Textarea,
-		Toaster,
 		Tooltip,
 		TONES,
 		Combobox,
@@ -817,5 +816,3 @@
 		</div>
 	</div>
 </LocaleProvider>
-
-<Toaster position="bottom-right" />

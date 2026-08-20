@@ -1,5 +1,5 @@
 import tailwindcss from '@tailwindcss/vite';
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { sveltekit } from '@sveltejs/kit/vite';
 // `vitest/config` rather than `vite`, so the `test` block type-checks.
 import { defineConfig } from 'vitest/config';
@@ -14,9 +14,8 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 
-			// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-			// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-			// See https://svelte.dev/docs/kit/adapters for more information about adapters.
+			// The docs site is fully prerendered, so Cloudflare serves it as static
+			// files with a Worker only for the 404 fallback.
 			adapter: adapter()
 		})
 	],

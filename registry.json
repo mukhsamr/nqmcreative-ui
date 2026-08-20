@@ -8,7 +8,7 @@
 			"subpath": "@nqmcreative/ui/accordion",
 			"file": "src/lib/components/Accordion.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "Wrapper that stacks collapsible items with hairlines between them.",
 			"uses": [],
 			"modules": []
 		},
@@ -17,7 +17,7 @@
 			"subpath": "@nqmcreative/ui/accordion-item",
 			"file": "src/lib/components/AccordionItem.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "A single collapsible row, built on <details> so it works without JS.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -28,7 +28,7 @@
 			"subpath": "@nqmcreative/ui/alert",
 			"file": "src/lib/components/Alert.svelte",
 			"category": "feedback",
-			"description": "",
+			"description": "Inline message in any tone, optionally dismissible.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -40,7 +40,7 @@
 			"subpath": "@nqmcreative/ui/avatar",
 			"file": "src/lib/components/Avatar.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Image or initials, circular or squared, in five sizes.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -51,7 +51,7 @@
 			"subpath": "@nqmcreative/ui/avatar-group",
 			"file": "src/lib/components/AvatarGroup.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Overlapping row of avatars with a ring cut out of the background.",
 			"uses": [],
 			"modules": []
 		},
@@ -60,7 +60,7 @@
 			"subpath": "@nqmcreative/ui/badge",
 			"file": "src/lib/components/Badge.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Pill label for status and counts. Solid, soft or outline.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -71,7 +71,7 @@
 			"subpath": "@nqmcreative/ui/breadcrumb",
 			"file": "src/lib/components/Breadcrumb.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "Trail of links to the current page.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -83,7 +83,7 @@
 			"subpath": "@nqmcreative/ui/button",
 			"file": "src/lib/components/Button.svelte",
 			"category": "actions",
-			"description": "",
+			"description": "Five variants and four sizes, with a loading state and an href mode.",
 			"uses": [
 				"Spinner"
 			],
@@ -96,7 +96,7 @@
 			"subpath": "@nqmcreative/ui/calendar",
 			"file": "src/lib/components/Calendar.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Month grid with keyboard navigation, bounds and disabled days.",
 			"uses": [],
 			"modules": [
 				"date",
@@ -109,7 +109,7 @@
 			"subpath": "@nqmcreative/ui/card",
 			"file": "src/lib/components/Card.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Bordered, filled or tinted surface with an optional header and footer.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -120,7 +120,7 @@
 			"subpath": "@nqmcreative/ui/checkbox",
 			"file": "src/lib/components/Checkbox.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Single checkbox with a label, description and indeterminate state.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -131,7 +131,7 @@
 			"subpath": "@nqmcreative/ui/checkbox-group",
 			"file": "src/lib/components/CheckboxGroup.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "A set of checkboxes bound to a string array, with an optional cap.",
 			"uses": [
 				"Checkbox"
 			],
@@ -144,7 +144,7 @@
 			"subpath": "@nqmcreative/ui/combobox",
 			"file": "src/lib/components/Combobox.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Single-select with a text filter and keyboard navigation.",
 			"uses": [],
 			"modules": [
 				"actions/anchor",
@@ -158,7 +158,7 @@
 			"subpath": "@nqmcreative/ui/command-palette",
 			"file": "src/lib/components/CommandPalette.svelte",
 			"category": "overlay",
-			"description": "Key that opens the palette with Cmd/Ctrl held. Default `'k'`. Pass `null` to wire your own trigger only.",
+			"description": "Cmd+K launcher with grouping, shortcuts and hidden keywords.",
 			"uses": [
 				"Kbd"
 			],
@@ -173,7 +173,7 @@
 			"subpath": "@nqmcreative/ui/confirm-dialog",
 			"file": "src/lib/components/ConfirmDialog.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Small dialog that stays busy until an async confirm settles.",
 			"uses": [
 				"Button",
 				"Modal"
@@ -188,7 +188,7 @@
 			"subpath": "@nqmcreative/ui/context-menu",
 			"file": "src/lib/components/ContextMenu.svelte",
 			"category": "overlay",
-			"description": "A 0×0 element parked at the pointer, so the same `anchored` action that positions dropdowns can flip and clamp this menu too.",
+			"description": "Right-click menu placed at the pointer, flipped near the edges.",
 			"uses": [],
 			"modules": [
 				"actions/anchor",
@@ -201,7 +201,7 @@
 			"subpath": "@nqmcreative/ui/date-picker",
 			"file": "src/lib/components/DatePicker.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Text field plus a calendar popover. Value is a YYYY-MM-DD string.",
 			"uses": [
 				"Calendar"
 			],
@@ -218,7 +218,7 @@
 			"subpath": "@nqmcreative/ui/divider",
 			"file": "src/lib/components/Divider.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "Hairline rule, horizontal or vertical, with an optional caption.",
 			"uses": [],
 			"modules": []
 		},
@@ -227,7 +227,7 @@
 			"subpath": "@nqmcreative/ui/drawer",
 			"file": "src/lib/components/Drawer.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Panel that slides in from any edge, on the native dialog top layer.",
 			"uses": [],
 			"modules": [
 				"locale"
@@ -238,7 +238,7 @@
 			"subpath": "@nqmcreative/ui/dropdown",
 			"file": "src/lib/components/Dropdown.svelte",
 			"category": "overlay",
-			"description": "Wires the consumer's own trigger element rather than wrapping it in another button: the ARIA state belongs on the real control, not on our span.",
+			"description": "Menu anchored to a trigger, with focus trap and viewport flipping.",
 			"uses": [],
 			"modules": [
 				"actions/anchor",
@@ -251,7 +251,7 @@
 			"subpath": "@nqmcreative/ui/dropzone",
 			"file": "src/lib/components/Dropzone.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Drag-and-drop file input with type, size and count validation.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -263,7 +263,7 @@
 			"subpath": "@nqmcreative/ui/empty-state",
 			"file": "src/lib/components/EmptyState.svelte",
 			"category": "feedback",
-			"description": "",
+			"description": "Placeholder for an empty list, with a glyph and an action slot.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -274,7 +274,7 @@
 			"subpath": "@nqmcreative/ui/field",
 			"file": "src/lib/components/Field.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Wraps any control with a label, hint and error message.",
 			"uses": [],
 			"modules": []
 		},
@@ -283,7 +283,7 @@
 			"subpath": "@nqmcreative/ui/footer",
 			"file": "src/lib/components/Footer.svelte",
 			"category": "app shell",
-			"description": "",
+			"description": "Site footer with link columns and a bottom bar.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -294,7 +294,7 @@
 			"subpath": "@nqmcreative/ui/input",
 			"file": "src/lib/components/Input.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Text field with prefix and suffix slots, sizes and an invalid state.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -305,7 +305,7 @@
 			"subpath": "@nqmcreative/ui/input-group",
 			"file": "src/lib/components/InputGroup.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Joins an input to a button or addon with a single shared border.",
 			"uses": [],
 			"modules": []
 		},
@@ -314,7 +314,7 @@
 			"subpath": "@nqmcreative/ui/kbd",
 			"file": "src/lib/components/Kbd.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Keyboard key, styled with a thicker bottom edge.",
 			"uses": [],
 			"modules": []
 		},
@@ -323,7 +323,7 @@
 			"subpath": "@nqmcreative/ui/label",
 			"file": "src/lib/components/Label.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Form label with an optional required marker.",
 			"uses": [],
 			"modules": []
 		},
@@ -332,7 +332,7 @@
 			"subpath": "@nqmcreative/ui/link",
 			"file": "src/lib/components/Link.svelte",
 			"category": "actions",
-			"description": "",
+			"description": "Anchor in any tone, with an external variant.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -343,7 +343,7 @@
 			"subpath": "@nqmcreative/ui/locale-provider",
 			"file": "src/lib/components/LocaleProvider.svelte",
 			"category": "locale",
-			"description": "",
+			"description": "Scopes a locale to a subtree — the SSR-safe way to translate.",
 			"uses": [],
 			"modules": [
 				"locale"
@@ -354,7 +354,7 @@
 			"subpath": "@nqmcreative/ui/menu-item",
 			"file": "src/lib/components/MenuItem.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Row inside a Dropdown or ContextMenu, with a shortcut hint.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -365,7 +365,7 @@
 			"subpath": "@nqmcreative/ui/menu-separator",
 			"file": "src/lib/components/MenuSeparator.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Rule between menu groups, with an optional caption.",
 			"uses": [],
 			"modules": []
 		},
@@ -374,7 +374,7 @@
 			"subpath": "@nqmcreative/ui/modal",
 			"file": "src/lib/components/Modal.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Centred dialog on the native top layer, with a footer slot.",
 			"uses": [],
 			"modules": [
 				"locale"
@@ -385,7 +385,7 @@
 			"subpath": "@nqmcreative/ui/multi-select",
 			"file": "src/lib/components/MultiSelect.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Multi-select with chips, grouping and a selection cap.",
 			"uses": [],
 			"modules": [
 				"actions/anchor",
@@ -399,7 +399,7 @@
 			"subpath": "@nqmcreative/ui/navbar",
 			"file": "src/lib/components/Navbar.svelte",
 			"category": "app shell",
-			"description": "",
+			"description": "Top bar that collapses into a drawer below the md breakpoint.",
 			"uses": [
 				"Drawer",
 				"Dropdown",
@@ -415,7 +415,7 @@
 			"subpath": "@nqmcreative/ui/number-input",
 			"file": "src/lib/components/NumberInput.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Number field with steppers, clamping and decimal handling.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -427,7 +427,7 @@
 			"subpath": "@nqmcreative/ui/pagination",
 			"file": "src/lib/components/Pagination.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "Page numbers that collapse to an ellipsis around the current one.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -439,7 +439,7 @@
 			"subpath": "@nqmcreative/ui/password-input",
 			"file": "src/lib/components/PasswordInput.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Password field with a visibility toggle and a strength meter.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -451,7 +451,7 @@
 			"subpath": "@nqmcreative/ui/popover",
 			"file": "src/lib/components/Popover.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Anchored panel that opens on click or hover.",
 			"uses": [],
 			"modules": [
 				"actions/anchor",
@@ -463,7 +463,7 @@
 			"subpath": "@nqmcreative/ui/progress",
 			"file": "src/lib/components/Progress.svelte",
 			"category": "feedback",
-			"description": "",
+			"description": "Determinate or indeterminate bar, in three sizes.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -474,7 +474,7 @@
 			"subpath": "@nqmcreative/ui/radio",
 			"file": "src/lib/components/Radio.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Single radio bound to a shared group value.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -485,7 +485,7 @@
 			"subpath": "@nqmcreative/ui/radio-group",
 			"file": "src/lib/components/RadioGroup.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "A set of radios, optionally rendered as selectable cards.",
 			"uses": [
 				"Radio"
 			],
@@ -498,7 +498,7 @@
 			"subpath": "@nqmcreative/ui/segmented-control",
 			"file": "src/lib/components/SegmentedControl.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Exclusive choice as one joined row, with arrow-key movement.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -509,7 +509,7 @@
 			"subpath": "@nqmcreative/ui/select",
 			"file": "src/lib/components/Select.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Native select with a chevron and data-driven options.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -520,7 +520,7 @@
 			"subpath": "@nqmcreative/ui/sidebar",
 			"file": "src/lib/components/Sidebar.svelte",
 			"category": "app shell",
-			"description": "",
+			"description": "Nested, collapsible navigation rail for an app shell.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -532,7 +532,7 @@
 			"subpath": "@nqmcreative/ui/skeleton",
 			"file": "src/lib/components/Skeleton.svelte",
 			"category": "feedback",
-			"description": "",
+			"description": "Pulsing placeholder in text, block or circle form.",
 			"uses": [],
 			"modules": []
 		},
@@ -541,7 +541,7 @@
 			"subpath": "@nqmcreative/ui/slider",
 			"file": "src/lib/components/Slider.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Range input with ticks, a value bubble and dual-handle mode.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -552,7 +552,7 @@
 			"subpath": "@nqmcreative/ui/spinner",
 			"file": "src/lib/components/Spinner.svelte",
 			"category": "feedback",
-			"description": "",
+			"description": "Rotating ring that inherits the surrounding colour.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -564,7 +564,7 @@
 			"subpath": "@nqmcreative/ui/stat",
 			"file": "src/lib/components/Stat.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Figure with a label, delta and trend arrow.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -575,7 +575,7 @@
 			"subpath": "@nqmcreative/ui/steps",
 			"file": "src/lib/components/Steps.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "Progress through a flow, horizontal or vertical, with a failed state.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -586,7 +586,7 @@
 			"subpath": "@nqmcreative/ui/switch",
 			"file": "src/lib/components/Switch.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "On/off toggle with a label and description.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -597,7 +597,7 @@
 			"subpath": "@nqmcreative/ui/table",
 			"file": "src/lib/components/Table.svelte",
 			"category": "data display",
-			"description": "",
+			"description": "Data-driven table with sorting, row selection and a cell snippet.",
 			"uses": [
 				"Checkbox"
 			],
@@ -611,7 +611,7 @@
 			"subpath": "@nqmcreative/ui/tabs",
 			"file": "src/lib/components/Tabs.svelte",
 			"category": "layout & navigation",
-			"description": "",
+			"description": "Underline, pill or segmented tabs bound to a value.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -622,7 +622,7 @@
 			"subpath": "@nqmcreative/ui/textarea",
 			"file": "src/lib/components/Textarea.svelte",
 			"category": "forms",
-			"description": "",
+			"description": "Multi-line field that can grow with its content.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -633,7 +633,7 @@
 			"subpath": "@nqmcreative/ui/theme-toggle",
 			"file": "src/lib/components/ThemeToggle.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "Light, dark and system, remembered in localStorage.",
 			"uses": [],
 			"modules": [
 				"locale",
@@ -645,7 +645,7 @@
 			"subpath": "@nqmcreative/ui/toaster",
 			"file": "src/lib/components/Toaster.svelte",
 			"category": "feedback",
-			"description": "",
+			"description": "Renders the toast queue. Mount once, near the root.",
 			"uses": [
 				"Spinner"
 			],
@@ -661,7 +661,7 @@
 			"subpath": "@nqmcreative/ui/tooltip",
 			"file": "src/lib/components/Tooltip.svelte",
 			"category": "overlay",
-			"description": "",
+			"description": "CSS-only label on hover and focus, in four placements.",
 			"uses": [],
 			"modules": []
 		}
