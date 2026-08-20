@@ -1,0 +1,9 @@
+# Keep the repo LF-only. Prettier writes LF, so without this every file would
+# come back as a CRLF diff on Windows checkouts.
+* text=auto eol=lf
+
+# Binary
+*.png binary
+*.jpg binary
+*.woff2 binary
+*.svg text eol=lf
