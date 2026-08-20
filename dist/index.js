@@ -63,6 +63,15 @@ export { default as Steps } from './components/Steps.svelte';
 export { default as Navbar } from './components/Navbar.svelte';
 export { default as Sidebar } from './components/Sidebar.svelte';
 export { default as Footer } from './components/Footer.svelte';
+/* --- marketing --- */
+export { default as HeroSection } from './components/HeroSection.svelte';
+export { default as FeatureGrid } from './components/FeatureGrid.svelte';
+export { default as FeatureCard } from './components/FeatureCard.svelte';
+export { default as PricingCard } from './components/PricingCard.svelte';
+export { default as Testimonial } from './components/Testimonial.svelte';
+export { default as LogoCloud } from './components/LogoCloud.svelte';
+export { default as CTASection } from './components/CTASection.svelte';
+export { default as StatsBand } from './components/StatsBand.svelte';
 /* --- overlay --- */
 export { default as Modal } from './components/Modal.svelte';
 export { default as Drawer } from './components/Drawer.svelte';

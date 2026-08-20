@@ -1,7 +1,7 @@
 # @nqmcreative/ui
 
 Svelte 5 (runes) + Tailwind CSS v4 component library. Flat surfaces, no
-shadows, no border-radius except pills. 57 components, eight tones, light and
+shadows, no border-radius except pills. 65 components, eight tones, light and
 dark, no runtime dependencies.
 
 The docs site lives in this repo — every component with a live demo, plus
@@ -123,6 +123,7 @@ Under SSR use `<LocaleProvider>` instead, so the locale is scoped to a request.
 | Layout & nav | `Divider`, `Tabs`, `Accordion`, `AccordionItem`, `Breadcrumb`, `Pagination`, `Steps`                                                                                                                                                                       |
 | App shell    | `Navbar`, `Sidebar`, `Footer`                                                                                                                                                                                                                              |
 | Overlay      | `Modal`, `ConfirmDialog`, `Drawer`, `Dropdown` + `MenuItem` + `MenuSeparator`, `ContextMenu`, `CommandPalette`, `Popover`, `Tooltip`                                                                                                                       |
+| Marketing    | `HeroSection`, `FeatureGrid`, `FeatureCard`, `PricingCard`, `Testimonial`, `LogoCloud`, `CTASection`, `StatsBand`                                                                                                                                          |
 | System       | `ThemeToggle`, `LocaleProvider`                                                                                                                                                                                                                            |
 
 Overlays are built on the native top layer and three in-house actions

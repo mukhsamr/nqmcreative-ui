@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"version": "0.1.1",
-	"description": "Svelte 5 + Tailwind CSS v4 design system \u2014 57 components, eight tones, light and dark, no runtime dependencies.",
+	"description": "Svelte 5 + Tailwind CSS v4 design system \u2014 65 components, eight tones, light and dark, no runtime dependencies.",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-exports.mjs && node scripts/generate-registry.mjs && publint",
@@ -67,6 +67,10 @@
 			"types": "./dist/components/Button.svelte.d.ts",
 			"svelte": "./dist/components/Button.svelte"
 		},
+		"./cta-section": {
+			"types": "./dist/components/CTASection.svelte.d.ts",
+			"svelte": "./dist/components/CTASection.svelte"
+		},
 		"./calendar": {
 			"types": "./dist/components/Calendar.svelte.d.ts",
 			"svelte": "./dist/components/Calendar.svelte"
@@ -123,6 +127,14 @@
 			"types": "./dist/components/EmptyState.svelte.d.ts",
 			"svelte": "./dist/components/EmptyState.svelte"
 		},
+		"./feature-card": {
+			"types": "./dist/components/FeatureCard.svelte.d.ts",
+			"svelte": "./dist/components/FeatureCard.svelte"
+		},
+		"./feature-grid": {
+			"types": "./dist/components/FeatureGrid.svelte.d.ts",
+			"svelte": "./dist/components/FeatureGrid.svelte"
+		},
 		"./field": {
 			"types": "./dist/components/Field.svelte.d.ts",
 			"svelte": "./dist/components/Field.svelte"
@@ -130,6 +142,10 @@
 		"./footer": {
 			"types": "./dist/components/Footer.svelte.d.ts",
 			"svelte": "./dist/components/Footer.svelte"
+		},
+		"./hero-section": {
+			"types": "./dist/components/HeroSection.svelte.d.ts",
+			"svelte": "./dist/components/HeroSection.svelte"
 		},
 		"./input": {
 			"types": "./dist/components/Input.svelte.d.ts",
@@ -154,6 +170,10 @@
 		"./locale-provider": {
 			"types": "./dist/components/LocaleProvider.svelte.d.ts",
 			"svelte": "./dist/components/LocaleProvider.svelte"
+		},
+		"./logo-cloud": {
+			"types": "./dist/components/LogoCloud.svelte.d.ts",
+			"svelte": "./dist/components/LogoCloud.svelte"
 		},
 		"./menu-item": {
 			"types": "./dist/components/MenuItem.svelte.d.ts",
@@ -190,6 +210,10 @@
 		"./popover": {
 			"types": "./dist/components/Popover.svelte.d.ts",
 			"svelte": "./dist/components/Popover.svelte"
+		},
+		"./pricing-card": {
+			"types": "./dist/components/PricingCard.svelte.d.ts",
+			"svelte": "./dist/components/PricingCard.svelte"
 		},
 		"./progress": {
 			"types": "./dist/components/Progress.svelte.d.ts",
@@ -231,6 +255,10 @@
 			"types": "./dist/components/Stat.svelte.d.ts",
 			"svelte": "./dist/components/Stat.svelte"
 		},
+		"./stats-band": {
+			"types": "./dist/components/StatsBand.svelte.d.ts",
+			"svelte": "./dist/components/StatsBand.svelte"
+		},
 		"./steps": {
 			"types": "./dist/components/Steps.svelte.d.ts",
 			"svelte": "./dist/components/Steps.svelte"
@@ -246,6 +274,10 @@
 		"./tabs": {
 			"types": "./dist/components/Tabs.svelte.d.ts",
 			"svelte": "./dist/components/Tabs.svelte"
+		},
+		"./testimonial": {
+			"types": "./dist/components/Testimonial.svelte.d.ts",
+			"svelte": "./dist/components/Testimonial.svelte"
 		},
 		"./textarea": {
 			"types": "./dist/components/Textarea.svelte.d.ts",

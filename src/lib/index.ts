@@ -184,6 +184,28 @@ export type { SidebarItem, SidebarSection } from './components/Sidebar.svelte';
 export { default as Footer } from './components/Footer.svelte';
 export type { FooterColumn, FooterLink } from './components/Footer.svelte';
 
+/* --- marketing --- */
+export { default as HeroSection } from './components/HeroSection.svelte';
+
+export { default as FeatureGrid } from './components/FeatureGrid.svelte';
+export type { FeatureColumns } from './components/FeatureGrid.svelte';
+
+export { default as FeatureCard } from './components/FeatureCard.svelte';
+
+export { default as PricingCard } from './components/PricingCard.svelte';
+
+export { default as Testimonial } from './components/Testimonial.svelte';
+export type { TestimonialVariant } from './components/Testimonial.svelte';
+
+export { default as LogoCloud } from './components/LogoCloud.svelte';
+export type { Logo } from './components/LogoCloud.svelte';
+
+export { default as CTASection } from './components/CTASection.svelte';
+export type { CTAVariant } from './components/CTASection.svelte';
+
+export { default as StatsBand } from './components/StatsBand.svelte';
+export type { BandStat } from './components/StatsBand.svelte';
+
 /* --- overlay --- */
 export { default as Modal } from './components/Modal.svelte';
 export type { ModalSize } from './components/Modal.svelte';

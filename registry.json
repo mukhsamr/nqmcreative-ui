@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"homepage": "https://github.com/mukhsamr/nqmcreative-ui",
-	"count": 57,
+	"count": 65,
 	"components": [
 		{
 			"name": "Accordion",
@@ -87,6 +87,17 @@
 			"uses": [
 				"Spinner"
 			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "CTASection",
+			"subpath": "@nqmcreative/ui/cta-section",
+			"file": "src/lib/components/CTASection.svelte",
+			"category": "marketing",
+			"description": "Closing call to action — tinted, solid or outlined.",
+			"uses": [],
 			"modules": [
 				"tones"
 			]
@@ -270,6 +281,26 @@
 			]
 		},
 		{
+			"name": "FeatureCard",
+			"subpath": "@nqmcreative/ui/feature-card",
+			"file": "src/lib/components/FeatureCard.svelte",
+			"category": "marketing",
+			"description": "One feature: glyph, heading, copy. Optionally a whole link.",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "FeatureGrid",
+			"subpath": "@nqmcreative/ui/feature-grid",
+			"file": "src/lib/components/FeatureGrid.svelte",
+			"category": "marketing",
+			"description": "Section wrapper that lays feature cards out in 2, 3 or 4 columns.",
+			"uses": [],
+			"modules": []
+		},
+		{
 			"name": "Field",
 			"subpath": "@nqmcreative/ui/field",
 			"file": "src/lib/components/Field.svelte",
@@ -284,6 +315,17 @@
 			"file": "src/lib/components/Footer.svelte",
 			"category": "app shell",
 			"description": "Site footer with link columns and a bottom bar.",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "HeroSection",
+			"subpath": "@nqmcreative/ui/hero-section",
+			"file": "src/lib/components/HeroSection.svelte",
+			"category": "marketing",
+			"description": "Page opener — eyebrow, headline, copy, actions, optional media column.",
 			"uses": [],
 			"modules": [
 				"tones"
@@ -348,6 +390,15 @@
 			"modules": [
 				"locale"
 			]
+		},
+		{
+			"name": "LogoCloud",
+			"subpath": "@nqmcreative/ui/logo-cloud",
+			"file": "src/lib/components/LogoCloud.svelte",
+			"category": "marketing",
+			"description": "Row of client or partner marks, dimmed until hovered.",
+			"uses": [],
+			"modules": []
 		},
 		{
 			"name": "MenuItem",
@@ -456,6 +507,17 @@
 			"modules": [
 				"actions/anchor",
 				"actions/dismissable"
+			]
+		},
+		{
+			"name": "PricingCard",
+			"subpath": "@nqmcreative/ui/pricing-card",
+			"file": "src/lib/components/PricingCard.svelte",
+			"category": "marketing",
+			"description": "One plan: price, period, ticked feature list, optional featured styling.",
+			"uses": [],
+			"modules": [
+				"tones"
 			]
 		},
 		{
@@ -571,6 +633,20 @@
 			]
 		},
 		{
+			"name": "StatsBand",
+			"subpath": "@nqmcreative/ui/stats-band",
+			"file": "src/lib/components/StatsBand.svelte",
+			"category": "marketing",
+			"description": "A row of figures, built on Stat.",
+			"uses": [
+				"Stat",
+				"Stat"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
 			"name": "Steps",
 			"subpath": "@nqmcreative/ui/steps",
 			"file": "src/lib/components/Steps.svelte",
@@ -613,6 +689,19 @@
 			"category": "layout & navigation",
 			"description": "Underline, pill or segmented tabs bound to a value.",
 			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Testimonial",
+			"subpath": "@nqmcreative/ui/testimonial",
+			"file": "src/lib/components/Testimonial.svelte",
+			"category": "marketing",
+			"description": "A quote with an attributed author.",
+			"uses": [
+				"Avatar"
+			],
 			"modules": [
 				"tones"
 			]
