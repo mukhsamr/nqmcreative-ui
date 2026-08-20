@@ -1,6 +1,5 @@
 /*
  * @nqmcreative/ui design tokens
- * Mirrors the visual language of https://nqmcreative.com
  * Flat, no shadows, no border-radius (except pills). Import this after
  * `@import "tailwindcss";` in your app's CSS entry point. Ships light and dark
  * palettes — see the bottom of this file.

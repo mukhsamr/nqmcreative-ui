@@ -1,7 +1,8 @@
 /*
- * Optional: the exact Google Fonts used by nqmcreative.com — Sora (headings),
- * Work Sans (body), JetBrains Mono (labels and code). Import this only if your
- * project doesn't already self-host or load these fonts another way.
+ * Optional: the three typefaces this system is designed around — Sora
+ * (headings), Work Sans (body), JetBrains Mono (labels and code). Import this
+ * only if your project doesn't already self-host or load these fonts another
+ * way.
  *
  * These are plain `@font-face` rules rather than an `@import` of the Google
  * stylesheet on purpose: `@import` is only valid before every other rule, so a
