@@ -1,0 +1,669 @@
+{
+	"name": "@nqmcreative/ui",
+	"homepage": "https://github.com/mukhsamr/nqmcreative-ui",
+	"count": 57,
+	"components": [
+		{
+			"name": "Accordion",
+			"subpath": "@nqmcreative/ui/accordion",
+			"file": "src/lib/components/Accordion.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "AccordionItem",
+			"subpath": "@nqmcreative/ui/accordion-item",
+			"file": "src/lib/components/AccordionItem.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Alert",
+			"subpath": "@nqmcreative/ui/alert",
+			"file": "src/lib/components/Alert.svelte",
+			"category": "feedback",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Avatar",
+			"subpath": "@nqmcreative/ui/avatar",
+			"file": "src/lib/components/Avatar.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "AvatarGroup",
+			"subpath": "@nqmcreative/ui/avatar-group",
+			"file": "src/lib/components/AvatarGroup.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Badge",
+			"subpath": "@nqmcreative/ui/badge",
+			"file": "src/lib/components/Badge.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Breadcrumb",
+			"subpath": "@nqmcreative/ui/breadcrumb",
+			"file": "src/lib/components/Breadcrumb.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Button",
+			"subpath": "@nqmcreative/ui/button",
+			"file": "src/lib/components/Button.svelte",
+			"category": "actions",
+			"description": "",
+			"uses": [
+				"Spinner"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Calendar",
+			"subpath": "@nqmcreative/ui/calendar",
+			"file": "src/lib/components/Calendar.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"date",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Card",
+			"subpath": "@nqmcreative/ui/card",
+			"file": "src/lib/components/Card.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Checkbox",
+			"subpath": "@nqmcreative/ui/checkbox",
+			"file": "src/lib/components/Checkbox.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "CheckboxGroup",
+			"subpath": "@nqmcreative/ui/checkbox-group",
+			"file": "src/lib/components/CheckboxGroup.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [
+				"Checkbox"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Combobox",
+			"subpath": "@nqmcreative/ui/combobox",
+			"file": "src/lib/components/Combobox.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "CommandPalette",
+			"subpath": "@nqmcreative/ui/command-palette",
+			"file": "src/lib/components/CommandPalette.svelte",
+			"category": "overlay",
+			"description": "Key that opens the palette with Cmd/Ctrl held. Default `'k'`. Pass `null` to wire your own trigger only.",
+			"uses": [
+				"Kbd"
+			],
+			"modules": [
+				"actions/dismissable",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "ConfirmDialog",
+			"subpath": "@nqmcreative/ui/confirm-dialog",
+			"file": "src/lib/components/ConfirmDialog.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [
+				"Button",
+				"Modal"
+			],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "ContextMenu",
+			"subpath": "@nqmcreative/ui/context-menu",
+			"file": "src/lib/components/ContextMenu.svelte",
+			"category": "overlay",
+			"description": "A 0×0 element parked at the pointer, so the same `anchored` action that positions dropdowns can flip and clamp this menu too.",
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"locale"
+			]
+		},
+		{
+			"name": "DatePicker",
+			"subpath": "@nqmcreative/ui/date-picker",
+			"file": "src/lib/components/DatePicker.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [
+				"Calendar"
+			],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"date",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Divider",
+			"subpath": "@nqmcreative/ui/divider",
+			"file": "src/lib/components/Divider.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Drawer",
+			"subpath": "@nqmcreative/ui/drawer",
+			"file": "src/lib/components/Drawer.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale"
+			]
+		},
+		{
+			"name": "Dropdown",
+			"subpath": "@nqmcreative/ui/dropdown",
+			"file": "src/lib/components/Dropdown.svelte",
+			"category": "overlay",
+			"description": "Wires the consumer's own trigger element rather than wrapping it in another button: the ARIA state belongs on the real control, not on our span.",
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"locale"
+			]
+		},
+		{
+			"name": "Dropzone",
+			"subpath": "@nqmcreative/ui/dropzone",
+			"file": "src/lib/components/Dropzone.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "EmptyState",
+			"subpath": "@nqmcreative/ui/empty-state",
+			"file": "src/lib/components/EmptyState.svelte",
+			"category": "feedback",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Field",
+			"subpath": "@nqmcreative/ui/field",
+			"file": "src/lib/components/Field.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Footer",
+			"subpath": "@nqmcreative/ui/footer",
+			"file": "src/lib/components/Footer.svelte",
+			"category": "app shell",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Input",
+			"subpath": "@nqmcreative/ui/input",
+			"file": "src/lib/components/Input.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "InputGroup",
+			"subpath": "@nqmcreative/ui/input-group",
+			"file": "src/lib/components/InputGroup.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Kbd",
+			"subpath": "@nqmcreative/ui/kbd",
+			"file": "src/lib/components/Kbd.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Label",
+			"subpath": "@nqmcreative/ui/label",
+			"file": "src/lib/components/Label.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Link",
+			"subpath": "@nqmcreative/ui/link",
+			"file": "src/lib/components/Link.svelte",
+			"category": "actions",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "LocaleProvider",
+			"subpath": "@nqmcreative/ui/locale-provider",
+			"file": "src/lib/components/LocaleProvider.svelte",
+			"category": "locale",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale"
+			]
+		},
+		{
+			"name": "MenuItem",
+			"subpath": "@nqmcreative/ui/menu-item",
+			"file": "src/lib/components/MenuItem.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "MenuSeparator",
+			"subpath": "@nqmcreative/ui/menu-separator",
+			"file": "src/lib/components/MenuSeparator.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Modal",
+			"subpath": "@nqmcreative/ui/modal",
+			"file": "src/lib/components/Modal.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale"
+			]
+		},
+		{
+			"name": "MultiSelect",
+			"subpath": "@nqmcreative/ui/multi-select",
+			"file": "src/lib/components/MultiSelect.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Navbar",
+			"subpath": "@nqmcreative/ui/navbar",
+			"file": "src/lib/components/Navbar.svelte",
+			"category": "app shell",
+			"description": "",
+			"uses": [
+				"Drawer",
+				"Dropdown",
+				"MenuItem"
+			],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "NumberInput",
+			"subpath": "@nqmcreative/ui/number-input",
+			"file": "src/lib/components/NumberInput.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Pagination",
+			"subpath": "@nqmcreative/ui/pagination",
+			"file": "src/lib/components/Pagination.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "PasswordInput",
+			"subpath": "@nqmcreative/ui/password-input",
+			"file": "src/lib/components/PasswordInput.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Popover",
+			"subpath": "@nqmcreative/ui/popover",
+			"file": "src/lib/components/Popover.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable"
+			]
+		},
+		{
+			"name": "Progress",
+			"subpath": "@nqmcreative/ui/progress",
+			"file": "src/lib/components/Progress.svelte",
+			"category": "feedback",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Radio",
+			"subpath": "@nqmcreative/ui/radio",
+			"file": "src/lib/components/Radio.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "RadioGroup",
+			"subpath": "@nqmcreative/ui/radio-group",
+			"file": "src/lib/components/RadioGroup.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [
+				"Radio"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "SegmentedControl",
+			"subpath": "@nqmcreative/ui/segmented-control",
+			"file": "src/lib/components/SegmentedControl.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Select",
+			"subpath": "@nqmcreative/ui/select",
+			"file": "src/lib/components/Select.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Sidebar",
+			"subpath": "@nqmcreative/ui/sidebar",
+			"file": "src/lib/components/Sidebar.svelte",
+			"category": "app shell",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Skeleton",
+			"subpath": "@nqmcreative/ui/skeleton",
+			"file": "src/lib/components/Skeleton.svelte",
+			"category": "feedback",
+			"description": "",
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Slider",
+			"subpath": "@nqmcreative/ui/slider",
+			"file": "src/lib/components/Slider.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Spinner",
+			"subpath": "@nqmcreative/ui/spinner",
+			"file": "src/lib/components/Spinner.svelte",
+			"category": "feedback",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Stat",
+			"subpath": "@nqmcreative/ui/stat",
+			"file": "src/lib/components/Stat.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Steps",
+			"subpath": "@nqmcreative/ui/steps",
+			"file": "src/lib/components/Steps.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Switch",
+			"subpath": "@nqmcreative/ui/switch",
+			"file": "src/lib/components/Switch.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Table",
+			"subpath": "@nqmcreative/ui/table",
+			"file": "src/lib/components/Table.svelte",
+			"category": "data display",
+			"description": "",
+			"uses": [
+				"Checkbox"
+			],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Tabs",
+			"subpath": "@nqmcreative/ui/tabs",
+			"file": "src/lib/components/Tabs.svelte",
+			"category": "layout & navigation",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Textarea",
+			"subpath": "@nqmcreative/ui/textarea",
+			"file": "src/lib/components/Textarea.svelte",
+			"category": "forms",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "ThemeToggle",
+			"subpath": "@nqmcreative/ui/theme-toggle",
+			"file": "src/lib/components/ThemeToggle.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Toaster",
+			"subpath": "@nqmcreative/ui/toaster",
+			"file": "src/lib/components/Toaster.svelte",
+			"category": "feedback",
+			"description": "",
+			"uses": [
+				"Spinner"
+			],
+			"modules": [
+				"actions/dismissable",
+				"locale",
+				"toast",
+				"tones"
+			]
+		},
+		{
+			"name": "Tooltip",
+			"subpath": "@nqmcreative/ui/tooltip",
+			"file": "src/lib/components/Tooltip.svelte",
+			"category": "overlay",
+			"description": "",
+			"uses": [],
+			"modules": []
+		}
+	]
+}

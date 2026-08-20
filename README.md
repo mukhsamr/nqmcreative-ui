@@ -298,6 +298,34 @@ npm install file:../path/to/nqmcreative-ui
 
 `bun run build` in this repo then shows up without reinstalling.
 
+### The CLI
+
+`init` does the wiring below for you — the `@source` line, the font preconnect
+and the no-flash theme script are the three steps most easily forgotten:
+
+```bash
+bunx nqm-ui init
+```
+
+It detects SvelteKit or plain Vite, writes `src/app.css`, patches (or creates)
+`src/app.html`, and adds the CSS import to `src/routes/+layout.svelte`. Every
+write is idempotent — run it twice and the second run changes nothing. Add
+`--dry-run` to see what it would touch.
+
+It will not rewrite your Vite config; it prints the two lines to paste instead.
+
+```bash
+bunx nqm-ui list forms          # every component in a category
+bunx nqm-ui info date-picker    # subpath, what it renders, what it imports
+bunx nqm-ui add button badge    # print the import lines
+bunx nqm-ui add button --to src/routes/+page.svelte   # …or insert them
+```
+
+`add` is a convenience, not an installer: the whole library is already there
+after `bun add`, and a component pulls in whatever it renders internally — `add
+date-picker` mentions that `Calendar` comes with it, but there is nothing extra
+to install.
+
 ### Then, in every case
 
 **1. Peer requirements** — the consuming project brings its own `svelte` ^5 and

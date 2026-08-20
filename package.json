@@ -4,19 +4,22 @@
 	"description": "Svelte 5 + Tailwind CSS component library styled after nqmcreative.com",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-exports.mjs && publint",
+		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-exports.mjs && node scripts/generate-registry.mjs && publint",
 		"package": "svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs",
 		"exports": "node scripts/generate-exports.mjs",
+		"registry": "node scripts/generate-registry.mjs",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"lint": "prettier --check . && eslint . && node scripts/generate-exports.mjs --check",
+		"lint": "prettier --check . && eslint . && node scripts/generate-exports.mjs --check && node scripts/generate-registry.mjs --check",
 		"format": "prettier --write ."
 	},
 	"files": [
 		"dist",
+		"registry.json",
+		"cli",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
@@ -326,5 +329,8 @@
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/mukhsamr/nqmcreative-ui.git"
+	},
+	"bin": {
+		"nqm-ui": "./cli/index.mjs"
 	}
 }

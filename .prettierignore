@@ -10,3 +10,4 @@ bun.lockb
 
 # generated, and committed on purpose
 dist
+registry.json
