@@ -49,7 +49,8 @@ bunx nqm-ui init`;
 			built on one token system, light and dark, and not a single runtime dependency.
 		</p>
 		<div class="flex flex-wrap items-center gap-3 pt-2">
-			<Button href="/components" size="lg">Browse components</Button>
+			<Button href="/docs/installation" size="lg">Get started</Button>
+			<Button href="/components" variant="soft" size="lg">Browse components</Button>
 			<Button
 				href="https://github.com/mukhsamr/nqmcreative-ui"
 				variant="outline"

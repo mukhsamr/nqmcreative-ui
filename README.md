@@ -267,6 +267,11 @@ after a sort), and `Dropzone` (type, size and count rules).
 
 ## Installing it in another project
 
+> The docs site covers this with live examples — `/docs/installation`,
+> `/docs/theming`, `/docs/locale` and `/docs/adding-components`. Run
+> `bun run dev` to read them locally. What follows is the same ground in
+> short form.
+
 Not on npm — install it from the repo. **bun is the package manager here**;
 `bun.lock` is the committed lockfile.
 
