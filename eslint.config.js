@@ -10,6 +10,9 @@ const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	// `dist` is committed, so it is no longer covered by .gitignore — but it is
+	// generated, and linting generated output is noise.
+	{ ignores: ['dist/'] },
 	js.configs.recommended,
 	ts.configs.recommended,
 	svelte.configs.recommended,

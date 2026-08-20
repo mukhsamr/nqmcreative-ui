@@ -1,0 +1,210 @@
+/*
+ * @nqmcreative/ui design tokens
+ * Mirrors the visual language of https://nqmcreative.com
+ * Flat, no shadows, no border-radius (except pills). Import this after
+ * `@import "tailwindcss";` in your app's CSS entry point. Ships light and dark
+ * palettes — see the bottom of this file.
+ *
+ * Colour system: `brand` (teal green) is the primary. Every other hue below
+ * follows the same 4-step shape so components can swap tones freely:
+ *   --color-<tone>          base / solid fill / text on light surfaces
+ *   --color-<tone>-hover    darker step for hover + active
+ *   --color-<tone>-light    tinted surface (soft variants, alerts, badges)
+ *   --color-<tone>-border   hairline that reads against the tinted surface
+ */
+@theme {
+	/* --- surfaces --- */
+	--color-bg: #ffffff;
+	--color-bg-alt: #f8fafc;
+	--color-bg-inset: #f1f5f9;
+	--color-hairline: #e5e7eb;
+	--color-hairline-strong: #cbd5e1;
+
+	/* --- text --- */
+	--color-text: #0f172a;
+	--color-text-secondary: #475569;
+	--color-text-muted: #64748b;
+	--color-text-inverse: #ffffff;
+
+	/* --- brand / primary (teal green) --- */
+	--color-brand: #1c6358;
+	--color-brand-hover: #155047;
+	--color-brand-light: #e8f3f1;
+	--color-brand-border: #a8ccc5;
+
+	/* --- accent (copper) --- */
+	--color-accent: #c2410c;
+	--color-accent-hover: #9a3412;
+	--color-accent-light: #fdf1e9;
+	--color-accent-border: #f0c5a8;
+
+	/* --- violet --- */
+	--color-violet: #6d28d9;
+	--color-violet-hover: #5b21b6;
+	--color-violet-light: #f3edfd;
+	--color-violet-border: #cfbdf5;
+
+	/* --- info (blue) --- */
+	--color-info: #1d4ed8;
+	--color-info-hover: #1e40af;
+	--color-info-light: #eaf0fd;
+	--color-info-border: #b8caf7;
+
+	/* --- success (green) --- */
+	--color-success: #15803d;
+	--color-success-hover: #166534;
+	--color-success-light: #e9f6ed;
+	--color-success-border: #a8d9b8;
+
+	/* --- warning (amber) --- */
+	--color-warning: #b45309;
+	--color-warning-hover: #92400e;
+	--color-warning-light: #fdf4e6;
+	--color-warning-border: #f0d3a3;
+
+	/* --- danger (red) --- */
+	--color-danger: #b91c1c;
+	--color-danger-hover: #991b1b;
+	--color-danger-light: #fdecec;
+	--color-danger-border: #f2b9b9;
+
+	/* --- neutral (slate) --- */
+	--color-neutral: #475569;
+	--color-neutral-hover: #334155;
+	--color-neutral-light: #f1f5f9;
+	--color-neutral-border: #cbd5e1;
+
+	/* --- type --- */
+	--font-sans: 'Work Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--font-heading: 'Sora', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+
+	/* --- motion --- */
+	--ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-brand-out: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/*
+ * Dark mode. Two ways in, and they cooperate:
+ *
+ *   1. put `class="dark"` on <html> — an explicit choice always wins
+ *   2. do nothing — the OS preference applies, unless <html> says `class="light"`
+ *
+ * Both blocks below carry the same values on purpose; keep them in sync.
+ * Every utility built on these tokens (`bg-bg`, `text-text-secondary`,
+ * `bg-brand`, `border-hairline`, the whole tone system) follows automatically —
+ * components need no `dark:` classes of their own.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+	color-scheme: dark;
+
+	--color-bg: #0f172a;
+	--color-bg-alt: #16203a;
+	--color-bg-inset: #1e293b;
+	--color-hairline: #1e293b;
+	--color-hairline-strong: #334155;
+
+	--color-text: #f1f5f9;
+	--color-text-secondary: #cbd5e1;
+	--color-text-muted: #94a3b8;
+	--color-text-inverse: #0f172a;
+
+	--color-brand: #3f9585;
+	--color-brand-hover: #55ab9a;
+	--color-brand-light: #10302b;
+	--color-brand-border: #235047;
+
+	--color-accent: #ea7d4b;
+	--color-accent-hover: #f59564;
+	--color-accent-light: #3a1d0e;
+	--color-accent-border: #6b3417;
+
+	--color-violet: #a78bfa;
+	--color-violet-hover: #bda5fb;
+	--color-violet-light: #241a3d;
+	--color-violet-border: #40306b;
+
+	--color-info: #6b9bf7;
+	--color-info-hover: #8fb4f9;
+	--color-info-light: #14213f;
+	--color-info-border: #26406e;
+
+	--color-success: #46a06a;
+	--color-success-hover: #5cb47e;
+	--color-success-light: #10281a;
+	--color-success-border: #23492f;
+
+	--color-warning: #d99b3f;
+	--color-warning-hover: #e8ae55;
+	--color-warning-light: #33240c;
+	--color-warning-border: #5c421a;
+
+	--color-danger: #ef6b6b;
+	--color-danger-hover: #f38585;
+	--color-danger-light: #3a1616;
+	--color-danger-border: #6b2626;
+
+	--color-neutral: #94a3b8;
+	--color-neutral-hover: #cbd5e1;
+	--color-neutral-light: #1e293b;
+	--color-neutral-border: #334155;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not(.light) {
+		color-scheme: dark;
+
+		--color-bg: #0f172a;
+		--color-bg-alt: #16203a;
+		--color-bg-inset: #1e293b;
+		--color-hairline: #1e293b;
+		--color-hairline-strong: #334155;
+
+		--color-text: #f1f5f9;
+		--color-text-secondary: #cbd5e1;
+		--color-text-muted: #94a3b8;
+		--color-text-inverse: #0f172a;
+
+		--color-brand: #3f9585;
+		--color-brand-hover: #55ab9a;
+		--color-brand-light: #10302b;
+		--color-brand-border: #235047;
+
+		--color-accent: #ea7d4b;
+		--color-accent-hover: #f59564;
+		--color-accent-light: #3a1d0e;
+		--color-accent-border: #6b3417;
+
+		--color-violet: #a78bfa;
+		--color-violet-hover: #bda5fb;
+		--color-violet-light: #241a3d;
+		--color-violet-border: #40306b;
+
+		--color-info: #6b9bf7;
+		--color-info-hover: #8fb4f9;
+		--color-info-light: #14213f;
+		--color-info-border: #26406e;
+
+		--color-success: #46a06a;
+		--color-success-hover: #5cb47e;
+		--color-success-light: #10281a;
+		--color-success-border: #23492f;
+
+		--color-warning: #d99b3f;
+		--color-warning-hover: #e8ae55;
+		--color-warning-light: #33240c;
+		--color-warning-border: #5c421a;
+
+		--color-danger: #ef6b6b;
+		--color-danger-hover: #f38585;
+		--color-danger-light: #3a1616;
+		--color-danger-border: #6b2626;
+
+		--color-neutral: #94a3b8;
+		--color-neutral-hover: #cbd5e1;
+		--color-neutral-light: #1e293b;
+		--color-neutral-border: #334155;
+	}
+}

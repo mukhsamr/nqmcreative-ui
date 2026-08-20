@@ -1,5 +1,10 @@
 node_modules
 
+# bun is the package manager here — bun.lock is the committed lockfile
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
 # Output
 .output
 .vercel
@@ -7,7 +12,11 @@ node_modules
 .wrangler
 /.svelte-kit
 /build
-/dist
+
+# NOT /dist — it is committed on purpose. bun blocks a dependency's `prepare`
+# script and does not put node_modules/.bin on PATH when running one, so a
+# `bun add git+ssh://…` install cannot build the package itself. Shipping the
+# build output is what makes every install route work with bun.
 
 # OS
 .DS_Store

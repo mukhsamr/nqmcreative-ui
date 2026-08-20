@@ -231,8 +231,15 @@ bun run test      # vitest
 bun run build     # svelte-package + publint -> dist/
 ```
 
-Rebuild (`bun run build`) after any change to `src/lib` — consuming projects
-read from `dist/`, not `src/`.
+**`dist/` is committed on purpose — rebuild and commit it with your change.**
+Consuming projects read from `dist/`, not `src/`, and nothing builds it for
+them: bun blocks a dependency's `prepare` script, and even once trusted it
+runs without `node_modules/.bin` on PATH, so `svelte-kit` is not found.
+Shipping the build output is what keeps `bun add git+ssh://…` working.
+
+```bash
+bun run build && git add dist
+```
 
 `src/routes` holds two preview pages: `/` for the components and `/shell` for
 the app shell — navbar, sidebar, footer — at a realistic size.
@@ -244,55 +251,52 @@ after a sort), and `Dropzone` (type, size and count rules).
 
 ## Installing it in another project
 
-Not on npm. Three routes — pick by how you work.
+Not on npm — install it from the repo. **bun is the package manager here**;
+`bun.lock` is the committed lockfile.
 
 ### Option A — straight from GitHub (recommended)
 
-`prepare` builds `dist/` after the clone, so nothing needs to be packed or
-copied by hand.
-
 ```bash
-npm i git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
 ```
 
-While the repo is private, the installing machine needs access to it — an SSH
-key on the account, or `gh auth login`. Use `git+ssh://` rather than
-`git+https://` so nothing prompts for a password.
+`dist/` is committed, so this works as-is: nothing has to be built at install
+time. Use `git+ssh://` rather than `git+https://` — bun resolves https GitHub
+URLs through the API, which 404s on a private repo. The installing machine
+needs an SSH key on an account with access.
 
-Pull later changes with `npm update @nqmcreative/ui`, which tracks the tip of
+Pull later changes with `bun update @nqmcreative/ui`, which tracks the tip of
 `main`. To pin instead, tag a release and append it:
 
 ```bash
-npm i git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git#v0.0.1
+bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git#v0.0.1
 ```
 
 ### Option B — a packed tarball
 
-Portable, no repo access needed — hand it to a colleague or drop it in a CI
+Portable, and needs no repo access — hand it to someone or drop it in a CI
 cache.
 
 ```bash
-npm pack                      # in this repo; writes nqmcreative-ui-0.0.1.tgz
+bun run build && bun pm pack     # in this repo
 ```
 
 ```bash
-bun add ./nqmcreative-ui-0.0.1.tgz   # in your other project
+bun add ./nqmcreative-ui-0.0.1.tgz    # in your other project
 ```
 
-Re-pack and re-add after every change to `src/lib`.
-
 ### Option C — a live symlink, for developing both at once
+
+`bun link` and `bun add file:<dir>` both fail on Windows with
+`EBUSY: failed opening cache/package/version dir` — bun copies the whole source
+directory, `node_modules` (160 MB) included, into its cache. npm's symlink is
+the way here:
 
 ```bash
 npm install file:../path/to/nqmcreative-ui
 ```
 
-npm symlinks the folder, so `npm run build` here shows up without reinstalling.
-
-> **`bun link` and `bun add file:<dir>` do not work on Windows.** Both fail with
-> `EBUSY: failed opening cache/package/version dir` — bun copies the whole
-> source directory, `node_modules` (160 MB) included, into its cache. Options A
-> and B avoid it; so does npm's symlink.
+`bun run build` in this repo then shows up without reinstalling.
 
 ### Then, in every case
 
@@ -302,10 +306,15 @@ Tailwind CSS v4. The package itself has no runtime dependencies.
 **2. SvelteKit from scratch**, start to finish:
 
 ```bash
-npx sv create myapp --template minimal --types ts --install npm
-cd myapp
-npm i -D tailwindcss @tailwindcss/vite
-npm i git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
+bunx sv create myapp --template minimal --types ts --install bun
+```
+
+```bash
+cd myapp && bun add -d tailwindcss @tailwindcss/vite
+```
+
+```bash
+bun add git+ssh://git@github.com/mukhsamr/nqmcreative-ui.git
 ```
 
 Register the Tailwind plugin **before** `sveltekit()` in `vite.config.ts`:

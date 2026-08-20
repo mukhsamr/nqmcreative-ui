@@ -1,0 +1,112 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import { anchored, type Placement } from '../actions/anchor.js';
+	import { clickOutside, focusTrap, navigateList, portal } from '../actions/dismissable.js';
+	import { useLocale } from '../locale.svelte.js';
+
+	interface Props {
+		/** The control that opens the menu — put a `Button` in here. */
+		trigger: Snippet;
+		/** Menu contents: `MenuItem`, `MenuSeparator`, or anything else. */
+		children: Snippet;
+		open?: boolean;
+		placement?: Placement;
+		offset?: number;
+		/** Stretch the menu to the trigger's width. */
+		matchWidth?: boolean;
+		/** Close as soon as an item inside is activated. Default true. */
+		closeOnSelect?: boolean;
+		/** Accessible name for the menu. Defaults to the locale's `menu`. */
+		label?: string;
+		class?: string;
+		/** Classes for the wrapper around the trigger. */
+		triggerClass?: string;
+	}
+
+	let {
+		trigger,
+		children,
+		open = $bindable(false),
+		placement = 'bottom-start',
+		offset = 6,
+		matchWidth = false,
+		closeOnSelect = true,
+		label,
+		class: className = '',
+		triggerClass = ''
+	}: Props = $props();
+
+	const t = useLocale();
+
+	let anchorEl: HTMLElement | null = $state(null);
+	let menuEl: HTMLElement | null = $state(null);
+
+	/**
+	 * Wires the consumer's own trigger element rather than wrapping it in another
+	 * button: the ARIA state belongs on the real control, not on our span.
+	 */
+	function triggerBehaviour(node: HTMLElement) {
+		const toggle = () => (open = !open);
+		const onKeydown = (event: KeyboardEvent) => {
+			if (event.key === 'ArrowDown' && !open) {
+				event.preventDefault();
+				open = true;
+			}
+		};
+		node.addEventListener('click', toggle);
+		node.addEventListener('keydown', onKeydown);
+		return {
+			destroy() {
+				node.removeEventListener('click', toggle);
+				node.removeEventListener('keydown', onKeydown);
+			}
+		};
+	}
+
+	$effect(() => {
+		const control = anchorEl?.querySelector('button, a, [role="button"]');
+		if (!control) return;
+		control.setAttribute('aria-haspopup', 'menu');
+		control.setAttribute('aria-expanded', String(open));
+	});
+
+	function onMenuKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' || event.key === 'Tab') {
+			if (event.key === 'Escape') event.preventDefault();
+			event.stopPropagation();
+			open = false;
+			return;
+		}
+		if (!menuEl) return;
+		navigateList(event, [
+			...menuEl.querySelectorAll<HTMLElement>('[role="menuitem"]:not([disabled])')
+		]);
+	}
+
+	function onMenuClick(event: MouseEvent) {
+		if (!closeOnSelect) return;
+		if ((event.target as HTMLElement).closest('[role="menuitem"]:not([disabled])')) open = false;
+	}
+</script>
+
+<span bind:this={anchorEl} use:triggerBehaviour class="inline-flex {triggerClass}">
+	{@render trigger()}
+</span>
+
+{#if open}
+	<div
+		bind:this={menuEl}
+		use:portal
+		use:anchored={{ anchor: anchorEl, placement, offset, matchWidth }}
+		use:clickOutside={{ onoutside: () => (open = false), ignore: [anchorEl] }}
+		use:focusTrap={{ restore: true }}
+		onkeydown={onMenuKeydown}
+		onclick={onMenuClick}
+		role="menu"
+		aria-label={label ?? t.current.menu}
+		tabindex="-1"
+		class="z-50 flex max-h-[min(24rem,80vh)] min-w-44 flex-col overflow-y-auto border border-hairline bg-bg py-1 font-sans {className}"
+	>
+		{@render children()}
+	</div>
+{/if}
