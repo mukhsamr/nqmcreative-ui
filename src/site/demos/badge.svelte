@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Badge from '$lib/components/Badge.svelte';
-	import { TONES } from '$lib/tones.js';
+	import Badge from '$lib/styles/matte/Badge.svelte';
+	import { TONES } from '$lib/core/tones.js';
 </script>
 
 <div class="flex flex-wrap items-center gap-2">

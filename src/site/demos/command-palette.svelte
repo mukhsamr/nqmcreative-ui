@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import CommandPalette from '$lib/components/CommandPalette.svelte';
-	import Kbd from '$lib/components/Kbd.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import CommandPalette from '$lib/styles/matte/CommandPalette.svelte';
+	import Kbd from '$lib/styles/matte/Kbd.svelte';
 
 	let open = $state(false);
 </script>

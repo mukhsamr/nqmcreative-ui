@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Drawer from '$lib/components/Drawer.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import Drawer from '$lib/styles/matte/Drawer.svelte';
 
 	let open = $state(false);
 </script>

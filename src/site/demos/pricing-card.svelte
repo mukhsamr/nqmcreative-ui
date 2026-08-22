@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import PricingCard from '$lib/components/PricingCard.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import PricingCard from '$lib/styles/matte/PricingCard.svelte';
 </script>
 
 <div class="grid w-full gap-6 sm:grid-cols-2">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Divider from '$lib/components/Divider.svelte';
+	import Divider from '$lib/styles/matte/Divider.svelte';
 </script>
 
 <div class="flex w-full max-w-sm flex-col gap-4">

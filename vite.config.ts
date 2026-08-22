@@ -24,6 +24,11 @@ export default defineConfig({
 		})
 	],
 
+	server: {
+		port: 5175,
+		strictPort: true
+	},
+
 	test: {
 		// The components under test touch the DOM (mount, ResizeObserver, files),
 		// so every suite runs in happy-dom rather than node.

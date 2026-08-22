@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Skeleton from '$lib/components/Skeleton.svelte';
+	import Skeleton from '$lib/styles/matte/Skeleton.svelte';
 </script>
 
 <div class="flex w-full max-w-sm flex-col gap-4">

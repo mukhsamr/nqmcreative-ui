@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ContextMenu from '$lib/components/ContextMenu.svelte';
-	import MenuItem from '$lib/components/MenuItem.svelte';
-	import MenuSeparator from '$lib/components/MenuSeparator.svelte';
+	import ContextMenu from '$lib/styles/matte/ContextMenu.svelte';
+	import MenuItem from '$lib/styles/matte/MenuItem.svelte';
+	import MenuSeparator from '$lib/styles/matte/MenuSeparator.svelte';
 </script>
 
 <ContextMenu class="w-full">

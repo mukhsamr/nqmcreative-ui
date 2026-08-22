@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Radio from '$lib/components/Radio.svelte';
+	import Radio from '$lib/styles/matte/Radio.svelte';
 
 	let group = $state('monthly');
 </script>

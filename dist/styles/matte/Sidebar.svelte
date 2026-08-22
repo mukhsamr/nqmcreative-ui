@@ -1,0 +1,206 @@
+<script module lang="ts">
+	export interface SidebarItem {
+		/** Stable id used for the active state. Falls back to `href`. */
+		id?: string;
+		label: string;
+		href?: string;
+		disabled?: boolean;
+		badge?: string | number;
+		/** Nested links — the parent becomes a collapsible group. */
+		items?: SidebarItem[];
+		/** Open the group on first render. */
+		open?: boolean;
+	}
+
+	export interface SidebarSection {
+		/** Small heading above a run of items. */
+		label?: string;
+		items: SidebarItem[];
+	}
+</script>
+
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import { useLocale } from '../../core/locale.svelte.js';
+	import { focusRing, toneRing, toneSoft, type Tone } from '../../core/tones.js';
+
+	interface Props {
+		sections: SidebarSection[];
+		/** Bindable — the `id` (or `href`) of the current item. */
+		value?: string;
+		/** Bindable — narrow rail mode. */
+		collapsed?: boolean;
+		/** Show the collapse button. */
+		collapsible?: boolean;
+		tone?: Tone;
+		header?: Snippet;
+		footer?: Snippet;
+		onnavigate?: (item: SidebarItem) => void;
+		class?: string;
+	}
+
+	let {
+		sections,
+		value = $bindable(''),
+		collapsed = $bindable(false),
+		collapsible = true,
+		tone = 'brand',
+		header,
+		footer,
+		onnavigate,
+		class: className = ''
+	}: Props = $props();
+
+	const t = useLocale();
+
+	const keyOf = (item: SidebarItem) => item.id ?? item.href ?? item.label;
+
+	/** Groups start open when asked, or when they contain the active item. */
+	let opened = $state<Record<string, boolean>>({});
+
+	const isOpen = (item: SidebarItem) =>
+		opened[keyOf(item)] ?? (item.open || item.items!.some((child) => keyOf(child) === value));
+
+	function toggle(item: SidebarItem) {
+		opened = { ...opened, [keyOf(item)]: !isOpen(item) };
+	}
+
+	function go(item: SidebarItem) {
+		if (item.disabled) return;
+		value = keyOf(item);
+		onnavigate?.(item);
+	}
+
+	const row =
+		'flex w-full items-center gap-3 px-3 py-2 text-left font-sans text-sm transition-colors duration-150 ease-brand-out disabled:pointer-events-none disabled:opacity-40';
+</script>
+
+<aside
+	class="flex h-full shrink-0 flex-col border-r border-hairline bg-bg transition-[width] duration-200 ease-brand-out
+		{collapsed ? 'w-16' : 'w-60'} {className}"
+>
+	{#if header}
+		<div class="flex h-16 shrink-0 items-center gap-3 border-b border-hairline px-3">
+			{@render header()}
+		</div>
+	{/if}
+
+	<nav aria-label={t.current.navigation} class="flex-1 overflow-y-auto py-3">
+		{#each sections as section, i (section.label ?? i)}
+			<div class="flex flex-col gap-0.5 {i > 0 ? 'mt-4' : ''}">
+				{#if section.label && !collapsed}
+					<p class="px-3 pb-1 font-mono text-[10px] tracking-wide text-text-muted uppercase">
+						{section.label}
+					</p>
+				{:else if section.label && collapsed && i > 0}
+					<div class="mx-3 mb-1 h-px bg-hairline" role="separator"></div>
+				{/if}
+
+				{#each section.items as item (keyOf(item))}
+					{#if item.items?.length}
+						<button
+							type="button"
+							onclick={() => toggle(item)}
+							aria-expanded={isOpen(item)}
+							title={collapsed ? item.label : undefined}
+							class="{row} {focusRing} {toneRing[
+								tone
+							]} text-text-secondary hover:bg-bg-inset hover:text-text"
+						>
+							<span class="min-w-0 flex-1 truncate {collapsed ? 'sr-only' : ''}">{item.label}</span>
+							{#if !collapsed}
+								<svg
+									class="size-3 shrink-0 transition-transform duration-200 {isOpen(item)
+										? 'rotate-90'
+										: ''}"
+									viewBox="0 0 16 16"
+									fill="none"
+									aria-hidden="true"
+								>
+									<path
+										d="m6 4 4 4-4 4"
+										stroke="currentColor"
+										stroke-width="1.6"
+										stroke-linecap="square"
+									/>
+								</svg>
+							{/if}
+						</button>
+
+						{#if isOpen(item) && !collapsed}
+							<div class="ml-5 flex flex-col gap-0.5 border-l border-hairline pl-1">
+								{#each item.items as child (keyOf(child))}
+									<a
+										href={child.href}
+										onclick={() => go(child)}
+										aria-current={value === keyOf(child) ? 'page' : undefined}
+										class="{row} {focusRing} {toneRing[tone]} {value === keyOf(child)
+											? `${toneSoft[tone]} font-medium`
+											: 'text-text-muted hover:bg-bg-inset hover:text-text'} {child.disabled
+											? 'pointer-events-none opacity-40'
+											: ''}"
+									>
+										<span class="min-w-0 flex-1 truncate">{child.label}</span>
+										{#if child.badge !== undefined}
+											<span class="shrink-0 font-mono text-[11px]">{child.badge}</span>
+										{/if}
+									</a>
+								{/each}
+							</div>
+						{/if}
+					{:else}
+						<a
+							href={item.href}
+							onclick={() => go(item)}
+							aria-current={value === keyOf(item) ? 'page' : undefined}
+							title={collapsed ? item.label : undefined}
+							class="{row} {focusRing} {toneRing[tone]} {value === keyOf(item)
+								? `${toneSoft[tone]} font-medium`
+								: 'text-text-secondary hover:bg-bg-inset hover:text-text'} {item.disabled
+								? 'pointer-events-none opacity-40'
+								: ''}"
+						>
+							<span class="min-w-0 flex-1 truncate {collapsed ? 'sr-only' : ''}">{item.label}</span>
+							{#if item.badge !== undefined && !collapsed}
+								<span class="shrink-0 font-mono text-[11px] text-text-muted">{item.badge}</span>
+							{/if}
+						</a>
+					{/if}
+				{/each}
+			</div>
+		{/each}
+	</nav>
+
+	{#if footer || collapsible}
+		<div class="flex shrink-0 flex-col gap-2 border-t border-hairline p-3">
+			{#if footer}
+				{@render footer()}
+			{/if}
+			{#if collapsible}
+				<button
+					type="button"
+					onclick={() => (collapsed = !collapsed)}
+					aria-label={collapsed ? t.current.expandSidebar : t.current.collapseSidebar}
+					class="inline-flex h-8 items-center justify-center gap-2 font-sans text-xs text-text-muted transition-colors duration-150 hover:text-text {focusRing} {toneRing[
+						tone
+					]}"
+				>
+					<svg
+						class="size-4 transition-transform duration-200 {collapsed ? 'rotate-180' : ''}"
+						viewBox="0 0 16 16"
+						fill="none"
+						aria-hidden="true"
+					>
+						<path
+							d="m10 4-4 4 4 4"
+							stroke="currentColor"
+							stroke-width="1.6"
+							stroke-linecap="square"
+						/>
+					</svg>
+					{#if !collapsed}<span>{t.current.collapseSidebar}</span>{/if}
+				</button>
+			{/if}
+		</div>
+	{/if}
+</aside>

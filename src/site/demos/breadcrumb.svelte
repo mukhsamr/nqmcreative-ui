@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Breadcrumb from '$lib/components/Breadcrumb.svelte';
+	import Breadcrumb from '$lib/styles/matte/Breadcrumb.svelte';
 </script>
 
 <Breadcrumb

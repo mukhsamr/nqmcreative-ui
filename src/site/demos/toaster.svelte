@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import { toast } from '$lib/toast.svelte.js';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import { toast } from '$lib/core/toast.svelte.js';
 </script>
 
 <div class="flex flex-wrap gap-3">

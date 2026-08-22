@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Avatar from '$lib/components/Avatar.svelte';
+	import Avatar from '$lib/styles/matte/Avatar.svelte';
 </script>
 
 <div class="flex items-center gap-4">

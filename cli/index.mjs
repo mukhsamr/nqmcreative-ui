@@ -23,7 +23,7 @@ const argv = process.argv.slice(2);
 const flags = new Set(argv.filter((a) => a.startsWith('--')));
 
 /** Flags that take a value, so the value is not mistaken for a positional. */
-const valueFlags = new Set(['--to']);
+const valueFlags = new Set(['--to', '--style']);
 const args = [];
 for (let i = 0; i < argv.length; i++) {
 	if (argv[i].startsWith('--')) {
@@ -66,15 +66,37 @@ async function registry() {
 	fail('registry.json not found — is the package installed correctly?');
 }
 
-/** Accepts `Button`, `button`, `date-picker` or the full subpath. */
+/** Accepts `Button`, `button`, `date-picker` or any style's full subpath. */
 function findComponent(list, query) {
-	const needle = query.toLowerCase().replace(/^@nqmcreative\/ui\//, '');
-	return list.find(
-		(item) =>
-			item.name.toLowerCase() === needle ||
-			item.subpath.endsWith(`/${needle}`) ||
-			item.subpath === query
-	);
+	const needle = query.toLowerCase().replace(/^@nqmcreative\/ui\/[a-z-]+\//, '');
+	return list.find((item) => item.name.toLowerCase() === needle || item.slug === needle);
+}
+
+/**
+ * The style to work in. There is no default on purpose: a component belongs to
+ * a style, and picking one by accident is the mistake this package exists to
+ * prevent. Asking once beats shipping the wrong look.
+ */
+function pickStyle(styles) {
+	const index = argv.indexOf('--style');
+	const wanted = index !== -1 ? argv[index + 1] : null;
+
+	if (!wanted) {
+		log();
+		log('  which style?');
+		log();
+		for (const style of styles) {
+			log(`    ${c.cyan(style.name.padEnd(8))} ${c.dim(style.description)}`);
+		}
+		log();
+		log(`  ${c.dim(`e.g. ${command} --style ${styles[0].name}`)}`);
+		log();
+		process.exit(1);
+	}
+
+	const style = styles.find((s) => s.name === wanted);
+	if (!style) fail(`unknown style "${wanted}" — try ${styles.map((s) => s.name).join(' or ')}`);
+	return style;
 }
 
 /* ------------------------------------------------------------ file edits -- */
@@ -128,10 +150,12 @@ function sourcePath(cssRel) {
 /* ------------------------------------------------------------------ init -- */
 
 async function init() {
+	const { styles } = await registry();
+	const style = pickStyle(styles);
 	const project = await detectProject();
 
 	log();
-	log(c.bold('  @nqmcreative/ui'));
+	log(c.bold(`  @nqmcreative/ui — ${style.title}`));
 	log(c.dim(`  ${project.isKit ? 'SvelteKit' : 'Svelte + Vite'} project detected`));
 	log();
 
@@ -151,16 +175,16 @@ async function init() {
 	const source = sourcePath(project.cssRel);
 	const lines = [
 		`@import 'tailwindcss';`,
-		`@import '@nqmcreative/ui/theme.css';`,
-		`@import '@nqmcreative/ui/fonts.css';`,
+		`@import '@nqmcreative/ui/${style.name}/theme.css';`,
+		...(style.fonts ? [`@import '@nqmcreative/ui/${style.name}/fonts.css';`] : []),
 		``,
-		`/* Tailwind v4 skips node_modules — point it at the package's dist so`,
-		`   the class names used inside the components are generated. */`,
-		`@source '${source}';`
+		`/* Tailwind v4 skips node_modules — point it at this style's folder so`,
+		`   the class names used inside its components are generated. */`,
+		`@source '${source}/styles/${style.name}';`
 	];
 
 	const css = await readOr(project.css);
-	if (css.includes('@nqmcreative/ui/theme.css')) {
+	if (css.includes('@nqmcreative/ui/') && css.includes('theme.css')) {
 		skip(`${project.cssRel} already imports the theme`);
 	} else {
 		const body = css.trim()
@@ -197,7 +221,7 @@ async function init() {
 			// Unindented — `%sveltekit.head%` already sits at its own indentation,
 			// so the join below supplies it and the first line does not double up.
 			const additions = [];
-			if (!html.includes('fonts.gstatic.com')) {
+			if (style.fonts && !html.includes('fonts.gstatic.com')) {
 				additions.push(`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`);
 			}
 			if (!html.includes('nqm-theme')) {
@@ -272,14 +296,15 @@ async function init() {
 	}
 
 	log();
-	log(`  Next: ${c.cyan('bunx @nqmcreative/ui add button')}`);
+	log(`  Next: ${c.cyan(`bunx @nqmcreative/ui add button --style ${style.name}`)}`);
 	log();
 }
 
 /* ------------------------------------------------------------------- add -- */
 
 async function add() {
-	const { components } = await registry();
+	const { components, styles } = await registry();
+	const style = pickStyle(styles);
 	const names = args.slice(1);
 	if (names.length === 0) fail('which component? e.g. `nqm-ui add button dialog`');
 
@@ -290,7 +315,7 @@ async function add() {
 			const close = components
 				.filter((c) => c.name.toLowerCase().startsWith(name.slice(0, 3).toLowerCase()))
 				.slice(0, 3)
-				.map((c) => c.subpath.split('/').pop());
+				.map((c) => c.slug);
 			fail(
 				`unknown component "${name}"${close.length ? ` — did you mean ${close.join(', ')}?` : ''}`
 			);
@@ -298,7 +323,7 @@ async function add() {
 		found.push(item);
 	}
 
-	const imports = found.map((item) => `import ${item.name} from '${item.subpath}';`);
+	const imports = found.map((item) => `import ${item.name} from '${item.subpaths[style.name]}';`);
 
 	// `--to <file>` inserts the imports into an existing Svelte file.
 	const toIndex = argv.indexOf('--to');
@@ -339,7 +364,7 @@ async function add() {
 /* ------------------------------------------------------------------ list -- */
 
 async function list() {
-	const { components, count } = await registry();
+	const { components, count, styles } = await registry();
 	const filter = args[1]?.toLowerCase();
 
 	const groups = {};
@@ -355,11 +380,15 @@ async function list() {
 	for (const [category, items] of Object.entries(groups)) {
 		log(`  ${c.bold(category)}`);
 		for (const item of items) {
-			log(`    ${item.subpath.split('/').pop().padEnd(20)} ${c.dim(item.subpath)}`);
+			log(`    ${item.slug.padEnd(20)} ${c.dim(item.description)}`);
 		}
 		log();
 	}
-	log(c.dim(`  ${shown} of ${count} components`));
+	log(
+		c.dim(
+			`  ${shown} of ${count} components, in every style: ${styles.map((s) => s.name).join(', ')}`
+		)
+	);
 	log();
 }
 
@@ -374,11 +403,12 @@ async function info() {
 	log(`  ${c.bold(item.name)}  ${c.dim(item.category)}`);
 	if (item.description) log(`  ${item.description}`);
 	log();
-	log(`  ${c.cyan(`import ${item.name} from '${item.subpath}';`)}`);
+	for (const [style, subpath] of Object.entries(item.subpaths)) {
+		log(`  ${c.dim(style.padEnd(8))} ${c.cyan(`import ${item.name} from '${subpath}';`)}`);
+	}
 	log();
 	if (item.uses.length) log(`  renders    ${item.uses.join(', ')}`);
-	if (item.modules.length) log(`  uses       ${item.modules.join(', ')}`);
-	log(`  source     ${item.file}`);
+	if (item.modules.length) log(`  core       ${item.modules.join(', ')}`);
 	log();
 }
 
@@ -388,13 +418,16 @@ function help() {
 	log(`
   ${c.bold('@nqmcreative/ui')}
 
-    ${c.cyan('init')}                  wire the design system into this project
+    ${c.cyan('init --style <s>')}      wire one style into this project
     ${c.cyan('add <name...>')}         print the import for a component
+      ${c.dim('--style <s>')}         which style to import from (required)
       ${c.dim('--to <file>')}         …and insert it into that file instead
-    ${c.cyan('list [category]')}       every component and its subpath
-    ${c.cyan('info <name>')}           what one component pulls in
+    ${c.cyan('list [category]')}       every component in the catalogue
+    ${c.cyan('info <name>')}           what one component pulls in, in every style
 
     ${c.dim('--dry-run')}             show the writes without making them
+
+  ${c.dim('Every style implements every component. Run init once per project.')}
 `);
 }
 

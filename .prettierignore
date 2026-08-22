@@ -11,3 +11,4 @@ bun.lockb
 # generated, and committed on purpose
 dist
 registry.json
+src/routes/styles.css

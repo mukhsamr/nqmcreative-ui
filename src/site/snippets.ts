@@ -5,26 +5,19 @@
  * practical reason: a literal `</script>` inside a Svelte component's script
  * block ends that block, and every way of escaping it upsets either eslint or
  * prettier. In a plain module it is just text.
+ *
+ * The samples below use `matte`. Every style implements the same catalogue, so
+ * swapping the word in the import path is the whole difference.
  */
 
 export const install = `bun add @nqmcreative/ui`;
 
-export const installGit = `bun add github:mukhsamr/nqmcreative-ui`;
+export const cliInit = `bunx nqm-ui init --style matte`;
 
-export const installTarball = `# in the library repo
-bun run build && bun pm pack
-
-# in your project
-bun add ./nqmcreative-ui-0.1.0.tgz`;
-
-export const installSymlink = `npm install file:../path/to/nqmcreative-ui`;
-
-export const cliInit = `bunx nqm-ui init`;
-
-export const cliOther = `bunx nqm-ui list forms          # every component in a category
-bunx nqm-ui info date-picker    # subpath, what it renders, what it imports
-bunx nqm-ui add button badge    # print the import lines
-bunx nqm-ui add button --to src/routes/+page.svelte`;
+export const cliOther = `bunx nqm-ui list forms                   # every component in a category
+bunx nqm-ui info date-picker             # its import line in every style
+bunx nqm-ui add button badge --style matte
+bunx nqm-ui add button --style paper --to src/routes/+page.svelte`;
 
 export const scaffold = `bunx sv create myapp --template minimal --types ts --install bun
 cd myapp
@@ -41,16 +34,24 @@ export default defineConfig({
 });`;
 
 export const appCss = `@import 'tailwindcss';
-@import '@nqmcreative/ui/theme.css';
-@import '@nqmcreative/ui/fonts.css';
+@import '@nqmcreative/ui/matte/theme.css';
+@import '@nqmcreative/ui/matte/fonts.css';
 
-/* Tailwind v4 skips node_modules — point it at the package's dist so the
-   class names used inside the components are generated. */
-@source '../node_modules/@nqmcreative/ui/dist';`;
+/* Tailwind v4 skips node_modules — point it at the style's folder so the
+   class names used inside its components are generated. Only the style you
+   actually import needs to be scanned. */
+@source '../node_modules/@nqmcreative/ui/dist/styles/matte';`;
+
+export const appCssPaper = `@import 'tailwindcss';
+@import '@nqmcreative/ui/paper/theme.css';
+@import '@nqmcreative/ui/paper/fonts.css';
+
+/* Same idea, pointed at the other style's folder. */
+@source '../node_modules/@nqmcreative/ui/dist/styles/paper';`;
 
 export const layout = `<script lang="ts">
 	import '../app.css';
-	import Toaster from '@nqmcreative/ui/toaster';
+	import { Toaster } from '@nqmcreative/ui/matte';
 
 	let { children } = $props();
 </script>
@@ -66,9 +67,7 @@ export const appHtml = `<link rel="preconnect" href="https://fonts.gstatic.com" 
 </script>`;
 
 export const usage = `<script lang="ts">
-	import Button from '@nqmcreative/ui/button';
-	import Field from '@nqmcreative/ui/field';
-	import Input from '@nqmcreative/ui/input';
+	import { Button, Field, Input } from '@nqmcreative/ui/matte';
 
 	let email = $state('');
 </script>
@@ -79,9 +78,25 @@ export const usage = `<script lang="ts">
 
 <Button tone="accent">Get started</Button>`;
 
-export const barrel = `import { Button, Field, Input } from '@nqmcreative/ui';`;
+export const subpaths = `import Button from '@nqmcreative/ui/matte/button';
+import Field from '@nqmcreative/ui/matte/field';
+import Input from '@nqmcreative/ui/matte/input';`;
+
+export const noRoot = `// there is no root export — a style has to be named
+import { Button } from '@nqmcreative/ui';         // ✗ nothing here
+import { Button } from '@nqmcreative/ui/matte';   // ✓
+import { Button } from '@nqmcreative/ui/paper';   // ✓ same props, different look`;
 
 export const update = `bun update @nqmcreative/ui`;
+
+/* -------------------------------------------------------------- styles -- */
+
+export const styleSwap = `// one project, one style — swap the word and the whole app follows
+import { Button, Card, Modal } from '@nqmcreative/ui/matte';
+import { Button, Card, Modal } from '@nqmcreative/ui/paper';`;
+
+export const coreImport = `// the behaviour every style shares, if you need it directly
+import { focusTrap, anchored, toast, setLocale } from '@nqmcreative/ui/core';`;
 
 /* ------------------------------------------------------------- theming -- */
 
@@ -99,9 +114,9 @@ export const themeTokens = `@theme {
 }`;
 
 export const themeOverride = `@import 'tailwindcss';
-@import '@nqmcreative/ui/theme.css';
+@import '@nqmcreative/ui/matte/theme.css';
 
-/* your brand, on top of the defaults */
+/* your brand, on top of the style's defaults */
 @theme {
 	--color-brand: #0f766e;
 	--color-brand-hover: #115e59;
@@ -110,14 +125,14 @@ export const themeOverride = `@import 'tailwindcss';
 }`;
 
 export const themeToggle = `<script lang="ts">
-	import ThemeToggle from '@nqmcreative/ui/theme-toggle';
+	import { ThemeToggle } from '@nqmcreative/ui/matte';
 </script>
 
 <ThemeToggle />
 <ThemeToggle variant="segmented" />`;
 
 export const toneMaps = `<script lang="ts">
-	import { toneSoft, toneFill, type Tone } from '@nqmcreative/ui/tones';
+	import { toneSoft, toneFill, type Tone } from '@nqmcreative/ui/core';
 
 	let { tone = 'brand' }: { tone?: Tone } = $props();
 </script>
@@ -126,20 +141,20 @@ export const toneMaps = `<script lang="ts">
 
 /* -------------------------------------------------------------- locale -- */
 
-export const localeGlobal = `import { setLocale, idID } from '@nqmcreative/ui/locale';
+export const localeGlobal = `import { setLocale, idID } from '@nqmcreative/ui/core';
 
 setLocale(idID);`;
 
 export const localeProvider = `<script lang="ts">
-	import LocaleProvider from '@nqmcreative/ui/locale-provider';
-	import { idID } from '@nqmcreative/ui/locale';
+	import { LocaleProvider } from '@nqmcreative/ui/matte';
+	import { idID } from '@nqmcreative/ui/core';
 </script>
 
 <LocaleProvider locale={idID}>
 	<App />
 </LocaleProvider>`;
 
-export const localePartial = `import { setLocale } from '@nqmcreative/ui/locale';
+export const localePartial = `import { setLocale } from '@nqmcreative/ui/core';
 
 setLocale({
 	noData: 'Belum ada data',
@@ -149,11 +164,18 @@ setLocale({
 
 /* ---------------------------------------------------- adding a component -- */
 
+export const newCatalogue = `// scripts/catalogue.mjs — the list every style must implement
+export const COMPONENTS = [
+	// …
+	['Callout', 'feedback', 'Short aside that sits inside running copy.'],
+	// …
+];`;
+
 export const newComponent = `<script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { toneSoft, type Tone } from '../tones.js';
-	import { useLocale } from '../locale.svelte.js';
+	import { toneSoft, type Tone } from '../../core/tones.js';
+	import { useLocale } from '../../core/locale.svelte.js';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		tone?: Tone;
@@ -169,20 +191,22 @@ export const newComponent = `<script lang="ts">
 	{@render children()}
 </div>`;
 
-export const newExport = `/* --- feedback --- */
-export { default as Callout } from './components/Callout.svelte';
-export type { CalloutTone } from './components/Callout.svelte';`;
+export const newBehaviour = `// src/lib/core/callout.ts — anything with no opinion about looks
+export function calloutRole(tone: Tone): 'alert' | 'status' {
+	return tone === 'danger' ? 'alert' : 'status';
+}`;
 
 export const newDemo = `<script lang="ts">
-	import Callout from '$lib/components/Callout.svelte';
+	import Callout from '$lib/styles/matte/Callout.svelte';
 </script>
 
 <Callout tone="accent">Something worth noticing.</Callout>`;
 
-export const newBuild = `bun run registry     # picks up the new component
-bun run exports      # adds @nqmcreative/ui/callout
-bun run lint         # fails if either is stale
-bun run build        # rebuilds dist/, which is committed`;
+export const newBuild = `bun run index        # regenerates every style's barrel
+bun run registry     # fails if a style is missing the component
+bun run exports      # adds the subpath for each style
+bun run lint         # fails if any of the three is stale
+bun run build        # rebuilds dist/`;
 
 export const toneRule = `<!-- Tailwind only sees literal class strings -->
 <div class="bg-{tone}">…</div>          <!-- generates nothing -->

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Calendar from '$lib/components/Calendar.svelte';
+	import Calendar from '$lib/styles/matte/Calendar.svelte';
 
 	let value = $state('2026-08-15');
 </script>

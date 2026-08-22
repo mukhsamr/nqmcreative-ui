@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MultiSelect from '$lib/components/MultiSelect.svelte';
+	import MultiSelect from '$lib/styles/matte/MultiSelect.svelte';
 
 	let value = $state(['brand', 'motion']);
 </script>

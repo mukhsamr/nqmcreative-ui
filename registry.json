@@ -2,88 +2,47 @@
 	"name": "@nqmcreative/ui",
 	"homepage": "https://github.com/mukhsamr/nqmcreative-ui",
 	"count": 65,
+	"demoStyle": "matte",
+	"styles": [
+		{
+			"name": "matte",
+			"title": "Matte",
+			"description": "Flat and sharp-cornered — no radius, no shadow, no gloss. Hairline rules and mono micro-labels do the work borders usually do.",
+			"fonts": true,
+			"extra": []
+		},
+		{
+			"name": "paper",
+			"title": "Paper",
+			"description": "The neutral one. Start here if unsure: soft corners, light shadows, generous spacing, and nothing that fights the content.",
+			"fonts": true,
+			"extra": []
+		}
+	],
 	"components": [
 		{
-			"name": "Accordion",
-			"subpath": "@nqmcreative/ui/accordion",
-			"file": "src/lib/components/Accordion.svelte",
-			"category": "layout & navigation",
-			"description": "Wrapper that stacks collapsible items with hairlines between them.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "AccordionItem",
-			"subpath": "@nqmcreative/ui/accordion-item",
-			"file": "src/lib/components/AccordionItem.svelte",
-			"category": "layout & navigation",
-			"description": "A single collapsible row, built on <details> so it works without JS.",
+			"name": "LocaleProvider",
+			"slug": "locale-provider",
+			"category": "locale",
+			"description": "Scopes a locale to a subtree — the SSR-safe way to translate.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/locale-provider",
+				"paper": "@nqmcreative/ui/paper/locale-provider"
+			},
 			"uses": [],
 			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Alert",
-			"subpath": "@nqmcreative/ui/alert",
-			"file": "src/lib/components/Alert.svelte",
-			"category": "feedback",
-			"description": "Inline message in any tone, optionally dismissible.",
-			"uses": [],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Avatar",
-			"subpath": "@nqmcreative/ui/avatar",
-			"file": "src/lib/components/Avatar.svelte",
-			"category": "data display",
-			"description": "Image or initials, circular or squared, in five sizes.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "AvatarGroup",
-			"subpath": "@nqmcreative/ui/avatar-group",
-			"file": "src/lib/components/AvatarGroup.svelte",
-			"category": "data display",
-			"description": "Overlapping row of avatars with a ring cut out of the background.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Badge",
-			"subpath": "@nqmcreative/ui/badge",
-			"file": "src/lib/components/Badge.svelte",
-			"category": "data display",
-			"description": "Pill label for status and counts. Solid, soft or outline.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Breadcrumb",
-			"subpath": "@nqmcreative/ui/breadcrumb",
-			"file": "src/lib/components/Breadcrumb.svelte",
-			"category": "layout & navigation",
-			"description": "Trail of links to the current page.",
-			"uses": [],
-			"modules": [
-				"locale",
-				"tones"
+				"locale"
 			]
 		},
 		{
 			"name": "Button",
-			"subpath": "@nqmcreative/ui/button",
-			"file": "src/lib/components/Button.svelte",
+			"slug": "button",
 			"category": "actions",
 			"description": "Five variants and four sizes, with a loading state and an href mode.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/button",
+				"paper": "@nqmcreative/ui/paper/button"
+			},
 			"uses": [
 				"Spinner"
 			],
@@ -92,240 +51,14 @@
 			]
 		},
 		{
-			"name": "CTASection",
-			"subpath": "@nqmcreative/ui/cta-section",
-			"file": "src/lib/components/CTASection.svelte",
-			"category": "marketing",
-			"description": "Closing call to action — tinted, solid or outlined.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Calendar",
-			"subpath": "@nqmcreative/ui/calendar",
-			"file": "src/lib/components/Calendar.svelte",
-			"category": "forms",
-			"description": "Month grid with keyboard navigation, bounds and disabled days.",
-			"uses": [],
-			"modules": [
-				"date",
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Card",
-			"subpath": "@nqmcreative/ui/card",
-			"file": "src/lib/components/Card.svelte",
-			"category": "data display",
-			"description": "Bordered, filled or tinted surface with an optional header and footer.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Checkbox",
-			"subpath": "@nqmcreative/ui/checkbox",
-			"file": "src/lib/components/Checkbox.svelte",
-			"category": "forms",
-			"description": "Single checkbox with a label, description and indeterminate state.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "CheckboxGroup",
-			"subpath": "@nqmcreative/ui/checkbox-group",
-			"file": "src/lib/components/CheckboxGroup.svelte",
-			"category": "forms",
-			"description": "A set of checkboxes bound to a string array, with an optional cap.",
-			"uses": [
-				"Checkbox"
-			],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Combobox",
-			"subpath": "@nqmcreative/ui/combobox",
-			"file": "src/lib/components/Combobox.svelte",
-			"category": "forms",
-			"description": "Single-select with a text filter and keyboard navigation.",
-			"uses": [],
-			"modules": [
-				"actions/anchor",
-				"actions/dismissable",
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "CommandPalette",
-			"subpath": "@nqmcreative/ui/command-palette",
-			"file": "src/lib/components/CommandPalette.svelte",
-			"category": "overlay",
-			"description": "Cmd+K launcher with grouping, shortcuts and hidden keywords.",
-			"uses": [
-				"Kbd"
-			],
-			"modules": [
-				"actions/dismissable",
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "ConfirmDialog",
-			"subpath": "@nqmcreative/ui/confirm-dialog",
-			"file": "src/lib/components/ConfirmDialog.svelte",
-			"category": "overlay",
-			"description": "Small dialog that stays busy until an async confirm settles.",
-			"uses": [
-				"Button",
-				"Modal"
-			],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "ContextMenu",
-			"subpath": "@nqmcreative/ui/context-menu",
-			"file": "src/lib/components/ContextMenu.svelte",
-			"category": "overlay",
-			"description": "Right-click menu placed at the pointer, flipped near the edges.",
-			"uses": [],
-			"modules": [
-				"actions/anchor",
-				"actions/dismissable",
-				"locale"
-			]
-		},
-		{
-			"name": "DatePicker",
-			"subpath": "@nqmcreative/ui/date-picker",
-			"file": "src/lib/components/DatePicker.svelte",
-			"category": "forms",
-			"description": "Text field plus a calendar popover. Value is a YYYY-MM-DD string.",
-			"uses": [
-				"Calendar"
-			],
-			"modules": [
-				"actions/anchor",
-				"actions/dismissable",
-				"date",
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Divider",
-			"subpath": "@nqmcreative/ui/divider",
-			"file": "src/lib/components/Divider.svelte",
-			"category": "layout & navigation",
-			"description": "Hairline rule, horizontal or vertical, with an optional caption.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Drawer",
-			"subpath": "@nqmcreative/ui/drawer",
-			"file": "src/lib/components/Drawer.svelte",
-			"category": "overlay",
-			"description": "Panel that slides in from any edge, on the native dialog top layer.",
-			"uses": [],
-			"modules": [
-				"locale"
-			]
-		},
-		{
-			"name": "Dropdown",
-			"subpath": "@nqmcreative/ui/dropdown",
-			"file": "src/lib/components/Dropdown.svelte",
-			"category": "overlay",
-			"description": "Menu anchored to a trigger, with focus trap and viewport flipping.",
-			"uses": [],
-			"modules": [
-				"actions/anchor",
-				"actions/dismissable",
-				"locale"
-			]
-		},
-		{
-			"name": "Dropzone",
-			"subpath": "@nqmcreative/ui/dropzone",
-			"file": "src/lib/components/Dropzone.svelte",
-			"category": "forms",
-			"description": "Drag-and-drop file input with type, size and count validation.",
-			"uses": [],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "EmptyState",
-			"subpath": "@nqmcreative/ui/empty-state",
-			"file": "src/lib/components/EmptyState.svelte",
-			"category": "feedback",
-			"description": "Placeholder for an empty list, with a glyph and an action slot.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "FeatureCard",
-			"subpath": "@nqmcreative/ui/feature-card",
-			"file": "src/lib/components/FeatureCard.svelte",
-			"category": "marketing",
-			"description": "One feature: glyph, heading, copy. Optionally a whole link.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "FeatureGrid",
-			"subpath": "@nqmcreative/ui/feature-grid",
-			"file": "src/lib/components/FeatureGrid.svelte",
-			"category": "marketing",
-			"description": "Section wrapper that lays feature cards out in 2, 3 or 4 columns.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Field",
-			"subpath": "@nqmcreative/ui/field",
-			"file": "src/lib/components/Field.svelte",
-			"category": "forms",
-			"description": "Wraps any control with a label, hint and error message.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Footer",
-			"subpath": "@nqmcreative/ui/footer",
-			"file": "src/lib/components/Footer.svelte",
-			"category": "app shell",
-			"description": "Site footer with link columns and a bottom bar.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "HeroSection",
-			"subpath": "@nqmcreative/ui/hero-section",
-			"file": "src/lib/components/HeroSection.svelte",
-			"category": "marketing",
-			"description": "Page opener — eyebrow, headline, copy, actions, optional media column.",
+			"name": "Link",
+			"slug": "link",
+			"category": "actions",
+			"description": "Anchor in any tone, with an external variant.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/link",
+				"paper": "@nqmcreative/ui/paper/link"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
@@ -333,199 +66,55 @@
 		},
 		{
 			"name": "Input",
-			"subpath": "@nqmcreative/ui/input",
-			"file": "src/lib/components/Input.svelte",
+			"slug": "input",
 			"category": "forms",
 			"description": "Text field with prefix and suffix slots, sizes and an invalid state.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/input",
+				"paper": "@nqmcreative/ui/paper/input"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
 			]
 		},
 		{
-			"name": "InputGroup",
-			"subpath": "@nqmcreative/ui/input-group",
-			"file": "src/lib/components/InputGroup.svelte",
+			"name": "Textarea",
+			"slug": "textarea",
 			"category": "forms",
-			"description": "Joins an input to a button or addon with a single shared border.",
+			"description": "Multi-line field that can grow with its content.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/textarea",
+				"paper": "@nqmcreative/ui/paper/textarea"
+			},
 			"uses": [],
-			"modules": []
+			"modules": [
+				"tones"
+			]
 		},
 		{
-			"name": "Kbd",
-			"subpath": "@nqmcreative/ui/kbd",
-			"file": "src/lib/components/Kbd.svelte",
-			"category": "data display",
-			"description": "Keyboard key, styled with a thicker bottom edge.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Label",
-			"subpath": "@nqmcreative/ui/label",
-			"file": "src/lib/components/Label.svelte",
+			"name": "Select",
+			"slug": "select",
 			"category": "forms",
-			"description": "Form label with an optional required marker.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Link",
-			"subpath": "@nqmcreative/ui/link",
-			"file": "src/lib/components/Link.svelte",
-			"category": "actions",
-			"description": "Anchor in any tone, with an external variant.",
+			"description": "Native select with a chevron and data-driven options.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/select",
+				"paper": "@nqmcreative/ui/paper/select"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
 			]
 		},
 		{
-			"name": "LocaleProvider",
-			"subpath": "@nqmcreative/ui/locale-provider",
-			"file": "src/lib/components/LocaleProvider.svelte",
-			"category": "locale",
-			"description": "Scopes a locale to a subtree — the SSR-safe way to translate.",
-			"uses": [],
-			"modules": [
-				"locale"
-			]
-		},
-		{
-			"name": "LogoCloud",
-			"subpath": "@nqmcreative/ui/logo-cloud",
-			"file": "src/lib/components/LogoCloud.svelte",
-			"category": "marketing",
-			"description": "Row of client or partner marks, dimmed until hovered.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "MenuItem",
-			"subpath": "@nqmcreative/ui/menu-item",
-			"file": "src/lib/components/MenuItem.svelte",
-			"category": "overlay",
-			"description": "Row inside a Dropdown or ContextMenu, with a shortcut hint.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "MenuSeparator",
-			"subpath": "@nqmcreative/ui/menu-separator",
-			"file": "src/lib/components/MenuSeparator.svelte",
-			"category": "overlay",
-			"description": "Rule between menu groups, with an optional caption.",
-			"uses": [],
-			"modules": []
-		},
-		{
-			"name": "Modal",
-			"subpath": "@nqmcreative/ui/modal",
-			"file": "src/lib/components/Modal.svelte",
-			"category": "overlay",
-			"description": "Centred dialog on the native top layer, with a footer slot.",
-			"uses": [],
-			"modules": [
-				"locale"
-			]
-		},
-		{
-			"name": "MultiSelect",
-			"subpath": "@nqmcreative/ui/multi-select",
-			"file": "src/lib/components/MultiSelect.svelte",
+			"name": "Checkbox",
+			"slug": "checkbox",
 			"category": "forms",
-			"description": "Multi-select with chips, grouping and a selection cap.",
-			"uses": [],
-			"modules": [
-				"actions/anchor",
-				"actions/dismissable",
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Navbar",
-			"subpath": "@nqmcreative/ui/navbar",
-			"file": "src/lib/components/Navbar.svelte",
-			"category": "app shell",
-			"description": "Top bar that collapses into a drawer below the md breakpoint.",
-			"uses": [
-				"Drawer",
-				"Dropdown",
-				"MenuItem"
-			],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "NumberInput",
-			"subpath": "@nqmcreative/ui/number-input",
-			"file": "src/lib/components/NumberInput.svelte",
-			"category": "forms",
-			"description": "Number field with steppers, clamping and decimal handling.",
-			"uses": [],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Pagination",
-			"subpath": "@nqmcreative/ui/pagination",
-			"file": "src/lib/components/Pagination.svelte",
-			"category": "layout & navigation",
-			"description": "Page numbers that collapse to an ellipsis around the current one.",
-			"uses": [],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "PasswordInput",
-			"subpath": "@nqmcreative/ui/password-input",
-			"file": "src/lib/components/PasswordInput.svelte",
-			"category": "forms",
-			"description": "Password field with a visibility toggle and a strength meter.",
-			"uses": [],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Popover",
-			"subpath": "@nqmcreative/ui/popover",
-			"file": "src/lib/components/Popover.svelte",
-			"category": "overlay",
-			"description": "Anchored panel that opens on click or hover.",
-			"uses": [],
-			"modules": [
-				"actions/anchor",
-				"actions/dismissable"
-			]
-		},
-		{
-			"name": "PricingCard",
-			"subpath": "@nqmcreative/ui/pricing-card",
-			"file": "src/lib/components/PricingCard.svelte",
-			"category": "marketing",
-			"description": "One plan: price, period, ticked feature list, optional featured styling.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Progress",
-			"subpath": "@nqmcreative/ui/progress",
-			"file": "src/lib/components/Progress.svelte",
-			"category": "feedback",
-			"description": "Determinate or indeterminate bar, in three sizes.",
+			"description": "Single checkbox with a label, description and indeterminate state.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/checkbox",
+				"paper": "@nqmcreative/ui/paper/checkbox"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
@@ -533,21 +122,112 @@
 		},
 		{
 			"name": "Radio",
-			"subpath": "@nqmcreative/ui/radio",
-			"file": "src/lib/components/Radio.svelte",
+			"slug": "radio",
 			"category": "forms",
 			"description": "Single radio bound to a shared group value.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/radio",
+				"paper": "@nqmcreative/ui/paper/radio"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
 			]
 		},
 		{
+			"name": "Switch",
+			"slug": "switch",
+			"category": "forms",
+			"description": "On/off toggle with a label and description.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/switch",
+				"paper": "@nqmcreative/ui/paper/switch"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Field",
+			"slug": "field",
+			"category": "forms",
+			"description": "Wraps any control with a label, hint and error message.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/field",
+				"paper": "@nqmcreative/ui/paper/field"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Label",
+			"slug": "label",
+			"category": "forms",
+			"description": "Form label with an optional required marker.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/label",
+				"paper": "@nqmcreative/ui/paper/label"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "PasswordInput",
+			"slug": "password-input",
+			"category": "forms",
+			"description": "Password field with a visibility toggle and a strength meter.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/password-input",
+				"paper": "@nqmcreative/ui/paper/password-input"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"password",
+				"tones"
+			]
+		},
+		{
+			"name": "NumberInput",
+			"slug": "number-input",
+			"category": "forms",
+			"description": "Number field with steppers, clamping and decimal handling.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/number-input",
+				"paper": "@nqmcreative/ui/paper/number-input"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"number",
+				"tones"
+			]
+		},
+		{
+			"name": "Slider",
+			"slug": "slider",
+			"category": "forms",
+			"description": "Range input with ticks and a printed value.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/slider",
+				"paper": "@nqmcreative/ui/paper/slider"
+			},
+			"uses": [],
+			"modules": [
+				"number",
+				"tones"
+			]
+		},
+		{
 			"name": "RadioGroup",
-			"subpath": "@nqmcreative/ui/radio-group",
-			"file": "src/lib/components/RadioGroup.svelte",
+			"slug": "radio-group",
 			"category": "forms",
 			"description": "A set of radios, optionally rendered as selectable cards.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/radio-group",
+				"paper": "@nqmcreative/ui/paper/radio-group"
+			},
 			"uses": [
 				"Radio"
 			],
@@ -556,33 +236,274 @@
 			]
 		},
 		{
+			"name": "CheckboxGroup",
+			"slug": "checkbox-group",
+			"category": "forms",
+			"description": "A set of checkboxes bound to a string array, with an optional cap.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/checkbox-group",
+				"paper": "@nqmcreative/ui/paper/checkbox-group"
+			},
+			"uses": [
+				"Checkbox"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
 			"name": "SegmentedControl",
-			"subpath": "@nqmcreative/ui/segmented-control",
-			"file": "src/lib/components/SegmentedControl.svelte",
+			"slug": "segmented-control",
 			"category": "forms",
 			"description": "Exclusive choice as one joined row, with arrow-key movement.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/segmented-control",
+				"paper": "@nqmcreative/ui/paper/segmented-control"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
 			]
 		},
 		{
-			"name": "Select",
-			"subpath": "@nqmcreative/ui/select",
-			"file": "src/lib/components/Select.svelte",
+			"name": "InputGroup",
+			"slug": "input-group",
 			"category": "forms",
-			"description": "Native select with a chevron and data-driven options.",
+			"description": "Joins an input to a button or addon with a single shared border.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/input-group",
+				"paper": "@nqmcreative/ui/paper/input-group"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Combobox",
+			"slug": "combobox",
+			"category": "forms",
+			"description": "Single-select with a text filter and keyboard navigation.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/combobox",
+				"paper": "@nqmcreative/ui/paper/combobox"
+			},
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"list",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "MultiSelect",
+			"slug": "multi-select",
+			"category": "forms",
+			"description": "Multi-select with chips, grouping and a selection cap.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/multi-select",
+				"paper": "@nqmcreative/ui/paper/multi-select"
+			},
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"list",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "DatePicker",
+			"slug": "date-picker",
+			"category": "forms",
+			"description": "Text field plus a calendar popover. Value is a YYYY-MM-DD string.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/date-picker",
+				"paper": "@nqmcreative/ui/paper/date-picker"
+			},
+			"uses": [
+				"Calendar"
+			],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"calendar",
+				"date",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Calendar",
+			"slug": "calendar",
+			"category": "forms",
+			"description": "Month grid with keyboard navigation, bounds and disabled days.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/calendar",
+				"paper": "@nqmcreative/ui/paper/calendar"
+			},
+			"uses": [],
+			"modules": [
+				"calendar",
+				"date",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Dropzone",
+			"slug": "dropzone",
+			"category": "forms",
+			"description": "Drag-and-drop file input with type, size and count validation.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/dropzone",
+				"paper": "@nqmcreative/ui/paper/dropzone"
+			},
+			"uses": [],
+			"modules": [
+				"files",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Badge",
+			"slug": "badge",
+			"category": "data display",
+			"description": "Pill label for status and counts. Solid, soft or outline.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/badge",
+				"paper": "@nqmcreative/ui/paper/badge"
+			},
 			"uses": [],
 			"modules": [
 				"tones"
 			]
 		},
 		{
-			"name": "Sidebar",
-			"subpath": "@nqmcreative/ui/sidebar",
-			"file": "src/lib/components/Sidebar.svelte",
-			"category": "app shell",
-			"description": "Nested, collapsible navigation rail for an app shell.",
+			"name": "Avatar",
+			"slug": "avatar",
+			"category": "data display",
+			"description": "Image or initials, circular or squared, in five sizes.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/avatar",
+				"paper": "@nqmcreative/ui/paper/avatar"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "AvatarGroup",
+			"slug": "avatar-group",
+			"category": "data display",
+			"description": "Overlapping row of avatars, each ringed in the background.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/avatar-group",
+				"paper": "@nqmcreative/ui/paper/avatar-group"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Card",
+			"slug": "card",
+			"category": "data display",
+			"description": "Surface with an optional header and footer, in three variants.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/card",
+				"paper": "@nqmcreative/ui/paper/card"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Stat",
+			"slug": "stat",
+			"category": "data display",
+			"description": "Figure with a label, delta and trend arrow.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/stat",
+				"paper": "@nqmcreative/ui/paper/stat"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Table",
+			"slug": "table",
+			"category": "data display",
+			"description": "Data-driven table with sorting, row selection and a cell snippet.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/table",
+				"paper": "@nqmcreative/ui/paper/table"
+			},
+			"uses": [
+				"Checkbox"
+			],
+			"modules": [
+				"locale",
+				"table",
+				"tones"
+			]
+		},
+		{
+			"name": "Kbd",
+			"slug": "kbd",
+			"category": "data display",
+			"description": "Keyboard key.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/kbd",
+				"paper": "@nqmcreative/ui/paper/kbd"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Alert",
+			"slug": "alert",
+			"category": "feedback",
+			"description": "Inline message in any tone, optionally dismissible.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/alert",
+				"paper": "@nqmcreative/ui/paper/alert"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Progress",
+			"slug": "progress",
+			"category": "feedback",
+			"description": "Determinate or indeterminate bar, in three sizes.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/progress",
+				"paper": "@nqmcreative/ui/paper/progress"
+			},
+			"uses": [],
+			"modules": [
+				"number",
+				"tones"
+			]
+		},
+		{
+			"name": "Spinner",
+			"slug": "spinner",
+			"category": "feedback",
+			"description": "Rotating ring that inherits the surrounding colour.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/spinner",
+				"paper": "@nqmcreative/ui/paper/spinner"
+			},
 			"uses": [],
 			"modules": [
 				"locale",
@@ -591,150 +512,39 @@
 		},
 		{
 			"name": "Skeleton",
-			"subpath": "@nqmcreative/ui/skeleton",
-			"file": "src/lib/components/Skeleton.svelte",
+			"slug": "skeleton",
 			"category": "feedback",
 			"description": "Pulsing placeholder in text, block or circle form.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/skeleton",
+				"paper": "@nqmcreative/ui/paper/skeleton"
+			},
 			"uses": [],
 			"modules": []
 		},
 		{
-			"name": "Slider",
-			"subpath": "@nqmcreative/ui/slider",
-			"file": "src/lib/components/Slider.svelte",
-			"category": "forms",
-			"description": "Range input with ticks, a value bubble and dual-handle mode.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Spinner",
-			"subpath": "@nqmcreative/ui/spinner",
-			"file": "src/lib/components/Spinner.svelte",
+			"name": "EmptyState",
+			"slug": "empty-state",
 			"category": "feedback",
-			"description": "Rotating ring that inherits the surrounding colour.",
+			"description": "Placeholder for an empty list, with a glyph and an action slot.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/empty-state",
+				"paper": "@nqmcreative/ui/paper/empty-state"
+			},
 			"uses": [],
 			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Stat",
-			"subpath": "@nqmcreative/ui/stat",
-			"file": "src/lib/components/Stat.svelte",
-			"category": "data display",
-			"description": "Figure with a label, delta and trend arrow.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "StatsBand",
-			"subpath": "@nqmcreative/ui/stats-band",
-			"file": "src/lib/components/StatsBand.svelte",
-			"category": "marketing",
-			"description": "A row of figures, built on Stat.",
-			"uses": [
-				"Stat",
-				"Stat"
-			],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Steps",
-			"subpath": "@nqmcreative/ui/steps",
-			"file": "src/lib/components/Steps.svelte",
-			"category": "layout & navigation",
-			"description": "Progress through a flow, horizontal or vertical, with a failed state.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Switch",
-			"subpath": "@nqmcreative/ui/switch",
-			"file": "src/lib/components/Switch.svelte",
-			"category": "forms",
-			"description": "On/off toggle with a label and description.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Table",
-			"subpath": "@nqmcreative/ui/table",
-			"file": "src/lib/components/Table.svelte",
-			"category": "data display",
-			"description": "Data-driven table with sorting, row selection and a cell snippet.",
-			"uses": [
-				"Checkbox"
-			],
-			"modules": [
-				"locale",
-				"tones"
-			]
-		},
-		{
-			"name": "Tabs",
-			"subpath": "@nqmcreative/ui/tabs",
-			"file": "src/lib/components/Tabs.svelte",
-			"category": "layout & navigation",
-			"description": "Underline, pill or segmented tabs bound to a value.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Testimonial",
-			"subpath": "@nqmcreative/ui/testimonial",
-			"file": "src/lib/components/Testimonial.svelte",
-			"category": "marketing",
-			"description": "A quote with an attributed author.",
-			"uses": [
-				"Avatar"
-			],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "Textarea",
-			"subpath": "@nqmcreative/ui/textarea",
-			"file": "src/lib/components/Textarea.svelte",
-			"category": "forms",
-			"description": "Multi-line field that can grow with its content.",
-			"uses": [],
-			"modules": [
-				"tones"
-			]
-		},
-		{
-			"name": "ThemeToggle",
-			"subpath": "@nqmcreative/ui/theme-toggle",
-			"file": "src/lib/components/ThemeToggle.svelte",
-			"category": "overlay",
-			"description": "Light, dark and system, remembered in localStorage.",
-			"uses": [],
-			"modules": [
-				"locale",
 				"tones"
 			]
 		},
 		{
 			"name": "Toaster",
-			"subpath": "@nqmcreative/ui/toaster",
-			"file": "src/lib/components/Toaster.svelte",
+			"slug": "toaster",
 			"category": "feedback",
 			"description": "Renders the toast queue. Mount once, near the root.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/toaster",
+				"paper": "@nqmcreative/ui/paper/toaster"
+			},
 			"uses": [
 				"Spinner"
 			],
@@ -746,11 +556,431 @@
 			]
 		},
 		{
+			"name": "Divider",
+			"slug": "divider",
+			"category": "layout & navigation",
+			"description": "Rule, horizontal or vertical, with an optional caption.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/divider",
+				"paper": "@nqmcreative/ui/paper/divider"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Tabs",
+			"slug": "tabs",
+			"category": "layout & navigation",
+			"description": "Underline, pill or segmented tabs bound to a value.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/tabs",
+				"paper": "@nqmcreative/ui/paper/tabs"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Accordion",
+			"slug": "accordion",
+			"category": "layout & navigation",
+			"description": "Wrapper that stacks collapsible items.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/accordion",
+				"paper": "@nqmcreative/ui/paper/accordion"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "AccordionItem",
+			"slug": "accordion-item",
+			"category": "layout & navigation",
+			"description": "A single collapsible row, built on <details> so it works without JS.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/accordion-item",
+				"paper": "@nqmcreative/ui/paper/accordion-item"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Breadcrumb",
+			"slug": "breadcrumb",
+			"category": "layout & navigation",
+			"description": "Trail of links to the current page.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/breadcrumb",
+				"paper": "@nqmcreative/ui/paper/breadcrumb"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Pagination",
+			"slug": "pagination",
+			"category": "layout & navigation",
+			"description": "Page numbers that collapse to an ellipsis around the current one.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/pagination",
+				"paper": "@nqmcreative/ui/paper/pagination"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"pagination",
+				"tones"
+			]
+		},
+		{
+			"name": "Steps",
+			"slug": "steps",
+			"category": "layout & navigation",
+			"description": "Progress through a flow, horizontal or vertical, with a failed state.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/steps",
+				"paper": "@nqmcreative/ui/paper/steps"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Navbar",
+			"slug": "navbar",
+			"category": "app shell",
+			"description": "Top bar that collapses into a drawer below the md breakpoint.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/navbar",
+				"paper": "@nqmcreative/ui/paper/navbar"
+			},
+			"uses": [
+				"Drawer",
+				"Dropdown",
+				"MenuItem"
+			],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Sidebar",
+			"slug": "sidebar",
+			"category": "app shell",
+			"description": "Nested, collapsible navigation rail for an app shell.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/sidebar",
+				"paper": "@nqmcreative/ui/paper/sidebar"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "Footer",
+			"slug": "footer",
+			"category": "app shell",
+			"description": "Site footer with link columns and a bottom bar.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/footer",
+				"paper": "@nqmcreative/ui/paper/footer"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "HeroSection",
+			"slug": "hero-section",
+			"category": "marketing",
+			"description": "Page opener — eyebrow, headline, copy, actions, optional media column.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/hero-section",
+				"paper": "@nqmcreative/ui/paper/hero-section"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "FeatureGrid",
+			"slug": "feature-grid",
+			"category": "marketing",
+			"description": "Section wrapper that lays feature cards out in 2, 3 or 4 columns.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/feature-grid",
+				"paper": "@nqmcreative/ui/paper/feature-grid"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "FeatureCard",
+			"slug": "feature-card",
+			"category": "marketing",
+			"description": "One feature: glyph, heading, copy. Optionally a whole link.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/feature-card",
+				"paper": "@nqmcreative/ui/paper/feature-card"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "PricingCard",
+			"slug": "pricing-card",
+			"category": "marketing",
+			"description": "One plan: price, period, ticked feature list, optional featured styling.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/pricing-card",
+				"paper": "@nqmcreative/ui/paper/pricing-card"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Testimonial",
+			"slug": "testimonial",
+			"category": "marketing",
+			"description": "A quote with an attributed author.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/testimonial",
+				"paper": "@nqmcreative/ui/paper/testimonial"
+			},
+			"uses": [
+				"Avatar"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "LogoCloud",
+			"slug": "logo-cloud",
+			"category": "marketing",
+			"description": "Row of client or partner marks, dimmed until hovered.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/logo-cloud",
+				"paper": "@nqmcreative/ui/paper/logo-cloud"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "CTASection",
+			"slug": "cta-section",
+			"category": "marketing",
+			"description": "Closing call to action, in three variants.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/cta-section",
+				"paper": "@nqmcreative/ui/paper/cta-section"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "StatsBand",
+			"slug": "stats-band",
+			"category": "marketing",
+			"description": "A row of figures, built on Stat.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/stats-band",
+				"paper": "@nqmcreative/ui/paper/stats-band"
+			},
+			"uses": [
+				"Stat"
+			],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "Modal",
+			"slug": "modal",
+			"category": "overlay",
+			"description": "Centred dialog on the native top layer, with a footer slot.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/modal",
+				"paper": "@nqmcreative/ui/paper/modal"
+			},
+			"uses": [],
+			"modules": [
+				"dialog",
+				"locale"
+			]
+		},
+		{
+			"name": "Drawer",
+			"slug": "drawer",
+			"category": "overlay",
+			"description": "Panel that slides in from any edge, on the native dialog top layer.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/drawer",
+				"paper": "@nqmcreative/ui/paper/drawer"
+			},
+			"uses": [],
+			"modules": [
+				"dialog",
+				"locale"
+			]
+		},
+		{
+			"name": "ConfirmDialog",
+			"slug": "confirm-dialog",
+			"category": "overlay",
+			"description": "Small dialog that stays busy until an async confirm settles.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/confirm-dialog",
+				"paper": "@nqmcreative/ui/paper/confirm-dialog"
+			},
+			"uses": [
+				"Button",
+				"Modal"
+			],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "CommandPalette",
+			"slug": "command-palette",
+			"category": "overlay",
+			"description": "Cmd+K launcher with grouping, shortcuts and hidden keywords.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/command-palette",
+				"paper": "@nqmcreative/ui/paper/command-palette"
+			},
+			"uses": [
+				"Kbd"
+			],
+			"modules": [
+				"actions/dismissable",
+				"dialog",
+				"list",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "ContextMenu",
+			"slug": "context-menu",
+			"category": "overlay",
+			"description": "Right-click menu placed at the pointer, flipped near the edges.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/context-menu",
+				"paper": "@nqmcreative/ui/paper/context-menu"
+			},
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"locale",
+				"trigger"
+			]
+		},
+		{
+			"name": "Dropdown",
+			"slug": "dropdown",
+			"category": "overlay",
+			"description": "Menu anchored to a trigger, with focus trap and viewport flipping.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/dropdown",
+				"paper": "@nqmcreative/ui/paper/dropdown"
+			},
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"locale",
+				"trigger"
+			]
+		},
+		{
+			"name": "MenuItem",
+			"slug": "menu-item",
+			"category": "overlay",
+			"description": "Row inside a Dropdown or ContextMenu, with a shortcut hint.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/menu-item",
+				"paper": "@nqmcreative/ui/paper/menu-item"
+			},
+			"uses": [],
+			"modules": [
+				"tones"
+			]
+		},
+		{
+			"name": "MenuSeparator",
+			"slug": "menu-separator",
+			"category": "overlay",
+			"description": "Rule between menu groups, with an optional caption.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/menu-separator",
+				"paper": "@nqmcreative/ui/paper/menu-separator"
+			},
+			"uses": [],
+			"modules": []
+		},
+		{
+			"name": "Popover",
+			"slug": "popover",
+			"category": "overlay",
+			"description": "Anchored panel that opens on click or hover.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/popover",
+				"paper": "@nqmcreative/ui/paper/popover"
+			},
+			"uses": [],
+			"modules": [
+				"actions/anchor",
+				"actions/dismissable",
+				"trigger"
+			]
+		},
+		{
+			"name": "ThemeToggle",
+			"slug": "theme-toggle",
+			"category": "overlay",
+			"description": "Light, dark and system, remembered in localStorage.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/theme-toggle",
+				"paper": "@nqmcreative/ui/paper/theme-toggle"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"theme",
+				"tones"
+			]
+		},
+		{
 			"name": "Tooltip",
-			"subpath": "@nqmcreative/ui/tooltip",
-			"file": "src/lib/components/Tooltip.svelte",
+			"slug": "tooltip",
 			"category": "overlay",
 			"description": "CSS-only label on hover and focus, in four placements.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/tooltip",
+				"paper": "@nqmcreative/ui/paper/tooltip"
+			},
 			"uses": [],
 			"modules": []
 		}

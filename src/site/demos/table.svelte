@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Badge from '$lib/components/Badge.svelte';
-	import Table from '$lib/components/Table.svelte';
+	import Badge from '$lib/styles/matte/Badge.svelte';
+	import Table from '$lib/styles/matte/Table.svelte';
 
 	const rows = [
 		{ id: 'p1', project: 'Sundara', client: 'Sundara', status: 'Live', budget: 84 },

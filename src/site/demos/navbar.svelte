@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Navbar from '$lib/components/Navbar.svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import Navbar from '$lib/styles/matte/Navbar.svelte';
+	import ThemeToggle from '$lib/styles/matte/ThemeToggle.svelte';
 </script>
 
 <div class="w-full border border-hairline">

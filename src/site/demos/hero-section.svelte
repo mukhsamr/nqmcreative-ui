@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import HeroSection from '$lib/components/HeroSection.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import HeroSection from '$lib/styles/matte/HeroSection.svelte';
 </script>
 
 <div class="w-full border border-hairline">

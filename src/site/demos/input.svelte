@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$lib/components/Input.svelte';
+	import Input from '$lib/styles/matte/Input.svelte';
 
 	let value = $state('');
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DatePicker from '$lib/components/DatePicker.svelte';
+	import DatePicker from '$lib/styles/matte/DatePicker.svelte';
 
 	let value = $state('2026-08-15');
 </script>

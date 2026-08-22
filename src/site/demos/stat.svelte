@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Stat from '$lib/components/Stat.svelte';
+	import Stat from '$lib/styles/matte/Stat.svelte';
 </script>
 
 <div class="flex flex-wrap gap-10">

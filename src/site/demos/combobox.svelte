@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Combobox from '$lib/components/Combobox.svelte';
+	import Combobox from '$lib/styles/matte/Combobox.svelte';
 
 	let value = $state('');
 </script>

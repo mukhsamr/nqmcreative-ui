@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import ConfirmDialog from '$lib/components/ConfirmDialog.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import ConfirmDialog from '$lib/styles/matte/ConfirmDialog.svelte';
 
 	let open = $state(false);
 </script>

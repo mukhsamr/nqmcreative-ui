@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RadioGroup from '$lib/components/RadioGroup.svelte';
+	import RadioGroup from '$lib/styles/matte/RadioGroup.svelte';
 
 	let value = $state('studio');
 </script>

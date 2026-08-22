@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Slider from '$lib/components/Slider.svelte';
+	import Slider from '$lib/styles/matte/Slider.svelte';
 
 	let value = $state(40);
 </script>

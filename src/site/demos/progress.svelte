@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Progress from '$lib/components/Progress.svelte';
+	import Progress from '$lib/styles/matte/Progress.svelte';
 </script>
 
 <div class="flex w-full max-w-sm flex-col gap-5">

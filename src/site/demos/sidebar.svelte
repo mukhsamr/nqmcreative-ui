@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Sidebar from '$lib/components/Sidebar.svelte';
+	import Sidebar from '$lib/styles/matte/Sidebar.svelte';
 
 	let value = $state('projects');
 	let collapsed = $state(false);

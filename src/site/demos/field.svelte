@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Field from '$lib/components/Field.svelte';
-	import Input from '$lib/components/Input.svelte';
+	import Field from '$lib/styles/matte/Field.svelte';
+	import Input from '$lib/styles/matte/Input.svelte';
 </script>
 
 <div class="grid w-full gap-5 sm:grid-cols-2">

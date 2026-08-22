@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Dropdown from '$lib/components/Dropdown.svelte';
-	import MenuItem from '$lib/components/MenuItem.svelte';
-	import MenuSeparator from '$lib/components/MenuSeparator.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import Dropdown from '$lib/styles/matte/Dropdown.svelte';
+	import MenuItem from '$lib/styles/matte/MenuItem.svelte';
+	import MenuSeparator from '$lib/styles/matte/MenuSeparator.svelte';
 </script>
 
 <Dropdown>

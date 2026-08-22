@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Popover from '$lib/components/Popover.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import Popover from '$lib/styles/matte/Popover.svelte';
 </script>
 
 <Popover>

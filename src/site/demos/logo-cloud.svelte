@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LogoCloud from '$lib/components/LogoCloud.svelte';
+	import LogoCloud from '$lib/styles/matte/LogoCloud.svelte';
 </script>
 
 <div class="w-full border border-hairline">

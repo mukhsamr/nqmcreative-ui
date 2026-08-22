@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Avatar from '$lib/components/Avatar.svelte';
-	import AvatarGroup from '$lib/components/AvatarGroup.svelte';
+	import Avatar from '$lib/styles/matte/Avatar.svelte';
+	import AvatarGroup from '$lib/styles/matte/AvatarGroup.svelte';
 </script>
 
 <AvatarGroup>

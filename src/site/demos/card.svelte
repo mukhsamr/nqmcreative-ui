@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from '$lib/components/Card.svelte';
+	import Card from '$lib/styles/matte/Card.svelte';
 </script>
 
 <div class="grid w-full gap-4 sm:grid-cols-3">

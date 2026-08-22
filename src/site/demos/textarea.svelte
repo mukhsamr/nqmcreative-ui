@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Textarea from '$lib/components/Textarea.svelte';
+	import Textarea from '$lib/styles/matte/Textarea.svelte';
 
 	let value = $state('');
 </script>

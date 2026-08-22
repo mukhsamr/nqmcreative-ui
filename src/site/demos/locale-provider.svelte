@@ -1,8 +1,8 @@
 <script lang="ts">
-	import LocaleProvider from '$lib/components/LocaleProvider.svelte';
-	import Pagination from '$lib/components/Pagination.svelte';
-	import SegmentedControl from '$lib/components/SegmentedControl.svelte';
-	import { enUS, idID } from '$lib/locale.svelte.js';
+	import LocaleProvider from '$lib/styles/matte/LocaleProvider.svelte';
+	import Pagination from '$lib/styles/matte/Pagination.svelte';
+	import SegmentedControl from '$lib/styles/matte/SegmentedControl.svelte';
+	import { enUS, idID } from '$lib/core/locale.svelte.js';
 
 	let lang = $state('id');
 	let page = $state(3);

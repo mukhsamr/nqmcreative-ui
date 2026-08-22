@@ -1,0 +1,222 @@
+/*
+ * paper — design tokens.
+ *
+ * The neutral style: soft corners, light shadows, and a palette that gets out
+ * of the content's way. Import this after `@import "tailwindcss";` in your
+ * app's CSS entry point.
+ *
+ * The token *names* are a contract shared by every style — `core` and every
+ * component are written against them, so only the values below change from one
+ * style to the next. Each hue follows the same 4-step shape:
+ *
+ *   --color-<tone>          base / solid fill / text on light surfaces
+ *   --color-<tone>-hover    darker step for hover + active
+ *   --color-<tone>-light    tinted surface (soft variants, alerts, badges)
+ *   --color-<tone>-border   hairline that reads against the tinted surface
+ */
+@theme {
+	/* --- surfaces --- */
+	--color-bg: #ffffff;
+	--color-bg-alt: #f9fafb;
+	--color-bg-inset: #f3f4f6;
+	--color-hairline: #e5e7eb;
+	--color-hairline-strong: #d1d5db;
+
+	/* --- text --- */
+	--color-text: #111827;
+	--color-text-secondary: #4b5563;
+	--color-text-muted: #6b7280;
+	--color-text-inverse: #ffffff;
+
+	/* --- brand / primary (indigo) --- */
+	--color-brand: #4f46e5;
+	--color-brand-hover: #4338ca;
+	--color-brand-light: #eef2ff;
+	--color-brand-border: #c7d2fe;
+
+	/* --- accent (rose) --- */
+	--color-accent: #e11d48;
+	--color-accent-hover: #be123c;
+	--color-accent-light: #fff1f2;
+	--color-accent-border: #fecdd3;
+
+	/* --- violet --- */
+	--color-violet: #7c3aed;
+	--color-violet-hover: #6d28d9;
+	--color-violet-light: #f5f3ff;
+	--color-violet-border: #ddd6fe;
+
+	/* --- info (blue) --- */
+	--color-info: #2563eb;
+	--color-info-hover: #1d4ed8;
+	--color-info-light: #eff6ff;
+	--color-info-border: #bfdbfe;
+
+	/* --- success (emerald) --- */
+	--color-success: #059669;
+	--color-success-hover: #047857;
+	--color-success-light: #ecfdf5;
+	--color-success-border: #a7f3d0;
+
+	/* --- warning (amber) --- */
+	--color-warning: #d97706;
+	--color-warning-hover: #b45309;
+	--color-warning-light: #fffbeb;
+	--color-warning-border: #fde68a;
+
+	/* --- danger (red) --- */
+	--color-danger: #dc2626;
+	--color-danger-hover: #b91c1c;
+	--color-danger-light: #fef2f2;
+	--color-danger-border: #fecaca;
+
+	/* --- neutral (gray) --- */
+	--color-neutral: #6b7280;
+	--color-neutral-hover: #4b5563;
+	--color-neutral-light: #f3f4f6;
+	--color-neutral-border: #d1d5db;
+
+	/* --- type --- */
+	/*
+	 * Plus Jakarta Sans: rounded terminals, open counters, low contrast. Softer
+	 * than a system stack, which lands on Segoe UI for most readers and gives
+	 * paper's generous spacing nothing warm to sit in.
+	 *
+	 * One variable file covers 400 to 700, so this costs a single request per
+	 * subset — see `fonts.css`. Everything degrades to the system stack if that
+	 * file is not imported, so the webfont stays optional.
+	 */
+	--font-sans:
+		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-heading:
+		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+	/* --- motion --- */
+	--ease-brand: cubic-bezier(0.4, 0, 0.2, 1);
+	--ease-brand-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/*
+ * Dark mode. Two ways in, and they cooperate:
+ *
+ *   1. put `class="dark"` on <html> — an explicit choice always wins
+ *   2. do nothing — the OS preference applies, unless <html> says `class="light"`
+ *
+ * Both blocks below carry the same values on purpose; keep them in sync.
+ * Every utility built on these tokens follows automatically, so components
+ * need no `dark:` classes of their own.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+	color-scheme: dark;
+
+	--color-bg: #0b0f19;
+	--color-bg-alt: #111827;
+	--color-bg-inset: #1f2937;
+	--color-hairline: #1f2937;
+	--color-hairline-strong: #374151;
+
+	--color-text: #f9fafb;
+	--color-text-secondary: #d1d5db;
+	--color-text-muted: #9ca3af;
+	--color-text-inverse: #0b0f19;
+
+	--color-brand: #818cf8;
+	--color-brand-hover: #a5b4fc;
+	--color-brand-light: #1e1b4b;
+	--color-brand-border: #3730a3;
+
+	--color-accent: #fb7185;
+	--color-accent-hover: #fda4af;
+	--color-accent-light: #4c0519;
+	--color-accent-border: #9f1239;
+
+	--color-violet: #a78bfa;
+	--color-violet-hover: #c4b5fd;
+	--color-violet-light: #2e1065;
+	--color-violet-border: #5b21b6;
+
+	--color-info: #60a5fa;
+	--color-info-hover: #93c5fd;
+	--color-info-light: #172554;
+	--color-info-border: #1e40af;
+
+	--color-success: #34d399;
+	--color-success-hover: #6ee7b7;
+	--color-success-light: #022c22;
+	--color-success-border: #065f46;
+
+	--color-warning: #fbbf24;
+	--color-warning-hover: #fcd34d;
+	--color-warning-light: #451a03;
+	--color-warning-border: #92400e;
+
+	--color-danger: #f87171;
+	--color-danger-hover: #fca5a5;
+	--color-danger-light: #450a0a;
+	--color-danger-border: #991b1b;
+
+	--color-neutral: #9ca3af;
+	--color-neutral-hover: #d1d5db;
+	--color-neutral-light: #1f2937;
+	--color-neutral-border: #374151;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not(.light) {
+		color-scheme: dark;
+
+		--color-bg: #0b0f19;
+		--color-bg-alt: #111827;
+		--color-bg-inset: #1f2937;
+		--color-hairline: #1f2937;
+		--color-hairline-strong: #374151;
+
+		--color-text: #f9fafb;
+		--color-text-secondary: #d1d5db;
+		--color-text-muted: #9ca3af;
+		--color-text-inverse: #0b0f19;
+
+		--color-brand: #818cf8;
+		--color-brand-hover: #a5b4fc;
+		--color-brand-light: #1e1b4b;
+		--color-brand-border: #3730a3;
+
+		--color-accent: #fb7185;
+		--color-accent-hover: #fda4af;
+		--color-accent-light: #4c0519;
+		--color-accent-border: #9f1239;
+
+		--color-violet: #a78bfa;
+		--color-violet-hover: #c4b5fd;
+		--color-violet-light: #2e1065;
+		--color-violet-border: #5b21b6;
+
+		--color-info: #60a5fa;
+		--color-info-hover: #93c5fd;
+		--color-info-light: #172554;
+		--color-info-border: #1e40af;
+
+		--color-success: #34d399;
+		--color-success-hover: #6ee7b7;
+		--color-success-light: #022c22;
+		--color-success-border: #065f46;
+
+		--color-warning: #fbbf24;
+		--color-warning-hover: #fcd34d;
+		--color-warning-light: #451a03;
+		--color-warning-border: #92400e;
+
+		--color-danger: #f87171;
+		--color-danger-hover: #fca5a5;
+		--color-danger-light: #450a0a;
+		--color-danger-border: #991b1b;
+
+		--color-neutral: #9ca3af;
+		--color-neutral-hover: #d1d5db;
+		--color-neutral-light: #1f2937;
+		--color-neutral-border: #374151;
+	}
+}

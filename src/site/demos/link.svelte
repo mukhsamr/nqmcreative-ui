@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte';
+	import Link from '$lib/styles/matte/Link.svelte';
 </script>
 
 <div class="flex flex-wrap items-center gap-5">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Testimonial from '$lib/components/Testimonial.svelte';
+	import Testimonial from '$lib/styles/matte/Testimonial.svelte';
 </script>
 
 <div class="flex w-full flex-col gap-8">

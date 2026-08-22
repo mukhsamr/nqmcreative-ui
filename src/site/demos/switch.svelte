@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Switch from '$lib/components/Switch.svelte';
+	import Switch from '$lib/styles/matte/Switch.svelte';
 
 	let checked = $state(true);
 </script>

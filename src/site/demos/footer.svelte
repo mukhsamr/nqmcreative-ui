@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Footer from '$lib/components/Footer.svelte';
+	import Footer from '$lib/styles/matte/Footer.svelte';
 </script>
 
 <div class="w-full border border-hairline">

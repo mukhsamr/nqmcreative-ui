@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SegmentedControl from '$lib/components/SegmentedControl.svelte';
+	import SegmentedControl from '$lib/styles/matte/SegmentedControl.svelte';
 
 	let value = $state('grid');
 </script>

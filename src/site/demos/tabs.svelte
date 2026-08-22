@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Tabs from '$lib/components/Tabs.svelte';
+	import Tabs from '$lib/styles/matte/Tabs.svelte';
 
 	let value = $state('overview');
 </script>

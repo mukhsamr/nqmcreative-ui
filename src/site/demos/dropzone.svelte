@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dropzone from '$lib/components/Dropzone.svelte';
+	import Dropzone from '$lib/styles/matte/Dropzone.svelte';
 </script>
 
 <div class="w-full max-w-md">

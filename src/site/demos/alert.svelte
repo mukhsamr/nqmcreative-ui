@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Alert from '$lib/components/Alert.svelte';
+	import Alert from '$lib/styles/matte/Alert.svelte';
 </script>
 
 <div class="flex w-full flex-col gap-3">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Pagination from '$lib/components/Pagination.svelte';
+	import Pagination from '$lib/styles/matte/Pagination.svelte';
 
 	let page = $state(3);
 </script>

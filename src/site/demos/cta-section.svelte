@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import CTASection from '$lib/components/CTASection.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import CTASection from '$lib/styles/matte/CTASection.svelte';
 </script>
 
 <div class="flex w-full flex-col gap-6">

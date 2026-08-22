@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CheckboxGroup from '$lib/components/CheckboxGroup.svelte';
+	import CheckboxGroup from '$lib/styles/matte/CheckboxGroup.svelte';
 
 	let value = $state(['wifi']);
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Input from '$lib/components/Input.svelte';
-	import InputGroup from '$lib/components/InputGroup.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import Input from '$lib/styles/matte/Input.svelte';
+	import InputGroup from '$lib/styles/matte/InputGroup.svelte';
 
 	let value = $state('');
 </script>

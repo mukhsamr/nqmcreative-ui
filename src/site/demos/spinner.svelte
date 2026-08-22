@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Spinner from '$lib/components/Spinner.svelte';
+	import Spinner from '$lib/styles/matte/Spinner.svelte';
 </script>
 
 <div class="flex items-center gap-6">

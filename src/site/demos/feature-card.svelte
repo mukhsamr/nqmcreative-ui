@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FeatureCard from '$lib/components/FeatureCard.svelte';
+	import FeatureCard from '$lib/styles/matte/FeatureCard.svelte';
 </script>
 
 <div class="grid w-full gap-6 sm:grid-cols-2">

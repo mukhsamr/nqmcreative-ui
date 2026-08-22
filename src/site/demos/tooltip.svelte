@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
-	import Tooltip from '$lib/components/Tooltip.svelte';
+	import Button from '$lib/styles/matte/Button.svelte';
+	import Tooltip from '$lib/styles/matte/Tooltip.svelte';
 </script>
 
 <div class="flex flex-wrap items-center gap-4">

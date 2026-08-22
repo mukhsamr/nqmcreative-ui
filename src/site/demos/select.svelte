@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Select from '$lib/components/Select.svelte';
+	import Select from '$lib/styles/matte/Select.svelte';
 
 	let value = $state('studio');
 </script>

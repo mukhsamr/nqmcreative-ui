@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import ThemeToggle from '$lib/styles/matte/ThemeToggle.svelte';
 </script>
 
 <div class="flex flex-wrap items-center gap-5">

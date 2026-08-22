@@ -1,6 +1,6 @@
 <script lang="ts">
-	import FeatureCard from '$lib/components/FeatureCard.svelte';
-	import FeatureGrid from '$lib/components/FeatureGrid.svelte';
+	import FeatureCard from '$lib/styles/matte/FeatureCard.svelte';
+	import FeatureGrid from '$lib/styles/matte/FeatureGrid.svelte';
 </script>
 
 <div class="w-full border border-hairline">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Steps from '$lib/components/Steps.svelte';
+	import Steps from '$lib/styles/matte/Steps.svelte';
 
 	let current = $state(1);
 </script>

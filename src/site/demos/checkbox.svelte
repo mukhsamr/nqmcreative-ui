@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Checkbox from '$lib/components/Checkbox.svelte';
+	import Checkbox from '$lib/styles/matte/Checkbox.svelte';
 
 	let checked = $state(true);
 </script>

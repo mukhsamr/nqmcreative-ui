@@ -1,5 +1,5 @@
 <script lang="ts">
-	import StatsBand from '$lib/components/StatsBand.svelte';
+	import StatsBand from '$lib/styles/matte/StatsBand.svelte';
 </script>
 
 <div class="w-full border border-hairline">
