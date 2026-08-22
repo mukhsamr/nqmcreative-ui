@@ -184,12 +184,29 @@ async function init() {
 	];
 
 	const css = await readOr(project.css);
-	if (css.includes('@nqmcreative/ui/') && css.includes('theme.css')) {
+
+	// Matched against *this* style's theme, not any of them. A file left over
+	// from an older layout — or wired to a different style — has to be reported,
+	// not skipped as already done.
+	if (css.includes(`@nqmcreative/ui/${style.name}/theme.css`)) {
 		skip(`${project.cssRel} already imports the theme`);
 	} else {
-		const body = css.trim()
-			? `${lines.join('\n')}\n\n${css.replace(/@import 'tailwindcss';\n?/, '').trim()}\n`
-			: `${lines.join('\n')}\n`;
+		// Drop whatever this package left here before — an older layout's
+		// `@nqmcreative/ui/theme.css`, another style's, and the `@source` that
+		// went with them. Keeping those would either fight the new tokens or fail
+		// to resolve, so a rewrite is cleaner than an append.
+		const stale =
+			/^@import ['"]@nqmcreative\/ui\/[^'"]+\.css['"];$|^@source ['"][^'"]*@nqmcreative\/ui[^'"]*['"];$/;
+
+		const kept = css
+			.split('\n')
+			.filter((line) => !stale.test(line.trim()))
+			.join('\n')
+			.replace(/@import ['"]tailwindcss['"];\n?/, '')
+			.replace(/\n{3,}/g, '\n\n')
+			.trim();
+
+		const body = kept ? `${lines.join('\n')}\n\n${kept}\n` : `${lines.join('\n')}\n`;
 		await write(project.css, body, project.cssRel);
 	}
 

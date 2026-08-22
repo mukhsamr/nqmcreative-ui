@@ -10,8 +10,6 @@
 		type Tone
 	} from '../../core/tones.js';
 
-	/** @deprecated use `Tone` — kept so existing `tone="brand" | "neutral"` still type-checks. */
-	export type BadgeTone = Tone;
 	export type BadgeVariant = 'soft' | 'solid' | 'outline';
 	export type BadgeSize = 'sm' | 'md';
 

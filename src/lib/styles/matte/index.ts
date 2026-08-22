@@ -114,7 +114,7 @@ export { default as Dropzone } from './Dropzone.svelte';
 
 /* --- data display --- */
 export { default as Badge } from './Badge.svelte';
-export type { BadgeTone, BadgeVariant, BadgeSize } from './Badge.svelte';
+export type { BadgeVariant, BadgeSize } from './Badge.svelte';
 export { default as Avatar } from './Avatar.svelte';
 export type { AvatarSize } from './Avatar.svelte';
 export { default as AvatarGroup } from './AvatarGroup.svelte';
