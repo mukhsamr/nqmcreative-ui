@@ -1,6 +1,6 @@
 {
 	"name": "@nqmcreative/ui",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "Svelte 5 + Tailwind CSS v4 component library — three styles (matte, paper, sprout), 65 components each, one shared behaviour core. No runtime dependencies.",
 	"scripts": {
 		"dev": "vite dev",
