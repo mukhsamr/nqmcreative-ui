@@ -95,9 +95,10 @@
 		5. Fonts and theme, before first paint
 	</h3>
 	<p class="font-sans text-sm leading-relaxed text-text-secondary">
-		Both styles ship a <code class="font-mono text-brand">fonts.css</code>, so the preconnect is
-		worth having either way — matte loads Sora, Work Sans and JetBrains Mono, paper one variable
-		file. Skip the import and the tokens fall back to the system stack with no error anywhere.
+		Every style ships a <code class="font-mono text-brand">fonts.css</code>, so the preconnect is
+		worth having whichever you pick — matte loads Sora, Work Sans and JetBrains Mono, paper one
+		variable file, sprout two. Skip the import and the tokens fall back to the system stack with no
+		error anywhere.
 	</p>
 	<p class="font-sans text-sm leading-relaxed text-text-secondary">
 		Both go in <code class="font-mono text-brand">src/app.html</code>, above

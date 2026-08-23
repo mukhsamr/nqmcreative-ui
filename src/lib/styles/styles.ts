@@ -8,10 +8,12 @@
  */
 import * as matte from './matte/index.js';
 import * as paper from './paper/index.js';
+import * as sprout from './sprout/index.js';
 
 export const STYLES = [
 	['matte', matte],
-	['paper', paper]
+	['paper', paper],
+	['sprout', sprout]
 ] as const;
 
 export type StyleModule = (typeof STYLES)[number][1];

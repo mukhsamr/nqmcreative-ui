@@ -137,6 +137,12 @@ export const STYLES = [
 		title: 'Paper',
 		description:
 			'The neutral one. Start here if unsure: soft corners, light shadows, generous spacing, and nothing that fights the content.'
+	},
+	{
+		name: 'sprout',
+		title: 'Sprout',
+		description:
+			'Warm and fully rounded — leaf green on cream, pill buttons, and a round display face. For school, community and family sites.'
 	}
 ];
 

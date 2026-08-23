@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"version": "0.2.1",
-	"description": "Svelte 5 + Tailwind CSS v4 component library — two styles (matte, paper), 65 components each, one shared behaviour core. No runtime dependencies.",
+	"description": "Svelte 5 + Tailwind CSS v4 component library — three styles (matte, paper, sprout), 65 components each, one shared behaviour core. No runtime dependencies.",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-index.mjs && node scripts/generate-exports.mjs && node scripts/generate-registry.mjs && node scripts/generate-scoped-css.mjs && node scripts/generate-demos.mjs && publint",
@@ -618,7 +618,273 @@
 			"svelte": "./dist/styles/paper/Tooltip.svelte"
 		},
 		"./paper/theme.css": "./dist/styles/paper/theme.css",
-		"./paper/fonts.css": "./dist/styles/paper/fonts.css"
+		"./paper/fonts.css": "./dist/styles/paper/fonts.css",
+		"./sprout": {
+			"types": "./dist/styles/sprout/index.d.ts",
+			"svelte": "./dist/styles/sprout/index.js"
+		},
+		"./sprout/locale-provider": {
+			"types": "./dist/styles/sprout/LocaleProvider.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/LocaleProvider.svelte"
+		},
+		"./sprout/button": {
+			"types": "./dist/styles/sprout/Button.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Button.svelte"
+		},
+		"./sprout/link": {
+			"types": "./dist/styles/sprout/Link.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Link.svelte"
+		},
+		"./sprout/input": {
+			"types": "./dist/styles/sprout/Input.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Input.svelte"
+		},
+		"./sprout/textarea": {
+			"types": "./dist/styles/sprout/Textarea.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Textarea.svelte"
+		},
+		"./sprout/select": {
+			"types": "./dist/styles/sprout/Select.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Select.svelte"
+		},
+		"./sprout/checkbox": {
+			"types": "./dist/styles/sprout/Checkbox.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Checkbox.svelte"
+		},
+		"./sprout/radio": {
+			"types": "./dist/styles/sprout/Radio.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Radio.svelte"
+		},
+		"./sprout/switch": {
+			"types": "./dist/styles/sprout/Switch.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Switch.svelte"
+		},
+		"./sprout/field": {
+			"types": "./dist/styles/sprout/Field.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Field.svelte"
+		},
+		"./sprout/label": {
+			"types": "./dist/styles/sprout/Label.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Label.svelte"
+		},
+		"./sprout/password-input": {
+			"types": "./dist/styles/sprout/PasswordInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/PasswordInput.svelte"
+		},
+		"./sprout/number-input": {
+			"types": "./dist/styles/sprout/NumberInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/NumberInput.svelte"
+		},
+		"./sprout/slider": {
+			"types": "./dist/styles/sprout/Slider.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Slider.svelte"
+		},
+		"./sprout/radio-group": {
+			"types": "./dist/styles/sprout/RadioGroup.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/RadioGroup.svelte"
+		},
+		"./sprout/checkbox-group": {
+			"types": "./dist/styles/sprout/CheckboxGroup.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/CheckboxGroup.svelte"
+		},
+		"./sprout/segmented-control": {
+			"types": "./dist/styles/sprout/SegmentedControl.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/SegmentedControl.svelte"
+		},
+		"./sprout/input-group": {
+			"types": "./dist/styles/sprout/InputGroup.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/InputGroup.svelte"
+		},
+		"./sprout/combobox": {
+			"types": "./dist/styles/sprout/Combobox.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Combobox.svelte"
+		},
+		"./sprout/multi-select": {
+			"types": "./dist/styles/sprout/MultiSelect.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/MultiSelect.svelte"
+		},
+		"./sprout/date-picker": {
+			"types": "./dist/styles/sprout/DatePicker.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/DatePicker.svelte"
+		},
+		"./sprout/calendar": {
+			"types": "./dist/styles/sprout/Calendar.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Calendar.svelte"
+		},
+		"./sprout/dropzone": {
+			"types": "./dist/styles/sprout/Dropzone.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Dropzone.svelte"
+		},
+		"./sprout/badge": {
+			"types": "./dist/styles/sprout/Badge.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Badge.svelte"
+		},
+		"./sprout/avatar": {
+			"types": "./dist/styles/sprout/Avatar.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Avatar.svelte"
+		},
+		"./sprout/avatar-group": {
+			"types": "./dist/styles/sprout/AvatarGroup.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/AvatarGroup.svelte"
+		},
+		"./sprout/card": {
+			"types": "./dist/styles/sprout/Card.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Card.svelte"
+		},
+		"./sprout/stat": {
+			"types": "./dist/styles/sprout/Stat.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Stat.svelte"
+		},
+		"./sprout/table": {
+			"types": "./dist/styles/sprout/Table.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Table.svelte"
+		},
+		"./sprout/kbd": {
+			"types": "./dist/styles/sprout/Kbd.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Kbd.svelte"
+		},
+		"./sprout/alert": {
+			"types": "./dist/styles/sprout/Alert.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Alert.svelte"
+		},
+		"./sprout/progress": {
+			"types": "./dist/styles/sprout/Progress.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Progress.svelte"
+		},
+		"./sprout/spinner": {
+			"types": "./dist/styles/sprout/Spinner.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Spinner.svelte"
+		},
+		"./sprout/skeleton": {
+			"types": "./dist/styles/sprout/Skeleton.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Skeleton.svelte"
+		},
+		"./sprout/empty-state": {
+			"types": "./dist/styles/sprout/EmptyState.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/EmptyState.svelte"
+		},
+		"./sprout/toaster": {
+			"types": "./dist/styles/sprout/Toaster.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Toaster.svelte"
+		},
+		"./sprout/divider": {
+			"types": "./dist/styles/sprout/Divider.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Divider.svelte"
+		},
+		"./sprout/tabs": {
+			"types": "./dist/styles/sprout/Tabs.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Tabs.svelte"
+		},
+		"./sprout/accordion": {
+			"types": "./dist/styles/sprout/Accordion.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Accordion.svelte"
+		},
+		"./sprout/accordion-item": {
+			"types": "./dist/styles/sprout/AccordionItem.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/AccordionItem.svelte"
+		},
+		"./sprout/breadcrumb": {
+			"types": "./dist/styles/sprout/Breadcrumb.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Breadcrumb.svelte"
+		},
+		"./sprout/pagination": {
+			"types": "./dist/styles/sprout/Pagination.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Pagination.svelte"
+		},
+		"./sprout/steps": {
+			"types": "./dist/styles/sprout/Steps.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Steps.svelte"
+		},
+		"./sprout/navbar": {
+			"types": "./dist/styles/sprout/Navbar.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Navbar.svelte"
+		},
+		"./sprout/sidebar": {
+			"types": "./dist/styles/sprout/Sidebar.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Sidebar.svelte"
+		},
+		"./sprout/footer": {
+			"types": "./dist/styles/sprout/Footer.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Footer.svelte"
+		},
+		"./sprout/hero-section": {
+			"types": "./dist/styles/sprout/HeroSection.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/HeroSection.svelte"
+		},
+		"./sprout/feature-grid": {
+			"types": "./dist/styles/sprout/FeatureGrid.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/FeatureGrid.svelte"
+		},
+		"./sprout/feature-card": {
+			"types": "./dist/styles/sprout/FeatureCard.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/FeatureCard.svelte"
+		},
+		"./sprout/pricing-card": {
+			"types": "./dist/styles/sprout/PricingCard.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/PricingCard.svelte"
+		},
+		"./sprout/testimonial": {
+			"types": "./dist/styles/sprout/Testimonial.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Testimonial.svelte"
+		},
+		"./sprout/logo-cloud": {
+			"types": "./dist/styles/sprout/LogoCloud.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/LogoCloud.svelte"
+		},
+		"./sprout/cta-section": {
+			"types": "./dist/styles/sprout/CTASection.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/CTASection.svelte"
+		},
+		"./sprout/stats-band": {
+			"types": "./dist/styles/sprout/StatsBand.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/StatsBand.svelte"
+		},
+		"./sprout/modal": {
+			"types": "./dist/styles/sprout/Modal.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Modal.svelte"
+		},
+		"./sprout/drawer": {
+			"types": "./dist/styles/sprout/Drawer.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Drawer.svelte"
+		},
+		"./sprout/confirm-dialog": {
+			"types": "./dist/styles/sprout/ConfirmDialog.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/ConfirmDialog.svelte"
+		},
+		"./sprout/command-palette": {
+			"types": "./dist/styles/sprout/CommandPalette.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/CommandPalette.svelte"
+		},
+		"./sprout/context-menu": {
+			"types": "./dist/styles/sprout/ContextMenu.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/ContextMenu.svelte"
+		},
+		"./sprout/dropdown": {
+			"types": "./dist/styles/sprout/Dropdown.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Dropdown.svelte"
+		},
+		"./sprout/menu-item": {
+			"types": "./dist/styles/sprout/MenuItem.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/MenuItem.svelte"
+		},
+		"./sprout/menu-separator": {
+			"types": "./dist/styles/sprout/MenuSeparator.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/MenuSeparator.svelte"
+		},
+		"./sprout/popover": {
+			"types": "./dist/styles/sprout/Popover.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Popover.svelte"
+		},
+		"./sprout/theme-toggle": {
+			"types": "./dist/styles/sprout/ThemeToggle.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/ThemeToggle.svelte"
+		},
+		"./sprout/tooltip": {
+			"types": "./dist/styles/sprout/Tooltip.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/Tooltip.svelte"
+		},
+		"./sprout/theme.css": "./dist/styles/sprout/theme.css",
+		"./sprout/fonts.css": "./dist/styles/sprout/fonts.css"
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"

@@ -93,7 +93,8 @@ export const update = `bun update @nqmcreative/ui`;
 
 export const styleSwap = `// one project, one style — swap the word and the whole app follows
 import { Button, Card, Modal } from '@nqmcreative/ui/matte';
-import { Button, Card, Modal } from '@nqmcreative/ui/paper';`;
+import { Button, Card, Modal } from '@nqmcreative/ui/paper';
+import { Button, Card, Modal } from '@nqmcreative/ui/sprout';`;
 
 export const coreImport = `// the behaviour every style shares, if you need it directly
 import { focusTrap, anchored, toast, setLocale } from '@nqmcreative/ui/core';`;

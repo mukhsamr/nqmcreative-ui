@@ -17,6 +17,13 @@
 			"description": "The neutral one. Start here if unsure: soft corners, light shadows, generous spacing, and nothing that fights the content.",
 			"fonts": true,
 			"extra": []
+		},
+		{
+			"name": "sprout",
+			"title": "Sprout",
+			"description": "Warm and fully rounded — leaf green on cream, pill buttons, and a round display face. For school, community and family sites.",
+			"fonts": true,
+			"extra": []
 		}
 	],
 	"components": [
@@ -27,7 +34,8 @@
 			"description": "Scopes a locale to a subtree — the SSR-safe way to translate.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/locale-provider",
-				"paper": "@nqmcreative/ui/paper/locale-provider"
+				"paper": "@nqmcreative/ui/paper/locale-provider",
+				"sprout": "@nqmcreative/ui/sprout/locale-provider"
 			},
 			"uses": [],
 			"modules": [
@@ -41,7 +49,8 @@
 			"description": "Five variants and four sizes, with a loading state and an href mode.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/button",
-				"paper": "@nqmcreative/ui/paper/button"
+				"paper": "@nqmcreative/ui/paper/button",
+				"sprout": "@nqmcreative/ui/sprout/button"
 			},
 			"uses": [
 				"Spinner"
@@ -57,7 +66,8 @@
 			"description": "Anchor in any tone, with an external variant.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/link",
-				"paper": "@nqmcreative/ui/paper/link"
+				"paper": "@nqmcreative/ui/paper/link",
+				"sprout": "@nqmcreative/ui/sprout/link"
 			},
 			"uses": [],
 			"modules": [
@@ -71,7 +81,8 @@
 			"description": "Text field with prefix and suffix slots, sizes and an invalid state.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/input",
-				"paper": "@nqmcreative/ui/paper/input"
+				"paper": "@nqmcreative/ui/paper/input",
+				"sprout": "@nqmcreative/ui/sprout/input"
 			},
 			"uses": [],
 			"modules": [
@@ -85,7 +96,8 @@
 			"description": "Multi-line field that can grow with its content.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/textarea",
-				"paper": "@nqmcreative/ui/paper/textarea"
+				"paper": "@nqmcreative/ui/paper/textarea",
+				"sprout": "@nqmcreative/ui/sprout/textarea"
 			},
 			"uses": [],
 			"modules": [
@@ -99,7 +111,8 @@
 			"description": "Native select with a chevron and data-driven options.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/select",
-				"paper": "@nqmcreative/ui/paper/select"
+				"paper": "@nqmcreative/ui/paper/select",
+				"sprout": "@nqmcreative/ui/sprout/select"
 			},
 			"uses": [],
 			"modules": [
@@ -113,7 +126,8 @@
 			"description": "Single checkbox with a label, description and indeterminate state.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/checkbox",
-				"paper": "@nqmcreative/ui/paper/checkbox"
+				"paper": "@nqmcreative/ui/paper/checkbox",
+				"sprout": "@nqmcreative/ui/sprout/checkbox"
 			},
 			"uses": [],
 			"modules": [
@@ -127,7 +141,8 @@
 			"description": "Single radio bound to a shared group value.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/radio",
-				"paper": "@nqmcreative/ui/paper/radio"
+				"paper": "@nqmcreative/ui/paper/radio",
+				"sprout": "@nqmcreative/ui/sprout/radio"
 			},
 			"uses": [],
 			"modules": [
@@ -141,7 +156,8 @@
 			"description": "On/off toggle with a label and description.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/switch",
-				"paper": "@nqmcreative/ui/paper/switch"
+				"paper": "@nqmcreative/ui/paper/switch",
+				"sprout": "@nqmcreative/ui/sprout/switch"
 			},
 			"uses": [],
 			"modules": [
@@ -155,7 +171,8 @@
 			"description": "Wraps any control with a label, hint and error message.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/field",
-				"paper": "@nqmcreative/ui/paper/field"
+				"paper": "@nqmcreative/ui/paper/field",
+				"sprout": "@nqmcreative/ui/sprout/field"
 			},
 			"uses": [],
 			"modules": []
@@ -167,7 +184,8 @@
 			"description": "Form label with an optional required marker.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/label",
-				"paper": "@nqmcreative/ui/paper/label"
+				"paper": "@nqmcreative/ui/paper/label",
+				"sprout": "@nqmcreative/ui/sprout/label"
 			},
 			"uses": [],
 			"modules": []
@@ -179,7 +197,8 @@
 			"description": "Password field with a visibility toggle and a strength meter.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/password-input",
-				"paper": "@nqmcreative/ui/paper/password-input"
+				"paper": "@nqmcreative/ui/paper/password-input",
+				"sprout": "@nqmcreative/ui/sprout/password-input"
 			},
 			"uses": [],
 			"modules": [
@@ -195,7 +214,8 @@
 			"description": "Number field with steppers, clamping and decimal handling.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/number-input",
-				"paper": "@nqmcreative/ui/paper/number-input"
+				"paper": "@nqmcreative/ui/paper/number-input",
+				"sprout": "@nqmcreative/ui/sprout/number-input"
 			},
 			"uses": [],
 			"modules": [
@@ -211,7 +231,8 @@
 			"description": "Range input with ticks and a printed value.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/slider",
-				"paper": "@nqmcreative/ui/paper/slider"
+				"paper": "@nqmcreative/ui/paper/slider",
+				"sprout": "@nqmcreative/ui/sprout/slider"
 			},
 			"uses": [],
 			"modules": [
@@ -226,7 +247,8 @@
 			"description": "A set of radios, optionally rendered as selectable cards.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/radio-group",
-				"paper": "@nqmcreative/ui/paper/radio-group"
+				"paper": "@nqmcreative/ui/paper/radio-group",
+				"sprout": "@nqmcreative/ui/sprout/radio-group"
 			},
 			"uses": [
 				"Radio"
@@ -242,7 +264,8 @@
 			"description": "A set of checkboxes bound to a string array, with an optional cap.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/checkbox-group",
-				"paper": "@nqmcreative/ui/paper/checkbox-group"
+				"paper": "@nqmcreative/ui/paper/checkbox-group",
+				"sprout": "@nqmcreative/ui/sprout/checkbox-group"
 			},
 			"uses": [
 				"Checkbox"
@@ -258,7 +281,8 @@
 			"description": "Exclusive choice as one joined row, with arrow-key movement.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/segmented-control",
-				"paper": "@nqmcreative/ui/paper/segmented-control"
+				"paper": "@nqmcreative/ui/paper/segmented-control",
+				"sprout": "@nqmcreative/ui/sprout/segmented-control"
 			},
 			"uses": [],
 			"modules": [
@@ -272,7 +296,8 @@
 			"description": "Joins an input to a button or addon with a single shared border.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/input-group",
-				"paper": "@nqmcreative/ui/paper/input-group"
+				"paper": "@nqmcreative/ui/paper/input-group",
+				"sprout": "@nqmcreative/ui/sprout/input-group"
 			},
 			"uses": [],
 			"modules": []
@@ -284,7 +309,8 @@
 			"description": "Single-select with a text filter and keyboard navigation.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/combobox",
-				"paper": "@nqmcreative/ui/paper/combobox"
+				"paper": "@nqmcreative/ui/paper/combobox",
+				"sprout": "@nqmcreative/ui/sprout/combobox"
 			},
 			"uses": [],
 			"modules": [
@@ -302,7 +328,8 @@
 			"description": "Multi-select with chips, grouping and a selection cap.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/multi-select",
-				"paper": "@nqmcreative/ui/paper/multi-select"
+				"paper": "@nqmcreative/ui/paper/multi-select",
+				"sprout": "@nqmcreative/ui/sprout/multi-select"
 			},
 			"uses": [],
 			"modules": [
@@ -320,7 +347,8 @@
 			"description": "Text field plus a calendar popover. Value is a YYYY-MM-DD string.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/date-picker",
-				"paper": "@nqmcreative/ui/paper/date-picker"
+				"paper": "@nqmcreative/ui/paper/date-picker",
+				"sprout": "@nqmcreative/ui/sprout/date-picker"
 			},
 			"uses": [
 				"Calendar"
@@ -341,7 +369,8 @@
 			"description": "Month grid with keyboard navigation, bounds and disabled days.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/calendar",
-				"paper": "@nqmcreative/ui/paper/calendar"
+				"paper": "@nqmcreative/ui/paper/calendar",
+				"sprout": "@nqmcreative/ui/sprout/calendar"
 			},
 			"uses": [],
 			"modules": [
@@ -358,7 +387,8 @@
 			"description": "Drag-and-drop file input with type, size and count validation.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/dropzone",
-				"paper": "@nqmcreative/ui/paper/dropzone"
+				"paper": "@nqmcreative/ui/paper/dropzone",
+				"sprout": "@nqmcreative/ui/sprout/dropzone"
 			},
 			"uses": [],
 			"modules": [
@@ -374,7 +404,8 @@
 			"description": "Pill label for status and counts. Solid, soft or outline.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/badge",
-				"paper": "@nqmcreative/ui/paper/badge"
+				"paper": "@nqmcreative/ui/paper/badge",
+				"sprout": "@nqmcreative/ui/sprout/badge"
 			},
 			"uses": [],
 			"modules": [
@@ -388,7 +419,8 @@
 			"description": "Image or initials, circular or squared, in five sizes.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/avatar",
-				"paper": "@nqmcreative/ui/paper/avatar"
+				"paper": "@nqmcreative/ui/paper/avatar",
+				"sprout": "@nqmcreative/ui/sprout/avatar"
 			},
 			"uses": [],
 			"modules": [
@@ -402,7 +434,8 @@
 			"description": "Overlapping row of avatars, each ringed in the background.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/avatar-group",
-				"paper": "@nqmcreative/ui/paper/avatar-group"
+				"paper": "@nqmcreative/ui/paper/avatar-group",
+				"sprout": "@nqmcreative/ui/sprout/avatar-group"
 			},
 			"uses": [],
 			"modules": []
@@ -414,7 +447,8 @@
 			"description": "Surface with an optional header and footer, in three variants.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/card",
-				"paper": "@nqmcreative/ui/paper/card"
+				"paper": "@nqmcreative/ui/paper/card",
+				"sprout": "@nqmcreative/ui/sprout/card"
 			},
 			"uses": [],
 			"modules": [
@@ -428,7 +462,8 @@
 			"description": "Figure with a label, delta and trend arrow.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/stat",
-				"paper": "@nqmcreative/ui/paper/stat"
+				"paper": "@nqmcreative/ui/paper/stat",
+				"sprout": "@nqmcreative/ui/sprout/stat"
 			},
 			"uses": [],
 			"modules": [
@@ -442,7 +477,8 @@
 			"description": "Data-driven table with sorting, row selection and a cell snippet.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/table",
-				"paper": "@nqmcreative/ui/paper/table"
+				"paper": "@nqmcreative/ui/paper/table",
+				"sprout": "@nqmcreative/ui/sprout/table"
 			},
 			"uses": [
 				"Checkbox"
@@ -460,7 +496,8 @@
 			"description": "Keyboard key.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/kbd",
-				"paper": "@nqmcreative/ui/paper/kbd"
+				"paper": "@nqmcreative/ui/paper/kbd",
+				"sprout": "@nqmcreative/ui/sprout/kbd"
 			},
 			"uses": [],
 			"modules": []
@@ -472,7 +509,8 @@
 			"description": "Inline message in any tone, optionally dismissible.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/alert",
-				"paper": "@nqmcreative/ui/paper/alert"
+				"paper": "@nqmcreative/ui/paper/alert",
+				"sprout": "@nqmcreative/ui/sprout/alert"
 			},
 			"uses": [],
 			"modules": [
@@ -487,7 +525,8 @@
 			"description": "Determinate or indeterminate bar, in three sizes.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/progress",
-				"paper": "@nqmcreative/ui/paper/progress"
+				"paper": "@nqmcreative/ui/paper/progress",
+				"sprout": "@nqmcreative/ui/sprout/progress"
 			},
 			"uses": [],
 			"modules": [
@@ -502,7 +541,8 @@
 			"description": "Rotating ring that inherits the surrounding colour.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/spinner",
-				"paper": "@nqmcreative/ui/paper/spinner"
+				"paper": "@nqmcreative/ui/paper/spinner",
+				"sprout": "@nqmcreative/ui/sprout/spinner"
 			},
 			"uses": [],
 			"modules": [
@@ -517,7 +557,8 @@
 			"description": "Pulsing placeholder in text, block or circle form.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/skeleton",
-				"paper": "@nqmcreative/ui/paper/skeleton"
+				"paper": "@nqmcreative/ui/paper/skeleton",
+				"sprout": "@nqmcreative/ui/sprout/skeleton"
 			},
 			"uses": [],
 			"modules": []
@@ -529,7 +570,8 @@
 			"description": "Placeholder for an empty list, with a glyph and an action slot.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/empty-state",
-				"paper": "@nqmcreative/ui/paper/empty-state"
+				"paper": "@nqmcreative/ui/paper/empty-state",
+				"sprout": "@nqmcreative/ui/sprout/empty-state"
 			},
 			"uses": [],
 			"modules": [
@@ -543,7 +585,8 @@
 			"description": "Renders the toast queue. Mount once, near the root.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/toaster",
-				"paper": "@nqmcreative/ui/paper/toaster"
+				"paper": "@nqmcreative/ui/paper/toaster",
+				"sprout": "@nqmcreative/ui/sprout/toaster"
 			},
 			"uses": [
 				"Spinner"
@@ -562,7 +605,8 @@
 			"description": "Rule, horizontal or vertical, with an optional caption.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/divider",
-				"paper": "@nqmcreative/ui/paper/divider"
+				"paper": "@nqmcreative/ui/paper/divider",
+				"sprout": "@nqmcreative/ui/sprout/divider"
 			},
 			"uses": [],
 			"modules": []
@@ -574,7 +618,8 @@
 			"description": "Underline, pill or segmented tabs bound to a value.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/tabs",
-				"paper": "@nqmcreative/ui/paper/tabs"
+				"paper": "@nqmcreative/ui/paper/tabs",
+				"sprout": "@nqmcreative/ui/sprout/tabs"
 			},
 			"uses": [],
 			"modules": [
@@ -588,7 +633,8 @@
 			"description": "Wrapper that stacks collapsible items.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/accordion",
-				"paper": "@nqmcreative/ui/paper/accordion"
+				"paper": "@nqmcreative/ui/paper/accordion",
+				"sprout": "@nqmcreative/ui/sprout/accordion"
 			},
 			"uses": [],
 			"modules": []
@@ -600,7 +646,8 @@
 			"description": "A single collapsible row, built on <details> so it works without JS.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/accordion-item",
-				"paper": "@nqmcreative/ui/paper/accordion-item"
+				"paper": "@nqmcreative/ui/paper/accordion-item",
+				"sprout": "@nqmcreative/ui/sprout/accordion-item"
 			},
 			"uses": [],
 			"modules": [
@@ -614,7 +661,8 @@
 			"description": "Trail of links to the current page.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/breadcrumb",
-				"paper": "@nqmcreative/ui/paper/breadcrumb"
+				"paper": "@nqmcreative/ui/paper/breadcrumb",
+				"sprout": "@nqmcreative/ui/sprout/breadcrumb"
 			},
 			"uses": [],
 			"modules": [
@@ -629,7 +677,8 @@
 			"description": "Page numbers that collapse to an ellipsis around the current one.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/pagination",
-				"paper": "@nqmcreative/ui/paper/pagination"
+				"paper": "@nqmcreative/ui/paper/pagination",
+				"sprout": "@nqmcreative/ui/sprout/pagination"
 			},
 			"uses": [],
 			"modules": [
@@ -645,7 +694,8 @@
 			"description": "Progress through a flow, horizontal or vertical, with a failed state.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/steps",
-				"paper": "@nqmcreative/ui/paper/steps"
+				"paper": "@nqmcreative/ui/paper/steps",
+				"sprout": "@nqmcreative/ui/sprout/steps"
 			},
 			"uses": [],
 			"modules": [
@@ -659,7 +709,8 @@
 			"description": "Top bar that collapses into a drawer below the md breakpoint.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/navbar",
-				"paper": "@nqmcreative/ui/paper/navbar"
+				"paper": "@nqmcreative/ui/paper/navbar",
+				"sprout": "@nqmcreative/ui/sprout/navbar"
 			},
 			"uses": [
 				"Drawer",
@@ -678,7 +729,8 @@
 			"description": "Nested, collapsible navigation rail for an app shell.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/sidebar",
-				"paper": "@nqmcreative/ui/paper/sidebar"
+				"paper": "@nqmcreative/ui/paper/sidebar",
+				"sprout": "@nqmcreative/ui/sprout/sidebar"
 			},
 			"uses": [],
 			"modules": [
@@ -693,7 +745,8 @@
 			"description": "Site footer with link columns and a bottom bar.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/footer",
-				"paper": "@nqmcreative/ui/paper/footer"
+				"paper": "@nqmcreative/ui/paper/footer",
+				"sprout": "@nqmcreative/ui/sprout/footer"
 			},
 			"uses": [],
 			"modules": [
@@ -707,7 +760,8 @@
 			"description": "Page opener — eyebrow, headline, copy, actions, optional media column.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/hero-section",
-				"paper": "@nqmcreative/ui/paper/hero-section"
+				"paper": "@nqmcreative/ui/paper/hero-section",
+				"sprout": "@nqmcreative/ui/sprout/hero-section"
 			},
 			"uses": [],
 			"modules": [
@@ -721,7 +775,8 @@
 			"description": "Section wrapper that lays feature cards out in 2, 3 or 4 columns.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/feature-grid",
-				"paper": "@nqmcreative/ui/paper/feature-grid"
+				"paper": "@nqmcreative/ui/paper/feature-grid",
+				"sprout": "@nqmcreative/ui/sprout/feature-grid"
 			},
 			"uses": [],
 			"modules": []
@@ -733,7 +788,8 @@
 			"description": "One feature: glyph, heading, copy. Optionally a whole link.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/feature-card",
-				"paper": "@nqmcreative/ui/paper/feature-card"
+				"paper": "@nqmcreative/ui/paper/feature-card",
+				"sprout": "@nqmcreative/ui/sprout/feature-card"
 			},
 			"uses": [],
 			"modules": [
@@ -747,7 +803,8 @@
 			"description": "One plan: price, period, ticked feature list, optional featured styling.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/pricing-card",
-				"paper": "@nqmcreative/ui/paper/pricing-card"
+				"paper": "@nqmcreative/ui/paper/pricing-card",
+				"sprout": "@nqmcreative/ui/sprout/pricing-card"
 			},
 			"uses": [],
 			"modules": [
@@ -761,7 +818,8 @@
 			"description": "A quote with an attributed author.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/testimonial",
-				"paper": "@nqmcreative/ui/paper/testimonial"
+				"paper": "@nqmcreative/ui/paper/testimonial",
+				"sprout": "@nqmcreative/ui/sprout/testimonial"
 			},
 			"uses": [
 				"Avatar"
@@ -777,7 +835,8 @@
 			"description": "Row of client or partner marks, dimmed until hovered.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/logo-cloud",
-				"paper": "@nqmcreative/ui/paper/logo-cloud"
+				"paper": "@nqmcreative/ui/paper/logo-cloud",
+				"sprout": "@nqmcreative/ui/sprout/logo-cloud"
 			},
 			"uses": [],
 			"modules": []
@@ -789,7 +848,8 @@
 			"description": "Closing call to action, in three variants.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/cta-section",
-				"paper": "@nqmcreative/ui/paper/cta-section"
+				"paper": "@nqmcreative/ui/paper/cta-section",
+				"sprout": "@nqmcreative/ui/sprout/cta-section"
 			},
 			"uses": [],
 			"modules": [
@@ -803,7 +863,8 @@
 			"description": "A row of figures, built on Stat.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/stats-band",
-				"paper": "@nqmcreative/ui/paper/stats-band"
+				"paper": "@nqmcreative/ui/paper/stats-band",
+				"sprout": "@nqmcreative/ui/sprout/stats-band"
 			},
 			"uses": [
 				"Stat"
@@ -819,7 +880,8 @@
 			"description": "Centred dialog on the native top layer, with a footer slot.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/modal",
-				"paper": "@nqmcreative/ui/paper/modal"
+				"paper": "@nqmcreative/ui/paper/modal",
+				"sprout": "@nqmcreative/ui/sprout/modal"
 			},
 			"uses": [],
 			"modules": [
@@ -834,7 +896,8 @@
 			"description": "Panel that slides in from any edge, on the native dialog top layer.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/drawer",
-				"paper": "@nqmcreative/ui/paper/drawer"
+				"paper": "@nqmcreative/ui/paper/drawer",
+				"sprout": "@nqmcreative/ui/sprout/drawer"
 			},
 			"uses": [],
 			"modules": [
@@ -849,7 +912,8 @@
 			"description": "Small dialog that stays busy until an async confirm settles.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/confirm-dialog",
-				"paper": "@nqmcreative/ui/paper/confirm-dialog"
+				"paper": "@nqmcreative/ui/paper/confirm-dialog",
+				"sprout": "@nqmcreative/ui/sprout/confirm-dialog"
 			},
 			"uses": [
 				"Button",
@@ -867,7 +931,8 @@
 			"description": "Cmd+K launcher with grouping, shortcuts and hidden keywords.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/command-palette",
-				"paper": "@nqmcreative/ui/paper/command-palette"
+				"paper": "@nqmcreative/ui/paper/command-palette",
+				"sprout": "@nqmcreative/ui/sprout/command-palette"
 			},
 			"uses": [
 				"Kbd"
@@ -887,7 +952,8 @@
 			"description": "Right-click menu placed at the pointer, flipped near the edges.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/context-menu",
-				"paper": "@nqmcreative/ui/paper/context-menu"
+				"paper": "@nqmcreative/ui/paper/context-menu",
+				"sprout": "@nqmcreative/ui/sprout/context-menu"
 			},
 			"uses": [],
 			"modules": [
@@ -904,7 +970,8 @@
 			"description": "Menu anchored to a trigger, with focus trap and viewport flipping.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/dropdown",
-				"paper": "@nqmcreative/ui/paper/dropdown"
+				"paper": "@nqmcreative/ui/paper/dropdown",
+				"sprout": "@nqmcreative/ui/sprout/dropdown"
 			},
 			"uses": [],
 			"modules": [
@@ -921,7 +988,8 @@
 			"description": "Row inside a Dropdown or ContextMenu, with a shortcut hint.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/menu-item",
-				"paper": "@nqmcreative/ui/paper/menu-item"
+				"paper": "@nqmcreative/ui/paper/menu-item",
+				"sprout": "@nqmcreative/ui/sprout/menu-item"
 			},
 			"uses": [],
 			"modules": [
@@ -935,7 +1003,8 @@
 			"description": "Rule between menu groups, with an optional caption.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/menu-separator",
-				"paper": "@nqmcreative/ui/paper/menu-separator"
+				"paper": "@nqmcreative/ui/paper/menu-separator",
+				"sprout": "@nqmcreative/ui/sprout/menu-separator"
 			},
 			"uses": [],
 			"modules": []
@@ -947,7 +1016,8 @@
 			"description": "Anchored panel that opens on click or hover.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/popover",
-				"paper": "@nqmcreative/ui/paper/popover"
+				"paper": "@nqmcreative/ui/paper/popover",
+				"sprout": "@nqmcreative/ui/sprout/popover"
 			},
 			"uses": [],
 			"modules": [
@@ -963,7 +1033,8 @@
 			"description": "Light, dark and system, remembered in localStorage.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/theme-toggle",
-				"paper": "@nqmcreative/ui/paper/theme-toggle"
+				"paper": "@nqmcreative/ui/paper/theme-toggle",
+				"sprout": "@nqmcreative/ui/sprout/theme-toggle"
 			},
 			"uses": [],
 			"modules": [
@@ -979,7 +1050,8 @@
 			"description": "CSS-only label on hover and focus, in four placements.",
 			"subpaths": {
 				"matte": "@nqmcreative/ui/matte/tooltip",
-				"paper": "@nqmcreative/ui/paper/tooltip"
+				"paper": "@nqmcreative/ui/paper/tooltip",
+				"sprout": "@nqmcreative/ui/sprout/tooltip"
 			},
 			"uses": [],
 			"modules": []

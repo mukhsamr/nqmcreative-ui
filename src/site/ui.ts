@@ -1,5 +1,5 @@
 /**
- * Both styles, side by side — the docs site is the one consumer that is meant
+ * Every style, side by side — the docs site is the one consumer that is meant
  * to load more than one.
  *
  * An app imports a single style and never sees this. The site imports every
@@ -8,8 +8,9 @@
  */
 import * as matte from '$lib/styles/matte/index.js';
 import * as paper from '$lib/styles/paper/index.js';
+import * as sprout from '$lib/styles/sprout/index.js';
 
-export const UI = { matte, paper };
+export const UI = { matte, paper, sprout };
 
 export type StyleName = keyof typeof UI;
 

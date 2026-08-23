@@ -1,0 +1,255 @@
+/*
+ * sprout — design tokens.
+ *
+ * The warm one: leaf green on cream, fully rounded corners, and a display face
+ * with round terminals. Built for school, community and family sites, where the
+ * reader is a parent on a phone rather than an operator at a desk. Import this
+ * after `@import "tailwindcss";` in your app's CSS entry point.
+ *
+ * The token *names* are a contract shared by every style — `core` and every
+ * component are written against them, so only the values below change from one
+ * style to the next. Each hue follows the same 4-step shape:
+ *
+ *   --color-<tone>          base / solid fill / text on light surfaces
+ *   --color-<tone>-hover    darker step for hover + active
+ *   --color-<tone>-light    tinted surface (soft variants, alerts, badges)
+ *   --color-<tone>-border   hairline that reads against the tinted surface
+ */
+@theme {
+	/*
+	 * Surfaces are cream rather than white, and the greys are green-cast. A
+	 * neutral grey next to this much foliage reads as a printing error, so every
+	 * step of the scale carries a little of the brand hue.
+	 */
+	/* --- surfaces --- */
+	--color-bg: #fffefb;
+	--color-bg-alt: #f0fdf4;
+	--color-bg-inset: #e3f6e9;
+	--color-hairline: #ecefe7;
+	--color-hairline-strong: #d3e0d1;
+
+	/* --- text --- */
+	--color-text: #1a3a1f;
+	--color-text-secondary: #2f5135;
+	--color-text-muted: #5f6f62;
+	--color-text-inverse: #ffffff;
+
+	/*
+	 * Every base below is used two ways — as a solid fill under inverse text,
+	 * and as text on a light surface — so each one is picked to clear 4.5:1
+	 * against `--color-bg` and white. The brand is the deliberate exception:
+	 * #16a34a is the leaf green this style exists to reproduce, and it reaches
+	 * only 3.3:1 as text. It is kept because it *is* the identity, and because
+	 * it is overwhelmingly used as a fill, where white sits on it at button
+	 * sizes. If your project needs AA on brand-coloured text, move this one
+	 * value down a step to #15803d (5.0:1) and leave everything else alone —
+	 * nothing in the style depends on the brighter value.
+	 */
+	/* --- brand / primary (leaf) --- */
+	--color-brand: #16a34a;
+	--color-brand-hover: #15803d;
+	--color-brand-light: #dcfce7;
+	--color-brand-border: #a7e8bf;
+
+	/*
+	 * Honey. The base is dark enough to carry white text; the bright sunflower
+	 * the source site puts on its second call to action lives in
+	 * `--color-accent-border`, which is where a component reaches for a fill it
+	 * will put *dark* text on.
+	 */
+	/* --- accent (honey) --- */
+	--color-accent: #a16207;
+	--color-accent-hover: #854d0e;
+	--color-accent-light: #fff5d6;
+	--color-accent-border: #fbbf24;
+
+	/* --- violet --- */
+	--color-violet: #7c3aed;
+	--color-violet-hover: #6d28d9;
+	--color-violet-light: #f4f0fe;
+	--color-violet-border: #dccffb;
+
+	/* --- info (sky) --- */
+	--color-info: #0369a1;
+	--color-info-hover: #075985;
+	--color-info-light: #e8f5fd;
+	--color-info-border: #a5dcf3;
+
+	/* --- success (emerald) --- */
+	--color-success: #047857;
+	--color-success-hover: #065f46;
+	--color-success-light: #e6f8f0;
+	--color-success-border: #9ee0c3;
+
+	/* --- warning (amber) --- */
+	--color-warning: #b45309;
+	--color-warning-hover: #92400e;
+	--color-warning-light: #fff6e8;
+	--color-warning-border: #fbd79b;
+
+	/* --- danger (red) --- */
+	--color-danger: #d11f1f;
+	--color-danger-hover: #b91c1c;
+	--color-danger-light: #fdeeee;
+	--color-danger-border: #f7bcbc;
+
+	/* --- neutral (sage) --- */
+	--color-neutral: #5f6f62;
+	--color-neutral-hover: #4a584d;
+	--color-neutral-light: #eef3ec;
+	--color-neutral-border: #cbd8c9;
+
+	/* --- type --- */
+	/*
+	 * Two faces, and the split is the point. Fredoka sets headings: geometric,
+	 * round-terminalled, drawn wide — the same warmth the shapes have. Plus
+	 * Jakarta Sans sets everything a reader has to get through, because Fredoka
+	 * at 15px in a paragraph is charm at the cost of the sentence.
+	 *
+	 * Both are variable files, one request per subset — see `fonts.css`.
+	 * Everything degrades to the system stack if that file is not imported, so
+	 * the webfonts stay optional.
+	 */
+	--font-sans:
+		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-heading:
+		'Fredoka', 'Plus Jakarta Sans', ui-rounded, ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+	/* --- motion --- */
+	/*
+	 * A little overshoot on the way in — the one place sprout spends motion.
+	 * `--ease-brand-out` stays honest for anything that has to feel immediate,
+	 * like a hover colour change.
+	 */
+	--ease-brand: cubic-bezier(0.34, 1.4, 0.64, 1);
+	--ease-brand-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Dark mode. Two ways in, and they cooperate:
+ *
+ *   1. put `class="dark"` on <html> — an explicit choice always wins
+ *   2. do nothing — the OS preference applies, unless <html> says `class="light"`
+ *
+ * Both blocks below carry the same values on purpose; keep them in sync.
+ * Every utility built on these tokens follows automatically, so components
+ * need no `dark:` classes of their own.
+ *
+ * The dark palette is a night garden rather than a neutral slate: the surfaces
+ * keep the green cast, and every hue lifts a step or two so it still reads
+ * against them.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+	color-scheme: dark;
+
+	--color-bg: #0e1a11;
+	--color-bg-alt: #14251a;
+	--color-bg-inset: #1b3020;
+	--color-hairline: #1e3524;
+	--color-hairline-strong: #2f4a36;
+
+	--color-text: #f0f7f0;
+	--color-text-secondary: #cadfcd;
+	--color-text-muted: #94ad99;
+	--color-text-inverse: #0e1a11;
+
+	--color-brand: #4ade80;
+	--color-brand-hover: #86efac;
+	--color-brand-light: #0f2f1c;
+	--color-brand-border: #1f5533;
+
+	--color-accent: #fbbf24;
+	--color-accent-hover: #fcd34d;
+	--color-accent-light: #33260a;
+	--color-accent-border: #5e4514;
+
+	--color-violet: #a78bfa;
+	--color-violet-hover: #c4b5fd;
+	--color-violet-light: #271c47;
+	--color-violet-border: #4c3a86;
+
+	--color-info: #56b6ec;
+	--color-info-hover: #7fc9f2;
+	--color-info-light: #0d2a3d;
+	--color-info-border: #17496a;
+
+	--color-success: #34d399;
+	--color-success-hover: #6ee7b7;
+	--color-success-light: #082a1f;
+	--color-success-border: #10543c;
+
+	--color-warning: #f0a63c;
+	--color-warning-hover: #f5bc63;
+	--color-warning-light: #35240a;
+	--color-warning-border: #5e4114;
+
+	--color-danger: #f38080;
+	--color-danger-hover: #f7a3a3;
+	--color-danger-light: #3a1616;
+	--color-danger-border: #6b2727;
+
+	--color-neutral: #9db3a1;
+	--color-neutral-hover: #c7d8ca;
+	--color-neutral-light: #1b3020;
+	--color-neutral-border: #2f4a36;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not(.light) {
+		color-scheme: dark;
+
+		--color-bg: #0e1a11;
+		--color-bg-alt: #14251a;
+		--color-bg-inset: #1b3020;
+		--color-hairline: #1e3524;
+		--color-hairline-strong: #2f4a36;
+
+		--color-text: #f0f7f0;
+		--color-text-secondary: #cadfcd;
+		--color-text-muted: #94ad99;
+		--color-text-inverse: #0e1a11;
+
+		--color-brand: #4ade80;
+		--color-brand-hover: #86efac;
+		--color-brand-light: #0f2f1c;
+		--color-brand-border: #1f5533;
+
+		--color-accent: #fbbf24;
+		--color-accent-hover: #fcd34d;
+		--color-accent-light: #33260a;
+		--color-accent-border: #5e4514;
+
+		--color-violet: #a78bfa;
+		--color-violet-hover: #c4b5fd;
+		--color-violet-light: #271c47;
+		--color-violet-border: #4c3a86;
+
+		--color-info: #56b6ec;
+		--color-info-hover: #7fc9f2;
+		--color-info-light: #0d2a3d;
+		--color-info-border: #17496a;
+
+		--color-success: #34d399;
+		--color-success-hover: #6ee7b7;
+		--color-success-light: #082a1f;
+		--color-success-border: #10543c;
+
+		--color-warning: #f0a63c;
+		--color-warning-hover: #f5bc63;
+		--color-warning-light: #35240a;
+		--color-warning-border: #5e4114;
+
+		--color-danger: #f38080;
+		--color-danger-hover: #f7a3a3;
+		--color-danger-light: #3a1616;
+		--color-danger-border: #6b2727;
+
+		--color-neutral: #9db3a1;
+		--color-neutral-hover: #c7d8ca;
+		--color-neutral-light: #1b3020;
+		--color-neutral-border: #2f4a36;
+	}
+}
