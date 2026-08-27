@@ -102,18 +102,18 @@
 	/* --- type --- */
 	/*
 	 * Two faces, and the split is the point. Fredoka sets headings: geometric,
-	 * round-terminalled, drawn wide — the same warmth the shapes have. Plus
-	 * Jakarta Sans sets everything a reader has to get through, because Fredoka
-	 * at 15px in a paragraph is charm at the cost of the sentence.
+	 * round-terminalled, drawn wide — the same warmth the shapes have. Work
+	 * Sans sets everything a reader has to get through, because Fredoka at 15px
+	 * in a paragraph is charm at the cost of the sentence — and it is the body
+	 * face in every style, so only the headings change voice when you swap.
 	 *
 	 * Both are variable files, one request per subset — see `fonts.css`.
 	 * Everything degrades to the system stack if that file is not imported, so
 	 * the webfonts stay optional.
 	 */
-	--font-sans:
-		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-sans: 'Work Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-heading:
-		'Fredoka', 'Plus Jakarta Sans', ui-rounded, ui-sans-serif, system-ui, -apple-system, sans-serif;
+		'Fredoka', 'Work Sans', ui-rounded, ui-sans-serif, system-ui, -apple-system, sans-serif;
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
 	/* --- motion --- */

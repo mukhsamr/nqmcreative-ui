@@ -99,3 +99,18 @@ export function describeTrigger(
 export function menuItems(menu: HTMLElement | null): HTMLElement[] {
 	return menu ? [...menu.querySelectorAll<HTMLElement>('[role="menuitem"]:not([disabled])')] : [];
 }
+
+/**
+ * Whether a keystroke landed in something the reader is typing into. A
+ * bare-key shortcut — `/` for search — has to stand down for those, or it
+ * eats the character instead of opening anything.
+ */
+export function isTypingTarget(target: EventTarget | null): boolean {
+	if (!(target instanceof HTMLElement)) return false;
+	return (
+		target.isContentEditable ||
+		target.tagName === 'INPUT' ||
+		target.tagName === 'TEXTAREA' ||
+		target.tagName === 'SELECT'
+	);
+}

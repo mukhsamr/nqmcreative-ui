@@ -35,7 +35,7 @@
 	<select
 		bind:value
 		aria-invalid={invalid ? 'true' : undefined}
-		class="h-11 w-full appearance-none border bg-bg py-0 pr-10 pl-4 font-sans text-[15px] text-text transition-colors duration-150 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-50
+		class="h-10 w-full appearance-none border bg-bg py-0 pr-10 pl-3.5 font-sans text-[15px] text-text transition-colors duration-150 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-50
 			{invalid ? 'border-danger' : `border-hairline ${toneFocusBorder[tone]}`} {className}"
 		{...rest}
 	>

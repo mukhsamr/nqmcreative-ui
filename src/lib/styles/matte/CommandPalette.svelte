@@ -21,6 +21,7 @@
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneSoft, type Tone } from '../../core/tones.js';
+	import { isTypingTarget } from '../../core/trigger.js';
 	import Kbd from './Kbd.svelte';
 
 	interface Props {
@@ -34,6 +35,11 @@
 		 * Pass `null` to wire your own trigger only.
 		 */
 		hotkey?: string | null;
+		/**
+		 * Key that opens the palette on its own, pressed anywhere the reader
+		 * isn't typing. Default `'/'`. Pass `null` to turn it off.
+		 */
+		quickKey?: string | null;
 		onselect?: (item: CommandItem) => void;
 		class?: string;
 	}
@@ -45,6 +51,7 @@
 		emptyText,
 		tone = 'brand',
 		hotkey = 'k',
+		quickKey = '/',
 		onselect,
 		class: className = ''
 	}: Props = $props();
@@ -82,11 +89,27 @@
 	});
 
 	$effect(() => {
-		if (!hotkey) return;
+		if (!hotkey && !quickKey) return;
 		const onKeydown = (event: KeyboardEvent) => {
-			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === hotkey.toLowerCase()) {
+			const key = event.key.toLowerCase();
+
+			if ((event.metaKey || event.ctrlKey) && key === hotkey?.toLowerCase()) {
 				event.preventDefault();
 				open = !open;
+				return;
+			}
+
+			// A bare key can only open the palette, never close it: while it is
+			// open the keystroke belongs to the query field.
+			if (
+				key === quickKey?.toLowerCase() &&
+				!event.metaKey &&
+				!event.ctrlKey &&
+				!event.altKey &&
+				!isTypingTarget(event.target)
+			) {
+				event.preventDefault();
+				open = true;
 			}
 		};
 		window.addEventListener('keydown', onKeydown);
@@ -138,7 +161,7 @@
 	class="mx-auto mt-[12vh] mb-auto w-[min(36rem,calc(100vw-2rem))] max-w-none border border-hairline bg-bg p-0 text-text backdrop:bg-text/40 {className}"
 >
 	<div use:focusTrap={{ autofocus: false }} onkeydown={onKeydown} role="none" class="flex flex-col">
-		<div class="flex items-center gap-3 border-b border-hairline px-4">
+		<div class="flex items-center gap-3 border-b border-hairline px-3.5">
 			<svg
 				class="size-4 shrink-0 text-text-muted"
 				viewBox="0 0 16 16"
@@ -156,7 +179,7 @@
 				autocomplete="off"
 				aria-label={placeholder ?? t.current.commandPlaceholder}
 				placeholder={placeholder ?? t.current.commandPlaceholder}
-				class="h-12 w-full min-w-0 bg-transparent font-sans text-[15px] text-text placeholder:text-text-muted focus:outline-none"
+				class="h-11 w-full min-w-0 bg-transparent font-sans text-[15px] text-text placeholder:text-text-muted focus:outline-none"
 			/>
 			<Kbd>esc</Kbd>
 		</div>
@@ -168,13 +191,15 @@
 			class="max-h-80 overflow-y-auto py-1"
 		>
 			{#if flat.length === 0}
-				<p class="px-4 py-10 text-center font-sans text-sm text-text-muted">
+				<p class="px-3.5 py-10 text-center font-sans text-sm text-text-muted">
 					{emptyText ?? t.current.noResults}
 				</p>
 			{:else}
 				{#each groups as [group, groupItems] (group)}
 					{#if group}
-						<p class="px-4 pt-3 pb-1 font-mono text-[10px] tracking-wide text-text-muted uppercase">
+						<p
+							class="px-3.5 pt-3 pb-1 font-mono text-[10px] tracking-wide text-text-muted uppercase"
+						>
 							{group}
 						</p>
 					{/if}
@@ -189,7 +214,7 @@
 							aria-disabled={item.disabled}
 							onclick={() => run(item)}
 							onpointermove={() => (cursor.index = index)}
-							class="flex cursor-pointer items-center gap-3 px-4 py-2.5 font-sans text-[14px] transition-colors duration-100
+							class="flex cursor-pointer items-center gap-3 px-3.5 py-2 font-sans text-[14px] transition-colors duration-100
 								{item.disabled ? 'pointer-events-none opacity-40' : ''}
 								{index === active ? toneSoft[tone] : 'text-text-secondary'}"
 						>

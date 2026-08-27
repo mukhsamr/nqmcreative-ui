@@ -942,7 +942,8 @@
 				"dialog",
 				"list",
 				"locale",
-				"tones"
+				"tones",
+				"trigger"
 			]
 		},
 		{

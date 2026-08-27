@@ -1,6 +1,6 @@
 <script lang="ts">
 	import CodeBlock from '$site/CodeBlock.svelte';
-	import { styles } from '$site/catalogue.js';
+	import CodeTabs from '$site/CodeTabs.svelte';
 	import { UI } from '$site/ui.js';
 
 	let { data } = $props();
@@ -14,6 +14,28 @@
 	const Demo = $derived(entry.demos[data.style]);
 	const source = $derived(entry.sources[data.style]);
 
+	// Optional second demo, one file per component. Absent for most of them,
+	// and the section is simply not rendered when it is.
+	const Variants = $derived(entry.variants[data.style]);
+	const variantSource = $derived(entry.variantSources[data.style]);
+
+	// The package goes in once; `nqm-ui add` prints the import for this
+	// component in this style. Four managers, same two steps.
+	const managers = $derived([
+		{ value: 'npm', label: 'npm', install: 'npm install', run: 'npx' },
+		{ value: 'pnpm', label: 'pnpm', install: 'pnpm add', run: 'pnpm dlx' },
+		{ value: 'bun', label: 'bun', install: 'bun add', run: 'bunx' },
+		{ value: 'yarn', label: 'yarn', install: 'yarn add', run: 'yarn dlx' }
+	]);
+
+	const installTabs = $derived(
+		managers.map(({ value, label, install, run }) => ({
+			value,
+			label,
+			code: `${install} @nqmcreative/ui\n${run} nqm-ui add ${entry.slug} --style ${data.style}`
+		}))
+	);
+
 	// Two ways in: the style barrel exports by name, the per-component subpath
 	// exports a default. Mixing the two — named braces on the subpath — is the
 	// one combination that does not work.
@@ -23,6 +45,14 @@
 			`import ${entry.name} from '${entry.subpaths[data.style]}';`
 		].join('\n')
 	);
+
+	const panels = [
+		{ value: 'preview', label: 'Preview' },
+		{ value: 'code', label: 'Code' }
+	];
+
+	let demoPanel = $state('preview');
+	let variantPanel = $state('preview');
 </script>
 
 <svelte:head>
@@ -32,25 +62,40 @@
 
 <article class="flex flex-col gap-10">
 	<header class="flex flex-col gap-3">
-		<ui.Badge tone="neutral" size="sm">{entry.category}</ui.Badge>
 		<h1 class="font-heading text-3xl font-medium tracking-tight">{entry.name}</h1>
 		<p class="max-w-xl font-sans text-lg leading-relaxed text-text-secondary">
 			{entry.description}
 		</p>
 	</header>
 
-	<CodeBlock code={importLines} label="import — barrel or subpath" />
-
-	<!-- live preview -->
+	<!-- 1. install -->
 	<section class="flex flex-col gap-4">
-		<h2 class="font-mono text-[10px] tracking-wide text-text-muted uppercase">Preview</h2>
+		<h2 class="font-mono text-[10px] tracking-wide text-text-muted uppercase">Installation</h2>
+		<CodeTabs style={data.style} tabs={installTabs} label="terminal" />
+	</section>
+
+	<!-- 2. import -->
+	<section class="flex flex-col gap-4">
+		<h2 class="font-mono text-[10px] tracking-wide text-text-muted uppercase">Import</h2>
+		<CodeBlock code={importLines} label="barrel or subpath" />
+	</section>
+
+	<!-- 3. live preview, with the source behind a tab -->
+	<section class="flex flex-col gap-4">
+		<h2 class="font-mono text-[10px] tracking-wide text-text-muted uppercase">Usage</h2>
 		{#if Demo}
-			<div class="flex min-h-40 items-center justify-center border border-hairline bg-bg p-8">
-				<Demo />
+			<div class="flex flex-col gap-3">
+				<ui.Tabs bind:value={demoPanel} variant="segmented" items={panels} class="self-start" />
+				<div role="tabpanel">
+					{#if demoPanel === 'preview'}
+						<div class="flex min-h-40 items-center justify-center border border-hairline bg-bg p-8">
+							<Demo />
+						</div>
+					{:else if source}
+						<CodeBlock code={source} label="{entry.slug}.svelte" />
+					{/if}
+				</div>
 			</div>
-			{#if source}
-				<CodeBlock code={source} label="{entry.slug}.svelte" />
-			{/if}
 		{:else}
 			<div
 				class="flex min-h-40 items-center justify-center border border-dashed border-hairline-strong p-8 font-sans text-sm text-text-muted"
@@ -60,46 +105,22 @@
 		{/if}
 	</section>
 
-	<!-- the same component, in the other styles -->
-	<section
-		data-sveltekit-reload
-		class="flex flex-wrap items-center gap-3 font-sans text-sm text-text-muted"
-	>
-		<span>See {entry.name} in</span>
-		{#each styles.filter((s) => s.name !== data.style) as other (other.name)}
-			<ui.Link href="/{other.name}/components/{entry.slug}">{other.title}</ui.Link>
-		{/each}
-		<span class="text-hairline-strong">·</span>
-		<span>source</span>
-		{#each styles as style (style.name)}
-			<ui.Link
-				href="https://github.com/mukhsamr/nqmcreative-ui/blob/main/src/lib/styles/{style.name}/{entry.name}.svelte"
-				external>{style.name}</ui.Link
-			>
-		{/each}
-	</section>
-
-	<!-- what it pulls in -->
-	{#if entry.uses.length || entry.modules.length}
-		<section class="grid gap-6 sm:grid-cols-2">
-			{#if entry.uses.length}
-				<ui.Card variant="filled" eyebrow="Renders" title="Inside this component">
-					<p class="font-sans text-sm leading-relaxed text-text-secondary">
-						Uses {entry.uses.join(', ')} internally — nothing extra to install.
-					</p>
-				</ui.Card>
-			{/if}
-			{#if entry.modules.length}
-				<ui.Card variant="filled" eyebrow="Imports" title="Core modules">
-					<ul class="flex flex-wrap gap-2">
-						{#each entry.modules as module (module)}
-							<li>
-								<ui.Badge tone="neutral" size="sm">{module}</ui.Badge>
-							</li>
-						{/each}
-					</ul>
-				</ui.Card>
-			{/if}
+	<!-- 4. variants -->
+	{#if Variants}
+		<section class="flex flex-col gap-4">
+			<h2 class="font-mono text-[10px] tracking-wide text-text-muted uppercase">Variants</h2>
+			<div class="flex flex-col gap-3">
+				<ui.Tabs bind:value={variantPanel} variant="segmented" items={panels} class="self-start" />
+				<div role="tabpanel">
+					{#if variantPanel === 'preview'}
+						<div class="flex min-h-40 flex-col justify-center border border-hairline bg-bg p-8">
+							<Variants />
+						</div>
+					{:else if variantSource}
+						<CodeBlock code={variantSource} label="{entry.slug}.variants.svelte" />
+					{/if}
+				</div>
+			</div>
 		</section>
 	{/if}
 

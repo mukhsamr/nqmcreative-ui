@@ -156,7 +156,7 @@ export type { StepItem } from './Steps.svelte';
 export { default as Navbar } from './Navbar.svelte';
 export type { NavItem } from './Navbar.svelte';
 export { default as Sidebar } from './Sidebar.svelte';
-export type { SidebarItem, SidebarSection } from './Sidebar.svelte';
+export type { SidebarVariant, SidebarItem, SidebarSection } from './Sidebar.svelte';
 export { default as Footer } from './Footer.svelte';
 export type { FooterLink, FooterColumn } from './Footer.svelte';
 

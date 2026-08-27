@@ -1,0 +1,182 @@
+<script lang="ts">
+	import Sidebar from '$lib/styles/matte/Sidebar.svelte';
+
+	let surface = $state('projects');
+	let icons = $state('projects');
+	let nested = $state('assets');
+	let rail = $state('projects');
+</script>
+
+{#snippet home()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path
+			d="M2 7 8 2l6 5v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7Z"
+			stroke="currentColor"
+			stroke-width="1.4"
+		/>
+	</svg>
+{/snippet}
+
+{#snippet stack()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path d="m8 2 6 3-6 3-6-3 6-3Z" stroke="currentColor" stroke-width="1.4" />
+		<path d="m2 8 6 3 6-3M2 11l6 3 6-3" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet image()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<rect x="2" y="3" width="12" height="10" stroke="currentColor" stroke-width="1.4" />
+		<path d="m2 10 3-3 4 4M10 8l4 3" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet receipt()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path
+			d="M3 2h10v12l-2-1-1.5 1L8 13l-1.5 1L5 13l-2 1V2Z"
+			stroke="currentColor"
+			stroke-width="1.4"
+		/>
+		<path d="M6 6h4M6 9h4" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet cog()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.4" />
+		<path
+			d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8 3.4 3.4"
+			stroke="currentColor"
+			stroke-width="1.4"
+		/>
+	</svg>
+{/snippet}
+
+<div class="flex w-full flex-col gap-6">
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">variant</p>
+		<div class="flex flex-col gap-4">
+			{#each ['filled', 'plain', 'floating'] as const as name (name)}
+				<div class="flex flex-col gap-2">
+					<span class="font-mono text-[10px] text-text-muted">{name}</span>
+					<div class="flex h-40 border border-hairline bg-bg-alt">
+						<Sidebar
+							variant={name}
+							bind:value={surface}
+							collapsible={false}
+							sections={[
+								{
+									items: [
+										{ id: 'home', label: 'Dashboard', href: '#' },
+										{ id: 'projects', label: 'Projects', href: '#' },
+										{ id: 'billing', label: 'Billing', href: '#' }
+									]
+								}
+							]}
+						/>
+						<div class="flex-1"></div>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">icon</p>
+		<div class="flex h-64 border border-hairline">
+			<Sidebar
+				bind:value={icons}
+				collapsible={false}
+				sections={[
+					{
+						items: [
+							{ id: 'home', label: 'Dashboard', href: '#', icon: home },
+							{ id: 'projects', label: 'Projects', href: '#', icon: stack, badge: 12 },
+							{ id: 'invoices', label: 'Invoices', href: '#', icon: receipt }
+						]
+					},
+					{
+						label: 'Account',
+						items: [{ id: 'settings', label: 'Settings', href: '#', icon: cog }]
+					}
+				]}
+			/>
+			<div class="flex-1 bg-bg-alt"></div>
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">
+			submenu — collapsible and pinned
+		</p>
+		<div class="flex h-72 border border-hairline">
+			<Sidebar
+				bind:value={nested}
+				collapsible={false}
+				sections={[
+					{
+						label: 'Studio',
+						items: [
+							{
+								label: 'Library',
+								icon: stack,
+								open: true,
+								items: [
+									{ id: 'assets', label: 'Assets', href: '#', icon: image },
+									{ id: 'fonts', label: 'Fonts', href: '#' }
+								]
+							},
+							{
+								label: 'Archive',
+								icon: receipt,
+								items: [
+									{ id: 'q1', label: 'Q1 2026', href: '#' },
+									{ id: 'q2', label: 'Q2 2026', href: '#' }
+								]
+							}
+						]
+					},
+					{
+						label: 'Always open',
+						items: [
+							{
+								label: 'Settings',
+								icon: cog,
+								collapsible: false,
+								items: [
+									{ id: 'profile', label: 'Profile', href: '#' },
+									{ id: 'members', label: 'Members', href: '#', badge: 4 },
+									{ id: 'plan', label: 'Plan', href: '#' }
+								]
+							}
+						]
+					}
+				]}
+			/>
+			<div class="flex-1 bg-bg-alt"></div>
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">collapsed rail</p>
+		<div class="flex h-56 border border-hairline">
+			<Sidebar
+				bind:value={rail}
+				collapsed
+				collapsible={false}
+				sections={[
+					{
+						items: [
+							{ id: 'home', label: 'Dashboard', href: '#', icon: home },
+							{ id: 'projects', label: 'Projects', href: '#', icon: stack },
+							{ id: 'invoices', label: 'Invoices', href: '#', icon: receipt },
+							{ id: 'settings', label: 'Settings', href: '#', icon: cog }
+						]
+					}
+				]}
+			/>
+			<div class="flex-1 bg-bg-alt"></div>
+		</div>
+	</div>
+</div>

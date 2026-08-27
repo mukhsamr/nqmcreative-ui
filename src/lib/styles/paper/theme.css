@@ -78,16 +78,19 @@
 
 	/* --- type --- */
 	/*
-	 * Plus Jakarta Sans: rounded terminals, open counters, low contrast. Softer
-	 * than a system stack, which lands on Segoe UI for most readers and gives
-	 * paper's generous spacing nothing warm to sit in.
+	 * Work Sans sets running text in every style, so a project that swaps the
+	 * word after `@nqmcreative/ui/` keeps the same reading rhythm and only the
+	 * headings change voice.
 	 *
-	 * One variable file covers 400 to 700, so this costs a single request per
-	 * subset — see `fonts.css`. Everything degrades to the system stack if that
-	 * file is not imported, so the webfont stays optional.
+	 * Plus Jakarta Sans keeps the headings: rounded terminals, open counters,
+	 * low contrast — softer than a system stack, which lands on Segoe UI for
+	 * most readers and gives paper's generous spacing nothing warm to sit in.
+	 *
+	 * Both are variable files, one request per subset — see `fonts.css`.
+	 * Everything degrades to the system stack if that file is not imported, so
+	 * the webfonts stay optional.
 	 */
-	--font-sans:
-		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-sans: 'Work Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-heading:
 		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;

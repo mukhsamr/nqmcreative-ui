@@ -41,7 +41,7 @@
 
 	const sizes: Record<SegmentedSize, string> = {
 		sm: 'h-8 px-3 text-[13px]',
-		md: 'h-10 px-4 text-sm'
+		md: 'h-9 px-3.5 text-sm'
 	};
 
 	function select(option: SegmentOption) {

@@ -94,7 +94,7 @@
 
 <div
 	bind:this={wrapper}
-	class="inline-flex w-full items-center gap-1 border bg-bg pr-1 pl-4 transition-colors duration-150 ease-brand-out
+	class="inline-flex w-full items-center gap-1 border bg-bg pr-1 pl-3.5 transition-colors duration-150 ease-brand-out
 		{invalid ? 'border-danger' : `border-hairline ${toneFocusWithinBorder[tone]}`}
 		{disabled ? 'pointer-events-none opacity-50' : ''} {className}"
 >
@@ -118,7 +118,7 @@
 		}}
 		onblur={commit}
 		onkeydown={onKeydown}
-		class="h-11 w-full min-w-0 bg-transparent font-sans text-[15px] text-text tabular-nums placeholder:text-text-muted focus:outline-none"
+		class="h-10 w-full min-w-0 bg-transparent font-sans text-[15px] text-text tabular-nums placeholder:text-text-muted focus:outline-none"
 	/>
 
 	{#if name}<input type="hidden" {name} {value} />{/if}

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { categories, count, components, styles } from '$site/catalogue.js';
+	import { count, components, styles } from '$site/catalogue.js';
 	import { docs } from '$site/docs.js';
 	import { UI } from '$site/ui.js';
 
@@ -19,13 +19,19 @@
 	const active = $derived(page.url.pathname);
 	const inStyle = $derived((path: string) => active.startsWith(`${base}${path}`));
 
+	// One flat A–Z list — sidebar and palette both — rather than category
+	// headings: a reader looking for a component knows its name, not which
+	// bucket it was filed under.
+	const sorted = [...components].sort((a, b) => a.name.localeCompare(b.name));
+
+	// The category is gone from the palette's headings, so it rides along as a
+	// keyword instead: typing `overlay` still finds them.
 	const paletteItems = $derived(
-		components.map((item) => ({
+		sorted.map((item) => ({
 			id: item.slug,
 			label: item.name,
 			description: item.description,
-			group: item.category,
-			keywords: item.slug,
+			keywords: `${item.slug} ${item.category}`,
 			onselect: () => goto(`${base}/components/${item.slug}`)
 		}))
 	);
@@ -87,13 +93,14 @@
 				</svg>
 				Search
 				<ui.Kbd>⌘K</ui.Kbd>
+				<ui.Kbd>/</ui.Kbd>
 			</ui.Button>
 			<ui.ThemeToggle />
 		{/snippet}
 	</ui.Navbar>
 
 	<div class="mx-auto flex w-full max-w-6xl flex-1 gap-12 px-6">
-		<!-- category nav, hidden on small screens where the navbar drawer takes over -->
+		<!-- component nav, hidden on small screens where the navbar drawer takes over -->
 		<nav aria-label="Components" class="hidden w-52 shrink-0 py-10 lg:block">
 			<div class="sticky top-24 flex max-h-[calc(100vh-8rem)] flex-col gap-6 overflow-y-auto pb-6">
 				<div class="flex flex-col gap-1">
@@ -116,27 +123,25 @@
 					{/each}
 				</div>
 
-				{#each categories as group (group.name)}
-					<div class="flex flex-col gap-1">
-						<p
-							class="px-2 pb-1 font-sans text-[10px] font-semibold tracking-wide text-text-muted uppercase"
+				<div class="flex flex-col gap-1">
+					<p
+						class="px-2 pb-1 font-sans text-[10px] font-semibold tracking-wide text-text-muted uppercase"
+					>
+						components
+					</p>
+					{#each sorted as item (item.slug)}
+						<a
+							href="{base}/components/{item.slug}"
+							aria-current={active === `${base}/components/${item.slug}` ? 'page' : undefined}
+							class="px-2 py-1 font-sans text-sm transition-colors duration-150 {active ===
+							`${base}/components/${item.slug}`
+								? 'bg-brand-light font-medium text-brand'
+								: 'text-text-secondary hover:text-text'}"
 						>
-							{group.name}
-						</p>
-						{#each group.items as item (item.slug)}
-							<a
-								href="{base}/components/{item.slug}"
-								aria-current={active === `${base}/components/${item.slug}` ? 'page' : undefined}
-								class="px-2 py-1 font-sans text-sm transition-colors duration-150 {active ===
-								`${base}/components/${item.slug}`
-									? 'bg-brand-light font-medium text-brand'
-									: 'text-text-secondary hover:text-text'}"
-							>
-								{item.name}
-							</a>
-						{/each}
-					</div>
-				{/each}
+							{item.name}
+						</a>
+					{/each}
+				</div>
 			</div>
 		</nav>
 

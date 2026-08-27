@@ -41,7 +41,7 @@
 
 		<div class="grid {cols} {bordered ? 'gap-px border border-hairline bg-hairline' : 'gap-10'}">
 			{#each stats as stat (stat.label)}
-				<div class={bordered ? 'bg-bg p-6' : ''}>
+				<div class={bordered ? 'bg-bg p-5' : ''}>
 					<Stat
 						label={stat.label}
 						value={stat.value}

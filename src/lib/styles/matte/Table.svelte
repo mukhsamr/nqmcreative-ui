@@ -77,7 +77,7 @@
 		right: 'text-right'
 	};
 
-	const pad = $derived(compact ? 'px-4 py-2' : 'px-4 py-3');
+	const pad = $derived(compact ? 'px-3.5 py-1.5' : 'px-3.5 py-2.5');
 
 	const sorted = $derived(sortLocally ? sortRows(rows, sort) : rows);
 
@@ -112,7 +112,7 @@
 	<table class="w-full border-collapse font-sans text-[15px]">
 		{#if caption}
 			<caption
-				class="border-b border-hairline px-4 py-3 text-left font-sans text-sm text-text-muted"
+				class="border-b border-hairline px-3.5 py-2.5 text-left font-sans text-sm text-text-muted"
 			>
 				{caption}
 			</caption>
@@ -170,7 +170,7 @@
 				<tr>
 					<td
 						colspan={columns.length + (selectable ? 1 : 0)}
-						class="px-4 py-10 text-center text-sm text-text-muted"
+						class="px-3.5 py-10 text-center text-sm text-text-muted"
 					>
 						{#if empty}{@render empty()}{:else}{t.current.noData}{/if}
 					</td>

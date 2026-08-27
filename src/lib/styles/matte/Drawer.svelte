@@ -91,7 +91,7 @@
 >
 	<div class="flex h-full flex-col">
 		{#if title || dismissible}
-			<div class="flex items-start gap-4 border-b border-hairline px-6 py-5">
+			<div class="flex items-start gap-4 border-b border-hairline px-5 py-4">
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					{#if title}
 						<h2 class="font-heading text-lg font-medium tracking-tight">{title}</h2>
@@ -116,7 +116,7 @@
 		{/if}
 
 		<div
-			class="flex-1 overflow-y-auto px-6 py-5 font-sans text-[15px] leading-relaxed text-text-secondary"
+			class="flex-1 overflow-y-auto px-5 py-4 font-sans text-[15px] leading-relaxed text-text-secondary"
 		>
 			{@render children()}
 		</div>

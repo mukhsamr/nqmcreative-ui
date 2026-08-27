@@ -104,7 +104,15 @@
 			</div>
 		{/if}
 
-		<div class="px-6 py-2 pb-5 font-sans text-sm leading-relaxed text-text-secondary">
+		<!--
+			The body's top padding depends on what sits above it: 8px is the right
+			gap under a header, and far too tight when there is none — a titleless
+			modal, ConfirmDialog among them, would otherwise start against the edge.
+		-->
+		<div
+			class="px-6 pb-5 font-sans text-sm leading-relaxed text-text-secondary
+				{title || closable ? 'pt-2' : 'pt-5'}"
+		>
 			{@render children()}
 		</div>
 

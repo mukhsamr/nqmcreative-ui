@@ -34,8 +34,8 @@
 
 	const variants = $derived({
 		plain: '',
-		card: 'border border-hairline bg-bg p-6',
-		accent: `${toneSurface[tone]} border-l-2 ${toneBorderLeft[tone]} p-6`
+		card: 'border border-hairline bg-bg p-5',
+		accent: `${toneSurface[tone]} border-l-2 ${toneBorderLeft[tone]} p-5`
 	});
 </script>
 

@@ -37,7 +37,7 @@
 	disabled={href ? undefined : disabled}
 	aria-disabled={disabled ? 'true' : undefined}
 	tabindex={disabled ? undefined : -1}
-	class="flex w-full items-center gap-2.5 px-3 py-2 text-left text-[14px] transition-colors duration-100 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-40
+	class="flex w-full items-center gap-2.5 px-3 py-1.5 text-left text-[14px] transition-colors duration-100 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-40
 		{tone === 'neutral'
 		? 'text-text-secondary hover:bg-bg-inset focus-visible:bg-bg-inset'
 		: `${toneText[tone]} ${toneSoftHover[tone]}`}

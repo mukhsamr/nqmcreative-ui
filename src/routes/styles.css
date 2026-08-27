@@ -191,7 +191,7 @@
 	--color-neutral-hover: #4b5563;
 	--color-neutral-light: #f3f4f6;
 	--color-neutral-border: #d1d5db;
-	--font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-sans: 'Work Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 	--ease-brand: cubic-bezier(0.4, 0, 0.2, 1);
@@ -333,8 +333,8 @@
 	--color-neutral-hover: #4a584d;
 	--color-neutral-light: #eef3ec;
 	--color-neutral-border: #cbd8c9;
-	--font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-	--font-heading: 'Fredoka', 'Plus Jakarta Sans', ui-rounded, ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--font-sans: 'Work Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-heading: 'Fredoka', 'Work Sans', ui-rounded, ui-sans-serif, system-ui, -apple-system, sans-serif;
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 	--ease-brand: cubic-bezier(0.34, 1.4, 0.64, 1);
 	--ease-brand-out: cubic-bezier(0.22, 1, 0.36, 1);

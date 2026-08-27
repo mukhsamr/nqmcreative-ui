@@ -11,14 +11,17 @@ export function entries() {
 	);
 }
 
+/** Previous/next follow the sidebar, which is one flat A–Z list. */
+const ordered = [...components].sort((a, b) => a.name.localeCompare(b.name));
+
 export function load({ params }) {
 	const entry = bySlug.get(params.slug);
 	if (!entry) error(404, `No component called "${params.slug}"`);
 
-	const index = components.indexOf(entry);
+	const index = ordered.indexOf(entry);
 	return {
 		entry,
-		previous: components[index - 1] ?? null,
-		next: components[index + 1] ?? null
+		previous: ordered[index - 1] ?? null,
+		next: ordered[index + 1] ?? null
 	};
 }

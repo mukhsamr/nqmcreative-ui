@@ -50,7 +50,7 @@
 	{...rest}
 >
 	{#if header || title || eyebrow}
-		<div class="flex flex-col gap-1 {padded ? 'px-6 pt-6' : ''}">
+		<div class="flex flex-col gap-1 {padded ? 'px-5 pt-5' : ''}">
 			{#if header}
 				{@render header()}
 			{:else}
@@ -64,12 +64,12 @@
 		</div>
 	{/if}
 
-	<div class="flex-1 {padded ? (header || title || eyebrow ? 'px-6 pt-4 pb-6' : 'p-6') : ''}">
+	<div class="flex-1 {padded ? (header || title || eyebrow ? 'px-5 pt-3.5 pb-5' : 'p-5') : ''}">
 		{@render children()}
 	</div>
 
 	{#if footer}
-		<div class="border-t border-hairline {padded ? 'px-6 py-4' : ''}">
+		<div class="border-t border-hairline {padded ? 'px-5 py-3.5' : ''}">
 			{@render footer()}
 		</div>
 	{/if}

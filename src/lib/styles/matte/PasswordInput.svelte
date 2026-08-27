@@ -34,7 +34,7 @@
 
 <div class="flex w-full flex-col gap-2">
 	<span
-		class="inline-flex w-full items-center gap-2 border bg-bg pr-2 pl-4 transition-colors duration-150 ease-brand-out
+		class="inline-flex w-full items-center gap-2 border bg-bg pr-2 pl-3.5 transition-colors duration-150 ease-brand-out
 			{invalid ? 'border-danger' : `border-hairline ${toneFocusWithinBorder[tone]}`}
 			{disabled ? 'pointer-events-none opacity-50' : ''} {className}"
 	>
@@ -43,7 +43,7 @@
 			{disabled}
 			type={visible ? 'text' : 'password'}
 			aria-invalid={invalid ? 'true' : undefined}
-			class="h-11 w-full min-w-0 bg-transparent font-sans text-[15px] text-text placeholder:text-text-muted focus:outline-none"
+			class="h-10 w-full min-w-0 bg-transparent font-sans text-[15px] text-text placeholder:text-text-muted focus:outline-none"
 			{...rest}
 		/>
 		<button

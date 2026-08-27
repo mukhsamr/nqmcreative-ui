@@ -37,6 +37,13 @@ export interface CatalogueEntry {
 	demos: Record<string, Component | undefined>;
 	/** The demo's source, rewritten to the import path a consumer would type. */
 	sources: Record<string, string | undefined>;
+	/**
+	 * The optional variants demo — `<slug>.variants.svelte` — keyed by style
+	 * name. A component only has one once somebody writes it.
+	 */
+	variants: Record<string, Component | undefined>;
+	/** The variants demo's source, rewritten the same way as `sources`. */
+	variantSources: Record<string, string | undefined>;
 }
 
 export const styles: StyleInfo[] = data.styles;
@@ -128,21 +135,33 @@ function mergeImports(source: string, style: string) {
 		.join('\n');
 }
 
+/** The demo file a style holds for one slug, or `undefined` if there is none. */
+const keyFor = (style: string, slug: string) =>
+	Object.keys(modules).find((path) => styleOf(path) === style && slugOf(path) === slug);
+
 export const components: CatalogueEntry[] = data.components.map((item) => {
 	const demos: Record<string, Component | undefined> = {};
 	const entrySources: Record<string, string | undefined> = {};
+	const variants: Record<string, Component | undefined> = {};
+	const variantSources: Record<string, string | undefined> = {};
 
 	for (const style of styles) {
-		const key = Object.keys(modules).find(
-			(path) => styleOf(path) === style.name && slugOf(path) === item.slug
-		);
+		const key = keyFor(style.name, item.slug);
 		demos[style.name] = key ? modules[key].default : undefined;
 		entrySources[style.name] = key
 			? mergeImports(forDisplay(sources[key], style.name), style.name)
 			: undefined;
+
+		// Optional second demo. Nothing breaks when it is missing — the page
+		// simply leaves the variants section out.
+		const variantKey = keyFor(style.name, `${item.slug}.variants`);
+		variants[style.name] = variantKey ? modules[variantKey].default : undefined;
+		variantSources[style.name] = variantKey
+			? mergeImports(forDisplay(sources[variantKey], style.name), style.name)
+			: undefined;
 	}
 
-	return { ...item, demos, sources: entrySources };
+	return { ...item, demos, sources: entrySources, variants, variantSources };
 });
 
 export const bySlug = new Map(components.map((item) => [item.slug, item]));

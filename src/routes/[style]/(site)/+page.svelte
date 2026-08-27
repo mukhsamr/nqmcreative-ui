@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { UI } from '$site/ui.js';
-	import { categories, count, styles } from '$site/catalogue.js';
+	import { count, styles } from '$site/catalogue.js';
 	import CodeBlock from '$site/CodeBlock.svelte';
 	import { TONES } from '$lib/core/tones.js';
 
@@ -44,7 +44,6 @@ bunx nqm-ui init --style ${data.style}`);
 <div class="flex flex-col gap-20 pb-10">
 	<!-- hero -->
 	<header class="flex flex-col gap-6 pt-6">
-		<ui.Badge tone="brand" dot>{count} components × {styles.length} styles</ui.Badge>
 		<h1
 			class="max-w-2xl font-heading text-4xl leading-tight font-medium tracking-tight sm:text-5xl"
 		>
@@ -139,32 +138,6 @@ bunx nqm-ui init --style ${data.style}`);
 		<div class="flex flex-wrap items-center gap-2">
 			{#each TONES as tone (tone)}
 				<ui.Badge {tone} dot>{tone}</ui.Badge>
-			{/each}
-		</div>
-	</section>
-
-	<!-- catalogue -->
-	<section class="flex flex-col gap-5">
-		<h2 class="font-heading text-2xl font-medium tracking-tight">Everything in the box</h2>
-		<div class="grid gap-px border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
-			{#each categories as group (group.name)}
-				<div class="flex flex-col gap-3 bg-bg p-5">
-					<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">
-						{group.name}
-					</p>
-					<ul class="flex flex-col gap-1">
-						{#each group.items as item (item.slug)}
-							<li>
-								<a
-									href="{base}/components/{item.slug}"
-									class="font-sans text-sm text-text-secondary transition-colors duration-150 hover:text-brand"
-								>
-									{item.name}
-								</a>
-							</li>
-						{/each}
-					</ul>
-				</div>
 			{/each}
 		</div>
 	</section>

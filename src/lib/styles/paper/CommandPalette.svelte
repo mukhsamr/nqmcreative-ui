@@ -21,6 +21,7 @@
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneSoft, type Tone } from '../../core/tones.js';
+	import { isTypingTarget } from '../../core/trigger.js';
 	import Kbd from './Kbd.svelte';
 
 	interface Props {
@@ -34,6 +35,11 @@
 		 * Pass `null` to wire your own trigger only.
 		 */
 		hotkey?: string | null;
+		/**
+		 * Key that opens the palette on its own, pressed anywhere the reader
+		 * isn't typing. Default `'/'`. Pass `null` to turn it off.
+		 */
+		quickKey?: string | null;
 		onselect?: (item: CommandItem) => void;
 		class?: string;
 	}
@@ -45,6 +51,7 @@
 		emptyText,
 		tone = 'brand',
 		hotkey = 'k',
+		quickKey = '/',
 		onselect,
 		class: className = ''
 	}: Props = $props();
@@ -82,11 +89,27 @@
 	});
 
 	$effect(() => {
-		if (!hotkey) return;
+		if (!hotkey && !quickKey) return;
 		const onKeydown = (event: KeyboardEvent) => {
-			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === hotkey.toLowerCase()) {
+			const key = event.key.toLowerCase();
+
+			if ((event.metaKey || event.ctrlKey) && key === hotkey?.toLowerCase()) {
 				event.preventDefault();
 				open = !open;
+				return;
+			}
+
+			// A bare key can only open the palette, never close it: while it is
+			// open the keystroke belongs to the query field.
+			if (
+				key === quickKey?.toLowerCase() &&
+				!event.metaKey &&
+				!event.ctrlKey &&
+				!event.altKey &&
+				!isTypingTarget(event.target)
+			) {
+				event.preventDefault();
+				open = true;
 			}
 		};
 		window.addEventListener('keydown', onKeydown);

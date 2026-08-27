@@ -49,10 +49,10 @@
 		'inline-flex items-center justify-center gap-2 border font-sans font-medium whitespace-nowrap transition-all duration-150 ease-brand-out disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
 
 	const sizes: Record<ButtonSize, string> = {
-		sm: 'h-9 px-4 text-[13px]',
-		md: 'h-11 px-7 text-[15px]',
-		lg: 'h-12 px-8 text-base',
-		xl: 'h-14 px-10 text-base'
+		sm: 'h-8 px-3.5 text-[13px]',
+		md: 'h-10 px-5 text-[15px]',
+		lg: 'h-11 px-6 text-base',
+		xl: 'h-12 px-8 text-base'
 	};
 
 	const variantClass = $derived.by(() => {

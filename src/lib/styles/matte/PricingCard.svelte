@@ -45,7 +45,7 @@
 		: 'border border-hairline'} {className}"
 	{...rest}
 >
-	<div class="flex flex-col gap-4 p-6 {featured ? toneSoft[tone] : ''}">
+	<div class="flex flex-col gap-4 p-5 {featured ? toneSoft[tone] : ''}">
 		<div class="flex items-start justify-between gap-3">
 			<h3 class="font-heading text-lg font-medium tracking-tight {featured ? '' : 'text-text'}">
 				{name}
@@ -80,7 +80,7 @@
 	</div>
 
 	{#if features.length}
-		<ul class="flex flex-1 flex-col gap-3 border-t border-hairline p-6">
+		<ul class="flex flex-1 flex-col gap-3 border-t border-hairline p-5">
 			{#each features as feature (feature)}
 				<li class="flex items-start gap-3 font-sans text-sm text-text-secondary">
 					<svg
@@ -102,6 +102,6 @@
 	{/if}
 
 	{#if action}
-		<div class="p-6 pt-2">{@render action()}</div>
+		<div class="p-5 pt-2">{@render action()}</div>
 	{/if}
 </div>

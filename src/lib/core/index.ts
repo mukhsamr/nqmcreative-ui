@@ -42,7 +42,13 @@ export type { ClickOutsideOptions, FocusTrapOptions } from './actions/dismissabl
 
 /* --- overlays --- */
 export { syncDialog, isBackdropClick } from './dialog.svelte.js';
-export { popupTrigger, describeTrigger, menuItems, HOVER_GRACE } from './trigger.js';
+export {
+	popupTrigger,
+	describeTrigger,
+	menuItems,
+	isTypingTarget,
+	HOVER_GRACE
+} from './trigger.js';
 export type { PopupTriggerOptions } from './trigger.js';
 
 /* --- lists --- */

@@ -29,7 +29,7 @@
 <svelte:element
 	this={href ? 'a' : 'div'}
 	{href}
-	class="group flex flex-col gap-3 bg-bg p-6 {href
+	class="group flex flex-col gap-3 bg-bg p-5 {href
 		? `transition-colors duration-150 ease-brand-out ${focusRing} ${toneRing[tone]}`
 		: ''} {className}"
 	{...rest}

@@ -1,4 +1,8 @@
 <script module lang="ts">
+	import type { Snippet } from 'svelte';
+
+	export type SidebarVariant = 'plain' | 'filled' | 'floating';
+
 	export interface SidebarItem {
 		/** Stable id used for the active state. Falls back to `href`. */
 		id?: string;
@@ -6,10 +10,21 @@
 		href?: string;
 		disabled?: boolean;
 		badge?: string | number;
+		/**
+		 * Leading glyph, 16px. The one thing a collapsed rail still shows, so
+		 * an item that has to survive `collapsed` needs one.
+		 */
+		icon?: Snippet;
 		/** Nested links — the parent becomes a collapsible group. */
 		items?: SidebarItem[];
 		/** Open the group on first render. */
 		open?: boolean;
+		/**
+		 * `false` pins a group open: the parent stops being a button and the
+		 * children are always on show. For navigation a reader should not be
+		 * able to lose.
+		 */
+		collapsible?: boolean;
 	}
 
 	export interface SidebarSection {
@@ -20,7 +35,6 @@
 </script>
 
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { focusRing, toneRing, toneSoft, type Tone } from '../../core/tones.js';
 
@@ -32,6 +46,8 @@
 		collapsed?: boolean;
 		/** Show the collapse button. */
 		collapsible?: boolean;
+		/** Surface treatment: bare, the framed default, or a detached card. */
+		variant?: SidebarVariant;
 		tone?: Tone;
 		header?: Snippet;
 		footer?: Snippet;
@@ -44,6 +60,7 @@
 		value = $bindable(''),
 		collapsed = $bindable(false),
 		collapsible = true,
+		variant = 'filled',
 		tone = 'brand',
 		header,
 		footer,
@@ -59,7 +76,8 @@
 	let opened = $state<Record<string, boolean>>({});
 
 	const isOpen = (item: SidebarItem) =>
-		opened[keyOf(item)] ?? (item.open || item.items!.some((child) => keyOf(child) === value));
+		item.collapsible === false ||
+		(opened[keyOf(item)] ?? (item.open || item.items!.some((child) => keyOf(child) === value)));
 
 	function toggle(item: SidebarItem) {
 		opened = { ...opened, [keyOf(item)]: !isOpen(item) };
@@ -71,13 +89,50 @@
 		onnavigate?.(item);
 	}
 
+	const surfaces: Record<SidebarVariant, string> = {
+		plain: 'h-full bg-transparent',
+		filled: 'h-full border-r border-hairline bg-bg',
+		floating: 'm-3 h-[calc(100%-1.5rem)] border border-hairline bg-bg'
+	};
+
 	const row =
 		'flex w-full items-center gap-3 px-3 py-2 text-left font-sans text-sm transition-colors duration-150 ease-brand-out disabled:pointer-events-none disabled:opacity-40';
 </script>
 
+<!-- Nested links. One copy, rendered by both kinds of group. -->
+{#snippet subitems(item: SidebarItem)}
+	<div class="ml-5 flex flex-col gap-0.5 border-l border-hairline pl-1">
+		{#each item.items as child (keyOf(child))}
+			<a
+				href={child.href}
+				onclick={() => go(child)}
+				aria-current={value === keyOf(child) ? 'page' : undefined}
+				class="{row} {focusRing} {toneRing[tone]} {value === keyOf(child)
+					? `${toneSoft[tone]} font-medium`
+					: 'text-text-muted hover:bg-bg-inset hover:text-text'} {child.disabled
+					? 'pointer-events-none opacity-40'
+					: ''}"
+			>
+				{@render glyph(child)}
+				<span class="min-w-0 flex-1 truncate">{child.label}</span>
+				{#if child.badge !== undefined}
+					<span class="shrink-0 font-mono text-[11px]">{child.badge}</span>
+				{/if}
+			</a>
+		{/each}
+	</div>
+{/snippet}
+
+<!-- One box for every glyph, so rows line up whether or not an item has one. -->
+{#snippet glyph(item: SidebarItem)}
+	{#if item.icon}
+		<span class="grid size-4 shrink-0 place-items-center *:size-4">{@render item.icon()}</span>
+	{/if}
+{/snippet}
+
 <aside
-	class="flex h-full shrink-0 flex-col border-r border-hairline bg-bg transition-[width] duration-200 ease-brand-out
-		{collapsed ? 'w-16' : 'w-60'} {className}"
+	class="flex shrink-0 flex-col transition-[width] duration-200 ease-brand-out
+		{surfaces[variant]} {collapsed ? 'w-16' : 'w-60'} {className}"
 >
 	{#if header}
 		<div class="flex h-16 shrink-0 items-center gap-3 border-b border-hairline px-3">
@@ -97,16 +152,25 @@
 				{/if}
 
 				{#each section.items as item (keyOf(item))}
-					{#if item.items?.length}
+					{#if item.items?.length && item.collapsible === false}
+						<div class="{row} {collapsed ? 'justify-center' : ''} font-medium text-text-muted">
+							{@render glyph(item)}
+							<span class="min-w-0 flex-1 truncate {collapsed ? 'sr-only' : ''}">{item.label}</span>
+						</div>
+						{#if isOpen(item) && !collapsed}
+							{@render subitems(item)}
+						{/if}
+					{:else if item.items?.length}
 						<button
 							type="button"
 							onclick={() => toggle(item)}
 							aria-expanded={isOpen(item)}
 							title={collapsed ? item.label : undefined}
-							class="{row} {focusRing} {toneRing[
+							class="{row} {collapsed ? 'justify-center' : ''} {focusRing} {toneRing[
 								tone
 							]} text-text-secondary hover:bg-bg-inset hover:text-text"
 						>
+							{@render glyph(item)}
 							<span class="min-w-0 flex-1 truncate {collapsed ? 'sr-only' : ''}">{item.label}</span>
 							{#if !collapsed}
 								<svg
@@ -128,25 +192,7 @@
 						</button>
 
 						{#if isOpen(item) && !collapsed}
-							<div class="ml-5 flex flex-col gap-0.5 border-l border-hairline pl-1">
-								{#each item.items as child (keyOf(child))}
-									<a
-										href={child.href}
-										onclick={() => go(child)}
-										aria-current={value === keyOf(child) ? 'page' : undefined}
-										class="{row} {focusRing} {toneRing[tone]} {value === keyOf(child)
-											? `${toneSoft[tone]} font-medium`
-											: 'text-text-muted hover:bg-bg-inset hover:text-text'} {child.disabled
-											? 'pointer-events-none opacity-40'
-											: ''}"
-									>
-										<span class="min-w-0 flex-1 truncate">{child.label}</span>
-										{#if child.badge !== undefined}
-											<span class="shrink-0 font-mono text-[11px]">{child.badge}</span>
-										{/if}
-									</a>
-								{/each}
-							</div>
+							{@render subitems(item)}
 						{/if}
 					{:else}
 						<a
@@ -154,12 +200,15 @@
 							onclick={() => go(item)}
 							aria-current={value === keyOf(item) ? 'page' : undefined}
 							title={collapsed ? item.label : undefined}
-							class="{row} {focusRing} {toneRing[tone]} {value === keyOf(item)
+							class="{row} {collapsed ? 'justify-center' : ''} {focusRing} {toneRing[
+								tone
+							]} {value === keyOf(item)
 								? `${toneSoft[tone]} font-medium`
 								: 'text-text-secondary hover:bg-bg-inset hover:text-text'} {item.disabled
 								? 'pointer-events-none opacity-40'
 								: ''}"
 						>
+							{@render glyph(item)}
 							<span class="min-w-0 flex-1 truncate {collapsed ? 'sr-only' : ''}">{item.label}</span>
 							{#if item.badge !== undefined && !collapsed}
 								<span class="shrink-0 font-mono text-[11px] text-text-muted">{item.badge}</span>
