@@ -5,6 +5,25 @@
 	import { TONES } from '$lib/core/tones.js';
 </script>
 
+{#snippet check()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path d="m3 8 3.2 3.2L13 4.4" stroke="currentColor" stroke-width="1.6" />
+	</svg>
+{/snippet}
+
+{#snippet clock()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4" />
+		<path d="M8 4.5V8l2.5 1.5" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet cross()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.6" />
+	</svg>
+{/snippet}
+
 <div class="flex w-full flex-col gap-6">
 	<div class="flex flex-col gap-2">
 		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">variant</p>
@@ -29,6 +48,16 @@
 			{#each TONES as tone (tone)}
 				<Badge {tone}>{tone}</Badge>
 			{/each}
+		</div>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">icon</p>
+		<div class="flex flex-wrap items-center gap-2">
+			<Badge icon={check} tone="success">Paid</Badge>
+			<Badge icon={clock} tone="warning" variant="outline">Pending</Badge>
+			<Badge icon={cross} tone="danger" variant="solid">Failed</Badge>
+			<Badge icon={check} size="sm">Small</Badge>
 		</div>
 	</div>
 

@@ -7,6 +7,8 @@ interface Props extends HTMLAttributes<HTMLDetailsElement> {
     tone?: Tone;
     /** Short text on the right of the summary row. */
     meta?: string;
+    /** Leading icon on the summary row. */
+    icon?: Snippet;
     children: Snippet;
 }
 declare const AccordionItem: import("svelte").Component<Props, {}, "open">;

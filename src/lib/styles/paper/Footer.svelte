@@ -2,6 +2,8 @@
 	export interface FooterLink {
 		label: string;
 		href?: string;
+		/** Leading icon, 14px. */
+		icon?: Snippet;
 		external?: boolean;
 	}
 
@@ -14,6 +16,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { toneHoverText, type Tone } from '../../core/tones.js';
+	import { iconSm } from './icon.js';
 
 	interface Props {
 		columns?: FooterColumn[];
@@ -57,11 +60,12 @@
 												href={item.href}
 												target={item.external ? '_blank' : undefined}
 												rel={item.external ? 'noreferrer' : undefined}
-												class="font-sans text-[13px] text-text-muted transition-colors duration-150 ease-brand-out {toneHoverText[
+												class="inline-flex items-center gap-2 font-sans text-[13px] text-text-muted transition-colors duration-150 ease-brand-out {toneHoverText[
 													tone
 												]}"
 											>
-												{item.label}
+												{#if item.icon}<span class={iconSm}>{@render item.icon()}</span
+													>{/if}{item.label}
 												{#if item.external}<span aria-hidden="true" class="text-[0.85em]">↗</span
 													>{/if}
 											</a>

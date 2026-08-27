@@ -1,13 +1,17 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import { anchored } from '../../core/actions/anchor.js';
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
 	import { toneFocusWithinBorder, toneSoft, toneText, type Tone } from '../../core/tones.js';
 	import { useLocale } from '../../core/locale.svelte.js';
+	import { iconMd } from './icon.js';
 
 	export interface ComboboxOption {
 		value: string;
 		label: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		/** Second line under the label. */
 		description?: string;
 		disabled?: boolean;
@@ -237,6 +241,7 @@
 							{index === active ? toneSoft[tone] : 'text-text-secondary'}"
 					>
 						<span class="flex items-center gap-2">
+							{#if option.icon}<span class={iconMd}>{@render option.icon()}</span>{/if}
 							<span class="min-w-0 flex-1 truncate">{option.label}</span>
 							{#if option.value === value}
 								<svg

@@ -9,6 +9,10 @@ interface Props extends HTMLAnchorAttributes {
     external?: boolean;
     /** Inherit the surrounding text colour instead of the tone. */
     muted?: boolean;
+    /** Leading icon, 14px. */
+    icon?: Snippet;
+    /** Trailing icon, before the external mark. */
+    iconEnd?: Snippet;
     children: Snippet;
 }
 declare const Link: import("svelte").Component<Props, {}, "">;

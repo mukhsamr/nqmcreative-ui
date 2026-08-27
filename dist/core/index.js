@@ -15,7 +15,7 @@ export { anchored } from './actions/anchor.js';
 export { clickOutside, focusTrap, focusable, navigateList, portal } from './actions/dismissable.js';
 /* --- overlays --- */
 export { syncDialog, isBackdropClick } from './dialog.svelte.js';
-export { popupTrigger, describeTrigger, menuItems, HOVER_GRACE } from './trigger.js';
+export { popupTrigger, describeTrigger, menuItems, isTypingTarget, HOVER_GRACE } from './trigger.js';
 /* --- lists --- */
 export { ListCursor, groupItems, matchQuery, revealIndex } from './list.svelte.js';
 /* --- data --- */

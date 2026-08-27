@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneText, type Tone } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 
 	interface Props extends HTMLAttributes<HTMLDetailsElement> {
 		title: string;
@@ -9,6 +10,8 @@
 		tone?: Tone;
 		/** Short text on the right of the summary row. */
 		meta?: string;
+		/** Leading icon on the summary row. */
+		icon?: Snippet;
 		children: Snippet;
 	}
 
@@ -17,6 +20,7 @@
 		open = $bindable(false),
 		tone = 'brand',
 		meta,
+		icon,
 		class: className = '',
 		children,
 		...rest
@@ -27,6 +31,7 @@
 	<summary
 		class="flex cursor-pointer list-none items-center gap-4 px-4 py-3.5 font-sans text-sm font-medium text-text transition-colors duration-150 ease-brand-out select-none hover:bg-bg-alt focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-current [&::-webkit-details-marker]:hidden"
 	>
+		{#if icon}<span class={iconMd}>{@render icon()}</span>{/if}
 		<span class="flex-1">{title}</span>
 		{#if meta}<span class="text-[13px] font-normal text-text-muted">{meta}</span>{/if}
 		<svg

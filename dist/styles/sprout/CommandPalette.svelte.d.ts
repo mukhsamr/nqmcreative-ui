@@ -1,6 +1,9 @@
+import type { Snippet } from 'svelte';
 export interface CommandItem {
     id: string;
     label: string;
+    /** Leading icon, 16px. */
+    icon?: Snippet;
     /** Second line under the label. */
     description?: string;
     /** Items sharing a group are rendered under one heading. */
@@ -24,6 +27,11 @@ interface Props {
      * Pass `null` to wire your own trigger only.
      */
     hotkey?: string | null;
+    /**
+     * Key that opens the palette on its own, pressed anywhere the reader
+     * isn't typing. Default `'/'`. Pass `null` to turn it off.
+     */
+    quickKey?: string | null;
     onselect?: (item: CommandItem) => void;
     class?: string;
 }

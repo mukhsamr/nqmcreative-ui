@@ -1,7 +1,11 @@
 <script module lang="ts">
+	import type { Snippet } from 'svelte';
+
 	export interface StepItem {
 		label: string;
 		description?: string;
+		/** Replaces the step number. A finished step still shows its check. */
+		icon?: Snippet;
 		/** Marks the step as failed — shown in `danger` regardless of position. */
 		error?: boolean;
 		disabled?: boolean;
@@ -10,6 +14,7 @@
 
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
+	import { iconMd } from './icon.js';
 	import { focusRing, toneFill, toneRing, toneText, type Tone } from '../../core/tones.js';
 
 	interface Props extends Omit<HTMLAttributes<HTMLElement>, 'onchange'> {
@@ -67,6 +72,8 @@
 		<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 			<path d="m2 7 3.2 3.2L12 3.6" stroke="currentColor" stroke-width="1.8" />
 		</svg>
+	{:else if item.icon}
+		<span class={iconMd}>{@render item.icon()}</span>
 	{:else}
 		{index + 1}
 	{/if}

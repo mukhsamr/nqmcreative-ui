@@ -1,11 +1,15 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { focusRing, toneRing, type Tone } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 	import { edge } from './lift.js';
 
 	export interface SegmentOption {
 		value: string;
 		label: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		disabled?: boolean;
 	}
 
@@ -21,6 +25,8 @@
 		tone?: Tone;
 		/** Spread the segments evenly across the full width. */
 		fullWidth?: boolean;
+		/** Icons only — each option's `label` becomes its accessible name. */
+		iconOnly?: boolean;
 		label?: string;
 		disabled?: boolean;
 		onchange?: (value: string) => void;
@@ -33,6 +39,7 @@
 		size = 'md',
 		tone = 'brand',
 		fullWidth = false,
+		iconOnly = false,
 		label,
 		disabled = false,
 		class: className = '',
@@ -43,6 +50,11 @@
 	const sizes: Record<SegmentedSize, string> = {
 		sm: 'h-7 px-2.5 text-[13px]',
 		md: 'h-8 px-3.5 text-sm'
+	};
+
+	const squares: Record<SegmentedSize, string> = {
+		sm: 'size-7 text-[13px]',
+		md: 'size-8 text-sm'
 	};
 
 	function select(option: SegmentOption) {
@@ -75,14 +87,16 @@
 			type="button"
 			role="radio"
 			aria-checked={value === option.value}
+			aria-label={iconOnly ? option.label : undefined}
 			disabled={option.disabled || disabled}
 			tabindex={value === option.value ? 0 : -1}
 			onclick={() => select(option)}
 			class="inline-flex items-center justify-center rounded-xl font-sans font-medium whitespace-nowrap transition-all duration-150 ease-brand-out disabled:pointer-events-none disabled:opacity-40
-				{sizes[size]} {focusRing} {toneRing[tone]}
+				{iconOnly ? squares[size] : sizes[size]} {focusRing} {toneRing[tone]}
 				{value === option.value ? `bg-bg text-text ${edge}` : 'text-text-muted hover:text-text'}"
 		>
-			{option.label}
+			{#if option.icon}<span class={iconMd}>{@render option.icon()}</span>{/if}
+			{#if !iconOnly}{option.label}{/if}
 		</button>
 	{/each}
 	{#if name}<input type="hidden" {name} {value} />{/if}

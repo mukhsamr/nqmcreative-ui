@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { edge } from './lift.js';
 	import {
@@ -9,10 +10,13 @@
 		toneText,
 		type Tone
 	} from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 
 	export interface TabItem {
 		value: string;
 		label: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		disabled?: boolean;
 		/** Small count/label rendered after the tab title. */
 		badge?: string | number;
@@ -90,6 +94,7 @@
 			onclick={() => select(item)}
 			class={tabClass(value === item.value)}
 		>
+			{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
 			{item.label}
 			{#if item.badge !== undefined}
 				<span

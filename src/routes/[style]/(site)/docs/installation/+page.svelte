@@ -1,12 +1,20 @@
 <script lang="ts">
 	import { UI } from '$site/ui.js';
 	import CodeBlock from '$site/CodeBlock.svelte';
+	import CodeTabs from '$site/CodeTabs.svelte';
 	import * as code from '$site/snippets.js';
 	import { count, styles } from '$site/catalogue.js';
 
 	let { data } = $props();
 
 	const ui = $derived(UI[data.style]);
+
+	const updateTabs = [
+		{ value: 'npm', label: 'npm', code: 'npm install @nqmcreative/ui@latest' },
+		{ value: 'pnpm', label: 'pnpm', code: 'pnpm update @nqmcreative/ui --latest' },
+		{ value: 'bun', label: 'bun', code: 'bun update @nqmcreative/ui' },
+		{ value: 'yarn', label: 'yarn', code: 'yarn up @nqmcreative/ui' }
+	];
 </script>
 
 <svelte:head>
@@ -146,5 +154,49 @@
 
 <section class="flex flex-col gap-4">
 	<h2 class="font-heading text-xl font-medium tracking-tight">Updating</h2>
-	<CodeBlock code={code.update} label="terminal" />
+	<p class="font-sans leading-relaxed text-text-secondary">
+		Nothing was copied into your project: <code class="font-mono text-brand">add</code> printed an
+		import, and the components themselves live in
+		<code class="font-mono text-brand">node_modules</code>. So upgrading the package is the whole
+		job — every Button in your app is the new Button on the next build.
+	</p>
+	<CodeTabs style={data.style} tabs={updateTabs} label="terminal" />
+
+	<h3 class="pt-2 font-sans text-sm font-medium text-text">Then rewrite the wiring</h3>
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		<code class="font-mono text-brand">nqm-ui update</code> is
+		<code class="font-mono text-brand">init</code> under the name you reach for afterwards. It
+		overwrites the lines it owns in
+		<code class="font-mono text-brand">src/app.css</code> — the
+		<code class="font-mono text-brand">tailwindcss</code> import, this style's
+		<code class="font-mono text-brand">theme.css</code> and
+		<code class="font-mono text-brand">fonts.css</code>, and the
+		<code class="font-mono text-brand">@source</code> line — and leaves everything below them alone,
+		your own <code class="font-mono text-brand">@theme</code> overrides included.
+	</p>
+	<CodeBlock code={code.cliUpdate} label="terminal" />
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Run it after every upgrade, not just when something looks wrong. If a release changes which
+		files a style imports, or where <code class="font-mono text-brand">@source</code> has to point, the
+		old lines would sit there resolving to nothing and your components would come up unstyled — which
+		reads like a broken install rather than a stale config.
+	</p>
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Leave <code class="font-mono text-brand">--style</code> off and it asks, listing the three and taking
+		a number or a name.
+	</p>
+	<CodeBlock code={code.cliUpdateAsk} label="terminal" />
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Restart the dev server afterwards so Tailwind rescans, and delete
+		<code class="font-mono text-brand">node_modules/.vite</code> if class names still look like the old
+		release.
+	</p>
+
+	<h3 class="pt-2 font-sans text-sm font-medium text-text">What an upgrade can change</h3>
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Looks ride along without asking: a release that tightens a style's control scale moves every
+		button in your app on the next build. Prop names, types and behaviour are the contract and only
+		move on a major. If your layout depends on a control being an exact height, pin the version and
+		read the release notes before moving.
+	</p>
 </section>

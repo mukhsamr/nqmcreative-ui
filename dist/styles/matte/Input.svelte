@@ -30,14 +30,14 @@
 	}: Props = $props();
 
 	const sizes: Record<InputSize, string> = {
-		sm: 'h-9 text-[13px]',
-		md: 'h-11 text-[15px]',
-		lg: 'h-12 text-base'
+		sm: 'h-8 text-[13px]',
+		md: 'h-10 text-[15px]',
+		lg: 'h-11 text-base'
 	};
 </script>
 
 <span
-	class="inline-flex w-full items-center gap-2 border bg-bg px-4 transition-colors duration-150 ease-brand-out
+	class="inline-flex w-full items-center gap-2 border bg-bg px-3.5 transition-colors duration-150 ease-brand-out
 		{sizes[size]}
 		{invalid
 		? 'border-danger focus-within:border-danger'

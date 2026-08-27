@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { focusRing, toneHoverText, toneRing, toneText, type Tone } from '../../core/tones.js';
+	import { iconSm } from './icon.js';
 
 	interface Props extends HTMLAnchorAttributes {
 		tone?: Tone;
@@ -11,6 +12,10 @@
 		external?: boolean;
 		/** Inherit the surrounding text colour instead of the tone. */
 		muted?: boolean;
+		/** Leading icon, 14px. */
+		icon?: Snippet;
+		/** Trailing icon, before the external mark. */
+		iconEnd?: Snippet;
 		children: Snippet;
 	}
 
@@ -19,6 +24,8 @@
 		underline = 'hover',
 		external = false,
 		muted = false,
+		icon,
+		iconEnd,
 		class: className = '',
 		children,
 		...rest
@@ -39,6 +46,8 @@
 		{underlines[underline]} {focusRing} {toneRing[tone]} {className}"
 	{...rest}
 >
+	{#if icon}<span class={iconSm}>{@render icon()}</span>{/if}
 	{@render children()}
+	{#if iconEnd}<span class={iconSm}>{@render iconEnd()}</span>{/if}
 	{#if external}<span aria-hidden="true" class="text-[0.85em]">↗</span>{/if}
 </a>

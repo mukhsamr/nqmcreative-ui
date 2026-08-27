@@ -6,7 +6,7 @@
  * `aria-sort`, and the same selection callbacks.
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { flushSync, mount, unmount } from 'svelte';
+import { createRawSnippet, flushSync, mount, unmount } from 'svelte';
 import { STYLES } from './styles.js';
 import type { TableSort } from '../core/table.js';
 
@@ -204,6 +204,79 @@ describe.each(STYLES)('%s Table', (_name, style) => {
 			boxes()[0].click();
 			flushSync();
 			expect(onselect).toHaveBeenLastCalledWith(['p2']);
+		});
+	});
+
+	describe('header, footer and bulk bar', () => {
+		const snippet = (label: string) =>
+			createRawSnippet(() => ({ render: () => `<span>${label}</span>` }));
+
+		/** The component's own root: [header?] [scroller] [footer?]. */
+		const shell = () => target.firstElementChild!;
+		const flat = (el: Element) => el.textContent?.replace(/\s+/g, ' ').trim() ?? '';
+		const tick = (i: number) =>
+			target.querySelectorAll<HTMLInputElement>('tbody input[type="checkbox"]')[i].click();
+
+		it('renders no bar unless a snippet is passed', () => {
+			render();
+			expect(shell().children).toHaveLength(1);
+			expect(shell().firstElementChild!.querySelector('table')).not.toBeNull();
+		});
+
+		it('puts the header above the table and the footer below it', () => {
+			render({ header: snippet('toolbar'), footer: snippet('pager') });
+			const [first, scroller, last] = [...shell().children];
+			expect(shell().children).toHaveLength(3);
+			expect(flat(first)).toBe('toolbar');
+			expect(scroller.querySelector('table')).not.toBeNull();
+			expect(flat(last)).toBe('pager');
+		});
+
+		it('keeps the table scrolling on its own so a header can stay put', () => {
+			render({ header: snippet('toolbar') });
+			const scroller = target.querySelector('table')!.parentElement!;
+			expect(scroller.className).toContain('overflow-auto');
+		});
+
+		it('leaves the header up while nothing is ticked', () => {
+			render({ selectable: true, header: snippet('toolbar'), bulkActions: snippet('bulk') });
+			expect(flat(shell().firstElementChild!)).toBe('toolbar');
+		});
+
+		it('swaps the header for the count and the bulk actions once a row is ticked', () => {
+			render({ selectable: true, header: snippet('toolbar'), bulkActions: snippet('bulk') });
+			tick(0);
+			flushSync();
+
+			const bar = flat(shell().firstElementChild!);
+			expect(bar).not.toContain('toolbar');
+			expect(bar).toContain('1 selected');
+			expect(bar).toContain('bulk');
+		});
+
+		it('empties the selection from the bulk bar', () => {
+			const onselect = vi.fn();
+			render({ selectable: true, bulkActions: snippet('bulk'), onselect });
+			tick(0);
+			tick(2);
+			flushSync();
+			expect(flat(shell().firstElementChild!)).toContain('2 selected');
+
+			const clear = [...shell().querySelectorAll('button')].find((b) =>
+				b.textContent?.includes('Clear')
+			)!;
+			clear.click();
+			flushSync();
+
+			expect(onselect).toHaveBeenLastCalledWith([]);
+			expect(shell().children).toHaveLength(1);
+		});
+
+		it('stays out of the way of a selectable table with no bulk actions', () => {
+			render({ selectable: true, header: snippet('toolbar') });
+			tick(0);
+			flushSync();
+			expect(flat(shell().firstElementChild!)).toBe('toolbar');
 		});
 	});
 

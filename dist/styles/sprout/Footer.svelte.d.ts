@@ -1,6 +1,8 @@
 export interface FooterLink {
     label: string;
     href?: string;
+    /** Leading icon, 14px. */
+    icon?: Snippet;
     external?: boolean;
 }
 export interface FooterColumn {

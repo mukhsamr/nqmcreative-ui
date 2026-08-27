@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { iconLg } from './icon.js';
 	import type { HTMLDialogAttributes } from 'svelte/elements';
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { isBackdropClick, syncDialog } from '../../core/dialog.svelte.js';
@@ -11,6 +12,8 @@
 		open?: boolean;
 		title?: string;
 		description?: string;
+		/** Leading icon beside the title. */
+		icon?: Snippet;
 		size?: ModalSize;
 		/** Clicking the backdrop or pressing Escape closes the dialog. */
 		dismissible?: boolean;
@@ -26,6 +29,7 @@
 		open = $bindable(false),
 		title,
 		description,
+		icon,
 		size = 'md',
 		dismissible = true,
 		showClose,
@@ -74,7 +78,8 @@
 >
 	<div class="flex flex-col">
 		{#if title || closable}
-			<div class="flex items-start gap-4 border-b border-hairline px-6 py-5">
+			<div class="flex items-start gap-4 border-b border-hairline px-5 py-4">
+				{#if icon}<span class={iconLg}>{@render icon()}</span>{/if}
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					{#if title}
 						<h2 class="font-heading text-lg font-medium tracking-tight">{title}</h2>
@@ -98,12 +103,12 @@
 			</div>
 		{/if}
 
-		<div class="px-6 py-5 font-sans text-[15px] leading-relaxed text-text-secondary">
+		<div class="px-5 py-4 font-sans text-[15px] leading-relaxed text-text-secondary">
 			{@render children()}
 		</div>
 
 		{#if footer}
-			<div class="flex items-center justify-end gap-3 border-t border-hairline px-6 py-4">
+			<div class="flex items-center justify-end gap-3 border-t border-hairline px-5 py-3.5">
 				{@render footer()}
 			</div>
 		{/if}

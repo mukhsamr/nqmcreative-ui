@@ -1,6 +1,8 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneText, type Tone } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 
 	export type StatTrend = 'up' | 'down' | 'flat';
 
@@ -11,6 +13,8 @@
 		delta?: string;
 		trend?: StatTrend;
 		hint?: string;
+		/** Leading icon on the label row. */
+		icon?: Snippet;
 		/** Colour of the value itself. Leave unset for plain `text`. */
 		tone?: Tone;
 	}
@@ -21,6 +25,7 @@
 		delta,
 		trend = 'flat',
 		hint,
+		icon,
 		tone,
 		class: className = '',
 		...rest
@@ -31,7 +36,9 @@
 </script>
 
 <div class="flex flex-col gap-1 font-sans {className}" {...rest}>
-	<span class="font-mono text-xs tracking-wide text-text-muted uppercase">{label}</span>
+	<span class="flex items-center gap-2 font-mono text-xs tracking-wide text-text-muted uppercase"
+		>{#if icon}<span class={iconMd}>{@render icon()}</span>{/if}{label}</span
+	>
 	<div class="flex items-baseline gap-2">
 		<span
 			class="font-heading text-3xl font-medium tracking-tight {tone ? toneText[tone] : 'text-text'}"

@@ -173,7 +173,7 @@
 		<ul class="flex flex-col border border-hairline">
 			{#each files as file, i (file.name + file.size + i)}
 				<li
-					class="flex items-center gap-3 border-b border-hairline px-4 py-3 font-sans last:border-b-0"
+					class="flex items-center gap-3 border-b border-hairline px-3.5 py-2.5 font-sans last:border-b-0"
 				>
 					<span class="min-w-0 flex-1 truncate text-sm text-text">{file.name}</span>
 					<span class="shrink-0 font-mono text-xs text-text-muted">{formatSize(file.size)}</span>

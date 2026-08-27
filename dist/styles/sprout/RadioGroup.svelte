@@ -3,11 +3,14 @@
 	import type { HTMLFieldsetAttributes } from 'svelte/elements';
 	import Radio from './Radio.svelte';
 	import { toneBorder, toneSurface, type Tone } from '../../core/tones.js';
+	import { iconLg } from './icon.js';
 	import { edge } from './lift.js';
 
 	export interface RadioOption {
 		value: string;
 		label: string;
+		/** Leading icon, 20px. Drawn in `boxed` mode only. */
+		icon?: Snippet;
 		description?: string;
 		disabled?: boolean;
 	}
@@ -63,6 +66,9 @@
 							: 'border-hairline bg-bg hover:border-hairline-strong'}
 							{option.disabled ? 'pointer-events-none opacity-50' : ''}"
 					>
+						{#if option.icon}
+							<span class={iconLg}>{@render option.icon()}</span>
+						{/if}
 						<Radio
 							bind:group={value}
 							value={option.value}

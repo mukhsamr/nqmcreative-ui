@@ -9,6 +9,7 @@
 		toneText,
 		type Tone
 	} from '../../core/tones.js';
+	import { iconSm } from './icon.js';
 
 	export type BadgeVariant = 'soft' | 'solid' | 'outline';
 	export type BadgeSize = 'sm' | 'md';
@@ -19,6 +20,8 @@
 		size?: BadgeSize;
 		/** Small filled circle before the label. */
 		dot?: boolean;
+		/** Leading icon, 14px — sits where the dot would. */
+		icon?: Snippet;
 		children: Snippet;
 	}
 
@@ -27,6 +30,7 @@
 		variant = 'soft',
 		size = 'md',
 		dot = false,
+		icon,
 		class: className = '',
 		children,
 		...rest
@@ -54,5 +58,6 @@
 			class="size-1.5 shrink-0 rounded-full {variant === 'solid' ? 'bg-current' : toneFill[tone]}"
 		></span>
 	{/if}
+	{#if icon}<span class={iconSm}>{@render icon()}</span>{/if}
 	{@render children()}
 </span>

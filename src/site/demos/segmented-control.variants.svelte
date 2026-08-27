@@ -1,0 +1,90 @@
+<script lang="ts">
+	import SegmentedControl from '$lib/styles/matte/SegmentedControl.svelte';
+
+	let labelled = $state('grid');
+	let bare = $state('grid');
+	let small = $state('day');
+	let wide = $state('all');
+</script>
+
+{#snippet grid()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<rect x="2" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.4" />
+		<rect x="9" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.4" />
+		<rect x="2" y="9" width="5" height="5" stroke="currentColor" stroke-width="1.4" />
+		<rect x="9" y="9" width="5" height="5" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet list()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" />
+	</svg>
+{/snippet}
+
+{#snippet board()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<rect x="2" y="2" width="4" height="12" stroke="currentColor" stroke-width="1.4" />
+		<rect x="8" y="2" width="4" height="7" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+<div class="flex w-full flex-col gap-6">
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">icon + label</p>
+		<SegmentedControl
+			bind:value={labelled}
+			label="View"
+			options={[
+				{ value: 'grid', label: 'Grid', icon: grid },
+				{ value: 'list', label: 'List', icon: list },
+				{ value: 'board', label: 'Board', icon: board }
+			]}
+		/>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">
+			icon only — each label becomes the accessible name
+		</p>
+		<SegmentedControl
+			iconOnly
+			tone="accent"
+			bind:value={bare}
+			label="View"
+			options={[
+				{ value: 'grid', label: 'Grid', icon: grid },
+				{ value: 'list', label: 'List', icon: list },
+				{ value: 'board', label: 'Board', icon: board }
+			]}
+		/>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">size</p>
+		<SegmentedControl
+			size="sm"
+			bind:value={small}
+			label="Range"
+			options={[
+				{ value: 'day', label: 'Day' },
+				{ value: 'week', label: 'Week' },
+				{ value: 'month', label: 'Month' }
+			]}
+		/>
+	</div>
+
+	<div class="flex flex-col gap-2">
+		<p class="font-mono text-[10px] tracking-wide text-text-muted uppercase">full width</p>
+		<SegmentedControl
+			fullWidth
+			bind:value={wide}
+			label="Filter"
+			options={[
+				{ value: 'all', label: 'All', icon: list },
+				{ value: 'mine', label: 'Mine', icon: grid },
+				{ value: 'draft', label: 'Draft', icon: board, disabled: true }
+			]}
+		/>
+	</div>
+</div>

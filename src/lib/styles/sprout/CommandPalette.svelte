@@ -1,7 +1,11 @@
 <script module lang="ts">
+	import type { Snippet } from 'svelte';
+
 	export interface CommandItem {
 		id: string;
 		label: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		/** Second line under the label. */
 		description?: string;
 		/** Items sharing a group are rendered under one heading. */
@@ -22,6 +26,7 @@
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneSoft, type Tone } from '../../core/tones.js';
 	import { isTypingTarget } from '../../core/trigger.js';
+	import { iconMd } from './icon.js';
 	import Kbd from './Kbd.svelte';
 	import { float } from './lift.js';
 
@@ -215,6 +220,7 @@
 								{item.disabled ? 'pointer-events-none opacity-40' : ''}
 								{index === active ? toneSoft[tone] : 'text-text-secondary'}"
 						>
+							{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
 							<span class="flex min-w-0 flex-1 flex-col gap-0.5">
 								<span class="truncate">{item.label}</span>
 								{#if item.description}

@@ -3,16 +3,19 @@
  * @nqmcreative/ui CLI
  *
  *   nqm-ui init            wire the design system into this project
+ *   nqm-ui update          rewrite that wiring after upgrading the package
  *   nqm-ui add <name...>   print (or insert) the import for a component
  *   nqm-ui list [category] every component and its subpath
  *   nqm-ui info <name>     what one component pulls in
  *
  * Node built-ins only, so `bunx @nqmcreative/ui init` needs nothing installed.
- * Every write is idempotent: running init twice changes nothing the second
- * time.
+ * Every write is idempotent: the lines this CLI owns are rewritten from
+ * scratch on every run, so running it twice changes nothing the second time —
+ * and running it after an upgrade picks up whatever those lines became.
  */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { createInterface } from 'node:readline/promises';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -76,27 +79,56 @@ function findComponent(list, query) {
  * The style to work in. There is no default on purpose: a component belongs to
  * a style, and picking one by accident is the mistake this package exists to
  * prevent. Asking once beats shipping the wrong look.
+ *
+ * `--style` answers it up front. Without it a terminal gets a numbered prompt;
+ * a pipe or a CI job gets the list and a non-zero exit, because there is
+ * nobody there to answer.
  */
-function pickStyle(styles) {
+async function pickStyle(styles) {
 	const index = argv.indexOf('--style');
 	const wanted = index !== -1 ? argv[index + 1] : null;
 
-	if (!wanted) {
-		log();
-		log('  which style?');
-		log();
-		for (const style of styles) {
-			log(`    ${c.cyan(style.name.padEnd(8))} ${c.dim(style.description)}`);
-		}
-		log();
-		log(`  ${c.dim(`e.g. ${command} --style ${styles[0].name}`)}`);
+	if (wanted) {
+		const named = styles.find((s) => s.name === wanted);
+		if (!named) fail(`unknown style "${wanted}" — try ${styles.map((s) => s.name).join(' or ')}`);
+		return named;
+	}
+
+	log();
+	log('  which style?');
+	log();
+	styles.forEach((style, i) => {
+		log(`    ${c.cyan(`${i + 1})`)} ${c.bold(style.name.padEnd(8))} ${c.dim(style.description)}`);
+	});
+	log();
+
+	if (!process.stdin.isTTY) {
+		log(`  ${c.dim(`not a terminal — pass it: ${command} --style ${styles[0].name}`)}`);
 		log();
 		process.exit(1);
 	}
 
-	const style = styles.find((s) => s.name === wanted);
-	if (!style) fail(`unknown style "${wanted}" — try ${styles.map((s) => s.name).join(' or ')}`);
-	return style;
+	const rl = createInterface({ input: process.stdin, output: process.stdout });
+	try {
+		for (let attempt = 0; attempt < 3; attempt++) {
+			const answer = (await rl.question(`  1-${styles.length}, or a name [1]: `)).trim();
+			if (!answer) return styles[0];
+
+			const number = Number(answer);
+			if (Number.isInteger(number) && number >= 1 && number <= styles.length) {
+				return styles[number - 1];
+			}
+
+			const named = styles.find((s) => s.name === answer.toLowerCase());
+			if (named) return named;
+
+			warn(`no style called "${answer}"`);
+		}
+	} finally {
+		rl.close();
+	}
+
+	fail(`try ${command} --style ${styles[0].name}`);
 }
 
 /* ------------------------------------------------------------ file edits -- */
@@ -151,7 +183,7 @@ function sourcePath(cssRel) {
 
 async function init() {
 	const { styles } = await registry();
-	const style = pickStyle(styles);
+	const style = await pickStyle(styles);
 	const project = await detectProject();
 
 	log();
@@ -185,28 +217,31 @@ async function init() {
 
 	const css = await readOr(project.css);
 
-	// Matched against *this* style's theme, not any of them. A file left over
-	// from an older layout — or wired to a different style — has to be reported,
-	// not skipped as already done.
-	if (css.includes(`@nqmcreative/ui/${style.name}/theme.css`)) {
-		skip(`${project.cssRel} already imports the theme`);
+	// The block above belongs to this package, so it is rewritten on every run
+	// rather than left alone once it is there. That is what makes an upgrade
+	// land: when a release changes which files a style imports, or where
+	// `@source` has to point, the old lines would otherwise sit here and the
+	// new components would come up unstyled.
+	//
+	// Only those lines. Everything below is the project's own CSS and is
+	// carried over untouched — including an `@import` of another package, which
+	// is why the match is anchored to this one.
+	const stale =
+		/^@import ['"]@nqmcreative\/ui\/[^'"]+\.css['"];$|^@source ['"][^'"]*@nqmcreative\/ui[^'"]*['"];$/;
+
+	const kept = css
+		.split('\n')
+		.filter((line) => !stale.test(line.trim()))
+		.join('\n')
+		.replace(/@import ['"]tailwindcss['"];\n?/, '')
+		.replace(/\/\* Tailwind v4 skips node_modules[\s\S]*?\*\/\n?/, '')
+		.replace(/\n{3,}/g, '\n\n')
+		.trim();
+
+	const body = kept ? `${lines.join('\n')}\n\n${kept}\n` : `${lines.join('\n')}\n`;
+	if (body === css) {
+		skip(`${project.cssRel} already up to date`);
 	} else {
-		// Drop whatever this package left here before — an older layout's
-		// `@nqmcreative/ui/theme.css`, another style's, and the `@source` that
-		// went with them. Keeping those would either fight the new tokens or fail
-		// to resolve, so a rewrite is cleaner than an append.
-		const stale =
-			/^@import ['"]@nqmcreative\/ui\/[^'"]+\.css['"];$|^@source ['"][^'"]*@nqmcreative\/ui[^'"]*['"];$/;
-
-		const kept = css
-			.split('\n')
-			.filter((line) => !stale.test(line.trim()))
-			.join('\n')
-			.replace(/@import ['"]tailwindcss['"];\n?/, '')
-			.replace(/\n{3,}/g, '\n\n')
-			.trim();
-
-		const body = kept ? `${lines.join('\n')}\n\n${kept}\n` : `${lines.join('\n')}\n`;
 		await write(project.css, body, project.cssRel);
 	}
 
@@ -321,7 +356,7 @@ async function init() {
 
 async function add() {
 	const { components, styles } = await registry();
-	const style = pickStyle(styles);
+	const style = await pickStyle(styles);
 	const names = args.slice(1);
 	if (names.length === 0) fail('which component? e.g. `nqm-ui add button dialog`');
 
@@ -435,22 +470,26 @@ function help() {
 	log(`
   ${c.bold('@nqmcreative/ui')}
 
-    ${c.cyan('init --style <s>')}      wire one style into this project
+    ${c.cyan('init')}                  wire one style into this project
+    ${c.cyan('update')}                rewrite that wiring after upgrading the package
     ${c.cyan('add <name...>')}         print the import for a component
-      ${c.dim('--style <s>')}         which style to import from (required)
       ${c.dim('--to <file>')}         …and insert it into that file instead
     ${c.cyan('list [category]')}       every component in the catalogue
     ${c.cyan('info <name>')}           what one component pulls in, in every style
 
+    ${c.dim('--style <s>')}           skip the picker: matte, paper or sprout
     ${c.dim('--dry-run')}             show the writes without making them
 
-  ${c.dim('Every style implements every component. Run init once per project.')}
+  ${c.dim('Every style implements every component. Run init once per project,')}
+  ${c.dim('then update after each upgrade — it overwrites the lines it owns.')}
 `);
 }
 
 /* ------------------------------------------------------------------ main -- */
 
-const commands = { init, add, list, info };
+// `update` is `init` under the name people reach for after an upgrade: both
+// rewrite the lines this CLI owns and leave the rest of the file alone.
+const commands = { init, update: init, add, list, info };
 if (!command || flags.has('--help') || command === 'help') {
 	help();
 } else if (commands[command]) {

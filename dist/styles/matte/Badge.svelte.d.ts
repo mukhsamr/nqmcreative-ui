@@ -9,6 +9,8 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
     size?: BadgeSize;
     /** Small filled circle before the label. */
     dot?: boolean;
+    /** Leading icon, 14px — sits where the dot would. */
+    icon?: Snippet;
     children: Snippet;
 }
 declare const Badge: import("svelte").Component<Props, {}, "">;

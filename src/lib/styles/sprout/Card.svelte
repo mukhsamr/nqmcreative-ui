@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneBorderLeft, toneHoverBorder, toneSurface, type Tone } from '../../core/tones.js';
+	import { iconLg } from './icon.js';
 	import { soft, softOnHover } from './lift.js';
 
 	export type CardVariant = 'outline' | 'filled' | 'tinted';
@@ -16,6 +17,8 @@
 		padded?: boolean;
 		title?: string;
 		eyebrow?: string;
+		/** Leading icon above the title. Ignored when you pass `header`. */
+		icon?: Snippet;
 		header?: Snippet;
 		footer?: Snippet;
 		children: Snippet;
@@ -29,6 +32,7 @@
 		padded = true,
 		title,
 		eyebrow,
+		icon,
 		header,
 		footer,
 		class: className = '',
@@ -55,11 +59,12 @@
 		{className}"
 	{...rest}
 >
-	{#if header || title || eyebrow}
+	{#if header || title || eyebrow || icon}
 		<div class="flex flex-col gap-1 {padded ? 'px-6 pt-6' : ''}">
 			{#if header}
 				{@render header()}
 			{:else}
+				{#if icon}<span class={iconLg}>{@render icon()}</span>{/if}
 				{#if eyebrow}
 					<span class="font-sans text-xs font-semibold text-text-muted">{eyebrow}</span>
 				{/if}

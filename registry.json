@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"homepage": "https://github.com/mukhsamr/nqmcreative-ui",
-	"count": 65,
+	"count": 63,
 	"demoStyle": "matte",
 	"styles": [
 		{
@@ -189,40 +189,6 @@
 			},
 			"uses": [],
 			"modules": []
-		},
-		{
-			"name": "PasswordInput",
-			"slug": "password-input",
-			"category": "forms",
-			"description": "Password field with a visibility toggle and a strength meter.",
-			"subpaths": {
-				"matte": "@nqmcreative/ui/matte/password-input",
-				"paper": "@nqmcreative/ui/paper/password-input",
-				"sprout": "@nqmcreative/ui/sprout/password-input"
-			},
-			"uses": [],
-			"modules": [
-				"locale",
-				"password",
-				"tones"
-			]
-		},
-		{
-			"name": "NumberInput",
-			"slug": "number-input",
-			"category": "forms",
-			"description": "Number field with steppers, clamping and decimal handling.",
-			"subpaths": {
-				"matte": "@nqmcreative/ui/matte/number-input",
-				"paper": "@nqmcreative/ui/paper/number-input",
-				"sprout": "@nqmcreative/ui/sprout/number-input"
-			},
-			"uses": [],
-			"modules": [
-				"locale",
-				"number",
-				"tones"
-			]
 		},
 		{
 			"name": "Slider",

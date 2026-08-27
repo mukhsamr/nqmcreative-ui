@@ -8,6 +8,7 @@
  *   const id = toast.loading('Rendering…');
  *   toast.dismiss(id);
  */
+import type { Snippet } from 'svelte';
 import type { Tone } from './tones.js';
 export interface ToastAction {
     label: string;
@@ -19,6 +20,8 @@ export interface ToastOptions {
     /** Milliseconds on screen. `0` keeps it until dismissed. Default 5000. */
     duration?: number;
     action?: ToastAction;
+    /** Replaces the tone's own glyph. */
+    icon?: Snippet;
     /** Swaps the glyph for a spinner and defaults `duration` to 0. */
     loading?: boolean;
 }

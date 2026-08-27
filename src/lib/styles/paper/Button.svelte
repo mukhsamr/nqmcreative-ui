@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import Spinner from './Spinner.svelte';
+	import { iconMd, iconSm } from './icon.js';
 	import {
 		focusRing,
 		toneBorderSoft,
@@ -17,7 +18,7 @@
 	export type ButtonVariant = 'solid' | 'soft' | 'outline' | 'ghost' | 'link' | 'primary';
 	export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
-	interface Props extends HTMLButtonAttributes {
+	interface Props extends Omit<HTMLButtonAttributes, 'onclick'> {
 		variant?: ButtonVariant;
 		tone?: Tone;
 		size?: ButtonSize;
@@ -28,7 +29,19 @@
 		loading?: boolean;
 		/** Stretch to the container's full width. */
 		block?: boolean;
-		children: Snippet;
+		/** Leading icon. The spinner takes its place while the button is busy. */
+		icon?: Snippet;
+		/** Trailing icon. */
+		iconEnd?: Snippet;
+		/** Square button with no label — pass an `aria-label`. */
+		iconOnly?: boolean;
+		/**
+		 * Return a promise — a save, a submit, a fetch — and the button spins and
+		 * locks itself until it settles, without any state in the parent. It
+		 * unlocks on a rejection too, so catch failures inside the handler.
+		 */
+		onclick?: (event: MouseEvent) => unknown;
+		children?: Snippet;
 	}
 
 	let {
@@ -38,6 +51,10 @@
 		href,
 		loading = false,
 		block = false,
+		icon,
+		iconEnd,
+		iconOnly = false,
+		onclick,
 		disabled = false,
 		type = 'button',
 		class: className = '',
@@ -53,6 +70,13 @@
 		md: 'h-10 px-4 text-sm',
 		lg: 'h-11 px-5 text-[15px]',
 		xl: 'h-12 px-6 text-base'
+	};
+
+	const squares: Record<ButtonSize, string> = {
+		sm: 'size-8',
+		md: 'size-10',
+		lg: 'size-11',
+		xl: 'size-12'
 	};
 
 	const variantClass = $derived.by(() => {
@@ -74,7 +98,24 @@
 	});
 
 	const isLink = $derived(variant === 'link');
-	const inert = $derived(disabled || loading);
+
+	/** Set by an `onclick` that returned a promise, on top of the `loading` prop. */
+	let pending = $state(false);
+	const busy = $derived(loading || pending);
+	const inert = $derived(disabled || busy);
+
+	const iconClass = $derived(size === 'sm' ? iconSm : iconMd);
+
+	async function handleClick(event: MouseEvent) {
+		const result = onclick?.(event);
+		// Anything else is a plain handler: nothing to wait for, nothing to lock.
+		if (!(result instanceof Promise)) return;
+		pending = true;
+		// The handler owns its own errors — catch them there to show a message.
+		// All the button needs to know is that the work has settled.
+		await result.catch(() => {});
+		pending = false;
+	}
 </script>
 
 <svelte:element
@@ -83,14 +124,24 @@
 	type={href ? undefined : type}
 	disabled={href ? undefined : inert}
 	aria-disabled={href && inert ? 'true' : undefined}
-	aria-busy={loading ? 'true' : undefined}
+	aria-busy={busy ? 'true' : undefined}
 	role={href ? 'button' : undefined}
-	class="{base} {focusRing} {toneRing[tone]} {variantClass} {isLink ? '' : sizes[size]}
+	class="{base} {focusRing} {toneRing[tone]} {variantClass} {isLink
+		? ''
+		: iconOnly
+			? squares[size]
+			: sizes[size]}
 		{block ? 'w-full' : ''} {className}"
 	{...rest}
+	onclick={handleClick}
 >
-	{#if loading}
+	{#if busy}
 		<Spinner size={size === 'sm' ? 'xs' : 'sm'} label="" />
+	{:else if icon}
+		<span class={iconClass} aria-hidden="true">{@render icon()}</span>
 	{/if}
-	{@render children()}
+	{@render children?.()}
+	{#if iconEnd && !iconOnly}
+		<span class={iconClass} aria-hidden="true">{@render iconEnd()}</span>
+	{/if}
 </svelte:element>

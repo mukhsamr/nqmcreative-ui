@@ -1,3 +1,4 @@
+import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import { type Tone } from '../../core/tones.js';
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -10,6 +11,8 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
     tone?: Tone;
     /** Rounded square instead of the default circle. */
     squared?: boolean;
+    /** Drawn instead of the initials when there is no `src` — a user mark. */
+    fallback?: Snippet;
 }
 declare const Avatar: import("svelte").Component<Props, {}, "">;
 type Avatar = ReturnType<typeof Avatar>;

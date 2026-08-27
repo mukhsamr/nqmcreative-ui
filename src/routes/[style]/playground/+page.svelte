@@ -25,7 +25,8 @@
 	let kickoff = $state('2026-09-14');
 	let skills = $state<string[]>(['brand', 'motion']);
 	let password = $state('nqm');
-	let quantity = $state(3);
+	let quantity = $state('3');
+	let revealed = $state(false);
 	let opacity = $state(65);
 	let delivery = $state('standard');
 	let city = $state('');
@@ -542,12 +543,27 @@
 				<h2 class="font-heading text-lg font-medium">Advanced form controls</h2>
 
 				<div class="grid gap-6 sm:grid-cols-2">
-					<ui.Field label="Password" hint="Meter is length plus character variety." for="pw">
-						<ui.PasswordInput id="pw" bind:value={password} strength placeholder="••••••••" />
+					<ui.Field label="Password" hint="Toggled by the suffix button." for="pw">
+						<ui.Input
+							id="pw"
+							type={revealed ? 'text' : 'password'}
+							bind:value={password}
+							placeholder="••••••••"
+						>
+							{#snippet suffix()}
+								<button
+									type="button"
+									onclick={() => (revealed = !revealed)}
+									class="font-mono text-[11px] uppercase"
+								>
+									{revealed ? 'Hide' : 'Show'}
+								</button>
+							{/snippet}
+						</ui.Input>
 					</ui.Field>
 
 					<ui.Field label="Quantity" for="qty">
-						<ui.NumberInput id="qty" bind:value={quantity} min={1} max={20} unit="pcs" />
+						<ui.Input id="qty" type="number" bind:value={quantity} min={1} max={20} />
 					</ui.Field>
 
 					<ui.Field label="City" hint="Type to filter, arrows to move." for="city">

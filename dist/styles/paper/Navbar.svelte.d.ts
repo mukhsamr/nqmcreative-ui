@@ -1,6 +1,8 @@
 export interface NavItem {
     label: string;
     href?: string;
+    /** Leading icon, 16px. */
+    icon?: Snippet;
     /** Marks the current page — also sets `aria-current`. */
     active?: boolean;
     disabled?: boolean;

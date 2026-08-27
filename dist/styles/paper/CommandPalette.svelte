@@ -1,7 +1,11 @@
 <script module lang="ts">
+	import type { Snippet } from 'svelte';
+
 	export interface CommandItem {
 		id: string;
 		label: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		/** Second line under the label. */
 		description?: string;
 		/** Items sharing a group are rendered under one heading. */
@@ -21,6 +25,8 @@
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneSoft, type Tone } from '../../core/tones.js';
+	import { isTypingTarget } from '../../core/trigger.js';
+	import { iconMd } from './icon.js';
 	import Kbd from './Kbd.svelte';
 
 	interface Props {
@@ -34,6 +40,11 @@
 		 * Pass `null` to wire your own trigger only.
 		 */
 		hotkey?: string | null;
+		/**
+		 * Key that opens the palette on its own, pressed anywhere the reader
+		 * isn't typing. Default `'/'`. Pass `null` to turn it off.
+		 */
+		quickKey?: string | null;
 		onselect?: (item: CommandItem) => void;
 		class?: string;
 	}
@@ -45,6 +56,7 @@
 		emptyText,
 		tone = 'brand',
 		hotkey = 'k',
+		quickKey = '/',
 		onselect,
 		class: className = ''
 	}: Props = $props();
@@ -82,11 +94,27 @@
 	});
 
 	$effect(() => {
-		if (!hotkey) return;
+		if (!hotkey && !quickKey) return;
 		const onKeydown = (event: KeyboardEvent) => {
-			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === hotkey.toLowerCase()) {
+			const key = event.key.toLowerCase();
+
+			if ((event.metaKey || event.ctrlKey) && key === hotkey?.toLowerCase()) {
 				event.preventDefault();
 				open = !open;
+				return;
+			}
+
+			// A bare key can only open the palette, never close it: while it is
+			// open the keystroke belongs to the query field.
+			if (
+				key === quickKey?.toLowerCase() &&
+				!event.metaKey &&
+				!event.ctrlKey &&
+				!event.altKey &&
+				!isTypingTarget(event.target)
+			) {
+				event.preventDefault();
+				open = true;
 			}
 		};
 		window.addEventListener('keydown', onKeydown);
@@ -191,6 +219,7 @@
 								{item.disabled ? 'pointer-events-none opacity-40' : ''}
 								{index === active ? toneSoft[tone] : 'text-text-secondary'}"
 						>
+							{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
 							<span class="flex min-w-0 flex-1 flex-col gap-0.5">
 								<span class="truncate">{item.label}</span>
 								{#if item.description}

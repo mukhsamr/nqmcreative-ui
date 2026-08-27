@@ -10,6 +10,8 @@ interface Props extends HTMLDialogAttributes {
     size?: DrawerSize;
     title?: string;
     description?: string;
+    /** Leading icon beside the title. */
+    icon?: Snippet;
     dismissible?: boolean;
     footer?: Snippet;
     onclose?: () => void;

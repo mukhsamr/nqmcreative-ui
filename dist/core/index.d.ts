@@ -15,7 +15,7 @@ export type { Placement, AnchorOptions } from './actions/anchor.js';
 export { clickOutside, focusTrap, focusable, navigateList, portal } from './actions/dismissable.js';
 export type { ClickOutsideOptions, FocusTrapOptions } from './actions/dismissable.js';
 export { syncDialog, isBackdropClick } from './dialog.svelte.js';
-export { popupTrigger, describeTrigger, menuItems, HOVER_GRACE } from './trigger.js';
+export { popupTrigger, describeTrigger, menuItems, isTypingTarget, HOVER_GRACE } from './trigger.js';
 export type { PopupTriggerOptions } from './trigger.js';
 export { ListCursor, groupItems, matchQuery, revealIndex } from './list.svelte.js';
 export type { ListItem } from './list.svelte.js';

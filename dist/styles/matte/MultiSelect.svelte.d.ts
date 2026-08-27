@@ -1,6 +1,9 @@
+import type { Snippet } from 'svelte';
 export interface MultiSelectOption {
     value: string;
     label: string;
+    /** Leading icon, 16px. */
+    icon?: Snippet;
     description?: string;
     disabled?: boolean;
     group?: string;

@@ -1,6 +1,9 @@
+import type { Snippet } from 'svelte';
 export interface StepItem {
     label: string;
     description?: string;
+    /** Replaces the step number. A finished step still shows its check. */
+    icon?: Snippet;
     /** Marks the step as failed — shown in `danger` regardless of position. */
     error?: boolean;
     disabled?: boolean;

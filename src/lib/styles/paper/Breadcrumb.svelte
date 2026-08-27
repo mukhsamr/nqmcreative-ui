@@ -1,11 +1,15 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneHoverText, type Tone } from '../../core/tones.js';
 	import { useLocale } from '../../core/locale.svelte.js';
+	import { iconMd } from './icon.js';
 
 	export interface BreadcrumbItem {
 		label: string;
 		href?: string;
+		/** Leading icon — a home mark on the first crumb, say. */
+		icon?: Snippet;
 	}
 
 	interface Props extends HTMLAttributes<HTMLElement> {
@@ -29,18 +33,18 @@
 				{#if item.href && i < items.length - 1}
 					<a
 						href={item.href}
-						class="rounded px-1 py-0.5 text-text-muted transition-colors duration-150 ease-brand-out hover:bg-bg-inset {toneHoverText[
+						class="inline-flex items-center gap-1.5 rounded px-1 py-0.5 text-text-muted transition-colors duration-150 ease-brand-out hover:bg-bg-inset {toneHoverText[
 							tone
 						]}"
 					>
-						{item.label}
+						{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}{item.label}
 					</a>
 				{:else}
 					<span
-						class="px-1 py-0.5 font-medium text-text"
+						class="inline-flex items-center gap-1.5 px-1 py-0.5 font-medium text-text"
 						aria-current={i === items.length - 1 ? 'page' : undefined}
 					>
-						{item.label}
+						{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}{item.label}
 					</span>
 				{/if}
 			</li>

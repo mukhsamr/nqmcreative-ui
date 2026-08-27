@@ -1,3 +1,4 @@
+import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import { type Tone } from '../../core/tones.js';
 export type StatTrend = 'up' | 'down' | 'flat';
@@ -8,6 +9,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     delta?: string;
     trend?: StatTrend;
     hint?: string;
+    /** Leading icon on the label row. */
+    icon?: Snippet;
     /** Colour of the value itself. Leave unset for plain `text`. */
     tone?: Tone;
 }

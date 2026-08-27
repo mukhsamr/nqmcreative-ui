@@ -12,6 +12,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     padded?: boolean;
     title?: string;
     eyebrow?: string;
+    /** Leading icon above the title. Ignored when you pass `header`. */
+    icon?: Snippet;
     header?: Snippet;
     footer?: Snippet;
     children: Snippet;

@@ -6,6 +6,8 @@ interface Props extends HTMLDialogAttributes {
     open?: boolean;
     title?: string;
     description?: string;
+    /** Leading icon beside the title. */
+    icon?: Snippet;
     size?: ModalSize;
     /** Clicking the backdrop or pressing Escape closes the dialog. */
     dismissible?: boolean;

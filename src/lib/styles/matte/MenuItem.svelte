@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { toneSoftHover, toneText, type Tone } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 
 	interface Props extends HTMLButtonAttributes {
 		/** Renders an `<a>` instead of a `<button>`. */
@@ -49,7 +50,7 @@
 			<path d="m2 7 3.2 3.2L12 3.6" stroke="currentColor" stroke-width="1.6" />
 		</svg>
 	{:else if icon}
-		<span class="flex size-3.5 shrink-0 items-center justify-center">{@render icon()}</span>
+		<span class={iconMd}>{@render icon()}</span>
 	{/if}
 	<span class="min-w-0 flex-1 truncate">{@render children()}</span>
 	{#if shortcut}

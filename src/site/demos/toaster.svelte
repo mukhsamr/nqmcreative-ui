@@ -3,13 +3,27 @@
 	import { toast } from '$lib/core/toast.svelte.js';
 </script>
 
+{#snippet rocket()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path
+			d="M8 1.5c2.5 1.5 3.5 4 3.5 6L8 11 4.5 7.5c0-2 1-4.5 3.5-6Z"
+			stroke="currentColor"
+			stroke-width="1.4"
+		/>
+		<path d="M6 11.5 4.5 14M10 11.5 11.5 14" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
 <div class="flex flex-wrap gap-3">
 	<Button size="sm" onclick={() => toast.success('Saved')}>Success</Button>
 	<Button size="sm" variant="soft" tone="danger" onclick={() => toast.error('Upload failed')}
 		>Error</Button
 	>
-	<Button size="sm" variant="soft" tone="info" onclick={() => toast.info('Rendering started')}
-		>Info</Button
+	<Button
+		size="sm"
+		variant="soft"
+		tone="info"
+		onclick={() => toast.info('Rendering started', { icon: rocket })}>Custom icon</Button
 	>
 </div>
 <p class="mt-3 font-sans text-sm text-text-muted">

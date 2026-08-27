@@ -2,6 +2,8 @@
 	export interface NavItem {
 		label: string;
 		href?: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		/** Marks the current page — also sets `aria-current`. */
 		active?: boolean;
 		disabled?: boolean;
@@ -15,6 +17,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { useLocale } from '../../core/locale.svelte.js';
+	import { iconMd } from './icon.js';
 	import { focusRing, toneRing, toneSoft, toneText, type Tone } from '../../core/tones.js';
 	import Drawer from './Drawer.svelte';
 	import Dropdown from './Dropdown.svelte';
@@ -84,6 +87,7 @@
 										? `${toneSoft[tone]}`
 										: 'text-text-secondary hover:bg-bg-inset hover:text-text'}"
 								>
+									{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
 									{item.label}
 									<svg class="size-3" viewBox="0 0 16 16" fill="none" aria-hidden="true">
 										<path
@@ -96,7 +100,12 @@
 								</button>
 							{/snippet}
 							{#each item.items as child (child.label)}
-								<MenuItem href={child.href} disabled={child.disabled} selected={child.active}>
+								<MenuItem
+									href={child.href}
+									disabled={child.disabled}
+									selected={child.active}
+									icon={child.icon}
+								>
 									{child.label}
 								</MenuItem>
 							{/each}
@@ -111,6 +120,7 @@
 								? 'pointer-events-none opacity-50'
 								: ''}"
 						>
+							{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
 							{item.label}
 							{#if item.badge !== undefined}
 								<span class="text-[11px] text-text-muted tabular-nums">{item.badge}</span>
@@ -163,7 +173,10 @@
 						? 'pointer-events-none opacity-50'
 						: ''}"
 				>
-					{item.label}
+					<span class="flex min-w-0 items-center gap-2.5">
+						{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
+						{item.label}
+					</span>
 					{#if item.badge !== undefined}
 						<span class="text-[11px] text-text-muted tabular-nums">{item.badge}</span>
 					{/if}
@@ -175,11 +188,12 @@
 								<a
 									href={child.href}
 									onclick={() => (menuOpen = false)}
-									class="block rounded-xl px-3 py-2 font-sans text-[13px] text-text-muted hover:bg-bg-inset {toneText[
+									class="flex items-center gap-2.5 rounded-xl px-3 py-2 font-sans text-[13px] text-text-muted hover:bg-bg-inset {toneText[
 										tone
 									]}"
 								>
-									{child.label}
+									{#if child.icon}<span class={iconMd}>{@render child.icon()}</span
+										>{/if}{child.label}
 								</a>
 							</li>
 						{/each}

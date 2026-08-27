@@ -1,7 +1,7 @@
 # @nqmcreative/ui
 
 Svelte 5 (runes) + Tailwind CSS v4 component library. One package, **three
-styles**, 65 components each — the same props, the same behaviour, a different
+styles**, 63 components each — the same props, the same behaviour, a different
 look. Eight tones, light and dark, no runtime dependencies.
 
 | style    | import                   | character                                                                                                                      |
@@ -131,9 +131,9 @@ Under SSR use `<LocaleProvider>` instead, so the locale is scoped to a request.
 
 ```
 src/lib/core/            behaviour, a11y, types — no markup, no classes
-src/lib/styles/matte/    65 components
-src/lib/styles/paper/    65 components
-src/lib/styles/sprout/   65 components
+src/lib/styles/matte/    63 components
+src/lib/styles/paper/    63 components
+src/lib/styles/sprout/   63 components
 scripts/catalogue.mjs    the list every style must implement
 ```
 
@@ -150,17 +150,17 @@ same.
 
 ## Components
 
-| group        | components                                                                                                                                                                                                                                                 |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Actions      | `Button`, `Link`                                                                                                                                                                                                                                           |
-| Forms        | `Input`, `Textarea`, `Select`, `Combobox`, `MultiSelect`, `DatePicker`, `Calendar`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `SegmentedControl`, `Switch`, `Slider`, `NumberInput`, `PasswordInput`, `InputGroup`, `Dropzone`, `Field`, `Label` |
-| Data display | `Badge`, `Avatar`, `AvatarGroup`, `Card`, `Stat`, `Table`, `Kbd`                                                                                                                                                                                           |
-| Feedback     | `Alert`, `Toaster` + `toast`, `Progress`, `Spinner`, `Skeleton`, `EmptyState`                                                                                                                                                                              |
-| Layout & nav | `Divider`, `Tabs`, `Accordion`, `AccordionItem`, `Breadcrumb`, `Pagination`, `Steps`                                                                                                                                                                       |
-| App shell    | `Navbar`, `Sidebar`, `Footer`                                                                                                                                                                                                                              |
-| Overlay      | `Modal`, `ConfirmDialog`, `Drawer`, `Dropdown` + `MenuItem` + `MenuSeparator`, `ContextMenu`, `CommandPalette`, `Popover`, `Tooltip`                                                                                                                       |
-| Marketing    | `HeroSection`, `FeatureGrid`, `FeatureCard`, `PricingCard`, `Testimonial`, `LogoCloud`, `CTASection`, `StatsBand`                                                                                                                                          |
-| System       | `ThemeToggle`, `LocaleProvider`                                                                                                                                                                                                                            |
+| group        | components                                                                                                                                                                                                                 |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Actions      | `Button`, `Link`                                                                                                                                                                                                           |
+| Forms        | `Input`, `Textarea`, `Select`, `Combobox`, `MultiSelect`, `DatePicker`, `Calendar`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `SegmentedControl`, `Switch`, `Slider`, `InputGroup`, `Dropzone`, `Field`, `Label` |
+| Data display | `Badge`, `Avatar`, `AvatarGroup`, `Card`, `Stat`, `Table`, `Kbd`                                                                                                                                                           |
+| Feedback     | `Alert`, `Toaster` + `toast`, `Progress`, `Spinner`, `Skeleton`, `EmptyState`                                                                                                                                              |
+| Layout & nav | `Divider`, `Tabs`, `Accordion`, `AccordionItem`, `Breadcrumb`, `Pagination`, `Steps`                                                                                                                                       |
+| App shell    | `Navbar`, `Sidebar`, `Footer`                                                                                                                                                                                              |
+| Overlay      | `Modal`, `ConfirmDialog`, `Drawer`, `Dropdown` + `MenuItem` + `MenuSeparator`, `ContextMenu`, `CommandPalette`, `Popover`, `Tooltip`                                                                                       |
+| Marketing    | `HeroSection`, `FeatureGrid`, `FeatureCard`, `PricingCard`, `Testimonial`, `LogoCloud`, `CTASection`, `StatsBand`                                                                                                          |
+| System       | `ThemeToggle`, `LocaleProvider`                                                                                                                                                                                            |
 
 Overlays are built on the native top layer and three in-house actions
 (`portal`, `focusTrap`, `anchored`) rather than a positioning dependency.

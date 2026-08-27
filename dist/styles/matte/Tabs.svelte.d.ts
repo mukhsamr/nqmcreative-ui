@@ -1,8 +1,11 @@
+import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import { type Tone } from '../../core/tones.js';
 export interface TabItem {
     value: string;
     label: string;
+    /** Leading icon, 16px. */
+    icon?: Snippet;
     disabled?: boolean;
     /** Small count/label rendered after the tab title. */
     badge?: string | number;

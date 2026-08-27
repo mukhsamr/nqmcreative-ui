@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { iconLg } from './icon.js';
 	import type { HTMLDialogAttributes } from 'svelte/elements';
 	import { useLocale } from '../../core/locale.svelte.js';
 	import { isBackdropClick, syncDialog } from '../../core/dialog.svelte.js';
@@ -15,6 +16,8 @@
 		size?: DrawerSize;
 		title?: string;
 		description?: string;
+		/** Leading icon beside the title. */
+		icon?: Snippet;
 		dismissible?: boolean;
 		footer?: Snippet;
 		onclose?: () => void;
@@ -27,6 +30,7 @@
 		size = 'md',
 		title,
 		description,
+		icon,
 		dismissible = true,
 		footer,
 		onclose,
@@ -92,6 +96,7 @@
 	<div class="flex h-full flex-col">
 		{#if title || dismissible}
 			<div class="flex items-start gap-4 border-b border-hairline px-5 py-4">
+				{#if icon}<span class={iconLg}>{@render icon()}</span>{/if}
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					{#if title}
 						<h2 class="font-heading text-lg font-medium tracking-tight">{title}</h2>

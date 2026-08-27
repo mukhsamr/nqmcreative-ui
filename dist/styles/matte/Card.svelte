@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneBorderLeft, toneHoverBorder, toneSurface, type Tone } from '../../core/tones.js';
+	import { iconLg } from './icon.js';
 
 	export type CardVariant = 'outline' | 'filled' | 'tinted';
 
@@ -15,6 +16,8 @@
 		padded?: boolean;
 		title?: string;
 		eyebrow?: string;
+		/** Leading icon above the title. Ignored when you pass `header`. */
+		icon?: Snippet;
 		header?: Snippet;
 		footer?: Snippet;
 		children: Snippet;
@@ -28,6 +31,7 @@
 		padded = true,
 		title,
 		eyebrow,
+		icon,
 		header,
 		footer,
 		class: className = '',
@@ -49,11 +53,12 @@
 		{className}"
 	{...rest}
 >
-	{#if header || title || eyebrow}
-		<div class="flex flex-col gap-1 {padded ? 'px-6 pt-6' : ''}">
+	{#if header || title || eyebrow || icon}
+		<div class="flex flex-col gap-1 {padded ? 'px-5 pt-5' : ''}">
 			{#if header}
 				{@render header()}
 			{:else}
+				{#if icon}<span class={iconLg}>{@render icon()}</span>{/if}
 				{#if eyebrow}
 					<span class="font-mono text-xs tracking-wide text-text-muted uppercase">{eyebrow}</span>
 				{/if}
@@ -64,12 +69,12 @@
 		</div>
 	{/if}
 
-	<div class="flex-1 {padded ? (header || title || eyebrow ? 'px-6 pt-4 pb-6' : 'p-6') : ''}">
+	<div class="flex-1 {padded ? (header || title || eyebrow ? 'px-5 pt-3.5 pb-5' : 'p-5') : ''}">
 		{@render children()}
 	</div>
 
 	{#if footer}
-		<div class="border-t border-hairline {padded ? 'px-6 py-4' : ''}">
+		<div class="border-t border-hairline {padded ? 'px-5 py-3.5' : ''}">
 			{@render footer()}
 		</div>
 	{/if}

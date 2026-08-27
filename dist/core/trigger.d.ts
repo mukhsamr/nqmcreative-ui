@@ -33,3 +33,9 @@ export declare function popupTrigger(node: HTMLElement, options: PopupTriggerOpt
 export declare function describeTrigger(wrapper: HTMLElement | null, kind: 'menu' | 'dialog' | 'listbox', open: boolean): void;
 /** The menu items a roving-focus menu should walk, in DOM order. */
 export declare function menuItems(menu: HTMLElement | null): HTMLElement[];
+/**
+ * Whether a keystroke landed in something the reader is typing into. A
+ * bare-key shortcut — `/` for search — has to stand down for those, or it
+ * eats the character instead of opening anything.
+ */
+export declare function isTypingTarget(target: EventTarget | null): boolean;

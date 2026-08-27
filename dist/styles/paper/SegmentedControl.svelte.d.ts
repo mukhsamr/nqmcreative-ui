@@ -1,8 +1,11 @@
+import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import { type Tone } from '../../core/tones.js';
 export interface SegmentOption {
     value: string;
     label: string;
+    /** Leading icon, 16px. */
+    icon?: Snippet;
     disabled?: boolean;
 }
 export type SegmentedSize = 'sm' | 'md';
@@ -16,6 +19,8 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onchange'> {
     tone?: Tone;
     /** Spread the segments evenly across the full width. */
     fullWidth?: boolean;
+    /** Icons only — each option's `label` becomes its accessible name. */
+    iconOnly?: boolean;
     label?: string;
     disabled?: boolean;
     onchange?: (value: string) => void;

@@ -36,6 +36,7 @@
 
 <script lang="ts">
 	import { useLocale } from '../../core/locale.svelte.js';
+	import { iconMd } from './icon.js';
 	import { focusRing, toneRing, toneSoft, type Tone } from '../../core/tones.js';
 
 	interface Props {
@@ -126,7 +127,7 @@
 <!-- One box for every glyph, so rows line up whether or not an item has one. -->
 {#snippet glyph(item: SidebarItem)}
 	{#if item.icon}
-		<span class="grid size-4 shrink-0 place-items-center *:size-4">{@render item.icon()}</span>
+		<span class={iconMd}>{@render item.icon()}</span>
 	{/if}
 {/snippet}
 

@@ -89,6 +89,18 @@ import { Button } from '@nqmcreative/ui/paper';   // ✓ same props, different l
 
 export const update = `bun update @nqmcreative/ui`;
 
+export const cliUpdate = `bunx nqm-ui update --style matte`;
+
+export const cliUpdateAsk = `bunx nqm-ui update
+
+  which style?
+
+    1) matte    Flat and sharp-cornered…
+    2) paper    The neutral one…
+    3) sprout   Warm and fully rounded…
+
+  1-3, or a name [1]:`;
+
 /* -------------------------------------------------------------- styles -- */
 
 export const styleSwap = `// one project, one style — swap the word and the whole app follows

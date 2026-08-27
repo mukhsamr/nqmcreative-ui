@@ -29,6 +29,18 @@ declare function $$render<T extends Record<string, unknown>>(): {
         compact?: boolean;
         /** Header stays put while the body scrolls — pair with a `max-h-*` class. */
         stickyHeader?: boolean;
+        /** Bar above the table — a title, a search field, a filter row. */
+        header?: Snippet;
+        /** Bar below the table — pagination, a total, a summary line. */
+        footer?: Snippet;
+        /**
+         * Shown in place of `header` while rows are ticked, after the count and the
+         * clear button. Passing it is what turns the bulk bar on.
+         */
+        bulkActions?: Snippet<[{
+            selected: string[];
+            clear: () => void;
+        }]>;
         /** Bindable. Set it to sort; leave `sortable` columns to drive it. */
         sort?: TableSort | null;
         /** Sort the rows here rather than refetching them server-side. Default true. */

@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import { toneSoftHover, toneText, type Tone } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 
 	interface Props extends HTMLButtonAttributes {
 		/** Renders an `<a>` instead of a `<button>`. */
@@ -37,7 +38,7 @@
 	disabled={href ? undefined : disabled}
 	aria-disabled={disabled ? 'true' : undefined}
 	tabindex={disabled ? undefined : -1}
-	class="flex w-full items-center gap-2.5 px-3 py-2 text-left text-[14px] transition-colors duration-100 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-40
+	class="flex w-full items-center gap-2.5 px-3 py-1.5 text-left text-[14px] transition-colors duration-100 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-40
 		{tone === 'neutral'
 		? 'text-text-secondary hover:bg-bg-inset focus-visible:bg-bg-inset'
 		: `${toneText[tone]} ${toneSoftHover[tone]}`}
@@ -49,7 +50,7 @@
 			<path d="m2 7 3.2 3.2L12 3.6" stroke="currentColor" stroke-width="1.6" />
 		</svg>
 	{:else if icon}
-		<span class="flex size-3.5 shrink-0 items-center justify-center">{@render icon()}</span>
+		<span class={iconMd}>{@render icon()}</span>
 	{/if}
 	<span class="min-w-0 flex-1 truncate">{@render children()}</span>
 	{#if shortcut}

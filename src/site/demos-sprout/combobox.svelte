@@ -6,14 +6,25 @@
 	let value = $state('');
 </script>
 
+{#snippet pin()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path
+			d="M8 14s4.5-4.2 4.5-7a4.5 4.5 0 1 0-9 0c0 2.8 4.5 7 4.5 7Z"
+			stroke="currentColor"
+			stroke-width="1.4"
+		/>
+		<circle cx="8" cy="7" r="1.6" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
 <div class="w-full max-w-xs">
 	<Combobox
 		bind:value
 		options={[
-			{ value: 'jkt', label: 'Jakarta' },
-			{ value: 'bdg', label: 'Bandung' },
-			{ value: 'sby', label: 'Surabaya' },
-			{ value: 'dps', label: 'Denpasar' }
+			{ value: 'jkt', label: 'Jakarta', icon: pin },
+			{ value: 'bdg', label: 'Bandung', icon: pin },
+			{ value: 'sby', label: 'Surabaya', icon: pin },
+			{ value: 'dps', label: 'Denpasar', icon: pin }
 		]}
 	/>
 </div>

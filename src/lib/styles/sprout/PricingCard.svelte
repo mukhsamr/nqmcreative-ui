@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneBorder, toneSoft, toneSolid, type Tone } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 	import { edge, soft } from './lift.js';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -13,6 +14,8 @@
 		description?: string;
 		/** One line each. Rendered with a tick. */
 		features?: string[];
+		/** Replaces the tick beside every feature. */
+		featureIcon?: Snippet;
 		/** Pill in the top corner, e.g. "Most popular". */
 		badge?: string;
 		/** Ring, lift and a tinted header — for the plan you want chosen. */
@@ -30,6 +33,7 @@
 		period,
 		description,
 		features = [],
+		featureIcon,
 		badge,
 		featured = false,
 		tone = 'brand',
@@ -78,21 +82,25 @@
 		<ul class="flex flex-1 flex-col gap-3 border-t border-hairline p-6">
 			{#each features as feature (feature)}
 				<li class="flex items-start gap-3 font-sans text-sm text-text-secondary">
-					<span
-						class="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full {toneSoft[
-							tone
-						]}"
-					>
-						<svg class="size-2.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-							<path
-								d="m3 8 3.2 3.2L13 4.4"
-								stroke="currentColor"
-								stroke-width="2.4"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-					</span>
+					{#if featureIcon}
+						<span class="mt-0.5 {iconMd}">{@render featureIcon()}</span>
+					{:else}
+						<span
+							class="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full {toneSoft[
+								tone
+							]}"
+						>
+							<svg class="size-2.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+								<path
+									d="m3 8 3.2 3.2L13 4.4"
+									stroke="currentColor"
+									stroke-width="2.4"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</span>
+					{/if}
 					<span class="leading-snug">{feature}</span>
 				</li>
 			{/each}

@@ -1,7 +1,10 @@
+import type { Snippet } from 'svelte';
 import { type Tone } from '../../core/tones.js';
 export interface ComboboxOption {
     value: string;
     label: string;
+    /** Leading icon, 16px. */
+    icon?: Snippet;
     /** Second line under the label. */
     description?: string;
     disabled?: boolean;

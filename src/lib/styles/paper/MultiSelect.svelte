@@ -1,7 +1,11 @@
 <script module lang="ts">
+	import type { Snippet } from 'svelte';
+
 	export interface MultiSelectOption {
 		value: string;
 		label: string;
+		/** Leading icon, 16px. */
+		icon?: Snippet;
 		description?: string;
 		disabled?: boolean;
 		group?: string;
@@ -13,6 +17,7 @@
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
 	import { useLocale } from '../../core/locale.svelte.js';
+	import { iconMd, iconSm } from './icon.js';
 	import { toneFocusWithinBorder, toneSoft, toneText, type Tone } from '../../core/tones.js';
 
 	interface Props {
@@ -153,7 +158,7 @@
 					tone
 				]}"
 			>
-				{option.label}
+				{#if option.icon}<span class={iconSm}>{@render option.icon()}</span>{/if}{option.label}
 				<button
 					type="button"
 					onclick={() => remove(option)}
@@ -273,6 +278,7 @@
 								</svg>
 							{/if}
 						</span>
+						{#if option.icon}<span class={iconMd}>{@render option.icon()}</span>{/if}
 						<span class="flex min-w-0 flex-1 flex-col gap-0.5">
 							<span class="truncate">{option.label}</span>
 							{#if option.description}

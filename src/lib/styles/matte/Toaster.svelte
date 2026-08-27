@@ -4,6 +4,7 @@
 	import { portal } from '../../core/actions/dismissable.js';
 	import { toast } from '../../core/toast.svelte.js';
 	import { toneBorderSoft, toneSurface, toneText } from '../../core/tones.js';
+	import { iconMd } from './icon.js';
 	import Spinner from './Spinner.svelte';
 	import { useLocale } from '../../core/locale.svelte.js';
 
@@ -57,6 +58,8 @@
 			<span class="mt-0.5 shrink-0 {toneText[item.tone]}">
 				{#if item.loading}
 					<Spinner size="sm" label="" />
+				{:else if item.icon}
+					<span class={iconMd}>{@render item.icon()}</span>
 				{:else if item.tone === 'success'}
 					<svg class="size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
 						<path d="m3 8.5 3.2 3.2L13 5" stroke="currentColor" stroke-width="1.6" />

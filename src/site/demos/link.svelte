@@ -2,8 +2,26 @@
 	import Link from '$lib/styles/matte/Link.svelte';
 </script>
 
+{#snippet book()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path
+			d="M3 2.5h6a2 2 0 0 1 2 2v9a2 2 0 0 0-2-2H3v-9Z"
+			stroke="currentColor"
+			stroke-width="1.4"
+		/>
+		<path d="M13 2.5h-2v9h2v-9Z" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet arrow()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.5" />
+	</svg>
+{/snippet}
+
 <div class="flex flex-wrap items-center gap-5">
 	<Link href="#">Default</Link>
-	<Link href="#" tone="accent" underline="always">Accent</Link>
+	<Link href="#" icon={book}>With icon</Link>
+	<Link href="#" tone="accent" underline="always" iconEnd={arrow}>Read the docs</Link>
 	<Link href="https://nqmcreative.com" external>External</Link>
 </div>

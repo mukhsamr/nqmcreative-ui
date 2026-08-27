@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneSoft, type Tone } from '../../core/tones.js';
 
@@ -13,6 +14,8 @@
 		tone?: Tone;
 		/** Square instead of the default circle. */
 		squared?: boolean;
+		/** Drawn instead of the initials when there is no `src` — a user mark. */
+		fallback?: Snippet;
 	}
 
 	let {
@@ -22,6 +25,7 @@
 		size = 'md',
 		tone = 'brand',
 		squared = false,
+		fallback,
 		class: className = '',
 		...rest
 	}: Props = $props();
@@ -32,6 +36,15 @@
 		md: 'size-10 text-sm',
 		lg: 'size-12 text-base',
 		xl: 'size-16 text-lg'
+	};
+
+	// The mark tracks the initials: about half the circle, whatever the size.
+	const glyphs: Record<AvatarSize, string> = {
+		xs: 'grid place-items-center *:size-3',
+		sm: 'grid place-items-center *:size-4',
+		md: 'grid place-items-center *:size-5',
+		lg: 'grid place-items-center *:size-6',
+		xl: 'grid place-items-center *:size-8'
 	};
 
 	const initials = $derived(
@@ -52,6 +65,8 @@
 >
 	{#if src}
 		<img {src} alt={alt ?? name} class="size-full object-cover" />
+	{:else if fallback}
+		<span class={glyphs[size]}>{@render fallback()}</span>
 	{:else}
 		{initials}
 	{/if}

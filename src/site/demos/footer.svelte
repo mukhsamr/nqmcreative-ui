@@ -2,6 +2,27 @@
 	import Footer from '$lib/styles/matte/Footer.svelte';
 </script>
 
+{#snippet grid()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<rect x="2" y="2" width="5" height="5" stroke="currentColor" stroke-width="1.4" />
+		<rect x="9" y="9" width="5" height="5" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
+{#snippet tag()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<path d="M2 2h5l7 7-5 5-7-7V2Z" stroke="currentColor" stroke-width="1.4" />
+		<circle cx="5" cy="5" r="1" fill="currentColor" />
+	</svg>
+{/snippet}
+
+{#snippet mail()}
+	<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+		<rect x="2" y="3.5" width="12" height="9" stroke="currentColor" stroke-width="1.4" />
+		<path d="m2 4.5 6 4 6-4" stroke="currentColor" stroke-width="1.4" />
+	</svg>
+{/snippet}
+
 <div class="w-full border border-hairline">
 	<Footer
 		copyright="© 2026 NQM Creative"
@@ -9,15 +30,15 @@
 			{
 				title: 'Product',
 				links: [
-					{ label: 'Components', href: '#' },
-					{ label: 'Changelog', href: '#' }
+					{ label: 'Components', href: '#', icon: grid },
+					{ label: 'Changelog', href: '#', icon: tag }
 				]
 			},
 			{
 				title: 'Studio',
 				links: [
 					{ label: 'Work', href: '#' },
-					{ label: 'Contact', href: '#' }
+					{ label: 'Contact', href: '#', icon: mail }
 				]
 			}
 		]}

@@ -10,6 +10,8 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     description?: string;
     /** One line each. Rendered with a tick. */
     features?: string[];
+    /** Replaces the tick beside every feature. */
+    featureIcon?: Snippet;
     /** Pill in the top corner, e.g. "Most popular". */
     badge?: string;
     /** Thicker border and a tinted header — for the plan you want chosen. */

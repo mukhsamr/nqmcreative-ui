@@ -4,6 +4,8 @@ import { type Tone } from '../../core/tones.js';
 export interface RadioOption {
     value: string;
     label: string;
+    /** Leading icon, 20px. Drawn in `boxed` mode only. */
+    icon?: Snippet;
     description?: string;
     disabled?: boolean;
 }

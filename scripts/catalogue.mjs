@@ -42,8 +42,6 @@ export const COMPONENTS = [
 	['Switch', 'forms', 'On/off toggle with a label and description.'],
 	['Field', 'forms', 'Wraps any control with a label, hint and error message.'],
 	['Label', 'forms', 'Form label with an optional required marker.'],
-	['PasswordInput', 'forms', 'Password field with a visibility toggle and a strength meter.'],
-	['NumberInput', 'forms', 'Number field with steppers, clamping and decimal handling.'],
 	['Slider', 'forms', 'Range input with ticks and a printed value.'],
 	['RadioGroup', 'forms', 'A set of radios, optionally rendered as selectable cards.'],
 	['CheckboxGroup', 'forms', 'A set of checkboxes bound to a string array, with an optional cap.'],

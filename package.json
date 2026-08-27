@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"version": "0.2.3",
-	"description": "Svelte 5 + Tailwind CSS v4 component library — three styles (matte, paper, sprout), 65 components each, one shared behaviour core. No runtime dependencies.",
+	"description": "Svelte 5 + Tailwind CSS v4 component library — three styles (matte, paper, sprout), 63 components each, one shared behaviour core. No runtime dependencies.",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-index.mjs && node scripts/generate-exports.mjs && node scripts/generate-registry.mjs && node scripts/generate-scoped-css.mjs && node scripts/generate-demos.mjs && publint",
@@ -134,14 +134,6 @@
 		"./matte/label": {
 			"types": "./dist/styles/matte/Label.svelte.d.ts",
 			"svelte": "./dist/styles/matte/Label.svelte"
-		},
-		"./matte/password-input": {
-			"types": "./dist/styles/matte/PasswordInput.svelte.d.ts",
-			"svelte": "./dist/styles/matte/PasswordInput.svelte"
-		},
-		"./matte/number-input": {
-			"types": "./dist/styles/matte/NumberInput.svelte.d.ts",
-			"svelte": "./dist/styles/matte/NumberInput.svelte"
 		},
 		"./matte/slider": {
 			"types": "./dist/styles/matte/Slider.svelte.d.ts",
@@ -401,14 +393,6 @@
 			"types": "./dist/styles/paper/Label.svelte.d.ts",
 			"svelte": "./dist/styles/paper/Label.svelte"
 		},
-		"./paper/password-input": {
-			"types": "./dist/styles/paper/PasswordInput.svelte.d.ts",
-			"svelte": "./dist/styles/paper/PasswordInput.svelte"
-		},
-		"./paper/number-input": {
-			"types": "./dist/styles/paper/NumberInput.svelte.d.ts",
-			"svelte": "./dist/styles/paper/NumberInput.svelte"
-		},
 		"./paper/slider": {
 			"types": "./dist/styles/paper/Slider.svelte.d.ts",
 			"svelte": "./dist/styles/paper/Slider.svelte"
@@ -666,14 +650,6 @@
 		"./sprout/label": {
 			"types": "./dist/styles/sprout/Label.svelte.d.ts",
 			"svelte": "./dist/styles/sprout/Label.svelte"
-		},
-		"./sprout/password-input": {
-			"types": "./dist/styles/sprout/PasswordInput.svelte.d.ts",
-			"svelte": "./dist/styles/sprout/PasswordInput.svelte"
-		},
-		"./sprout/number-input": {
-			"types": "./dist/styles/sprout/NumberInput.svelte.d.ts",
-			"svelte": "./dist/styles/sprout/NumberInput.svelte"
 		},
 		"./sprout/slider": {
 			"types": "./dist/styles/sprout/Slider.svelte.d.ts",
