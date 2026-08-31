@@ -73,6 +73,24 @@ export interface Locale {
 	decrease: string;
 	increase: string;
 
+	/* file input */
+	chooseFile: string;
+	noFile: string;
+
+	/* search input */
+	clearSearch: string;
+
+	/* pin input */
+	/** Prefixed to the box number, so box three is labelled `Digit 3`. */
+	digit: string;
+
+	/* tags input */
+	addTag: string;
+	duplicateTag: string;
+
+	/* colour input */
+	pickColour: string;
+
 	/* date picker */
 	/** BCP 47 tag handed to `Intl` for month and weekday names. */
 	dateLocale: string;
@@ -141,6 +159,18 @@ export const enUS: Locale = {
 	decrease: 'Decrease',
 	increase: 'Increase',
 
+	chooseFile: 'Choose file',
+	noFile: 'No file chosen',
+
+	clearSearch: 'Clear search',
+
+	digit: 'Digit',
+
+	addTag: 'Add a tag',
+	duplicateTag: 'Already added',
+
+	pickColour: 'Pick a colour',
+
 	dateLocale: 'en-US',
 	dateFormat: 'mdy',
 	today: 'Today',
@@ -204,6 +234,18 @@ export const idID: Locale = {
 
 	decrease: 'Kurangi',
 	increase: 'Tambah',
+
+	chooseFile: 'Pilih berkas',
+	noFile: 'Belum ada berkas',
+
+	clearSearch: 'Hapus pencarian',
+
+	digit: 'Digit',
+
+	addTag: 'Tambah tag',
+	duplicateTag: 'Sudah ditambahkan',
+
+	pickColour: 'Pilih warna',
 
 	dateLocale: 'id-ID',
 	dateFormat: 'dmy',

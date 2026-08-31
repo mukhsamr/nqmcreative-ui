@@ -153,6 +153,39 @@ async function write(path, content, label) {
 
 /* -------------------------------------------------------------- detection -- */
 
+/**
+ * Which kind of project this is.
+ *
+ * The library itself is plain Svelte 5 — no `$app/*`, no `$env/*`, no
+ * `@sveltejs/kit` anywhere in it — so a framework only decides where four
+ * things live:
+ *
+ *   kit      src/app.css          src/app.html            src/routes/+layout.svelte
+ *   vite     src/app.css          index.html              src/main.ts
+ *   laravel  resources/css/…      resources/views/…       the @vite directive
+ */
+function detectFramework(deps) {
+	if ('@sveltejs/kit' in deps) return 'kit';
+	if (existsSync(join(cwd, 'artisan'))) return 'laravel';
+	return 'vite';
+}
+
+const FRAMEWORK_LABEL = {
+	kit: 'SvelteKit',
+	laravel: 'Laravel + Svelte',
+	vite: 'Svelte + Vite'
+};
+
+/** The first candidate that exists, or the first one as the place to create. */
+function pickPath(candidates) {
+	return candidates.find((path) => existsSync(join(cwd, path))) ?? candidates[0];
+}
+
+/** The one that exists, or null — for files we patch but never invent. */
+function findPath(candidates) {
+	return candidates.find((path) => existsSync(join(cwd, path))) ?? null;
+}
+
 async function detectProject() {
 	const pkgPath = join(cwd, 'package.json');
 	if (!existsSync(pkgPath)) fail('no package.json here — run this inside your project');
@@ -160,17 +193,156 @@ async function detectProject() {
 	const pkg = JSON.parse(await readFile(pkgPath, 'utf8'));
 	const deps = { ...pkg.dependencies, ...pkg.devDependencies };
 
-	const isKit = '@sveltejs/kit' in deps;
+	const framework = detectFramework(deps);
+	const isKit = framework === 'kit';
 	const hasTailwind = '@tailwindcss/vite' in deps || 'tailwindcss' in deps;
 	const hasUi = '@nqmcreative/ui' in deps;
+	// Kit brings its own; everywhere else the components are .svelte files in
+	// node_modules and something has to compile them.
+	const hasCompiler = isKit || '@sveltejs/vite-plugin-svelte' in deps;
 
 	// Where the Tailwind entry CSS lives, or should.
-	const candidates = isKit
-		? ['src/app.css', 'src/routes/+layout.css', 'src/app.postcss']
-		: ['src/app.css', 'src/style.css', 'src/main.css'];
-	const css = candidates.find((path) => existsSync(join(cwd, path))) ?? candidates[0];
+	const css = pickPath(
+		{
+			kit: ['src/app.css', 'src/routes/+layout.css', 'src/app.postcss'],
+			laravel: ['resources/css/app.css'],
+			vite: ['src/app.css', 'src/style.css', 'src/main.css']
+		}[framework]
+	);
 
-	return { pkg, deps, isKit, hasTailwind, hasUi, css: join(cwd, css), cssRel: css };
+	// The document head, for the font preconnect and the no-flash theme script.
+	// Kit gets one written if it is missing; the other two are only patched,
+	// because guessing at someone's Blade layout would do more harm than a
+	// printed reminder.
+	const head = {
+		kit: 'src/app.html',
+		laravel: findPath([
+			'resources/views/app.blade.php',
+			'resources/views/layouts/app.blade.php',
+			'resources/views/components/layouts/app.blade.php',
+			'resources/views/welcome.blade.php'
+		]),
+		vite: findPath(['index.html'])
+	}[framework];
+
+	// Where the entry CSS gets imported. Laravel has nowhere: the `@vite`
+	// directive in the Blade layout links it directly.
+	const entry = {
+		kit: 'src/routes/+layout.svelte',
+		laravel: null,
+		vite: findPath(['src/main.ts', 'src/main.js'])
+	}[framework];
+
+	return {
+		pkg,
+		deps,
+		framework,
+		isKit,
+		hasTailwind,
+		hasUi,
+		hasCompiler,
+		css: join(cwd, css),
+		cssRel: css,
+		head,
+		entry
+	};
+}
+
+/* ------------------------------------------------------------------ head -- */
+
+/** Escapes a literal for use inside a RegExp — the markers contain `%` and `/`. */
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** The two things that have to run before first paint, in document order. */
+function headAdditions(style, html) {
+	const additions = [];
+	if (style.fonts && !html.includes('fonts.gstatic.com')) {
+		additions.push(`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`);
+	}
+	if (!html.includes('nqm-theme')) {
+		additions.push(
+			`<script>`,
+			`\tconst saved = localStorage.getItem('nqm-theme');`,
+			`\tif (saved === 'dark' || saved === 'light') document.documentElement.classList.add(saved);`,
+			`</script>`
+		);
+	}
+	return additions;
+}
+
+/**
+ * Puts them in the document head, wherever that is for this framework.
+ *
+ * Kit renders into a `%sveltekit.head%` placeholder; a Vite index.html and a
+ * Blade layout both have a real `</head>` to sit above. When there is no file
+ * to patch — or no marker in it — the lines are printed instead of guessed at.
+ */
+async function wireHead(project, style) {
+	const { framework, head } = project;
+
+	const printByHand = (additions, reason) => {
+		log();
+		warn(reason);
+		log(additions.map((line) => c.cyan(`    ${line}`)).join('\n'));
+	};
+
+	if (!head) {
+		printByHand(
+			headAdditions(style, ''),
+			framework === 'laravel'
+				? 'no Blade layout found — put these inside <head> in yours:'
+				: 'no index.html found — put these inside its <head>:'
+		);
+		return;
+	}
+
+	const htmlPath = join(cwd, head);
+	let html = await readOr(htmlPath);
+
+	if (!html && framework === 'kit') {
+		// Some `sv create` templates omit it and let SvelteKit fall back to a
+		// built-in. Write the standard one so there is somewhere to put the
+		// preconnect and the no-flash theme script.
+		html = [
+			'<!doctype html>',
+			'<html lang="en">',
+			'	<head>',
+			'		<meta charset="utf-8" />',
+			'		<meta name="viewport" content="width=device-width, initial-scale=1" />',
+			'		%sveltekit.head%',
+			'	</head>',
+			'	<body data-sveltekit-preload-data="hover">',
+			'		<div style="display: contents">%sveltekit.body%</div>',
+			'	</body>',
+			'</html>',
+			''
+		].join('\n');
+		skip('src/app.html was missing — creating it');
+	}
+
+	const additions = headAdditions(style, html);
+	if (additions.length === 0) {
+		skip(`${head} already wired`);
+		return;
+	}
+
+	const marker = framework === 'kit' ? '%sveltekit.head%' : '</head>';
+	if (!html.includes(marker)) {
+		printByHand(additions, `${head} has no ${marker} — add these by hand, inside <head>:`);
+		return;
+	}
+
+	// Matched with its own indentation so the block lands at the right depth,
+	// and replaced through a function so a `$` in the lines stays literal.
+	html = html.replace(new RegExp(`([ \\t]*)${escapeRe(marker)}`), (_match, indent) => {
+		// The placeholder is itself a child of <head>; a closing tag is not, so
+		// its children sit one level deeper — in whichever unit the file uses.
+		const unit = indent.startsWith('\t') ? '\t' : '    ';
+		const inner = framework === 'kit' ? indent : `${indent}${unit}`;
+		const body = additions.map((line) => line.replace(/^\t/, unit));
+		return `${inner}${body.join(`\n${inner}`)}\n${indent}${marker}`;
+	});
+	await write(htmlPath, html, head);
 }
 
 /** How many `../` from the CSS file up to node_modules. */
@@ -188,7 +360,7 @@ async function init() {
 
 	log();
 	log(c.bold(`  @nqmcreative/ui — ${style.title}`));
-	log(c.dim(`  ${project.isKit ? 'SvelteKit' : 'Svelte + Vite'} project detected`));
+	log(c.dim(`  ${FRAMEWORK_LABEL[project.framework]} project detected`));
 	log();
 
 	if (!project.hasUi) {
@@ -200,6 +372,13 @@ async function init() {
 	if (!project.hasTailwind) {
 		warn('Tailwind CSS v4 is not installed:');
 		log(c.cyan('    bun add -d tailwindcss @tailwindcss/vite'));
+		log();
+	}
+
+	if (!project.hasCompiler) {
+		// The package ships .svelte files, so the app compiles them itself.
+		warn('nothing here compiles Svelte components:');
+		log(c.cyan('    bun add -d svelte @sveltejs/vite-plugin-svelte'));
 		log();
 	}
 
@@ -245,85 +424,62 @@ async function init() {
 		await write(project.css, body, project.cssRel);
 	}
 
-	/* --- 2. app.html: font preconnect + no-flash theme --- */
-	if (project.isKit) {
-		const htmlPath = join(cwd, 'src/app.html');
-		let html = await readOr(htmlPath);
-		if (!html) {
-			// Some `sv create` templates omit it and let SvelteKit fall back to a
-			// built-in. Write the standard one so there is somewhere to put the
-			// preconnect and the no-flash theme script.
-			html = [
-				'<!doctype html>',
-				'<html lang="en">',
-				'	<head>',
-				'		<meta charset="utf-8" />',
-				'		<meta name="viewport" content="width=device-width, initial-scale=1" />',
-				'		%sveltekit.head%',
-				'	</head>',
-				'	<body data-sveltekit-preload-data="hover">',
-				'		<div style="display: contents">%sveltekit.body%</div>',
-				'	</body>',
-				'</html>',
-				''
-			].join('\n');
-			skip('src/app.html was missing — creating it');
-		}
-		{
-			// Unindented — `%sveltekit.head%` already sits at its own indentation,
-			// so the join below supplies it and the first line does not double up.
-			const additions = [];
-			if (style.fonts && !html.includes('fonts.gstatic.com')) {
-				additions.push(`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`);
-			}
-			if (!html.includes('nqm-theme')) {
-				additions.push(
-					`<script>`,
-					`\tconst saved = localStorage.getItem('nqm-theme');`,
-					`\tif (saved === 'dark' || saved === 'light') document.documentElement.classList.add(saved);`,
-					`</script>`
-				);
-			}
-			if (additions.length === 0) {
-				skip('src/app.html already wired');
-			} else if (!html.includes('%sveltekit.head%')) {
-				warn('src/app.html has no %sveltekit.head% — add these by hand:');
-				log(additions.map((line) => `\t\t${line}`).join('\n'));
-			} else {
-				const indent = /([ \t]*)%sveltekit\.head%/.exec(html)?.[1] ?? '\t\t';
-				html = html.replace(
-					'%sveltekit.head%',
-					`${additions.join(`\n${indent}`)}\n${indent}%sveltekit.head%`
-				);
-				await write(htmlPath, html, 'src/app.html');
-			}
-		}
+	// Laravel keeps its markup outside resources/css, so automatic detection
+	// never reaches it. These are the project's own lines, not ours — printed
+	// rather than written, so removing them stays possible.
+	if (project.framework === 'laravel' && !/@source ['"]\.\.\/(js|views)/.test(body)) {
+		log();
+		warn(`Tailwind also has to see your own markup — add to ${project.cssRel}:`);
+		log(c.cyan(`    @source '../js';`));
+		log(c.cyan(`    @source '../views';`));
 	}
+
+	/* --- 2. the document head: font preconnect + no-flash theme --- */
+	await wireHead(project, style);
 
 	/* --- 3. remind about the vite plugin, which we will not rewrite --- */
 	const viteConfig =
-		['vite.config.ts', 'vite.config.js'].map((f) => join(cwd, f)).find((f) => existsSync(f)) ??
-		null;
+		['vite.config.ts', 'vite.config.js', 'vite.config.mjs']
+			.map((f) => join(cwd, f))
+			.find((f) => existsSync(f)) ?? null;
 	const viteSource = viteConfig ? await readOr(viteConfig) : '';
 	if (!viteSource.includes('@tailwindcss/vite')) {
+		const plugins = {
+			kit: `plugins: [tailwindcss(), sveltekit()]`,
+			laravel: `plugins: [laravel({ input: ['${project.cssRel}', 'resources/js/app.js'] }), tailwindcss(), svelte()]`,
+			vite: `plugins: [tailwindcss(), svelte()]`
+		}[project.framework];
+		const after = project.framework === 'kit' ? 'sveltekit()' : 'svelte()';
+
 		log();
 		warn(
-			`add the Tailwind plugin to ${viteConfig ? relative(cwd, viteConfig) : 'your vite config'} — before sveltekit():`
+			`add the Tailwind plugin to ${viteConfig ? relative(cwd, viteConfig) : 'your vite config'} — before ${after}:`
 		);
 		log(c.cyan(`    import tailwindcss from '@tailwindcss/vite';`));
-		log(c.cyan(`    plugins: [tailwindcss(), sveltekit()]`));
+		log(c.cyan(`    ${plugins}`));
 	} else {
 		skip('vite config already has the Tailwind plugin');
 	}
 
 	/* --- 4. import the CSS once --- */
-	if (project.isKit) {
-		const layoutPath = join(cwd, 'src/routes/+layout.svelte');
+	if (project.framework === 'laravel') {
+		// Nothing imports it: the Blade layout hands the path to Vite, which is
+		// also what makes `php artisan serve` pick up the built file.
+		const blade = project.head ? await readOr(join(cwd, project.head)) : '';
+		if (blade.includes(project.cssRel)) {
+			skip(`${project.head} already loads ${project.cssRel}`);
+		} else {
+			log();
+			warn(`load the CSS from your Blade layout, inside <head>:`);
+			log(c.cyan(`    @vite(['${project.cssRel}', 'resources/js/app.js'])`));
+		}
+	} else if (project.framework === 'kit') {
+		const layoutPath = join(cwd, project.entry);
 		let layout = await readOr(layoutPath);
 		const line = `import '../app.css';`;
 
 		if (layout.includes('app.css')) {
-			skip('src/routes/+layout.svelte already imports the CSS');
+			skip(`${project.entry} already imports the CSS`);
 		} else if (!layout.trim()) {
 			await write(
 				layoutPath,
@@ -335,15 +491,36 @@ async function init() {
 
 {@render children()}
 `,
-				'src/routes/+layout.svelte'
+				project.entry
 			);
 		} else if (/<script[^>]*>/.test(layout)) {
 			layout = layout.replace(/(<script[^>]*>\n)/, `$1\t${line}\n`);
-			await write(layoutPath, layout, 'src/routes/+layout.svelte');
+			await write(layoutPath, layout, project.entry);
 		} else {
 			log();
-			warn('import the CSS once, at the top of src/routes/+layout.svelte:');
+			warn(`import the CSS once, at the top of ${project.entry}:`);
 			log(c.cyan(`    ${line}`));
+		}
+	} else {
+		// Plain Vite: the entry module is the one thing every page loads.
+		const rel = project.entry
+			? relative(dirname(join(cwd, project.entry)), project.css)
+					.split(/[\\/]/)
+					.join('/')
+			: null;
+		const line = rel ? `import '${rel.startsWith('.') ? rel : `./${rel}`}';` : null;
+
+		if (!project.entry) {
+			log();
+			warn(`import ${project.cssRel} once, at the top of your entry module:`);
+			log(c.cyan(`    import './${project.cssRel.split('/').pop()}';`));
+		} else {
+			const source = await readOr(join(cwd, project.entry));
+			if (source.includes(line) || /import ['"][^'"]*app\.css['"]/.test(source)) {
+				skip(`${project.entry} already imports the CSS`);
+			} else {
+				await write(join(cwd, project.entry), `${line}\n${source}`, project.entry);
+			}
 		}
 	}
 

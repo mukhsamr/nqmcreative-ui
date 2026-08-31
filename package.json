@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"version": "0.3.0",
-	"description": "Svelte 5 + Tailwind CSS v4 component library — three styles (matte, paper, sprout), 63 components each, one shared behaviour core. No runtime dependencies.",
+	"description": "Svelte 5 + Tailwind CSS v4 component library — three styles (matte, paper, sprout), 71 components each, one shared behaviour core. No runtime dependencies.",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && svelte-kit sync && svelte-package && node scripts/strip-dist-tests.mjs && node scripts/generate-index.mjs && node scripts/generate-exports.mjs && node scripts/generate-registry.mjs && node scripts/generate-scoped-css.mjs && node scripts/generate-demos.mjs && publint",
@@ -154,6 +154,38 @@
 		"./matte/input-group": {
 			"types": "./dist/styles/matte/InputGroup.svelte.d.ts",
 			"svelte": "./dist/styles/matte/InputGroup.svelte"
+		},
+		"./matte/input-addon": {
+			"types": "./dist/styles/matte/InputAddon.svelte.d.ts",
+			"svelte": "./dist/styles/matte/InputAddon.svelte"
+		},
+		"./matte/search-input": {
+			"types": "./dist/styles/matte/SearchInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/SearchInput.svelte"
+		},
+		"./matte/pin-input": {
+			"types": "./dist/styles/matte/PinInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/PinInput.svelte"
+		},
+		"./matte/tags-input": {
+			"types": "./dist/styles/matte/TagsInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/TagsInput.svelte"
+		},
+		"./matte/currency-input": {
+			"types": "./dist/styles/matte/CurrencyInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/CurrencyInput.svelte"
+		},
+		"./matte/time-input": {
+			"types": "./dist/styles/matte/TimeInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/TimeInput.svelte"
+		},
+		"./matte/color-input": {
+			"types": "./dist/styles/matte/ColorInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/ColorInput.svelte"
+		},
+		"./matte/file-input": {
+			"types": "./dist/styles/matte/FileInput.svelte.d.ts",
+			"svelte": "./dist/styles/matte/FileInput.svelte"
 		},
 		"./matte/combobox": {
 			"types": "./dist/styles/matte/Combobox.svelte.d.ts",
@@ -413,6 +445,38 @@
 			"types": "./dist/styles/paper/InputGroup.svelte.d.ts",
 			"svelte": "./dist/styles/paper/InputGroup.svelte"
 		},
+		"./paper/input-addon": {
+			"types": "./dist/styles/paper/InputAddon.svelte.d.ts",
+			"svelte": "./dist/styles/paper/InputAddon.svelte"
+		},
+		"./paper/search-input": {
+			"types": "./dist/styles/paper/SearchInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/SearchInput.svelte"
+		},
+		"./paper/pin-input": {
+			"types": "./dist/styles/paper/PinInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/PinInput.svelte"
+		},
+		"./paper/tags-input": {
+			"types": "./dist/styles/paper/TagsInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/TagsInput.svelte"
+		},
+		"./paper/currency-input": {
+			"types": "./dist/styles/paper/CurrencyInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/CurrencyInput.svelte"
+		},
+		"./paper/time-input": {
+			"types": "./dist/styles/paper/TimeInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/TimeInput.svelte"
+		},
+		"./paper/color-input": {
+			"types": "./dist/styles/paper/ColorInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/ColorInput.svelte"
+		},
+		"./paper/file-input": {
+			"types": "./dist/styles/paper/FileInput.svelte.d.ts",
+			"svelte": "./dist/styles/paper/FileInput.svelte"
+		},
 		"./paper/combobox": {
 			"types": "./dist/styles/paper/Combobox.svelte.d.ts",
 			"svelte": "./dist/styles/paper/Combobox.svelte"
@@ -670,6 +734,38 @@
 		"./sprout/input-group": {
 			"types": "./dist/styles/sprout/InputGroup.svelte.d.ts",
 			"svelte": "./dist/styles/sprout/InputGroup.svelte"
+		},
+		"./sprout/input-addon": {
+			"types": "./dist/styles/sprout/InputAddon.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/InputAddon.svelte"
+		},
+		"./sprout/search-input": {
+			"types": "./dist/styles/sprout/SearchInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/SearchInput.svelte"
+		},
+		"./sprout/pin-input": {
+			"types": "./dist/styles/sprout/PinInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/PinInput.svelte"
+		},
+		"./sprout/tags-input": {
+			"types": "./dist/styles/sprout/TagsInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/TagsInput.svelte"
+		},
+		"./sprout/currency-input": {
+			"types": "./dist/styles/sprout/CurrencyInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/CurrencyInput.svelte"
+		},
+		"./sprout/time-input": {
+			"types": "./dist/styles/sprout/TimeInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/TimeInput.svelte"
+		},
+		"./sprout/color-input": {
+			"types": "./dist/styles/sprout/ColorInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/ColorInput.svelte"
+		},
+		"./sprout/file-input": {
+			"types": "./dist/styles/sprout/FileInput.svelte.d.ts",
+			"svelte": "./dist/styles/sprout/FileInput.svelte"
 		},
 		"./sprout/combobox": {
 			"types": "./dist/styles/sprout/Combobox.svelte.d.ts",

@@ -15,3 +15,36 @@ export function percentOf(value, min, max) {
         return 0;
     return Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
 }
+/** `1234567.5` → `1,234,567.50`, or `1.234.567,50` in a locale that swaps them. */
+export function formatGrouped(value, options = {}) {
+    const { group = ',', decimal = '.', precision } = options;
+    if (!Number.isFinite(value))
+        return '';
+    const fixed = precision === undefined ? String(value) : value.toFixed(precision);
+    const negative = fixed.startsWith('-');
+    const [whole, fraction] = (negative ? fixed.slice(1) : fixed).split('.');
+    // Replaced through a function so a separator that looks like `$&` stays put.
+    const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, () => group);
+    return `${negative ? '-' : ''}${grouped}${fraction ? decimal + fraction : ''}`;
+}
+/**
+ * The inverse, and deliberately forgiving: anything that is not a digit, a
+ * minus or the decimal separator is dropped, so a pasted `Rp 1.250.000,-`
+ * still reads as a number. `null` means there were no digits at all.
+ */
+export function parseGrouped(text, options = {}) {
+    const { decimal = '.' } = options;
+    let cleaned = '';
+    for (const char of text) {
+        if (char === decimal)
+            cleaned += '.';
+        else if (char >= '0' && char <= '9')
+            cleaned += char;
+        else if (char === '-' && cleaned === '')
+            cleaned += char;
+    }
+    if (!cleaned || cleaned === '-' || cleaned === '.')
+        return null;
+    const value = Number(cleaned);
+    return Number.isFinite(value) ? value : null;
+}

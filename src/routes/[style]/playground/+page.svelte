@@ -32,6 +32,15 @@
 	let city = $state('');
 	let search = $state('');
 	let uploads = $state<File[]>([]);
+	let lookup = $state('');
+	let found = $state('');
+	let domain = $state('sundara');
+	let amount = $state<number | null>(84000000);
+	let slot = $state('09:30');
+	let topics = $state(['brand', 'motion']);
+	let accent = $state('#0f766e');
+	let logo = $state<File[]>([]);
+	let otp = $state('');
 	let sort = $state<{ key: string; direction: 'asc' | 'desc' } | null>(null);
 	let picked = $state<string[]>([]);
 
@@ -624,6 +633,84 @@
 					onaccept={(files) => toast.success(`${files.length} file(s) added`)}
 					onreject={(bad) => toast.error(`${bad.length} file(s) rejected`)}
 				/>
+			</section>
+
+			<!-- the specialised fields -->
+			<section class="flex flex-col gap-5">
+				<h2 class="font-heading text-lg font-medium">Specialised fields</h2>
+
+				<div class="grid gap-5 sm:grid-cols-2">
+					<ui.Field label="Find a project" hint="Runs 300ms after you stop typing.">
+						<ui.SearchInput
+							bind:value={lookup}
+							debounce={300}
+							placeholder="Keyword"
+							onsearch={(next) => (found = next)}
+						/>
+					</ui.Field>
+
+					<ui.Field label="Studio domain">
+						<ui.InputGroup>
+							<ui.InputAddon>https://</ui.InputAddon>
+							<ui.Input bind:value={domain} placeholder="sundara" />
+							<ui.InputAddon>.com</ui.InputAddon>
+						</ui.InputGroup>
+					</ui.Field>
+
+					<ui.Field label="Budget" hint="Grouped on blur — the bound value stays a number.">
+						<ui.CurrencyInput
+							bind:value={amount}
+							currency="Rp"
+							group="."
+							decimal=","
+							precision={0}
+							min={0}
+						/>
+					</ui.Field>
+
+					<ui.Field label="Kickoff time">
+						<ui.TimeInput bind:value={slot} min="08:00" max="17:00" step={15} />
+					</ui.Field>
+
+					<ui.Field label="Topics" hint="Enter or a comma commits. Six at most.">
+						<ui.TagsInput
+							bind:tags={topics}
+							max={6}
+							tone="accent"
+							onreject={(reason) => toast.error(`Tag refused: ${reason}`)}
+						/>
+					</ui.Field>
+
+					<ui.Field label="Brand colour">
+						<ui.ColorInput
+							bind:value={accent}
+							swatches={['#0f766e', '#b45309', '#1d4ed8', '#be123c', '#111827']}
+						/>
+					</ui.Field>
+
+					<ui.Field label="Logo" hint="One file, 2 MB.">
+						<ui.FileInput
+							bind:files={logo}
+							accept="image/*"
+							maxSize={2 * 1024 * 1024}
+							onreject={(bad) => toast.error(`${bad.length} file(s) rejected`)}
+						/>
+					</ui.Field>
+
+					<ui.Field label="Verification code" hint="Paste all six at once.">
+						<ui.PinInput
+							bind:value={otp}
+							length={6}
+							groupAfter={3}
+							oncomplete={(code) => toast.success(`Code ${code} submitted`)}
+						/>
+					</ui.Field>
+				</div>
+
+				<p class="font-mono text-xs text-text-muted">
+					{found ? `searching “${found}”` : 'nothing searched yet'} · {topics.length} topics ·
+					{amount === null ? 'no budget' : money.format(amount)} · {slot || 'no time'} · {accent}
+				</p>
 			</section>
 
 			<!-- command, confirm, context menu -->

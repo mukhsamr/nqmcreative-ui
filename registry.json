@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"homepage": "https://github.com/mukhsamr/nqmcreative-ui",
-	"count": 63,
+	"count": 71,
 	"demoStyle": "matte",
 	"styles": [
 		{
@@ -267,6 +267,148 @@
 			},
 			"uses": [],
 			"modules": []
+		},
+		{
+			"name": "InputAddon",
+			"slug": "input-addon",
+			"category": "forms",
+			"description": "Fixed label joined to an input inside an InputGroup.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/input-addon",
+				"paper": "@nqmcreative/ui/paper/input-addon",
+				"sprout": "@nqmcreative/ui/sprout/input-addon"
+			},
+			"uses": [
+				"Input"
+			],
+			"modules": []
+		},
+		{
+			"name": "SearchInput",
+			"slug": "search-input",
+			"category": "forms",
+			"description": "Search field with a clear button and a debounced callback.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/search-input",
+				"paper": "@nqmcreative/ui/paper/search-input",
+				"sprout": "@nqmcreative/ui/sprout/search-input"
+			},
+			"uses": [
+				"Input"
+			],
+			"modules": [
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "PinInput",
+			"slug": "pin-input",
+			"category": "forms",
+			"description": "One box per character, with paste spreading and arrow keys.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/pin-input",
+				"paper": "@nqmcreative/ui/paper/pin-input",
+				"sprout": "@nqmcreative/ui/sprout/pin-input"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"pin",
+				"tones"
+			]
+		},
+		{
+			"name": "TagsInput",
+			"slug": "tags-input",
+			"category": "forms",
+			"description": "Free-text tokens committed on Enter, deduplicated and capped.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/tags-input",
+				"paper": "@nqmcreative/ui/paper/tags-input",
+				"sprout": "@nqmcreative/ui/sprout/tags-input"
+			},
+			"uses": [],
+			"modules": [
+				"locale",
+				"tags",
+				"tones"
+			]
+		},
+		{
+			"name": "CurrencyInput",
+			"slug": "currency-input",
+			"category": "forms",
+			"description": "Amount field that groups on blur and binds a number.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/currency-input",
+				"paper": "@nqmcreative/ui/paper/currency-input",
+				"sprout": "@nqmcreative/ui/sprout/currency-input"
+			},
+			"uses": [
+				"Input"
+			],
+			"modules": [
+				"number",
+				"tones"
+			]
+		},
+		{
+			"name": "TimeInput",
+			"slug": "time-input",
+			"category": "forms",
+			"description": "HH:MM field with steppers, bounds and a minute step.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/time-input",
+				"paper": "@nqmcreative/ui/paper/time-input",
+				"sprout": "@nqmcreative/ui/sprout/time-input"
+			},
+			"uses": [
+				"Input"
+			],
+			"modules": [
+				"locale",
+				"time",
+				"tones"
+			]
+		},
+		{
+			"name": "ColorInput",
+			"slug": "color-input",
+			"category": "forms",
+			"description": "Hex field paired with the native swatch and fixed choices.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/color-input",
+				"paper": "@nqmcreative/ui/paper/color-input",
+				"sprout": "@nqmcreative/ui/sprout/color-input"
+			},
+			"uses": [
+				"Input"
+			],
+			"modules": [
+				"color",
+				"locale",
+				"tones"
+			]
+		},
+		{
+			"name": "FileInput",
+			"slug": "file-input",
+			"category": "forms",
+			"description": "One-line file picker with type, size and count validation.",
+			"subpaths": {
+				"matte": "@nqmcreative/ui/matte/file-input",
+				"paper": "@nqmcreative/ui/paper/file-input",
+				"sprout": "@nqmcreative/ui/sprout/file-input"
+			},
+			"uses": [
+				"Input"
+			],
+			"modules": [
+				"files",
+				"locale",
+				"tones"
+			]
 		},
 		{
 			"name": "Combobox",

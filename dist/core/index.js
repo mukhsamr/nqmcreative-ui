@@ -23,7 +23,11 @@ export { nextSort, sortRows, toggleKey } from './table.js';
 export { pageRange } from './pagination.js';
 export { sortFiles, matchesAccept, formatSize } from './files.js';
 export { passwordScore } from './password.js';
-export { clampToStep, percentOf, stepDecimals } from './number.js';
+export { clampToStep, formatGrouped, parseGrouped, percentOf, stepDecimals } from './number.js';
+export { caretIndex, clearFrom, fillFrom, sanitisePin } from './pin.js';
+export { addTag, splitTags } from './tags.js';
+export { normaliseHex, isDark } from './color.js';
+export { MINUTES_IN_DAY, clampTime, formatClock, formatTime, parseTime, stepTime } from './time.js';
 /* --- dates --- */
 export { toISO, fromISO, today, isSameDay, addDays, addMonths, monthGrid, weekdayNames, monthLabel, isOutOfRange, formatISO, parseFormatted } from './date.js';
 export { calendarKeyMove, dateHint } from './calendar.js';

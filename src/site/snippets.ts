@@ -66,6 +66,87 @@ export const appHtml = `<link rel="preconnect" href="https://fonts.gstatic.com" 
 	if (saved === 'dark' || saved === 'light') document.documentElement.classList.add(saved);
 </script>`;
 
+/* ------------------------------------------------------- outside SvelteKit -- */
+
+export const viteScaffold = `npm create vite@latest myapp -- --template svelte-ts
+cd myapp
+npm i @nqmcreative/ui
+npm i -D tailwindcss @tailwindcss/vite
+npx nqm-ui init --style matte`;
+
+export const viteConfigPlain = `import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+	// tailwindcss() must come before svelte()
+	plugins: [tailwindcss(), svelte()]
+});`;
+
+export const viteEntry = `import './app.css';
+import { mount } from 'svelte';
+import App from './App.svelte';
+
+export default mount(App, { target: document.getElementById('app') });`;
+
+export const laravelInstall = `npm i @nqmcreative/ui
+npm i -D svelte @sveltejs/vite-plugin-svelte tailwindcss @tailwindcss/vite
+npx nqm-ui init --style matte`;
+
+export const laravelViteConfig = `import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+	plugins: [
+		laravel({ input: ['resources/css/app.css', 'resources/js/app.js'], refresh: true }),
+		tailwindcss(),
+		svelte()
+	]
+});`;
+
+export const laravelCss = `@import 'tailwindcss';
+@import '@nqmcreative/ui/matte/theme.css';
+@import '@nqmcreative/ui/matte/fonts.css';
+
+/* Two levels up from resources/css to the project root. */
+@source '../../node_modules/@nqmcreative/ui/dist/styles/matte';
+
+/* Your own markup, which lives outside this folder. */
+@source '../js';
+@source '../views';`;
+
+export const laravelBlade = `<head>
+	@vite(['resources/css/app.css', 'resources/js/app.js'])
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<script>
+		const saved = localStorage.getItem('nqm-theme');
+		if (saved === 'dark' || saved === 'light') document.documentElement.classList.add(saved);
+	</script>
+</head>`;
+
+export const laravelMount = `import { mount } from 'svelte';
+import App from './App.svelte';
+
+// One island per view, or one root for the whole page — Blade renders the
+// shell, Svelte takes the node it is given.
+const target = document.getElementById('app');
+if (target) mount(App, { target });`;
+
+export const laravelIsland = `<script>
+	import { Button, Field, Input } from '@nqmcreative/ui/matte';
+
+	let email = $state('');
+</script>
+
+<Field label="Work email">
+	<Input bind:value={email} placeholder="you@example.com" />
+</Field>
+
+<Button tone="accent">Get started</Button>`;
+
 export const usage = `<script lang="ts">
 	import { Button, Field, Input } from '@nqmcreative/ui/matte';
 
@@ -228,3 +309,130 @@ export const toneRule = `<!-- Tailwind only sees literal class strings -->
 export const borderRule = `<!-- two colours for the same property: CSS order decides, not class order -->
 <div class="border border-hairline border-brand">…</div>   <!-- unpredictable -->
 <div class="border border-hairline border-l-brand">…</div> <!-- fine -->`;
+
+/* --------------------------------------------------------- form inputs -- */
+
+export const inputWrapping = `// four of them are an Input with a job on top of it
+SearchInput   Input + a clear button + a debounced callback
+CurrencyInput Input + grouping on blur, bound to a number
+TimeInput     Input + steppers, bounds and a minute step
+ColorInput    Input + the native swatch, bound to a hex string
+
+// four draw their own box, because the shape is not a field
+InputAddon    a fixed label welded to an InputGroup
+PinInput      one box per character
+TagsInput     chips and a field sharing one border
+FileInput     a button, a filename and a clear button`;
+
+export const searchInputUse = `<script lang="ts">
+	import { SearchInput } from '@nqmcreative/ui/matte';
+
+	let value = $state('');
+	let results = $state<string[]>([]);
+</script>
+
+<!-- \`value\` updates on every keystroke; \`onsearch\` waits for the pause -->
+<SearchInput
+	bind:value
+	debounce={300}
+	placeholder="Search invoices"
+	onsearch={async (query) => (results = await search(query))}
+/>`;
+
+export const inputAddonUse = `<InputGroup>
+	<InputAddon>https://</InputAddon>
+	<Input bind:value={handle} placeholder="studio" />
+	<InputAddon>.com</InputAddon>
+</InputGroup>
+
+<InputGroup>
+	<Input bind:value={weight} inputmode="decimal" />
+	<InputAddon>kg</InputAddon>
+</InputGroup>`;
+
+export const pinInputUse = `<script lang="ts">
+	import { PinInput } from '@nqmcreative/ui/matte';
+
+	let code = $state('');
+</script>
+
+<PinInput
+	bind:value={code}
+	length={6}
+	groupAfter={3}
+	name="otp"
+	oncomplete={(value) => verify(value)}
+/>`;
+
+export const tagsInputUse = `<script lang="ts">
+	import { TagsInput } from '@nqmcreative/ui/matte';
+
+	let tags = $state(['svelte']);
+</script>
+
+<TagsInput
+	bind:tags
+	max={6}
+	minLength={2}
+	separators={[',', ' ']}
+	name="topics"
+	onreject={(reason) => toast.error(reason)}
+/>`;
+
+export const currencyInputUse = `<script lang="ts">
+	import { CurrencyInput } from '@nqmcreative/ui/matte';
+
+	// A number, not a string — the field owns the formatting, you own the value.
+	let price = $state<number | null>(1250000);
+</script>
+
+<CurrencyInput bind:value={price} currency="Rp" group="." decimal="," precision={0} min={0} />`;
+
+export const timeInputUse = `<script lang="ts">
+	import { TimeInput } from '@nqmcreative/ui/matte';
+
+	// Always \`HH:MM\` — the same string <input type="time"> would post.
+	let start = $state('09:00');
+</script>
+
+<TimeInput bind:value={start} min="08:00" max="17:00" step={15} />`;
+
+export const colorInputUse = `<script lang="ts">
+	import { ColorInput } from '@nqmcreative/ui/matte';
+
+	let brand = $state('#0f766e');
+</script>
+
+<ColorInput bind:value={brand} swatches={['#0f766e', '#b45309', '#1d4ed8']} />`;
+
+export const fileInputUse = `<script lang="ts">
+	import { FileInput } from '@nqmcreative/ui/matte';
+
+	let files = $state<File[]>([]);
+</script>
+
+<FileInput
+	bind:files
+	name="avatar"
+	accept="image/*,.pdf"
+	maxSize={2 * 1024 * 1024}
+	onreject={(rejected) => console.warn(rejected)}
+/>`;
+
+export const inputBindings = `let query = $state('');            // SearchInput  — string
+let code = $state('');             // PinInput     — string, shorter means incomplete
+let tags = $state<string[]>([]);   // TagsInput    — string[]
+let price = $state<number | null>(null); // CurrencyInput — number, null when empty
+let start = $state('09:00');       // TimeInput    — 'HH:MM', '' when empty
+let brand = $state('#0f766e');     // ColorInput   — '#rrggbb'
+let files = $state<File[]>([]);    // FileInput    — File[]`;
+
+export const inputCore = `// the rules these fields run on, usable without any of them
+import {
+	addTag, splitTags,           // tokens: dedup, cap, paste splitting
+	fillFrom, sanitisePin,       // codes: where a paste lands, what a box takes
+	parseTime, clampTime,        // clock: 'HH:MM' in and out, bounds and steps
+	formatGrouped, parseGrouped, // money: group on the way out, forgive on the way in
+	normaliseHex,                // colour: '#abc' becomes '#aabbcc'
+	sortFiles, formatSize        // files: accepted, rejected and why
+} from '@nqmcreative/ui/core';`;

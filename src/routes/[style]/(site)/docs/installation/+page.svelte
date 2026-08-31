@@ -60,14 +60,15 @@
 	</p>
 	<CodeBlock code={code.scaffold} label="terminal" />
 	<p class="font-sans leading-relaxed text-text-secondary">
-		Then let the CLI do the wiring — it writes <code class="font-mono text-sm text-brand"
-			>app.css</code
-		>, patches <code class="font-mono text-sm text-brand">app.html</code>, and adds the CSS import
-		to your root layout:
+		Then let the CLI do the wiring — it writes the entry
+		<code class="font-mono text-sm text-brand">app.css</code>, patches the document
+		<code class="font-mono text-sm text-brand">&lt;head&gt;</code>, and makes sure that CSS is
+		loaded once:
 	</p>
 	<CodeBlock code={code.cliInit} label="terminal" />
 	<p class="font-sans leading-relaxed text-text-secondary">
-		It will not rewrite your Vite config — it prints the two lines to paste. Every write is
+		It recognises SvelteKit, a plain Vite app and Laravel, and wires whichever set of files that one
+		has. It will not rewrite your Vite config — it prints the two lines to paste. Every write is
 		idempotent, so running it twice changes nothing. Add
 		<code class="font-mono text-sm text-brand">--dry-run</code> to see what it would touch.
 	</p>
@@ -116,6 +117,68 @@
 		<code class="font-mono text-brand">true</code> and svelte-check rejects it.
 	</p>
 	<CodeBlock code={code.appHtml} label="src/app.html" />
+</section>
+
+<section class="flex flex-col gap-4">
+	<h2 class="font-heading text-xl font-medium tracking-tight">Outside SvelteKit</h2>
+	<p class="font-sans leading-relaxed text-text-secondary">
+		Nothing in the library imports <code class="font-mono text-sm text-brand">$app/*</code>,
+		<code class="font-mono text-sm text-brand">$env/*</code> or
+		<code class="font-mono text-sm text-brand">@sveltejs/kit</code>. The only peer dependency is
+		<code class="font-mono text-sm text-brand">svelte ^5</code>, and every DOM call sits inside an
+		action or an effect — so a plain Vite app works, and so does Laravel with Vite as its front end.
+		<code class="font-mono text-sm text-brand">nqm-ui init</code> recognises all three and wires the files
+		that project shape actually has.
+	</p>
+	<ui.Alert tone="info" title="One extra dependency out here">
+		The components ship as <code class="font-mono">.svelte</code> source, published under a
+		<code class="font-mono">svelte</code> export condition.
+		<code class="font-mono">@sveltejs/vite-plugin-svelte</code> is what resolves that condition and compiles
+		them. SvelteKit brings it along; everywhere else it is an install.
+	</ui.Alert>
+
+	<h3 class="pt-2 font-sans text-sm font-medium text-text">Svelte + Vite</h3>
+	<CodeBlock code={code.viteScaffold} label="terminal" />
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		<code class="font-mono text-brand">init</code> writes
+		<code class="font-mono text-brand">src/app.css</code>, patches the
+		<code class="font-mono text-brand">&lt;head&gt;</code> in
+		<code class="font-mono text-brand">index.html</code>, and puts the CSS import at the top of
+		<code class="font-mono text-brand">src/main.ts</code>. The Vite config is the one thing it
+		prints rather than rewrites.
+	</p>
+	<CodeBlock code={code.viteConfigPlain} label="vite.config.ts" />
+	<CodeBlock code={code.viteEntry} label="src/main.ts" />
+
+	<h3 class="pt-2 font-sans text-sm font-medium text-text">Laravel</h3>
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Vite is already how Laravel builds its front end, so Svelte and this package are the only
+		additions. Blade renders the shell; Svelte takes the node it is handed.
+	</p>
+	<CodeBlock code={code.laravelInstall} label="terminal" />
+	<CodeBlock code={code.laravelViteConfig} label="vite.config.js" />
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		The entry CSS is <code class="font-mono text-brand">resources/css/app.css</code>, two levels
+		below the project root — so
+		<code class="font-mono text-brand">@source</code> walks two up rather than one.
+	</p>
+	<CodeBlock code={code.laravelCss} label="resources/css/app.css — matte" />
+	<ui.Alert tone="warning" title="Point Tailwind at your own markup too">
+		Blade templates and Svelte islands sit outside
+		<code class="font-mono">resources/css</code>, so the two
+		<code class="font-mono">@source</code> lines below the package's are not optional either — without
+		them the classes you write yourself go missing exactly the way the package's would.
+	</ui.Alert>
+	<p class="font-sans text-sm leading-relaxed text-text-secondary">
+		Nothing imports that CSS from JavaScript: the
+		<code class="font-mono text-brand">@vite</code> directive hands the path to Vite, and the
+		<code class="font-mono text-brand">&lt;head&gt;</code> it sits in is the one
+		<code class="font-mono text-brand">init</code> patches with the preconnect and the no-flash theme
+		script.
+	</p>
+	<CodeBlock code={code.laravelBlade} label="resources/views/app.blade.php" />
+	<CodeBlock code={code.laravelMount} label="resources/js/app.js" />
+	<CodeBlock code={code.laravelIsland} label="resources/js/App.svelte" />
 </section>
 
 <section class="flex flex-col gap-4">

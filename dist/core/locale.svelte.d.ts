@@ -52,6 +52,14 @@ export interface Locale {
     passwordStrength: [string, string, string, string, string];
     decrease: string;
     increase: string;
+    chooseFile: string;
+    noFile: string;
+    clearSearch: string;
+    /** Prefixed to the box number, so box three is labelled `Digit 3`. */
+    digit: string;
+    addTag: string;
+    duplicateTag: string;
+    pickColour: string;
     /** BCP 47 tag handed to `Intl` for month and weekday names. */
     dateLocale: string;
     /** Order of the date parts the input accepts and prints. */
