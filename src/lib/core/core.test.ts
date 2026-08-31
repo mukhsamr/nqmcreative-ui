@@ -282,7 +282,7 @@ describe('calendarKeyMove', () => {
 });
 
 describe('dateHint', () => {
-	it('spells the placeholder in the locale part order', () => {
+	it('spells the placeholder in the chosen part order', () => {
 		expect(dateHint('dmy')).toBe('DD/MM/YYYY');
 		expect(dateHint('mdy')).toBe('MM/DD/YYYY');
 		expect(dateHint('ymd')).toBe('YYYY/MM/DD');

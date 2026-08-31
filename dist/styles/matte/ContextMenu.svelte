@@ -3,7 +3,6 @@
 	import { anchored } from '../../core/actions/anchor.js';
 	import { clickOutside, focusTrap, navigateList, portal } from '../../core/actions/dismissable.js';
 	import { menuItems } from '../../core/trigger.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 
 	interface Props {
 		/** The region that responds to a right-click. */
@@ -26,8 +25,6 @@
 		class: className = '',
 		menuClass = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let menuEl: HTMLElement | null = $state(null);
 	/**
@@ -79,7 +76,7 @@
 			if ((event.target as HTMLElement).closest('[role="menuitem"]:not([disabled])')) open = false;
 		}}
 		role="menu"
-		aria-label={label ?? t.current.menu}
+		aria-label={label ?? 'Menu'}
 		tabindex="-1"
 		class="z-50 flex max-h-[min(24rem,80vh)] min-w-44 flex-col overflow-y-auto border border-hairline bg-bg py-1 font-sans {menuClass}"
 	>

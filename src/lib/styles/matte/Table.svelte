@@ -16,7 +16,6 @@
 	import Checkbox from './Checkbox.svelte';
 	import type { Tone } from '../../core/tones.js';
 	import { nextSort, sortRows, toggleKey, type TableSort } from '../../core/table.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 
 	interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'onselect'> {
 		columns: TableColumn[];
@@ -82,8 +81,6 @@
 		...rest
 	}: Props = $props();
 
-	const t = useLocale();
-
 	const aligns = {
 		left: 'text-left',
 		center: 'text-center',
@@ -136,14 +133,14 @@
 		>
 			<span class="font-mono text-xs font-medium tracking-wide text-text uppercase">
 				{selected.length}
-				{t.current.selected}
+				selected
 			</span>
 			<button
 				type="button"
 				onclick={clearSelection}
 				class="font-mono text-xs tracking-wide text-text-muted uppercase transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 			>
-				{t.current.clear}
+				Clear selection
 			</button>
 			<div class="ml-auto flex flex-wrap items-center gap-2">
 				{@render bulkActions?.({ selected, clear: clearSelection })}
@@ -173,7 +170,7 @@
 								checked={allSelected}
 								indeterminate={someSelected}
 								{tone}
-								aria-label={t.current.selectAllRows}
+								aria-label="Select all rows"
 								onchange={toggleAll}
 							/>
 						</th>
@@ -220,7 +217,7 @@
 							colspan={columns.length + (selectable ? 1 : 0)}
 							class="px-3.5 py-10 text-center text-sm text-text-muted"
 						>
-							{#if empty}{@render empty()}{:else}{t.current.noData}{/if}
+							{#if empty}{@render empty()}{:else}No data{/if}
 						</td>
 					</tr>
 				{:else}
@@ -237,7 +234,7 @@
 									<Checkbox
 										checked={isSelected}
 										{tone}
-										aria-label={t.current.selectRow}
+										aria-label="Select row"
 										onchange={() => toggleRow(row)}
 									/>
 								</td>

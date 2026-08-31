@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import { iconLg } from './icon.js';
 	import type { HTMLDialogAttributes } from 'svelte/elements';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { isBackdropClick, syncDialog } from '../../core/dialog.svelte.js';
 
 	export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
@@ -39,7 +38,6 @@
 		...rest
 	}: Props = $props();
 
-	const t = useLocale();
 	let dialog: HTMLDialogElement | null = $state(null);
 
 	const horizontal = $derived(side === 'left' || side === 'right');
@@ -109,7 +107,7 @@
 					<button
 						type="button"
 						onclick={close}
-						aria-label={t.current.close}
+						aria-label="Close"
 						class="-m-1 shrink-0 p-1 text-text-muted transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
 					>
 						<svg class="size-4" viewBox="0 0 14 14" fill="none" aria-hidden="true">

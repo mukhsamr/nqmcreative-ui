@@ -10,7 +10,6 @@
 		storedTheme,
 		type Theme
 	} from '../../core/theme.svelte.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 
 	interface Props {
 		/** Bindable. `'system'` follows the OS until the visitor chooses. */
@@ -33,8 +32,6 @@
 		class: className = ''
 	}: Props = $props();
 
-	const t = useLocale();
-
 	$effect(() => {
 		applyTheme(theme);
 		if (persist) persistTheme(theme);
@@ -50,8 +47,8 @@
 	}
 
 	const options = $derived([
-		{ value: 'light' as Theme, label: t.current.lightMode },
-		{ value: 'dark' as Theme, label: t.current.darkMode },
+		{ value: 'light' as Theme, label: 'Light' },
+		{ value: 'dark' as Theme, label: 'Dark' },
 		{ value: 'system' as Theme, label: 'Auto' }
 	]);
 </script>
@@ -95,7 +92,7 @@
 {#if variant === 'segmented'}
 	<div
 		role="radiogroup"
-		aria-label={t.current.toggleTheme}
+		aria-label="Toggle theme"
 		class="inline-flex items-center gap-1 rounded-lg border border-hairline bg-bg-inset p-1 {className}"
 	>
 		{#each options as option (option.value)}
@@ -119,8 +116,8 @@
 	<button
 		type="button"
 		onclick={cycle}
-		aria-label="{t.current.toggleTheme} ({theme})"
-		title={t.current.toggleTheme}
+		aria-label="Toggle theme ({theme})"
+		title="Toggle theme"
 		class="inline-flex size-9 items-center justify-center rounded-md border border-hairline bg-bg text-text-secondary shadow-xs transition-colors duration-150 ease-brand-out hover:bg-bg-alt hover:text-text {focusRing} {toneRing[
 			tone
 		]} {className}"

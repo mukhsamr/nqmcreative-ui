@@ -69,7 +69,7 @@ export function isOutOfRange(date, min, max) {
         return true;
     return false;
 }
-/** Prints `YYYY-MM-DD` in the locale's part order, e.g. `31/12/2026`. */
+/** Prints `YYYY-MM-DD` in the chosen part order, e.g. `31/12/2026`. */
 export function formatISO(value, format, separator = '/') {
     const date = fromISO(value);
     if (!date)

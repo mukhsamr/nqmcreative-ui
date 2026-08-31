@@ -1,5 +1,5 @@
 /**
- * Password strength, 0–4, matching the five labels in the locale.
+ * Password strength, 0–4, for labelling as you see fit.
  *
  * Deliberately simple — length plus character variety. It is a nudge in the
  * form, not a security control, and anything cleverer would need a dictionary

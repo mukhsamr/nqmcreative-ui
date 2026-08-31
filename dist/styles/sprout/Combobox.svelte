@@ -4,7 +4,6 @@
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
 	import { toneFocusWithinBorder, toneSoft, toneText, type Tone } from '../../core/tones.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { iconMd } from './icon.js';
 	import { edge, soft } from './lift.js';
 
@@ -51,8 +50,6 @@
 		onchange,
 		class: className = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let open = $state(false);
 	let query = $state('');
@@ -162,7 +159,7 @@
 		aria-controls="{id ?? 'combobox'}-listbox"
 		aria-activedescendant={open && flat[active] ? `${id ?? 'combobox'}-opt-${active}` : undefined}
 		aria-invalid={invalid ? 'true' : undefined}
-		placeholder={selected ? selected.label : (placeholder ?? t.current.comboboxPlaceholder)}
+		placeholder={selected ? selected.label : (placeholder ?? 'Search…')}
 		value={open ? query : (selected?.label ?? '')}
 		oninput={(event) => {
 			query = event.currentTarget.value;
@@ -180,7 +177,7 @@
 		<button
 			type="button"
 			onclick={clear}
-			aria-label={t.current.clear}
+			aria-label="Clear selection"
 			class="shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 		>
 			<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -218,7 +215,7 @@
 	>
 		{#if flat.length === 0}
 			<p class="px-3 py-6 text-center text-sm text-text-muted">
-				{emptyText ?? t.current.noMatches}
+				{emptyText ?? 'No matches'}
 			</p>
 		{:else}
 			{#each groups as [group, items] (group)}

@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import Button from './Button.svelte';
 	import Modal from './Modal.svelte';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneSoft, type Tone } from '../../core/tones.js';
 
 	interface Props {
@@ -36,8 +35,6 @@
 		icon,
 		children
 	}: Props = $props();
-
-	const t = useLocale();
 
 	async function confirm() {
 		try {
@@ -88,10 +85,10 @@
 
 	{#snippet footer()}
 		<Button variant="outline" tone="neutral" onclick={cancel} disabled={loading}>
-			{cancelLabel ?? t.current.cancel}
+			{cancelLabel ?? 'Cancel'}
 		</Button>
 		<Button {tone} onclick={confirm} {loading}>
-			{confirmLabel ?? t.current.confirm}
+			{confirmLabel ?? 'Confirm'}
 		</Button>
 	{/snippet}
 </Modal>

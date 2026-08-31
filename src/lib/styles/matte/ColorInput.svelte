@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import { normaliseHex } from '../../core/color.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import type { Tone } from '../../core/tones.js';
 	import Input, { type InputSize } from './Input.svelte';
 
@@ -26,8 +25,6 @@
 		class: className = '',
 		...rest
 	}: Props = $props();
-
-	const t = useLocale();
 
 	// The text can be mid-typing (`#a2`) while the swatch needs a real colour,
 	// so the swatch follows the last value that parsed rather than the field.
@@ -82,7 +79,7 @@
 					type="color"
 					value={resolved}
 					{disabled}
-					aria-label={t.current.pickColour}
+					aria-label="Pick a colour"
 					oninput={(event) => choose(event.currentTarget.value)}
 					class="absolute inset-0 cursor-pointer opacity-0 disabled:cursor-not-allowed"
 				/>

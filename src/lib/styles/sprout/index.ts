@@ -35,13 +35,6 @@ export {
 	navigateList,
 	portal,
 	toast,
-	locale,
-	setLocale,
-	provideLocale,
-	useLocale,
-	enUS,
-	idID,
-	LocaleStore,
 	applyTheme,
 	storedTheme,
 	toISO,
@@ -66,16 +59,12 @@ export type {
 	Toast,
 	ToastOptions,
 	ToastAction,
-	Locale,
 	Theme,
 	DateFormat,
 	TableSort,
 	SortDirection,
 	RejectedFile
 } from '../../core/index.js';
-
-/* --- locale --- */
-export { default as LocaleProvider } from './LocaleProvider.svelte';
 
 /* --- actions --- */
 export { default as Button } from './Button.svelte';

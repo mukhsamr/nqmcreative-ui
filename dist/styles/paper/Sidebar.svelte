@@ -35,7 +35,6 @@
 </script>
 
 <script lang="ts">
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { iconMd } from './icon.js';
 	import { focusRing, toneRing, toneSoft, type Tone } from '../../core/tones.js';
 
@@ -68,8 +67,6 @@
 		onnavigate,
 		class: className = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	const keyOf = (item: SidebarItem) => item.id ?? item.href ?? item.label;
 
@@ -141,7 +138,7 @@
 		</div>
 	{/if}
 
-	<nav aria-label={t.current.navigation} class="flex-1 overflow-y-auto p-2">
+	<nav aria-label="Navigation" class="flex-1 overflow-y-auto p-2">
 		{#each sections as section, i (section.label ?? i)}
 			<div class="flex flex-col gap-0.5 {i > 0 ? 'mt-4' : ''}">
 				{#if section.label && !collapsed}
@@ -230,7 +227,7 @@
 				<button
 					type="button"
 					onclick={() => (collapsed = !collapsed)}
-					aria-label={collapsed ? t.current.expandSidebar : t.current.collapseSidebar}
+					aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
 					class="inline-flex h-8 items-center justify-center gap-2 rounded-md font-sans text-xs text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text {focusRing} {toneRing[
 						tone
 					]}"
@@ -248,7 +245,7 @@
 							stroke-linecap="round"
 						/>
 					</svg>
-					{#if !collapsed}<span>{t.current.collapseSidebar}</span>{/if}
+					{#if !collapsed}<span>Collapse sidebar</span>{/if}
 				</button>
 			{/if}
 		</div>

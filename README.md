@@ -1,7 +1,7 @@
 # @nqmcreative/ui
 
 Svelte 5 (runes) + Tailwind CSS v4 component library. One package, **three
-styles**, 71 components each — the same props, the same behaviour, a different
+styles**, 70 components each — the same props, the same behaviour, a different
 look. Eight tones, light and dark, no runtime dependencies.
 
 | style    | import                   | character                                                                                                                      |
@@ -11,7 +11,7 @@ look. Eight tones, light and dark, no runtime dependencies.
 | `sprout` | `@nqmcreative/ui/sprout` | Warm and fully rounded — leaf green on cream, pill buttons, and a round display face. For school, community and family sites.  |
 
 The docs site lives in this repo — every component with a live demo, plus
-theming, locale and contributing guides. `bun run dev` to read it.
+theming and contributing guides. `bun run dev` to read it.
 
 ## Install
 
@@ -307,33 +307,31 @@ Each style's `theme.css` ships both palettes; nothing in a component says
 `dark:`. `<html class="dark">` or `class="light"` forces one, bare `<html>`
 follows the OS. `ThemeToggle` handles all three.
 
-### Locale
+### Built-in strings
 
-Every built-in string — ARIA names, `No data`, the calendar's month names —
-comes from one object, shared by every style:
+Components render English text of their own — ARIA names, `No data`, `Choose
+file` — written inline at the call site. Where a caller would plausibly want to
+change one, it is a prop: `<Table empty="…">`, `<Dropzone label="…">`,
+`<FileInput placeholder="…">`.
 
-```js
-import { setLocale, idID } from '@nqmcreative/ui/core';
-
-setLocale(idID);
-```
-
-`enUS` and `idID` ship with the package; pass a partial to change a few keys.
-Under SSR use `<LocaleProvider>` instead, so the locale is scoped to a request.
+Dates are the one place the browser decides: `Calendar` and `DatePicker` take
+month and weekday names from `Intl` with no locale argument, so they follow the
+reader's own system. The order of the parts the field parses and prints is
+explicit instead — `<DatePicker format="dmy">`, defaulting to `dmy`.
 
 ## Layout
 
 ```
 src/lib/core/            behaviour, a11y, types — no markup, no classes
-src/lib/styles/matte/    71 components
-src/lib/styles/paper/    71 components
-src/lib/styles/sprout/   71 components
+src/lib/styles/matte/    70 components
+src/lib/styles/paper/    70 components
+src/lib/styles/sprout/   70 components
 scripts/catalogue.mjs    the list every style must implement
 ```
 
 `core` holds what has no opinion about looks: focus traps, roving keyboard
 navigation, viewport-aware anchoring, date maths, file validation, table
-sorting, the toast queue, the locale strings. There is no `matte` version of a
+sorting, the toast queue. There is no `matte` version of a
 focus trap, so no style writes one.
 
 A style holds only markup and classes. It may differ from another completely —
@@ -354,7 +352,7 @@ same.
 | App shell    | `Navbar`, `Sidebar`, `Footer`                                                                                                                                                                                                                                                                                                             |
 | Overlay      | `Modal`, `ConfirmDialog`, `Drawer`, `Dropdown` + `MenuItem` + `MenuSeparator`, `ContextMenu`, `CommandPalette`, `Popover`, `Tooltip`                                                                                                                                                                                                      |
 | Marketing    | `HeroSection`, `FeatureGrid`, `FeatureCard`, `PricingCard`, `Testimonial`, `LogoCloud`, `CTASection`, `StatsBand`                                                                                                                                                                                                                         |
-| System       | `ThemeToggle`, `LocaleProvider`                                                                                                                                                                                                                                                                                                           |
+| System       | `ThemeToggle`                                                                                                                                                                                                                                                                                                                             |
 
 Overlays are built on the native top layer and three in-house actions
 (`portal`, `focusTrap`, `anchored`) rather than a positioning dependency.

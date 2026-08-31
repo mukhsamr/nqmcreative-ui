@@ -16,7 +16,6 @@
 
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { iconMd } from './icon.js';
 	import { focusRing, toneRing, toneText, type Tone } from '../../core/tones.js';
 	import Drawer from './Drawer.svelte';
@@ -53,8 +52,6 @@
 		class: className = ''
 	}: Props = $props();
 
-	const t = useLocale();
-
 	const link =
 		'inline-flex items-center gap-2 font-sans text-[15px] transition-colors duration-150 ease-brand-out';
 </script>
@@ -64,10 +61,7 @@
 		? 'border-b border-hairline'
 		: ''} {className}"
 >
-	<nav
-		aria-label={t.current.navigation}
-		class="mx-auto flex h-16 w-full max-w-6xl items-center gap-6 px-6"
-	>
+	<nav aria-label="Navigation" class="mx-auto flex h-16 w-full max-w-6xl items-center gap-6 px-6">
 		{#if brand}
 			<div class="flex shrink-0 items-center">{@render brand()}</div>
 		{/if}
@@ -138,7 +132,7 @@
 			<button
 				type="button"
 				onclick={() => (menuOpen = true)}
-				aria-label={t.current.openMenu}
+				aria-label="Open menu"
 				aria-expanded={menuOpen}
 				class="inline-flex size-9 items-center justify-center text-text-secondary transition-colors duration-150 hover:text-text md:hidden {focusRing} {toneRing[
 					tone
@@ -152,7 +146,7 @@
 	</nav>
 </header>
 
-<Drawer bind:open={menuOpen} side="right" size="sm" title={t.current.navigation}>
+<Drawer bind:open={menuOpen} side="right" size="sm" title="Navigation">
 	<ul class="flex flex-col">
 		{#each items as item (item.label)}
 			<li class="border-b border-hairline last:border-b-0">

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { formatSize as toReadableSize, sortFiles, type RejectedFile } from '../../core/files.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneFocusWithinBorder, type Tone } from '../../core/tones.js';
 	import { edge } from './lift.js';
 	import type { InputSize } from './Input.svelte';
@@ -19,9 +18,9 @@
 		size?: InputSize;
 		tone?: Tone;
 		invalid?: boolean;
-		/** Text on the button. Defaults to the locale's `chooseFile`. */
+		/** Text on the button. Defaults to `Choose file`. */
 		label?: string;
-		/** Shown while nothing is chosen. Defaults to the locale's `noFile`. */
+		/** Shown while nothing is chosen. Defaults to `No file chosen`. */
 		placeholder?: string;
 		/** Show the list of held files below the row. */
 		showList?: boolean;
@@ -51,18 +50,16 @@
 		class: className = ''
 	}: Props = $props();
 
-	const t = useLocale();
-
 	let input: HTMLInputElement | null = $state(null);
 	let rejected = $state<RejectedFile[]>([]);
 
-	const formatSize = (bytes: number) => toReadableSize(bytes, t.current.byteUnits);
+	const formatSize = (bytes: number) => toReadableSize(bytes);
 
 	/** One file reads as its name and weight; several read as a count. */
 	const summary = $derived.by(() => {
-		if (files.length === 0) return placeholder ?? t.current.noFile;
+		if (files.length === 0) return placeholder ?? 'No file chosen';
 		if (files.length === 1) return `${files[0].name} · ${formatSize(files[0].size)}`;
-		return `${files.length} ${t.current.selected}`;
+		return `${files.length} $selected`;
 	});
 
 	function add(incoming: FileList | File[] | null) {
@@ -91,9 +88,9 @@
 	}
 
 	const reasons: Record<RejectedFile['reason'], string> = $derived({
-		type: t.current.rejectedType,
-		size: t.current.rejectedSize,
-		count: t.current.rejectedCount
+		type: 'wrong file type',
+		size: 'too large',
+		count: 'over the file limit'
 	});
 
 	const sizes: Record<InputSize, string> = {
@@ -125,7 +122,7 @@
 			class="shrink-0 rounded-lg border border-hairline-strong bg-bg-alt font-sans font-medium text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current
 				{buttons[size]}"
 		>
-			{label ?? t.current.chooseFile}
+			{label ?? 'Choose file'}
 		</button>
 
 		<span
@@ -138,7 +135,7 @@
 			<button
 				type="button"
 				onclick={clear}
-				aria-label={t.current.remove}
+				aria-label="Remove"
 				class="mr-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -186,7 +183,7 @@
 					<button
 						type="button"
 						onclick={() => (files = files.filter((_, at) => at !== i))}
-						aria-label="{t.current.remove} {file.name}"
+						aria-label="Remove {file.name}"
 						class="-m-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
 					>
 						<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">

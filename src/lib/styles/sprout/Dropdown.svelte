@@ -3,7 +3,6 @@
 	import { anchored, type Placement } from '../../core/actions/anchor.js';
 	import { clickOutside, focusTrap, navigateList, portal } from '../../core/actions/dismissable.js';
 	import { describeTrigger, menuItems, popupTrigger } from '../../core/trigger.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { soft } from './lift.js';
 
 	interface Props {
@@ -18,7 +17,7 @@
 		matchWidth?: boolean;
 		/** Close as soon as an item inside is activated. Default true. */
 		closeOnSelect?: boolean;
-		/** Accessible name for the menu. Defaults to the locale's `menu`. */
+		/** Accessible name for the menu. Defaults to `Menu`. */
 		label?: string;
 		class?: string;
 		/** Classes for the wrapper around the trigger. */
@@ -37,8 +36,6 @@
 		class: className = '',
 		triggerClass = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let anchorEl: HTMLElement | null = $state(null);
 	let menuEl: HTMLElement | null = $state(null);
@@ -86,7 +83,7 @@
 		onkeydown={onMenuKeydown}
 		onclick={onMenuClick}
 		role="menu"
-		aria-label={label ?? t.current.menu}
+		aria-label={label ?? 'Menu'}
 		tabindex="-1"
 		class="z-50 flex max-h-[min(24rem,80vh)] min-w-48 flex-col overflow-y-auto rounded-2xl border border-hairline bg-bg py-1 font-sans {soft} {className}"
 	>

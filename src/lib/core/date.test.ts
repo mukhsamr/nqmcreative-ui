@@ -96,7 +96,7 @@ describe('isSameDay / isOutOfRange', () => {
 });
 
 describe('formatISO / parseFormatted', () => {
-	it('prints each locale order', () => {
+	it('prints each part order', () => {
 		expect(formatISO('2026-08-15', 'dmy')).toBe('15/08/2026');
 		expect(formatISO('2026-08-15', 'mdy')).toBe('08/15/2026');
 		expect(formatISO('2026-08-15', 'ymd')).toBe('2026/08/15');

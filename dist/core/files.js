@@ -46,10 +46,9 @@ export function sortFiles(incoming, rules = {}) {
     return { accepted, rejected };
 }
 /**
- * `900 B`, `2 MB`, `1.5 GB`. Units come from the locale so the number and its
- * suffix can be translated together.
+ * `900 B`, `2 MB`, `1.5 GB`. Pass `units` to relabel the suffixes.
  */
-export function formatSize(bytes, units) {
+export function formatSize(bytes, units = ['B', 'KB', 'MB', 'GB']) {
     if (bytes < 1024)
         return `${bytes} ${units[0]}`;
     let value = bytes / 1024;

@@ -1,7 +1,7 @@
 {
 	"name": "@nqmcreative/ui",
 	"homepage": "https://github.com/mukhsamr/nqmcreative-ui",
-	"count": 71,
+	"count": 70,
 	"demoStyle": "matte",
 	"styles": [
 		{
@@ -27,21 +27,6 @@
 		}
 	],
 	"components": [
-		{
-			"name": "LocaleProvider",
-			"slug": "locale-provider",
-			"category": "locale",
-			"description": "Scopes a locale to a subtree — the SSR-safe way to translate.",
-			"subpaths": {
-				"matte": "@nqmcreative/ui/matte/locale-provider",
-				"paper": "@nqmcreative/ui/paper/locale-provider",
-				"sprout": "@nqmcreative/ui/sprout/locale-provider"
-			},
-			"uses": [],
-			"modules": [
-				"locale"
-			]
-		},
 		{
 			"name": "Button",
 			"slug": "button",
@@ -297,7 +282,6 @@
 				"Input"
 			],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -313,7 +297,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"pin",
 				"tones"
 			]
@@ -330,7 +313,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"tags",
 				"tones"
 			]
@@ -367,7 +349,6 @@
 				"Input"
 			],
 			"modules": [
-				"locale",
 				"time",
 				"tones"
 			]
@@ -387,7 +368,6 @@
 			],
 			"modules": [
 				"color",
-				"locale",
 				"tones"
 			]
 		},
@@ -406,7 +386,6 @@
 			],
 			"modules": [
 				"files",
-				"locale",
 				"tones"
 			]
 		},
@@ -425,7 +404,6 @@
 				"actions/anchor",
 				"actions/dismissable",
 				"list",
-				"locale",
 				"tones"
 			]
 		},
@@ -444,7 +422,6 @@
 				"actions/anchor",
 				"actions/dismissable",
 				"list",
-				"locale",
 				"tones"
 			]
 		},
@@ -466,7 +443,6 @@
 				"actions/dismissable",
 				"calendar",
 				"date",
-				"locale",
 				"tones"
 			]
 		},
@@ -484,7 +460,6 @@
 			"modules": [
 				"calendar",
 				"date",
-				"locale",
 				"tones"
 			]
 		},
@@ -501,7 +476,6 @@
 			"uses": [],
 			"modules": [
 				"files",
-				"locale",
 				"tones"
 			]
 		},
@@ -592,7 +566,6 @@
 				"Checkbox"
 			],
 			"modules": [
-				"locale",
 				"table",
 				"tones"
 			]
@@ -622,7 +595,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -654,7 +626,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -701,7 +672,6 @@
 			],
 			"modules": [
 				"actions/dismissable",
-				"locale",
 				"toast",
 				"tones"
 			]
@@ -774,7 +744,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -790,7 +759,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"pagination",
 				"tones"
 			]
@@ -826,7 +794,6 @@
 				"MenuItem"
 			],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -842,7 +809,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -993,8 +959,7 @@
 			},
 			"uses": [],
 			"modules": [
-				"dialog",
-				"locale"
+				"dialog"
 			]
 		},
 		{
@@ -1009,8 +974,7 @@
 			},
 			"uses": [],
 			"modules": [
-				"dialog",
-				"locale"
+				"dialog"
 			]
 		},
 		{
@@ -1028,7 +992,6 @@
 				"Modal"
 			],
 			"modules": [
-				"locale",
 				"tones"
 			]
 		},
@@ -1049,7 +1012,6 @@
 				"actions/dismissable",
 				"dialog",
 				"list",
-				"locale",
 				"tones",
 				"trigger"
 			]
@@ -1068,7 +1030,6 @@
 			"modules": [
 				"actions/anchor",
 				"actions/dismissable",
-				"locale",
 				"trigger"
 			]
 		},
@@ -1086,7 +1047,6 @@
 			"modules": [
 				"actions/anchor",
 				"actions/dismissable",
-				"locale",
 				"trigger"
 			]
 		},
@@ -1147,7 +1107,6 @@
 			},
 			"uses": [],
 			"modules": [
-				"locale",
 				"theme",
 				"tones"
 			]

@@ -224,7 +224,7 @@
 		<code class="font-mono text-brand">group</code> and
 		<code class="font-mono text-brand">decimal</code> are yours to set rather than
 		<code class="font-mono text-brand">Intl</code>'s to choose, because the field has to parse back
-		what it prints — and some locales group with a space nobody can type.
+		what it prints — and some regions group with a space nobody can type.
 	</p>
 </section>
 

@@ -58,7 +58,7 @@ export function monthGrid(month: Date, weekStart: 0 | 1 = 1): Date[] {
 }
 
 /** Localised weekday initials, starting on `weekStart`. */
-export function weekdayNames(locale: string, weekStart: 0 | 1 = 1): string[] {
+export function weekdayNames(locale?: string, weekStart: 0 | 1 = 1): string[] {
 	const format = new Intl.DateTimeFormat(locale, { weekday: 'short' });
 	// 2024-01-07 was a Sunday, so this walks a full week in order.
 	return Array.from({ length: 7 }, (_, i) =>
@@ -66,7 +66,7 @@ export function weekdayNames(locale: string, weekStart: 0 | 1 = 1): string[] {
 	);
 }
 
-export function monthLabel(month: Date, locale: string): string {
+export function monthLabel(month: Date, locale?: string): string {
 	return new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(month);
 }
 
@@ -80,7 +80,7 @@ export function isOutOfRange(date: Date, min?: string, max?: string): boolean {
 
 export type DateFormat = 'dmy' | 'mdy' | 'ymd';
 
-/** Prints `YYYY-MM-DD` in the locale's part order, e.g. `31/12/2026`. */
+/** Prints `YYYY-MM-DD` in the chosen part order, e.g. `31/12/2026`. */
 export function formatISO(value: string, format: DateFormat, separator = '/'): string {
 	const date = fromISO(value);
 	if (!date) return '';

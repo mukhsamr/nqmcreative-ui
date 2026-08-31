@@ -158,7 +158,6 @@
 				links: [
 					{ label: 'Installation', href: `${base}/docs/installation` },
 					{ label: 'Theming', href: `${base}/docs/theming` },
-					{ label: 'Locale', href: `${base}/docs/locale` },
 					{ label: `Components (${count})`, href: `${base}/components` },
 					{ label: 'Playground', href: `${base}/playground` },
 					{ label: 'App shell', href: `${base}/playground/shell` }

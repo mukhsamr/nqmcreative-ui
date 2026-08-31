@@ -29,7 +29,6 @@ export declare function sortFiles(incoming: FileList | File[] | null, rules?: Fi
     rejected: RejectedFile[];
 };
 /**
- * `900 B`, `2 MB`, `1.5 GB`. Units come from the locale so the number and its
- * suffix can be translated together.
+ * `900 B`, `2 MB`, `1.5 GB`. Pass `units` to relabel the suffixes.
  */
-export declare function formatSize(bytes: number, units: readonly string[]): string;
+export declare function formatSize(bytes: number, units?: readonly string[]): string;

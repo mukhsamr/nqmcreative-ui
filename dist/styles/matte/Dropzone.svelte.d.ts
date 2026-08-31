@@ -13,7 +13,7 @@ interface Props {
     maxFiles?: number;
     disabled?: boolean;
     tone?: Tone;
-    /** Headline inside the zone. Defaults to the locale's `dropFiles`. */
+    /** Headline inside the zone. Defaults to `Drop files here`. */
     label?: string;
     hint?: string;
     /** Hide the built-in file list to render your own. */

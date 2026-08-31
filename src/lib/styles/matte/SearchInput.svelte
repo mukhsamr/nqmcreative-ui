@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import type { Tone } from '../../core/tones.js';
 	import Input, { type InputSize } from './Input.svelte';
 
@@ -36,8 +35,6 @@
 		class: className = '',
 		...rest
 	}: Props = $props();
-
-	const t = useLocale();
 
 	// The timer is cleared by the effect's own teardown, so a keystroke that
 	// lands mid-wait restarts the clock rather than queueing a second call.
@@ -75,7 +72,7 @@
 			<button
 				type="button"
 				onclick={clear}
-				aria-label={t.current.clearSearch}
+				aria-label="Clear search"
 				class="-mr-1 p-1 text-text-muted transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">

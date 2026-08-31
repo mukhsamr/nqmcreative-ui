@@ -1,3 +1,4 @@
+import { type DateFormat } from '../../core/date.js';
 import { type Tone } from '../../core/tones.js';
 interface Props {
     /** Bindable `YYYY-MM-DD` — the same shape as `<input type="date">`. */
@@ -7,6 +8,8 @@ interface Props {
     max?: string;
     isDisabled?: (date: Date) => boolean;
     weekStart?: 0 | 1;
+    /** Order of the date parts the field accepts and prints. */
+    format?: DateFormat;
     tone?: Tone;
     invalid?: boolean;
     disabled?: boolean;

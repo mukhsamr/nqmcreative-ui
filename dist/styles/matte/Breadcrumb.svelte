@@ -2,7 +2,6 @@
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneHoverText, type Tone } from '../../core/tones.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { iconMd } from './icon.js';
 
 	export interface BreadcrumbItem {
@@ -19,11 +18,9 @@
 	}
 
 	let { items, separator = '/', tone = 'brand', class: className = '', ...rest }: Props = $props();
-
-	const t = useLocale();
 </script>
 
-<nav aria-label={t.current.breadcrumb} class="font-sans text-sm {className}" {...rest}>
+<nav aria-label="Breadcrumb" class="font-sans text-sm {className}" {...rest}>
 	<ol class="flex flex-wrap items-center gap-2">
 		{#each items as item, i (item.label)}
 			<li class="flex items-center gap-2">

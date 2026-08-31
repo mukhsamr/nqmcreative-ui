@@ -5,7 +5,7 @@ interface Props extends HTMLAttributes<HTMLSpanElement> {
     size?: SpinnerSize;
     /** Omit to inherit the parent's `currentColor` (e.g. inside a Button). */
     tone?: Tone;
-    /** Defaults to the locale's loading string; pass `''` to hide it. */
+    /** Defaults to `Loading`; pass `''` to hide it. */
     label?: string;
 }
 declare const Spinner: import("svelte").Component<Props, {}, "">;

@@ -33,7 +33,6 @@ const exists = async (path) => {
 const coreModules = [
 	['', 'index'],
 	['/tones', 'tones'],
-	['/locale', 'locale.svelte'],
 	['/date', 'date'],
 	['/toast', 'toast.svelte'],
 	['/theme', 'theme.svelte'],

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { addTag, splitTags, type TagRejection } from '../../core/tags.js';
 	import { toneFocusWithinBorder, toneSoft, type Tone } from '../../core/tones.js';
 	import { edge } from './lift.js';
@@ -46,8 +45,6 @@
 		onreject,
 		class: className = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let draft = $state('');
 	let field: HTMLInputElement | null = $state(null);
@@ -112,8 +109,8 @@
 	const messages: Record<TagRejection, string> = $derived({
 		empty: '',
 		short: `${minLength}+`,
-		duplicate: t.current.duplicateTag,
-		full: `${t.current.selected} ${tags.length}/${max}`
+		duplicate: 'Already added',
+		full: `$selected ${tags.length}/${max}`
 	});
 </script>
 
@@ -137,7 +134,7 @@
 				<button
 					type="button"
 					onclick={() => remove(index)}
-					aria-label="{t.current.removeItem} {tag}"
+					aria-label="Remove {tag}"
 					class="inline-flex size-4 items-center justify-center rounded transition-colors duration-150 hover:bg-bg/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current"
 				>
 					<svg class="size-2.5" viewBox="0 0 10 10" fill="none" aria-hidden="true">
@@ -157,8 +154,8 @@
 			bind:value={draft}
 			{disabled}
 			readonly={full}
-			placeholder={tags.length === 0 ? (placeholder ?? t.current.addTag) : ''}
-			aria-label={placeholder ?? t.current.addTag}
+			placeholder={tags.length === 0 ? (placeholder ?? 'Add a tag') : ''}
+			aria-label={placeholder ?? 'Add a tag'}
 			aria-invalid={invalid ? 'true' : undefined}
 			onkeydown={onKeydown}
 			onpaste={onPaste}

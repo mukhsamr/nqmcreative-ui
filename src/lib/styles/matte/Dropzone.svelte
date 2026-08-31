@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { toneBorder, toneSoft, toneSurface, toneText, type Tone } from '../../core/tones.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { formatSize as toReadableSize, sortFiles, type RejectedFile } from '../../core/files.js';
 
 	interface Props {
@@ -16,7 +15,7 @@
 		maxFiles?: number;
 		disabled?: boolean;
 		tone?: Tone;
-		/** Headline inside the zone. Defaults to the locale's `dropFiles`. */
+		/** Headline inside the zone. Defaults to `Drop files here`. */
 		label?: string;
 		hint?: string;
 		/** Hide the built-in file list to render your own. */
@@ -45,8 +44,6 @@
 		class: className = ''
 	}: Props = $props();
 
-	const t = useLocale();
-
 	let input: HTMLInputElement | null = $state(null);
 	let dragging = $state(false);
 	let rejected = $state<RejectedFile[]>([]);
@@ -63,7 +60,7 @@
 		return parts.join(' · ');
 	});
 
-	const formatSize = (bytes: number) => toReadableSize(bytes, t.current.byteUnits);
+	const formatSize = (bytes: number) => toReadableSize(bytes);
 
 	function add(incoming: FileList | File[] | null) {
 		if (!incoming || disabled) return;
@@ -96,9 +93,9 @@
 	}
 
 	const reasons: Record<RejectedFile['reason'], string> = $derived({
-		type: t.current.rejectedType,
-		size: t.current.rejectedSize,
-		count: t.current.rejectedCount
+		type: 'wrong file type',
+		size: 'too large',
+		count: 'over the file limit'
 	});
 </script>
 
@@ -135,10 +132,10 @@
 			{/if}
 		</span>
 		<span class="flex flex-col gap-1">
-			<span class="text-[15px] font-medium text-text">{label ?? t.current.dropFiles}</span>
+			<span class="text-[15px] font-medium text-text">{label ?? 'Drop files here'}</span>
 			<span class="text-sm text-text-secondary">
-				{t.current.or}
-				<span class="underline underline-offset-4">{t.current.browse}</span>
+				or
+				<span class="underline underline-offset-4">browse</span>
 			</span>
 			{#if defaultHint}
 				<span class="font-mono text-xs text-text-muted">{defaultHint}</span>
@@ -180,7 +177,7 @@
 					<button
 						type="button"
 						onclick={() => remove(i)}
-						aria-label="{t.current.remove} {file.name}"
+						aria-label="Remove {file.name}"
 						class="-m-1 shrink-0 p-1 text-text-muted transition-colors duration-150 hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
 					>
 						<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">

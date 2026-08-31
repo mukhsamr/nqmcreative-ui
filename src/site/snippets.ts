@@ -190,7 +190,7 @@ import { Button, Card, Modal } from '@nqmcreative/ui/paper';
 import { Button, Card, Modal } from '@nqmcreative/ui/sprout';`;
 
 export const coreImport = `// the behaviour every style shares, if you need it directly
-import { focusTrap, anchored, toast, setLocale } from '@nqmcreative/ui/core';`;
+import { focusTrap, anchored, toast } from '@nqmcreative/ui/core';`;
 
 /* ------------------------------------------------------------- theming -- */
 
@@ -233,29 +233,6 @@ export const toneMaps = `<script lang="ts">
 
 <div class={toneSoft[tone]}>…</div>`;
 
-/* -------------------------------------------------------------- locale -- */
-
-export const localeGlobal = `import { setLocale, idID } from '@nqmcreative/ui/core';
-
-setLocale(idID);`;
-
-export const localeProvider = `<script lang="ts">
-	import { LocaleProvider } from '@nqmcreative/ui/matte';
-	import { idID } from '@nqmcreative/ui/core';
-</script>
-
-<LocaleProvider locale={idID}>
-	<App />
-</LocaleProvider>`;
-
-export const localePartial = `import { setLocale } from '@nqmcreative/ui/core';
-
-setLocale({
-	noData: 'Belum ada data',
-	previousPage: 'Sebelumnya',
-	nextPage: 'Berikutnya'
-});`;
-
 /* ---------------------------------------------------- adding a component -- */
 
 export const newCatalogue = `// scripts/catalogue.mjs — the list every style must implement
@@ -269,7 +246,6 @@ export const newComponent = `<script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { toneSoft, type Tone } from '../../core/tones.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 
 	interface Props extends HTMLAttributes<HTMLDivElement> {
 		tone?: Tone;
@@ -277,8 +253,6 @@ export const newComponent = `<script lang="ts">
 	}
 
 	let { tone = 'brand', class: className = '', children, ...rest }: Props = $props();
-
-	const t = useLocale();
 </script>
 
 <div class="p-4 font-sans {toneSoft[tone]} {className}" {...rest}>

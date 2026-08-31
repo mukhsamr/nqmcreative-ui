@@ -21,12 +21,12 @@ export declare function addMonths(date: Date, months: number): Date;
  */
 export declare function monthGrid(month: Date, weekStart?: 0 | 1): Date[];
 /** Localised weekday initials, starting on `weekStart`. */
-export declare function weekdayNames(locale: string, weekStart?: 0 | 1): string[];
-export declare function monthLabel(month: Date, locale: string): string;
+export declare function weekdayNames(locale?: string, weekStart?: 0 | 1): string[];
+export declare function monthLabel(month: Date, locale?: string): string;
 /** `true` when `date` falls outside `min`/`max`, both inclusive and optional. */
 export declare function isOutOfRange(date: Date, min?: string, max?: string): boolean;
 export type DateFormat = 'dmy' | 'mdy' | 'ymd';
-/** Prints `YYYY-MM-DD` in the locale's part order, e.g. `31/12/2026`. */
+/** Prints `YYYY-MM-DD` in the chosen part order, e.g. `31/12/2026`. */
 export declare function formatISO(value: string, format: DateFormat, separator?: string): string;
 /**
  * The inverse of `formatISO`, forgiving about separators and single digits.

@@ -22,8 +22,6 @@ const CORE_SURFACE = [
 	'focusTrap',
 	'portal',
 	'toast',
-	'setLocale',
-	'useLocale',
 	'applyTheme',
 	'storedTheme',
 	'toISO',

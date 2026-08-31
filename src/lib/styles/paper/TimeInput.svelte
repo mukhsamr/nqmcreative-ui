@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { clampTime, formatTime, parseTime, stepTime } from '../../core/time.js';
 	import type { Tone } from '../../core/tones.js';
 	import Input, { type InputSize } from './Input.svelte';
@@ -37,8 +36,6 @@
 		class: className = '',
 		...rest
 	}: Props = $props();
-
-	const t = useLocale();
 
 	// Typed text and the bound value are separate until the field settles:
 	// `9` is a valid thing to be halfway through typing and an invalid time.
@@ -120,7 +117,7 @@
 					class={stepper}
 					{disabled}
 					onclick={() => nudge(1)}
-					aria-label={t.current.increase}
+					aria-label="Increase"
 				>
 					<svg class="size-3" viewBox="0 0 12 12" fill="none" aria-hidden="true">
 						<path
@@ -137,7 +134,7 @@
 					class={stepper}
 					{disabled}
 					onclick={() => nudge(-1)}
-					aria-label={t.current.decrease}
+					aria-label="Decrease"
 				>
 					<svg class="size-3" viewBox="0 0 12 12" fill="none" aria-hidden="true">
 						<path

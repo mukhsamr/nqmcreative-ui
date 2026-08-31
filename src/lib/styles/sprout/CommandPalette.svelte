@@ -23,7 +23,6 @@
 	import { focusTrap } from '../../core/actions/dismissable.js';
 	import { syncDialog } from '../../core/dialog.svelte.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { toneSoft, type Tone } from '../../core/tones.js';
 	import { isTypingTarget } from '../../core/trigger.js';
 	import { iconMd } from './icon.js';
@@ -61,8 +60,6 @@
 		onselect,
 		class: className = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let dialog: HTMLDialogElement | null = $state(null);
 	let inputEl: HTMLInputElement | null = $state(null);
@@ -183,8 +180,8 @@
 				oninput={() => cursor.reset()}
 				type="text"
 				autocomplete="off"
-				aria-label={placeholder ?? t.current.commandPlaceholder}
-				placeholder={placeholder ?? t.current.commandPlaceholder}
+				aria-label={placeholder ?? 'Type a command or search…'}
+				placeholder={placeholder ?? 'Type a command or search…'}
 				class="h-12 w-full min-w-0 bg-transparent font-sans text-sm text-text placeholder:text-text-muted focus:outline-none"
 			/>
 			<Kbd>esc</Kbd>
@@ -198,7 +195,7 @@
 		>
 			{#if flat.length === 0}
 				<p class="px-4 py-10 text-center font-sans text-sm text-text-muted">
-					{emptyText ?? t.current.noResults}
+					{emptyText ?? 'No results'}
 				</p>
 			{:else}
 				{#each groups as [group, groupItems] (group)}

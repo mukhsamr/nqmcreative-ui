@@ -6,7 +6,6 @@
 	import { toneBorderSoft, toneSurface, toneText } from '../../core/tones.js';
 	import { iconMd } from './icon.js';
 	import Spinner from './Spinner.svelte';
-	import { useLocale } from '../../core/locale.svelte.js';
 
 	export type ToasterPosition =
 		'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
@@ -17,8 +16,6 @@
 	}
 
 	let { position = 'bottom-right', class: className = '' }: Props = $props();
-
-	const t = useLocale();
 
 	const positions: Record<ToasterPosition, string> = {
 		'top-left': 'top-4 left-4 items-start',
@@ -41,7 +38,7 @@
 <div
 	use:portal
 	aria-live="polite"
-	aria-label={t.current.notifications}
+	aria-label="Notifications"
 	class="pointer-events-none fixed z-[100] flex w-[min(24rem,calc(100vw-2rem))] flex-col gap-3 {positions[
 		position
 	]} {fromTop ? '' : 'flex-col-reverse'} {className}"
@@ -101,7 +98,7 @@
 			<button
 				type="button"
 				onclick={() => toast.dismiss(item.id)}
-				aria-label={t.current.dismiss}
+				aria-label="Dismiss"
 				class="-m-1 shrink-0 p-1 text-text-muted transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">

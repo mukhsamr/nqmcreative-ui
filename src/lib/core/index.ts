@@ -2,7 +2,7 @@
  * @nqmcreative/ui/core — everything the styles share.
  *
  * Behaviour, not looks: focus containment, keyboard navigation, date maths,
- * file validation, the toast queue, the locale strings. Nothing in here
+ * file validation, the toast queue. Nothing in here
  * renders anything, and nothing in here knows which style is being used.
  *
  * Styles are free to ignore any of it — but there is no `matte` version of a
@@ -96,15 +96,3 @@ export type { Toast, ToastOptions, ToastAction } from './toast.svelte.js';
 /* --- theme --- */
 export { applyTheme, storedTheme, persistTheme, nextTheme } from './theme.svelte.js';
 export type { Theme } from './theme.svelte.js';
-
-/* --- locale --- */
-export {
-	locale,
-	setLocale,
-	provideLocale,
-	useLocale,
-	enUS,
-	idID,
-	LocaleStore
-} from './locale.svelte.js';
-export type { Locale } from './locale.svelte.js';

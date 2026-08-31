@@ -37,7 +37,7 @@ export function calendarKeyMove(
 	}
 }
 
-/** The placeholder a text date field shows for a locale's part order. */
+/** The placeholder a text date field shows for a given part order. */
 export function dateHint(format: 'dmy' | 'mdy' | 'ymd'): string {
 	return { dmy: 'DD/MM/YYYY', mdy: 'MM/DD/YYYY', ymd: 'YYYY/MM/DD' }[format];
 }

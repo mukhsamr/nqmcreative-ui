@@ -196,7 +196,7 @@ describe('stepTime', () => {
 });
 
 describe('formatClock', () => {
-	it('prints a 24-hour locale as 24 hours', () => {
+	it('prints a 24-hour clock as 24 hours', () => {
 		expect(formatClock('13:05', 'id-ID', false)).toContain('13');
 	});
 
@@ -240,7 +240,7 @@ describe('formatGrouped', () => {
 		expect(formatGrouped(1234567, { precision: 0 })).toBe('1,234,567');
 	});
 
-	it('takes the locale-swapped separators', () => {
+	it('takes swapped separators', () => {
 		expect(formatGrouped(1234567.5, { group: '.', decimal: ',', precision: 2 })).toBe(
 			'1.234.567,50'
 		);

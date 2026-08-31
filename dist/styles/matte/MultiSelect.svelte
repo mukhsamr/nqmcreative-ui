@@ -16,7 +16,6 @@
 	import { anchored } from '../../core/actions/anchor.js';
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { iconMd, iconSm } from './icon.js';
 	import { toneFocusWithinBorder, toneSoft, toneText, type Tone } from '../../core/tones.js';
 
@@ -57,8 +56,6 @@
 		onchange,
 		class: className = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let open = $state(false);
 	let query = $state('');
@@ -149,7 +146,7 @@
 			class="inline-flex items-center rounded-full px-2.5 py-1 font-mono text-xs {toneSoft[tone]}"
 		>
 			{chosen.length}
-			{t.current.selected}
+			selected
 		</span>
 	{:else}
 		{#each chosen as option (option.value)}
@@ -162,7 +159,7 @@
 				<button
 					type="button"
 					onclick={() => remove(option)}
-					aria-label="{t.current.removeItem} {option.label}"
+					aria-label="Remove {option.label}"
 					class="inline-flex size-4 items-center justify-center rounded-full transition-colors duration-150 hover:bg-bg focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current"
 				>
 					<svg class="size-2.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -184,7 +181,7 @@
 		aria-expanded={open}
 		aria-controls="{id ?? 'multiselect'}-listbox"
 		aria-invalid={invalid ? 'true' : undefined}
-		placeholder={chosen.length ? '' : (placeholder ?? t.current.comboboxPlaceholder)}
+		placeholder={chosen.length ? '' : (placeholder ?? 'Search…')}
 		oninput={() => {
 			open = true;
 			cursor.index = 0;
@@ -206,7 +203,7 @@
 				onchange?.([]);
 				inputEl?.focus();
 			}}
-			aria-label={t.current.clear}
+			aria-label="Clear selection"
 			class="shrink-0 p-1.5 text-text-muted transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 		>
 			<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -229,7 +226,7 @@
 	>
 		{#if flat.length === 0}
 			<p class="px-3 py-6 text-center text-sm text-text-muted">
-				{emptyText ?? t.current.noMatches}
+				{emptyText ?? 'No matches'}
 			</p>
 		{:else}
 			{#each groups as [group, items] (group)}

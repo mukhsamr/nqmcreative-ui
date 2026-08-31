@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { focusRing, toneRing, toneSolid, type Tone } from '../../core/tones.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { pageRange } from '../../core/pagination.js';
 
 	interface Props extends Omit<HTMLAttributes<HTMLElement>, 'onchange'> {
@@ -25,8 +24,6 @@
 		...rest
 	}: Props = $props();
 
-	const t = useLocale();
-
 	const pages = $derived(pageRange(page, total, siblings));
 
 	function go(next: number) {
@@ -39,12 +36,12 @@
 	const cell = `inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 font-sans text-sm font-medium tabular-nums transition-colors duration-150 ease-brand-out disabled:opacity-40 disabled:pointer-events-none ${focusRing}`;
 </script>
 
-<nav aria-label={t.current.pagination} class="flex items-center gap-1 {className}" {...rest}>
+<nav aria-label="Pagination" class="flex items-center gap-1 {className}" {...rest}>
 	<button
 		type="button"
 		class="{cell} {toneRing[tone]} text-text-secondary hover:bg-bg-inset"
 		disabled={page <= 1}
-		aria-label={t.current.previousPage}
+		aria-label="Previous page"
 		onclick={() => go(page - 1)}
 	>
 		<svg class="size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -73,7 +70,7 @@
 		type="button"
 		class="{cell} {toneRing[tone]} text-text-secondary hover:bg-bg-inset"
 		disabled={page >= total}
-		aria-label={t.current.nextPage}
+		aria-label="Next page"
 		onclick={() => go(page + 1)}
 	>
 		<svg class="size-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">

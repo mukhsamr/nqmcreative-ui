@@ -12,7 +12,7 @@ interface Props {
     matchWidth?: boolean;
     /** Close as soon as an item inside is activated. Default true. */
     closeOnSelect?: boolean;
-    /** Accessible name for the menu. Defaults to the locale's `menu`. */
+    /** Accessible name for the menu. Defaults to `Menu`. */
     label?: string;
     class?: string;
     /** Classes for the wrapper around the trigger. */

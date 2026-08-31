@@ -2,8 +2,7 @@
 	import { anchored } from '../../core/actions/anchor.js';
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { dateHint } from '../../core/calendar.js';
-	import { formatISO, parseFormatted } from '../../core/date.js';
-	import { useLocale } from '../../core/locale.svelte.js';
+	import { formatISO, parseFormatted, type DateFormat } from '../../core/date.js';
 	import { toneFocusWithinBorder, type Tone } from '../../core/tones.js';
 	import Calendar from './Calendar.svelte';
 	import { edge, soft } from './lift.js';
@@ -16,6 +15,8 @@
 		max?: string;
 		isDisabled?: (date: Date) => boolean;
 		weekStart?: 0 | 1;
+		/** Order of the date parts the field accepts and prints. */
+		format?: DateFormat;
 		tone?: Tone;
 		invalid?: boolean;
 		disabled?: boolean;
@@ -34,6 +35,7 @@
 		max,
 		isDisabled,
 		weekStart = 1,
+		format = 'dmy',
 		tone = 'brand',
 		invalid = false,
 		disabled = false,
@@ -45,8 +47,6 @@
 		class: className = ''
 	}: Props = $props();
 
-	const t = useLocale();
-
 	let open = $state(false);
 	let text = $state('');
 	let editing = $state(false);
@@ -54,8 +54,8 @@
 	let inputEl: HTMLInputElement | null = $state(null);
 
 	/** While typing the field shows the raw text; otherwise the formatted value. */
-	const display = $derived(editing ? text : formatISO(value, t.current.dateFormat));
-	const hint = $derived(placeholder ?? dateHint(t.current.dateFormat));
+	const display = $derived(editing ? text : formatISO(value, format));
+	const hint = $derived(placeholder ?? dateHint(format));
 
 	function commit() {
 		editing = false;
@@ -66,7 +66,7 @@
 			}
 			return;
 		}
-		const parsed = parseFormatted(text, t.current.dateFormat);
+		const parsed = parseFormatted(text, format);
 		if (parsed && parsed !== value) {
 			value = parsed;
 			onchange?.(parsed);
@@ -133,7 +133,7 @@
 				onchange?.('');
 				inputEl?.focus();
 			}}
-			aria-label={t.current.clear}
+			aria-label="Clear selection"
 			class="shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 		>
 			<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -151,7 +151,7 @@
 		type="button"
 		{disabled}
 		onclick={() => (open = !open)}
-		aria-label={t.current.selectDate}
+		aria-label="Select a date"
 		aria-expanded={open}
 		class="shrink-0 rounded p-1.5 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 	>

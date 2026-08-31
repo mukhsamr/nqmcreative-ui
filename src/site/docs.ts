@@ -17,11 +17,6 @@ export const docs: DocPage[] = [
 		summary: 'Eight tones on one token system, plus light and dark.'
 	},
 	{
-		slug: 'locale',
-		title: 'Locale',
-		summary: 'Every built-in string, in one object you can override.'
-	},
-	{
 		slug: 'inputs',
 		title: 'Form inputs',
 		summary: 'The eight specialised fields: what each adds over Input, and what it binds.'

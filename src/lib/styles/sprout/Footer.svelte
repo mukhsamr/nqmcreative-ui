@@ -22,7 +22,7 @@
 		columns?: FooterColumn[];
 		/** Logo, wordmark and a line of copy on the left. */
 		brand?: Snippet;
-		/** Right side of the bottom bar — social links, a locale picker. */
+		/** Right side of the bottom bar — social links, a language picker. */
 		bottom?: Snippet;
 		/** Left side of the bottom bar. Ignored when `bottom` covers both. */
 		copyright?: string;

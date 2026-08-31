@@ -30,7 +30,7 @@ export function calendarKeyMove(key, focused, weekStart, shiftKey = false) {
             return null;
     }
 }
-/** The placeholder a text date field shows for a locale's part order. */
+/** The placeholder a text date field shows for a given part order. */
 export function dateHint(format) {
     return { dmy: 'DD/MM/YYYY', mdy: 'MM/DD/YYYY', ymd: 'YYYY/MM/DD' }[format];
 }

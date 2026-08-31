@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { caretIndex, clearFrom, fillFrom, sanitisePin, type PinMode } from '../../core/pin.js';
 	import { toneFocusBorder, type Tone } from '../../core/tones.js';
 
@@ -37,8 +36,6 @@
 		oncomplete,
 		class: className = ''
 	}: Props = $props();
-
-	const t = useLocale();
 
 	let boxes: HTMLInputElement[] = $state([]);
 
@@ -119,7 +116,7 @@
 			autocapitalize="characters"
 			spellcheck="false"
 			maxlength={length}
-			aria-label="{t.current.digit} {index + 1}"
+			aria-label="Digit {index + 1}"
 			aria-invalid={invalid ? 'true' : undefined}
 			oninput={(event) => onInput(event, index)}
 			onkeydown={(event) => onKeydown(event, index)}

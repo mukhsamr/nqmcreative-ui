@@ -8,7 +8,6 @@
 		toneText,
 		type Tone
 	} from '../../core/tones.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 
 	export type AlertVariant = 'soft' | 'outline' | 'accent';
 
@@ -36,7 +35,6 @@
 		...rest
 	}: Props = $props();
 
-	const t = useLocale();
 	let open = $state(true);
 
 	const variants = $derived({
@@ -82,7 +80,7 @@
 			<button
 				type="button"
 				onclick={dismiss}
-				aria-label={t.current.dismiss}
+				aria-label="Dismiss"
 				class="-m-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg/60 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">

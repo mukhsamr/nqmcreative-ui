@@ -14,7 +14,7 @@ interface Props extends Omit<HTMLInputAttributes, 'size' | 'prefix' | 'suffix' |
     precision?: number;
     /** Leading mark — `Rp`, `$`, `€`. */
     currency?: string;
-    /** Trailing mark instead, for the locales that write it that way. */
+    /** Trailing mark instead, for the regions that write it that way. */
     unit?: string;
     size?: InputSize;
     tone?: Tone;

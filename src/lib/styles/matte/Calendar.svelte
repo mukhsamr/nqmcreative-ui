@@ -11,7 +11,6 @@
 		weekdayNames
 	} from '../../core/date.js';
 	import { calendarKeyMove } from '../../core/calendar.js';
-	import { useLocale } from '../../core/locale.svelte.js';
 	import { focusRing, toneFill, toneRing, toneText, type Tone } from '../../core/tones.js';
 
 	interface Props {
@@ -46,8 +45,6 @@
 		class: className = ''
 	}: Props = $props();
 
-	const t = useLocale();
-
 	const selected = $derived(fromISO(value));
 	const now = today();
 
@@ -64,7 +61,7 @@
 	});
 
 	const days = $derived(monthGrid(view, weekStart));
-	const weekdays = $derived(weekdayNames(t.current.dateLocale, weekStart));
+	const weekdays = $derived(weekdayNames(undefined, weekStart));
 
 	function blocked(date: Date) {
 		return isOutOfRange(date, min, max) || (isDisabled?.(date) ?? false);
@@ -109,7 +106,7 @@
 		<button
 			type="button"
 			onclick={() => show(addMonths(view, -1))}
-			aria-label={t.current.previousMonth}
+			aria-label="Previous month"
 			class="inline-flex size-8 items-center justify-center text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text {focusRing} {toneRing[
 				tone
 			]}"
@@ -120,13 +117,13 @@
 		</button>
 
 		<span aria-live="polite" class="text-sm font-medium text-text">
-			{monthLabel(view, t.current.dateLocale)}
+			{monthLabel(view)}
 		</span>
 
 		<button
 			type="button"
 			onclick={() => show(addMonths(view, 1))}
-			aria-label={t.current.nextMonth}
+			aria-label="Next month"
 			class="inline-flex size-8 items-center justify-center text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text {focusRing} {toneRing[
 				tone
 			]}"
@@ -148,7 +145,7 @@
 		bind:this={grid}
 		role="grid"
 		tabindex="-1"
-		aria-label={t.current.selectDate}
+		aria-label="Select a date"
 		onkeydown={onKeydown}
 		class="grid grid-cols-7 gap-px focus:outline-none"
 	>
@@ -190,7 +187,7 @@
 				tone
 			]} hover:underline hover:underline-offset-4 {focusRing} {toneRing[tone]}"
 		>
-			{t.current.today}
+			Today
 		</button>
 	{/if}
 </div>

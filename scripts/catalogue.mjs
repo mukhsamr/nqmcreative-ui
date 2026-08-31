@@ -11,7 +11,6 @@
 
 /** Where a component sits in the docs, in the order the sections appear. */
 export const CATEGORIES = [
-	'locale',
 	'actions',
 	'forms',
 	'data display',
@@ -29,8 +28,6 @@ export const CATEGORIES = [
  * every style.
  */
 export const COMPONENTS = [
-	['LocaleProvider', 'locale', 'Scopes a locale to a subtree — the SSR-safe way to translate.'],
-
 	['Button', 'actions', 'Five variants and four sizes, with a loading state and an href mode.'],
 	['Link', 'actions', 'Anchor in any tone, with an external variant.'],
 

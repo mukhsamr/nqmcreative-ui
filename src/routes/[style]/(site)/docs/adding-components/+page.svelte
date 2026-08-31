@@ -82,9 +82,10 @@
 	</p>
 	<CodeBlock code={code.newComponent} label="src/lib/styles/matte/Callout.svelte" />
 	<p class="font-sans text-sm leading-relaxed text-text-secondary">
-		Take colours from the tone maps, never as raw hex. Take any user-visible string from
-		<code class="font-mono text-brand">useLocale()</code> rather than writing it inline — that is what
-		keeps the library translatable.
+		Take colours from the tone maps, never as raw hex. Any user-visible string the component renders
+		on its own — a label, an <code class="font-mono text-brand">aria-label</code>, an empty-state
+		line — is written inline in English, and exposed as a prop when a caller would plausibly want to
+		change it.
 	</p>
 </section>
 

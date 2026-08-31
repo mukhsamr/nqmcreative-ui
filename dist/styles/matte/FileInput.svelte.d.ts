@@ -15,9 +15,9 @@ interface Props {
     size?: InputSize;
     tone?: Tone;
     invalid?: boolean;
-    /** Text on the button. Defaults to the locale's `chooseFile`. */
+    /** Text on the button. Defaults to `Choose file`. */
     label?: string;
-    /** Shown while nothing is chosen. Defaults to the locale's `noFile`. */
+    /** Shown while nothing is chosen. Defaults to `No file chosen`. */
     placeholder?: string;
     /** Show the list of held files below the row. */
     showList?: boolean;
