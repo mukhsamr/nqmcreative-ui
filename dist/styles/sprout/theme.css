@@ -1,7 +1,7 @@
 /*
  * sprout — design tokens.
  *
- * The warm one: leaf green on cream, fully rounded corners, and a display face
+ * The warm one: leaf green on white, fully rounded corners, and a display face
  * with round terminals. Built for school, community and family sites, where the
  * reader is a parent on a phone rather than an operator at a desk. Import this
  * after `@import "tailwindcss";` in your app's CSS entry point.
@@ -17,16 +17,21 @@
  */
 @theme {
 	/*
-	 * Surfaces are cream rather than white, and the greys are green-cast. A
-	 * neutral grey next to this much foliage reads as a printing error, so every
-	 * step of the scale carries a little of the brand hue.
+	 * Surfaces are white, and the greys under them are near-neutral with only a
+	 * hair of warmth. The green belongs to the brand, not to the paper: a page
+	 * whose every secondary surface and every hover is tinted reads as tiring
+	 * long before it reads as warm, so the neutrals stay out of the way.
+	 *
+	 * `--color-bg` is the face of a card; `--color-bg-alt` is the ground it sits
+	 * on. Put `bg-bg-alt` on the body and cards float as white, which is the
+	 * layering this style was drawn from.
 	 */
 	/* --- surfaces --- */
-	--color-bg: #fffefb;
-	--color-bg-alt: #f0fdf4;
-	--color-bg-inset: #e3f6e9;
-	--color-hairline: #ecefe7;
-	--color-hairline-strong: #d3e0d1;
+	--color-bg: #ffffff;
+	--color-bg-alt: #f7f7f4;
+	--color-bg-inset: #edede8;
+	--color-hairline: #e6e6e0;
+	--color-hairline-strong: #cfcfc7;
 
 	/* --- text --- */
 	--color-text: #1a3a1f;
@@ -136,25 +141,25 @@
  * Every utility built on these tokens follows automatically, so components
  * need no `dark:` classes of their own.
  *
- * The dark palette is a night garden rather than a neutral slate: the surfaces
- * keep the green cast, and every hue lifts a step or two so it still reads
- * against them.
+ * The dark palette is lamplight rather than a neutral slate: the surfaces carry
+ * the same honey cast as the light ones, and every hue lifts a step or two so
+ * it still reads against them.
  */
 @custom-variant dark (&:where(.dark, .dark *));
 
 .dark {
 	color-scheme: dark;
 
-	--color-bg: #0e1a11;
-	--color-bg-alt: #14251a;
-	--color-bg-inset: #1b3020;
-	--color-hairline: #1e3524;
-	--color-hairline-strong: #2f4a36;
+	--color-bg: #17140e;
+	--color-bg-alt: #211c13;
+	--color-bg-inset: #2d261a;
+	--color-hairline: #2a2317;
+	--color-hairline-strong: #453a27;
 
 	--color-text: #f0f7f0;
 	--color-text-secondary: #cadfcd;
 	--color-text-muted: #94ad99;
-	--color-text-inverse: #0e1a11;
+	--color-text-inverse: #17140e;
 
 	--color-brand: #4ade80;
 	--color-brand-hover: #86efac;
@@ -201,16 +206,16 @@
 	:root:not(.light) {
 		color-scheme: dark;
 
-		--color-bg: #0e1a11;
-		--color-bg-alt: #14251a;
-		--color-bg-inset: #1b3020;
-		--color-hairline: #1e3524;
-		--color-hairline-strong: #2f4a36;
+		--color-bg: #17140e;
+		--color-bg-alt: #211c13;
+		--color-bg-inset: #2d261a;
+		--color-hairline: #2a2317;
+		--color-hairline-strong: #453a27;
 
 		--color-text: #f0f7f0;
 		--color-text-secondary: #cadfcd;
 		--color-text-muted: #94ad99;
-		--color-text-inverse: #0e1a11;
+		--color-text-inverse: #17140e;
 
 		--color-brand: #4ade80;
 		--color-brand-hover: #86efac;
@@ -251,5 +256,26 @@
 		--color-neutral-hover: #c7d8ca;
 		--color-neutral-light: #1b3020;
 		--color-neutral-border: #2f4a36;
+	}
+}
+
+/*
+ * The surfaces the browser draws for us.
+ *
+ * A caret and a highlight in the user-agent's blue belong to no design system,
+ * and they are the two the reader touches most: one sits in every field they
+ * type into, the other appears the moment they drag across a paragraph. The
+ * selection is mixed from the brand rather than pinned to a token so it stays
+ * a wash — the text underneath keeps its own colour and its own contrast.
+ */
+@layer base {
+	::selection {
+		background-color: color-mix(in oklab, var(--color-brand) 24%, transparent);
+	}
+
+	input,
+	textarea,
+	[contenteditable] {
+		caret-color: var(--color-brand);
 	}
 }

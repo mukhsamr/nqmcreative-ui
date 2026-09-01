@@ -161,7 +161,7 @@
 					type="button"
 					onclick={() => remove(option)}
 					aria-label="Remove {option.label}"
-					class="inline-flex size-4 items-center justify-center rounded transition-colors duration-150 hover:bg-bg/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current"
+					class="inline-flex size-4 items-center justify-center rounded-full transition-colors duration-150 hover:bg-bg/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current"
 				>
 					<svg class="size-2.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 						<path
@@ -210,7 +210,7 @@
 				inputEl?.focus();
 			}}
 			aria-label="Clear selection"
-			class="shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+			class="shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 		>
 			<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 				<path
@@ -261,7 +261,7 @@
 							{index === active ? toneSoft[tone] : 'text-text-secondary'}"
 					>
 						<span
-							class="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded border transition-colors duration-100
+							class="mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-md border transition-colors duration-100
 								{checked ? `border-transparent ${toneText[tone]}` : 'border-hairline-strong'}"
 						>
 							{#if checked}

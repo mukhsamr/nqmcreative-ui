@@ -74,7 +74,7 @@
 	>
 		{#snippet prefix()}
 			<span
-				class="relative grid size-5 place-items-center overflow-hidden rounded border border-hairline-strong"
+				class="relative grid size-5 place-items-center overflow-hidden rounded-lg border border-hairline-strong"
 			>
 				<span class="absolute inset-0" style="background-color: {resolved}"></span>
 				<input

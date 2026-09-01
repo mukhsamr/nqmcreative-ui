@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
-	import { toneFocusBorder, type Tone } from '../../core/tones.js';
+	import { focusRing, toneFocusBorder, toneRing, type Tone } from '../../core/tones.js';
 
 	interface Props extends HTMLTextareaAttributes {
 		value?: string;
@@ -48,7 +48,9 @@
 	bind:value
 	{rows}
 	aria-invalid={invalid ? 'true' : undefined}
-	class="w-full rounded-md border bg-bg px-3 py-2 font-sans text-sm text-text shadow-xs transition-colors duration-150 ease-brand-out placeholder:text-text-muted focus:outline-none disabled:pointer-events-none disabled:opacity-50
+	class="{focusRing} {toneRing[
+		tone
+	]} w-full rounded-md border bg-bg px-3 py-2 font-sans text-sm text-text shadow-xs transition-colors duration-150 ease-brand-out placeholder:text-text-muted disabled:pointer-events-none disabled:opacity-50
 		{autoresize ? 'resize-none overflow-hidden' : 'resize-y'}
 		{invalid ? 'border-danger' : `border-hairline-strong ${toneFocusBorder[tone]}`} {className}"
 	{...rest}></textarea>

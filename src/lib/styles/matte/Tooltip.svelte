@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { describedBy } from '../../core/trigger.js';
 	import type { HTMLAttributes } from 'svelte/elements';
 
 	export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
@@ -13,6 +14,11 @@
 
 	let { content, placement = 'top', class: className = '', children, ...rest }: Props = $props();
 
+	const uid = $props.id();
+	let wrapper: HTMLElement | null = $state(null);
+
+	$effect(() => describedBy(wrapper, `${uid}-tip`));
+
 	const placements: Record<TooltipPlacement, string> = {
 		top: 'bottom-full left-1/2 mb-2 -translate-x-1/2',
 		bottom: 'top-full left-1/2 mt-2 -translate-x-1/2',
@@ -21,9 +27,10 @@
 	};
 </script>
 
-<span class="group/tt relative inline-flex" {...rest}>
+<span bind:this={wrapper} class="group/tt relative inline-flex" {...rest}>
 	{@render children()}
 	<span
+		id="{uid}-tip"
 		role="tooltip"
 		class="pointer-events-none invisible absolute z-50 bg-text px-2.5 py-1.5 font-sans text-xs whitespace-nowrap text-text-inverse opacity-0 transition-opacity duration-150 ease-brand-out group-focus-within/tt:visible group-focus-within/tt:opacity-100 group-hover/tt:visible group-hover/tt:opacity-100
 			{placements[placement]} {className}"

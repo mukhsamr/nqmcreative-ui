@@ -26,6 +26,8 @@
 		...rest
 	}: Props = $props();
 
+	const uid = $props.id();
+
 	let el: HTMLInputElement | null = $state(null);
 
 	$effect(() => {
@@ -33,44 +35,61 @@
 	});
 </script>
 
-<label
-	class="group inline-flex items-start gap-2.5 font-sans text-sm
-		{disabled ? 'pointer-events-none opacity-50' : 'cursor-pointer'} {className}"
+<div
+	class="inline-block font-sans text-sm {disabled
+		? 'pointer-events-none opacity-50'
+		: ''} {className}"
 >
-	<input bind:this={el} type="checkbox" bind:checked {disabled} class="peer sr-only" {...rest} />
-	<span
-		class="mt-0.5 flex size-[18px] shrink-0 items-center justify-center rounded border border-hairline-strong bg-bg {edge} transition-colors duration-150 ease-brand-out
+	<label class="group inline-flex items-start gap-2.5 {disabled ? '' : 'cursor-pointer'}">
+		<input
+			bind:this={el}
+			type="checkbox"
+			bind:checked
+			{disabled}
+			aria-describedby={description ? `${uid}-description` : undefined}
+			class="peer sr-only"
+			{...rest}
+		/>
+		<span
+			class="mt-0.5 flex size-[18px] shrink-0 items-center justify-center rounded-md border border-hairline-strong bg-bg {edge} transition-colors duration-150 ease-brand-out
 			{tonePeerChecked[tone]} {peerFocusRing} {tonePeerFocus[tone]}"
-		aria-hidden="true"
-	>
-		{#if indeterminate}
-			<span class="h-0.5 w-2.5 rounded-full bg-text-muted"></span>
-		{:else}
-			<svg
-				class="size-3 text-text-inverse opacity-0 transition-opacity duration-150 group-has-[:checked]:opacity-100"
-				viewBox="0 0 12 12"
-				fill="none"
-			>
-				<path
-					d="m2 6 2.6 2.6L10 3.2"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-			</svg>
-		{/if}
-	</span>
-	{#if label || description || children}
-		<span class="flex flex-col gap-0.5">
-			{#if children}
-				{@render children()}
-			{:else if label}
-				<span class="leading-snug text-text">{label}</span>
-			{/if}
-			{#if description}
-				<span class="text-[13px] leading-snug text-text-muted">{description}</span>
+			aria-hidden="true"
+		>
+			{#if indeterminate}
+				<span class="h-0.5 w-2.5 rounded-full bg-text-muted"></span>
+			{:else}
+				<svg
+					class="size-3 text-text-inverse opacity-0 transition-opacity duration-150 group-has-[:checked]:opacity-100"
+					viewBox="0 0 12 12"
+					fill="none"
+				>
+					<path
+						d="m2 6 2.6 2.6L10 3.2"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
 			{/if}
 		</span>
+		{#if label || children}
+			<span class="flex flex-col gap-0.5">
+				{#if children}
+					{@render children()}
+				{:else if label}
+					<span class="leading-snug text-text">{label}</span>
+				{/if}
+			</span>
+		{/if}
+	</label>
+	{#if description}
+		<!-- ponytail: the indent tracks the 18px box plus the label's gap; move one, move both. -->
+		<span
+			id="{uid}-description"
+			class="mt-0.5 block pl-[28px] text-[13px] leading-snug text-text-muted"
+		>
+			{description}
+		</span>
 	{/if}
-</label>
+</div>

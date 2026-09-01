@@ -95,6 +95,20 @@ export function describeTrigger(
 	control.setAttribute('aria-expanded', String(open));
 }
 
+/**
+ * Points the real control inside a wrapper at the element that describes it —
+ * a tooltip's text. Same reason as `describeTrigger`: the control is whatever
+ * the consumer passed in a snippet, so the attribute has to be attached rather
+ * than written in the template. Without it a tooltip is decoration: sighted
+ * hover users get the hint, keyboard and screen-reader users get nothing.
+ */
+export function describedBy(wrapper: HTMLElement | null, id: string) {
+	const control = wrapper?.querySelector(
+		'button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+	);
+	control?.setAttribute('aria-describedby', id);
+}
+
 /** The menu items a roving-focus menu should walk, in DOM order. */
 export function menuItems(menu: HTMLElement | null): HTMLElement[] {
 	return menu ? [...menu.querySelectorAll<HTMLElement>('[role="menuitem"]:not([disabled])')] : [];

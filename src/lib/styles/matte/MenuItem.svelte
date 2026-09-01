@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import { toneSoftHover, toneText, type Tone } from '../../core/tones.js';
+	import { toneSoft, toneSoftHover, toneText, type Tone } from '../../core/tones.js';
 	import { iconMd } from './icon.js';
 
 	interface Props extends HTMLButtonAttributes {
@@ -28,6 +28,11 @@
 		children,
 		...rest
 	}: Props = $props();
+
+	// A chosen row speaks in the brand, the same as an active nav link — a tick
+	// alone leaves it the same grey as every row above it. An item that already
+	// carries a tone (a red `Delete`) keeps its own.
+	const chosen = $derived(toneSoft[tone === 'neutral' ? 'brand' : tone]);
 </script>
 
 <svelte:element
@@ -39,9 +44,11 @@
 	aria-disabled={disabled ? 'true' : undefined}
 	tabindex={disabled ? undefined : -1}
 	class="flex w-full items-center gap-2.5 px-3 py-1.5 text-left text-[14px] transition-colors duration-100 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-40
-		{tone === 'neutral'
-		? 'text-text-secondary hover:bg-bg-inset focus-visible:bg-bg-inset'
-		: `${toneText[tone]} ${toneSoftHover[tone]}`}
+		{selected
+		? `${chosen} font-medium`
+		: tone === 'neutral'
+			? 'text-text-secondary hover:bg-bg-inset focus-visible:bg-bg-inset'
+			: `${toneText[tone]} ${toneSoftHover[tone]}`}
 		{className}"
 	{...rest}
 >

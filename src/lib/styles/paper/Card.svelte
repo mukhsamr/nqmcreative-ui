@@ -48,7 +48,7 @@
 
 <div
 	class="flex flex-col rounded-lg {variants[variant]}
-		{accent ? `border-l-4 ${toneBorderLeft[tone]}` : ''}
+		{accent ? `border-l-2 ${toneBorderLeft[tone]}` : ''}
 		{interactive
 		? `transition-shadow duration-150 ease-brand-out hover:shadow-md ${toneHoverBorder[tone]}`
 		: ''}

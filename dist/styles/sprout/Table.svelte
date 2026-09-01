@@ -195,7 +195,7 @@
 								<button
 									type="button"
 									onclick={() => toggleSort(column)}
-									class="inline-flex items-center gap-1.5 rounded transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current
+									class="inline-flex items-center gap-1.5 rounded-md transition-colors duration-150 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current
 									{sort?.key === column.key ? 'text-text' : ''}"
 								>
 									{column.label}

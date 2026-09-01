@@ -39,6 +39,8 @@
 		...rest
 	}: Props = $props();
 
+	const uid = $props.id();
+
 	let dialog: HTMLDialogElement | null = $state(null);
 
 	const closable = $derived(showClose ?? dismissible);
@@ -64,6 +66,8 @@
 
 <dialog
 	bind:this={dialog}
+	aria-labelledby={title ? `${uid}-title` : undefined}
+	aria-describedby={description ? `${uid}-description` : undefined}
 	onclose={close}
 	onclick={onBackdrop}
 	oncancel={(event) => {
@@ -80,10 +84,14 @@
 				{#if icon}<span class={iconLg}>{@render icon()}</span>{/if}
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					{#if title}
-						<h2 class="font-heading text-lg font-medium tracking-tight">{title}</h2>
+						<h2 id="{uid}-title" class="font-heading text-lg font-medium tracking-tight">
+							{title}
+						</h2>
 					{/if}
 					{#if description}
-						<p class="font-sans text-sm text-text-secondary">{description}</p>
+						<p id="{uid}-description" class="font-sans text-sm text-text-secondary">
+							{description}
+						</p>
 					{/if}
 				</div>
 				{#if closable}

@@ -73,7 +73,7 @@
 				type="button"
 				onclick={clear}
 				aria-label="Clear search"
-				class="-mr-1 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+				class="-mr-1 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 					<path

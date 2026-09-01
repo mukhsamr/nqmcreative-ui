@@ -3,7 +3,14 @@
 	import { anchored } from '../../core/actions/anchor.js';
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
-	import { toneFocusWithinBorder, toneSoft, toneText, type Tone } from '../../core/tones.js';
+	import {
+		focusWithinRing,
+		toneFocusWithinBorder,
+		toneFocusWithinRing,
+		toneSoft,
+		toneText,
+		type Tone
+	} from '../../core/tones.js';
 	import { iconMd } from './icon.js';
 
 	export interface ComboboxOption {
@@ -143,7 +150,9 @@
 
 <div
 	bind:this={wrapper}
-	class="relative inline-flex w-full items-center gap-2 border bg-bg pr-2 pl-3.5 transition-colors duration-150 ease-brand-out
+	class="relative inline-flex w-full items-center gap-2 border bg-bg pr-2 pl-3.5 transition-colors duration-150 ease-brand-out {focusWithinRing} {toneFocusWithinRing[
+		tone
+	]}
 		{invalid ? 'border-danger' : `border-hairline ${toneFocusWithinBorder[tone]}`}
 		{disabled ? 'pointer-events-none opacity-50' : ''} {className}"
 >

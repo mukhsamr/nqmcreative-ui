@@ -145,7 +145,7 @@ export const STYLES = [
 		name: 'sprout',
 		title: 'Sprout',
 		description:
-			'Warm and fully rounded — leaf green on cream, pill buttons, and a round display face. For school, community and family sites.'
+			'Warm and fully rounded — leaf green on white, pill buttons, and a round display face. For school, community and family sites.'
 	}
 ];
 

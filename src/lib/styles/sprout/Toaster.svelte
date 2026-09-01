@@ -31,8 +31,24 @@
 	const fromLeft = $derived(position.endsWith('left'));
 	const fromCenter = $derived(position.endsWith('center'));
 
+	/**
+	 * A card sliding in from the edge of the screen, and a stack of them shuffling
+	 * to make room, is exactly the motion this preference exists to stop. Under it
+	 * the toast fades in place and the stack reorders instantly — the state change
+	 * still reads, it just stops travelling.
+	 *
+	 * ponytail: read once at mount. Someone who flips the OS setting mid-session
+	 * gets the new behaviour on the next load; a live listener is the upgrade.
+	 */
+	const stillness =
+		typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 	const enter = $derived(
-		fromCenter ? { y: fromTop ? -16 : 16, x: 0 } : { x: fromLeft ? -16 : 16, y: 0 }
+		stillness
+			? { x: 0, y: 0 }
+			: fromCenter
+				? { y: fromTop ? -16 : 16, x: 0 }
+				: { x: fromLeft ? -16 : 16, y: 0 }
 	);
 </script>
 
@@ -46,12 +62,12 @@
 >
 	{#each toast.items as item (item.id)}
 		<!--
-			sprout puts every toast on the same cream card and lets the glyph
+			sprout puts every toast on the same white card and lets the glyph
 			carry the tone. matte tints the whole surface; here a tinted block
 			would fight the warm page underneath.
 		-->
 		<div
-			animate:flip={{ duration: 200 }}
+			animate:flip={{ duration: stillness ? 0 : 200 }}
 			in:fly={{ ...enter, duration: 220 }}
 			out:fly={{ ...enter, duration: 160 }}
 			role={item.tone === 'danger' ? 'alert' : 'status'}
@@ -93,7 +109,7 @@
 			</span>
 
 			<div class="flex min-w-0 flex-1 flex-col gap-1">
-				<p class="text-sm leading-snug font-semibold text-text">{item.title}</p>
+				<p class="font-heading text-sm leading-snug font-semibold text-text">{item.title}</p>
 				{#if item.description}
 					<p class="text-[13px] leading-relaxed text-text-secondary">{item.description}</p>
 				{/if}
@@ -104,7 +120,7 @@
 							item.action?.onclick();
 							toast.dismiss(item.id);
 						}}
-						class="mt-1 self-start rounded font-sans text-[13px] font-semibold underline underline-offset-2 {toneText[
+						class="mt-1 self-start rounded-md font-sans text-[13px] font-semibold underline underline-offset-2 {toneText[
 							item.tone
 						]}"
 					>
@@ -117,7 +133,7 @@
 				type="button"
 				onclick={() => toast.dismiss(item.id)}
 				aria-label="Dismiss"
-				class="-m-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+				class="-m-1 shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 					<path

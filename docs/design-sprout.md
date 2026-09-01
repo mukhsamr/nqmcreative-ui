@@ -12,7 +12,7 @@ Source of truth: `src/lib/styles/sprout/`. Behaviour (not looks) lives in
 
 ## 1. Identity
 
-**The warm one.** Leaf green on cream, fully rounded corners, and a display face
+**The warm one.** Leaf green on white, fully rounded corners, and a display face
 with round terminals. Built for school, community and family sites — where the
 reader is a parent on a phone, not an operator at a desk.
 
@@ -28,8 +28,10 @@ The three laws, in order of importance:
    far as the lip shortens (5px → 2px), so the top face lands where the shadow
    was and the whole thing reads as one pressed object.
 
-Surfaces are cream, never white, and every grey is green-cast — a neutral grey
-next to this much foliage reads as a printing error.
+Surfaces are white, and the neutral ladder under them stays near-neutral with only a hair of warmth.
+**The green belongs to the brand, not to the paper** — a page whose every
+secondary surface and every hover is tinted green reads as tiring long before it
+reads as warm.
 
 ---
 
@@ -63,17 +65,21 @@ Every hue has the same four steps:
 
 ### 3.1 Surfaces
 
-Cream rather than white; every step of the grey scale carries a little brand hue.
-Dark mode is a **night garden**, not a neutral slate — the surfaces keep the
-green cast and every hue lifts a step or two.
+Cream rather than white, and every step carries a little honey rather than a
+little leaf. Dark mode is **lamplight**, not a neutral slate — the same warm
+cast, with every hue lifted a step or two so it still reads.
 
 | token                     | light     | dark      |
 | ------------------------- | --------- | --------- |
-| `--color-bg`              | `#fffefb` | `#0e1a11` |
-| `--color-bg-alt`          | `#f0fdf4` | `#14251a` |
-| `--color-bg-inset`        | `#e3f6e9` | `#1b3020` |
-| `--color-hairline`        | `#ecefe7` | `#1e3524` |
-| `--color-hairline-strong` | `#d3e0d1` | `#2f4a36` |
+| `--color-bg`              | `#ffffff` | `#17140e` |
+| `--color-bg-alt`          | `#f7f7f4` | `#211c13` |
+| `--color-bg-inset`        | `#edede8` | `#2d261a` |
+| `--color-hairline`        | `#e6e6e0` | `#2a2317` |
+| `--color-hairline-strong` | `#cfcfc7` | `#453a27` |
+
+**`bg` is the face of a card; `bg-alt` is the ground it sits on.** Put
+`bg-bg-alt` on the body and cards float as white — that is the layering this
+style was drawn from, and the one thing an app has to opt into itself.
 
 ### 3.2 Text
 
@@ -82,7 +88,7 @@ green cast and every hue lifts a step or two.
 | `--color-text`           | `#1a3a1f` | `#f0f7f0` |
 | `--color-text-secondary` | `#2f5135` | `#cadfcd` |
 | `--color-text-muted`     | `#5f6f62` | `#94ad99` |
-| `--color-text-inverse`   | `#ffffff` | `#0e1a11` |
+| `--color-text-inverse`   | `#ffffff` | `#17140e` |
 
 ### 3.3 Tones
 
@@ -229,22 +235,26 @@ theme tokens: a `--shadow-lip` that only sprout defined would break the shared
 token contract and fail `bun run scoped`. Tailwind still sees them because it
 scans that file like any other source.
 
-| export         | class                                                                                             | meaning                                               |
-| -------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `edge`         | `shadow-[0_2px_0_0_rgba(20,83,45,0.07)]`                                                          | barely raised: chips, inputs, table shells, list rows |
-| `soft`         | `shadow-[0_4px_0_0_rgba(20,83,45,0.08),0_14px_30px_-10px_rgba(20,83,45,0.18)]`                    | the workhorse: cards, menus, popovers, toasts         |
-| `softOnHover`  | `hover:shadow-[0_6px_0_0_rgba(20,83,45,0.10),0_18px_36px_-12px_rgba(20,83,45,0.22)]`              | `soft`, one step deeper, for a card under the pointer |
-| `float`        | `shadow-[0_6px_0_0_rgba(20,83,45,0.09),0_28px_60px_-20px_rgba(20,83,45,0.35)]`                    | off the page: Modal, Drawer, CommandPalette           |
-| `lift[tone]`   | `shadow-[0_5px_0_0_color-mix(in_oklab,var(--color-<tone>)_72%,black)]` + `active:` at `0_2px_0_0` | a solid fill's own lip — Button `solid`               |
-| `liftSm[tone]` | `shadow-[0_3px_0_0_color-mix(in_oklab,var(--color-<tone>)_72%,black)]`                            | too small to travel: icon tiles, dots, active page    |
+| export           | class                                                                                             | meaning                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `edge`           | `shadow-[0_2px_0_0_rgba(20,83,45,0.07)]`                                                          | barely raised: chips, inputs, table shells, list rows                      |
+| `soft`           | `shadow-[0_4px_0_0_rgba(20,83,45,0.08),0_14px_30px_-10px_rgba(20,83,45,0.18)]`                    | the workhorse: cards, menus, popovers, toasts                              |
+| `softOnHover`    | `hover:shadow-[0_6px_0_0_rgba(20,83,45,0.10),0_18px_36px_-12px_rgba(20,83,45,0.22)]`              | `soft`, one step deeper, for a card under the pointer                      |
+| `float`          | `shadow-[0_6px_0_0_rgba(20,83,45,0.09),0_28px_60px_-20px_rgba(20,83,45,0.35)]`                    | off the page: Modal, Drawer, CommandPalette                                |
+| `lift[tone]`     | `shadow-[0_5px_0_0_color-mix(in_oklab,var(--color-<tone>)_72%,black)]` + `active:` at `0_2px_0_0` | a solid fill's own lip — Button `solid`                                    |
+| `liftSoft[tone]` | `shadow-[0_5px_0_0_var(--color-<tone>-border)]` + `active:` at `0_2px_0_0`                        | the quiet lip — Button `soft` and `outline`, so both share one bottom edge |
+| `liftSm[tone]`   | `shadow-[0_3px_0_0_color-mix(in_oklab,var(--color-<tone>)_72%,black)]`                            | too small to travel: icon tiles, dots, active page                         |
 
 Rules:
 
 - A tone's lip is the tone **mixed 72% toward black in oklab**, so it is always
   the colour a shadow of that fill would be — and it darkens whatever the fill
   happens to be, in either theme.
-- `lift[tone]` must always be paired with `active:translate-y-[3px]` on the same
-  element. 5px − 2px = 3px; the numbers are not independent.
+- `lift[tone]` and `liftSoft[tone]` must always be paired with
+  `active:translate-y-[3px]` on the same element. 5px − 2px = 3px; the numbers
+  are not independent. A lip with no `active:` step (like `edge`) on something
+  that travels does not compress — it just slides down with its own shadow
+  attached, and never reads as pressed.
 - The surface shadows (`edge`/`soft`/`float`) are near-black at low alpha with a
   green cast (`rgba(20,83,45,·)`), never a tone colour.
 - Two exceptions that use a plain Tailwind shadow rather than a lip: Sidebar
@@ -391,7 +401,7 @@ text. Always read from these maps:
 | `tonePeerFocus[t]`         | `peer-focus-visible:outline-<t>`                          |
 
 Plus the sprout-local maps from `./lift.js`: `edge`, `soft`, `softOnHover`,
-`float`, `lift[tone]`, `liftSm[tone]`.
+`float`, `lift[tone]`, `liftSoft[tone]`, `liftSm[tone]`.
 
 ---
 
@@ -412,13 +422,13 @@ base: inline-flex items-center justify-center gap-2 rounded-full border
 
 Fully round, in the heading face, standing on a lip it sinks into. Sizes per §9.
 
-| variant           | classes                                                                                                                                                                                                     |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `solid`/`primary` | `border-transparent` + `toneSolid` + `toneSolidHover` + **`lift[tone]`**                                                                                                                                    |
-| `soft`            | `border-transparent` + `toneSoft` + `toneSoftHover` + `edge`                                                                                                                                                |
-| `outline`         | `bg-bg` + `edge` + `toneText` + `toneBorderSoft` + `hover:bg-bg-alt` — outline keeps its own colours on hover; it never flips to a solid fill (that is matte's move, and it fights sprout's soft surfaces). |
-| `ghost`           | `border-transparent bg-transparent` + `toneText` + `toneSoftHover` + `active:translate-y-0`                                                                                                                 |
-| `link`            | `border-transparent` + `toneText` + `h-auto p-0 text-sm underline-offset-4 hover:underline active:translate-y-0`                                                                                            |
+| variant           | classes                                                                                                                                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `solid`/`primary` | `border-transparent` + `toneSolid` + `toneSolidHover` + **`lift[tone]`**                                                                                                                                                  |
+| `soft`            | `border-transparent` + `toneSoft` + `toneSoftHover` + **`liftSoft[tone]`**                                                                                                                                                |
+| `outline`         | `bg-bg` + **`liftSoft[tone]`** + `toneText` + `toneBorderSoft` + `hover:bg-bg-alt` — outline keeps its own colours on hover; it never flips to a solid fill (that is matte's move, and it fights sprout's soft surfaces). |
+| `ghost`           | `border-transparent bg-transparent` + `toneText` + `toneSoftHover` + `active:translate-y-0`                                                                                                                               |
+| `link`            | `border-transparent` + `toneText` + `h-auto p-0 text-sm underline-offset-4 hover:underline active:translate-y-0`                                                                                                          |
 
 Spinner replaces the leading icon while busy (`size sm → xs`, else `sm`).
 `aria-busy` is set; an async `onclick` returning a promise auto-locks the button.
@@ -1013,11 +1023,11 @@ border border-hairline bg-bg text-text-secondary` + `edge` +
    square things are the 4px `rounded` micro-affordances (checkbox box, icon
    buttons, chip remove).
 2. Elevation comes from `./lift.js` — `edge`, `soft`, `softOnHover`, `float`,
-   `lift[tone]`, `liftSm[tone]`. Do **not** write `shadow-xs|sm|md|lg|2xl`
+   `lift[tone]`, `liftSoft[tone]`, `liftSm[tone]`. Do **not** write `shadow-xs|sm|md|lg|2xl`
    (the only sanctioned exception already in the code is Sidebar `floating`).
    Do not invent a new `shadow-[…]` by hand.
-3. `lift[tone]` is always paired with `active:translate-y-[3px]`. Never one
-   without the other.
+3. `lift[tone]` and `liftSoft[tone]` are always paired with
+   `active:translate-y-[3px]`. Never one without the other.
 4. Buttons sink (`translate-y-[3px]` down); cards rise
    (`hover:-translate-y-0.5`). Never the reverse.
 5. `font-heading` (Fredoka) is for headings, **Button labels, Badge labels and

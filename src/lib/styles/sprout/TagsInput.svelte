@@ -135,7 +135,7 @@
 					type="button"
 					onclick={() => remove(index)}
 					aria-label="Remove {tag}"
-					class="inline-flex size-4 items-center justify-center rounded transition-colors duration-150 hover:bg-bg/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current"
+					class="inline-flex size-4 items-center justify-center rounded-full transition-colors duration-150 hover:bg-bg/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current"
 				>
 					<svg class="size-2.5" viewBox="0 0 10 10" fill="none" aria-hidden="true">
 						<path

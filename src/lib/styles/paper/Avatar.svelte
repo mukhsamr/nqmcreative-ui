@@ -47,6 +47,12 @@
 		xl: 'grid place-items-center *:size-8'
 	};
 
+	// A src that 404s left the reader with the browser's broken-image mark while
+	// the initials sat right there unused. Holding the failed URL rather than a
+	// flag means a new src is tried again on its own.
+	let failed = $state('');
+	const broken = $derived(failed !== '' && failed === src);
+
 	const initials = $derived(
 		name
 			.trim()
@@ -60,13 +66,18 @@
 
 <span
 	class="inline-flex shrink-0 items-center justify-center overflow-hidden font-sans font-semibold select-none
-		{squared ? 'rounded-lg' : 'rounded-full'} {sizes[size]} {src
+		{squared ? 'rounded-lg' : 'rounded-full'} {sizes[size]} {src && !broken
 		? 'bg-bg-inset'
 		: toneSoft[tone]} {className}"
 	{...rest}
 >
-	{#if src}
-		<img {src} alt={alt ?? name} class="size-full object-cover" />
+	{#if src && !broken}
+		<img
+			{src}
+			alt={alt ?? name}
+			onerror={() => (failed = src ?? '')}
+			class="size-full object-cover"
+		/>
 	{:else if fallback}
 		<span class={glyphs[size]}>{@render fallback()}</span>
 	{:else}

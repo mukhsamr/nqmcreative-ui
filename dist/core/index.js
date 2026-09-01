@@ -9,7 +9,7 @@
  * focus trap, so none of them should have to write one.
  */
 /* --- tones --- */
-export { TONES, focusRing, peerFocusRing, toneBorder, toneBorderLeft, toneBorderSoft, toneFill, toneFocusBorder, toneFocusWithinBorder, toneHoverBorder, toneHoverText, tonePeerChecked, tonePeerFocus, toneRing, toneSoft, toneSoftHover, toneSolid, toneSolidHover, toneSurface, toneText } from './tones.js';
+export { TONES, focusRing, peerFocusRing, toneBorder, toneBorderLeft, toneBorderSoft, toneFill, toneFocusBorder, toneFocusWithinBorder, focusWithinRing, toneFocusWithinRing, toneHoverBorder, toneHoverText, tonePeerChecked, tonePeerFocus, toneRing, toneSoft, toneSoftHover, toneSolid, toneSolidHover, toneSurface, toneText } from './tones.js';
 /* --- actions --- */
 export { anchored } from './actions/anchor.js';
 export { clickOutside, focusTrap, focusable, navigateList, portal } from './actions/dismissable.js';

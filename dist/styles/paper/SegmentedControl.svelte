@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
-	import { focusRing, toneRing, type Tone } from '../../core/tones.js';
+	import { focusRing, toneRing, toneText, type Tone } from '../../core/tones.js';
 	import { iconMd } from './icon.js';
 
 	export interface SegmentOption {
@@ -92,7 +92,7 @@
 			onclick={() => select(option)}
 			class="inline-flex items-center justify-center rounded-md font-sans font-medium whitespace-nowrap transition-all duration-150 ease-brand-out disabled:pointer-events-none disabled:opacity-40
 				{iconOnly ? squares[size] : sizes[size]} {focusRing} {toneRing[tone]}
-				{value === option.value ? 'bg-bg text-text shadow-xs' : 'text-text-muted hover:text-text'}"
+				{value === option.value ? `bg-bg ${toneText[tone]} shadow-xs` : 'text-text-muted hover:text-text'}"
 		>
 			{#if option.icon}<span class={iconMd}>{@render option.icon()}</span>{/if}
 			{#if !iconOnly}{option.label}{/if}

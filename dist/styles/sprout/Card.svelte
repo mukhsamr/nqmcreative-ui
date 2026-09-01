@@ -40,7 +40,7 @@
 		...rest
 	}: Props = $props();
 
-	// The default card is the one the style is named for: cream, a hairline, and
+	// The default card is the one the style is named for: white, a hairline, and
 	// the lip. `filled` and `tinted` stay flat on purpose — a tinted panel that
 	// also floats is two claims about the same box.
 	const variants = $derived({
@@ -52,7 +52,7 @@
 
 <div
 	class="flex flex-col rounded-[28px] {variants[variant]}
-		{accent ? `border-l-4 ${toneBorderLeft[tone]}` : ''}
+		{accent ? `border-l-2 ${toneBorderLeft[tone]}` : ''}
 		{interactive
 		? `transition-[box-shadow,transform,border-color] duration-150 ease-brand-out hover:-translate-y-0.5 ${softOnHover} ${toneHoverBorder[tone]}`
 		: ''}

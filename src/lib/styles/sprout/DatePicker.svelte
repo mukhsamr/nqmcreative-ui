@@ -3,7 +3,12 @@
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { dateHint } from '../../core/calendar.js';
 	import { formatISO, parseFormatted, type DateFormat } from '../../core/date.js';
-	import { toneFocusWithinBorder, type Tone } from '../../core/tones.js';
+	import {
+		focusWithinRing,
+		toneFocusWithinBorder,
+		toneFocusWithinRing,
+		type Tone
+	} from '../../core/tones.js';
 	import Calendar from './Calendar.svelte';
 	import { edge, soft } from './lift.js';
 
@@ -95,7 +100,9 @@
 
 <div
 	bind:this={wrapper}
-	class="inline-flex w-full items-center gap-1 rounded-xl border bg-bg pr-1 pl-3 {edge} transition-colors duration-150 ease-brand-out
+	class="inline-flex w-full items-center gap-1 rounded-xl border bg-bg pr-1 pl-3 {edge} transition-colors duration-150 ease-brand-out {focusWithinRing} {toneFocusWithinRing[
+		tone
+	]}
 		{invalid ? 'border-danger' : `border-hairline-strong ${toneFocusWithinBorder[tone]}`}
 		{disabled ? 'pointer-events-none opacity-50' : ''} {className}"
 >
@@ -134,7 +141,7 @@
 				inputEl?.focus();
 			}}
 			aria-label="Clear selection"
-			class="shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+			class="shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 		>
 			<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 				<path
@@ -153,7 +160,7 @@
 		onclick={() => (open = !open)}
 		aria-label="Select a date"
 		aria-expanded={open}
-		class="shrink-0 rounded p-1.5 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+		class="shrink-0 rounded-xl p-1.5 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 	>
 		<svg class="size-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
 			<rect x="3" y="4.5" width="14" height="12" rx="2" stroke="currentColor" stroke-width="1.4" />

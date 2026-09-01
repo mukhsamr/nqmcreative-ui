@@ -30,8 +30,24 @@
 	const fromLeft = $derived(position.endsWith('left'));
 	const fromCenter = $derived(position.endsWith('center'));
 
+	/**
+	 * A card sliding in from the edge of the screen, and a stack of them shuffling
+	 * to make room, is exactly the motion this preference exists to stop. Under it
+	 * the toast fades in place and the stack reorders instantly — the state change
+	 * still reads, it just stops travelling.
+	 *
+	 * ponytail: read once at mount. Someone who flips the OS setting mid-session
+	 * gets the new behaviour on the next load; a live listener is the upgrade.
+	 */
+	const stillness =
+		typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 	const enter = $derived(
-		fromCenter ? { y: fromTop ? -16 : 16, x: 0 } : { x: fromLeft ? -16 : 16, y: 0 }
+		stillness
+			? { x: 0, y: 0 }
+			: fromCenter
+				? { y: fromTop ? -16 : 16, x: 0 }
+				: { x: fromLeft ? -16 : 16, y: 0 }
 	);
 </script>
 
@@ -50,7 +66,7 @@
 			would fight the page underneath.
 		-->
 		<div
-			animate:flip={{ duration: 200 }}
+			animate:flip={{ duration: stillness ? 0 : 200 }}
 			in:fly={{ ...enter, duration: 220 }}
 			out:fly={{ ...enter, duration: 160 }}
 			role={item.tone === 'danger' ? 'alert' : 'status'}
@@ -92,7 +108,7 @@
 			</span>
 
 			<div class="flex min-w-0 flex-1 flex-col gap-1">
-				<p class="text-sm leading-snug font-semibold text-text">{item.title}</p>
+				<p class="font-heading text-sm leading-snug font-semibold text-text">{item.title}</p>
 				{#if item.description}
 					<p class="text-[13px] leading-relaxed text-text-secondary">{item.description}</p>
 				{/if}

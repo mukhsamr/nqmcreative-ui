@@ -71,7 +71,7 @@
 	}
 
 	const stepper =
-		'grid size-6 place-items-center rounded text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current';
+		'grid size-6 place-items-center rounded-lg text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-current';
 </script>
 
 <Input

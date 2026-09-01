@@ -75,7 +75,7 @@
 			}`;
 		}
 		return `${base} h-8 rounded-xl px-3.5 ${
-			active ? `bg-bg text-text ${edge}` : 'text-text-muted hover:text-text'
+			active ? `bg-bg ${toneText[tone]} ${edge}` : 'text-text-muted hover:text-text'
 		}`;
 	}
 </script>

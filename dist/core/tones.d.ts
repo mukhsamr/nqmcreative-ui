@@ -30,6 +30,16 @@ export declare const toneRing: Record<Tone, string>;
 export declare const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-2";
 /** Border colour applied while the control itself has focus. */
 export declare const toneFocusBorder: Record<Tone, string>;
+/**
+ * Focus-ring geometry for a shell that holds the real control — `Input`'s
+ * wrapper, an input group. The ring belongs on the box the reader sees, not on
+ * the bare `<input>` inside it, so it is keyed off a focused descendant.
+ * `:has(:focus-visible)` rather than `:focus-within` so a pointer click into a
+ * field does not draw a keyboard affordance.
+ */
+export declare const focusWithinRing = "has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2";
+/** Ring colour for `focusWithinRing`. */
+export declare const toneFocusWithinRing: Record<Tone, string>;
 /** Border colour applied while a descendant has focus (wrapped controls). */
 export declare const toneFocusWithinBorder: Record<Tone, string>;
 /** Tinted surface only (no text colour) — alerts, callouts, table rows. */

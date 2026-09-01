@@ -45,13 +45,24 @@
 		children,
 		...rest
 	}: Props = $props();
+
+	const uid = $props.id();
+	// The group's own hint and error sit outside every control in it, so the
+	// fieldset is what has to point at them.
+	const messageId = $derived(error ? `${uid}-error` : hint ? `${uid}-hint` : undefined);
 </script>
 
-<fieldset class="flex flex-col gap-3 border-0 p-0 {className}" {...rest}>
+<fieldset
+	aria-describedby={messageId}
+	class="flex flex-col gap-3 border-0 p-0 {className}"
+	{...rest}
+>
 	{#if legend}
 		<legend class="mb-1 font-sans text-sm font-medium text-text">
 			{legend}
-			{#if required}<span class="ml-0.5 text-danger" aria-hidden="true">*</span>{/if}
+			{#if required}<span class="ml-0.5 text-danger" aria-hidden="true">*</span><span
+					class="sr-only">(required)</span
+				>{/if}
 		</legend>
 	{/if}
 
@@ -95,8 +106,8 @@
 	</div>
 
 	{#if error}
-		<p class="font-sans text-[13px] text-danger">{error}</p>
+		<p id="{uid}-error" role="alert" class="font-sans text-[13px] text-danger">{error}</p>
 	{:else if hint}
-		<p class="font-sans text-[13px] text-text-muted">{hint}</p>
+		<p id="{uid}-hint" class="font-sans text-[13px] text-text-muted">{hint}</p>
 	{/if}
 </fieldset>

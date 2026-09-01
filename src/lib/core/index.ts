@@ -20,6 +20,8 @@ export {
 	toneFill,
 	toneFocusBorder,
 	toneFocusWithinBorder,
+	focusWithinRing,
+	toneFocusWithinRing,
 	toneHoverBorder,
 	toneHoverText,
 	tonePeerChecked,

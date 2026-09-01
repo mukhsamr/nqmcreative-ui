@@ -109,7 +109,7 @@
 							class="{link} {focusRing} {toneRing[tone]} {item.active
 								? toneText[tone]
 								: 'text-text-secondary hover:text-text'} {item.disabled
-								? 'pointer-events-none opacity-50'
+								? 'pointer-events-none opacity-40'
 								: ''}"
 						>
 							{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
@@ -156,7 +156,7 @@
 					aria-current={item.active ? 'page' : undefined}
 					class="flex items-center justify-between gap-3 py-3 font-sans text-[15px] {item.active
 						? toneText[tone]
-						: 'text-text-secondary'} {item.disabled ? 'pointer-events-none opacity-50' : ''}"
+						: 'text-text-secondary'} {item.disabled ? 'pointer-events-none opacity-40' : ''}"
 				>
 					<span class="flex min-w-0 items-center gap-2.5">
 						{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}

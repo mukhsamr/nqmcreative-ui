@@ -223,3 +223,24 @@
 		--color-neutral-border: #374151;
 	}
 }
+
+/*
+ * The surfaces the browser draws for us.
+ *
+ * A caret and a highlight in the user-agent's blue belong to no design system,
+ * and they are the two the reader touches most: one sits in every field they
+ * type into, the other appears the moment they drag across a paragraph. The
+ * selection is mixed from the brand rather than pinned to a token so it stays
+ * a wash — the text underneath keeps its own colour and its own contrast.
+ */
+@layer base {
+	::selection {
+		background-color: color-mix(in oklab, var(--color-brand) 24%, transparent);
+	}
+
+	input,
+	textarea,
+	[contenteditable] {
+		caret-color: var(--color-brand);
+	}
+}

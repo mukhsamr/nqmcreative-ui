@@ -36,5 +36,19 @@ export declare const float = "shadow-[0_6px_0_0_rgba(20,83,45,0.09),0_28px_60px_
  * reads as one pressed object.
  */
 export declare const lift: Record<Tone, string>;
+/**
+ * The quiet lip, for a button that is not a solid fill: `soft` and `outline`.
+ *
+ * Drawn in the tone's own border colour — the line `outline` already carries —
+ * so the bottom reads as that border thickening rather than as a shadow stuck
+ * underneath. `soft` has no border of its own, so pairing the two here is what
+ * gives both variants the same edge: the only difference left between them is
+ * the face above it.
+ *
+ * Shortens by the same 3px the button travels, exactly like `lift`. Without
+ * that second step a pressed button just slides down with its shadow attached
+ * and never reads as pressed at all.
+ */
+export declare const liftSoft: Record<Tone, string>;
 /** The same lip at 3px, for things too small to travel: icon tiles, dots. */
 export declare const liftSm: Record<Tone, string>;

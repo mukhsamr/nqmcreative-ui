@@ -31,6 +31,8 @@
 		md: { track: 'h-6 w-11', thumb: 'size-5', travel: 'translate-x-5' }
 	};
 
+	const uid = $props.id();
+
 	function toggle() {
 		checked = !checked;
 		onchange?.(checked);
@@ -43,6 +45,7 @@
 		role="switch"
 		aria-checked={checked}
 		aria-label={label}
+		aria-describedby={description ? `${uid}-description` : undefined}
 		{disabled}
 		onclick={toggle}
 		class="relative mt-0.5 inline-flex shrink-0 items-center rounded-full p-0.5 transition-colors duration-200 ease-brand-out disabled:pointer-events-none
@@ -58,7 +61,9 @@
 		<span class="flex flex-col gap-0.5 font-sans text-sm">
 			{#if label}<span class="leading-snug text-text">{label}</span>{/if}
 			{#if description}
-				<span class="text-[13px] leading-snug text-text-muted">{description}</span>
+				<span id="{uid}-description" class="text-[13px] leading-snug text-text-muted"
+					>{description}</span
+				>
 			{/if}
 		</span>
 	{/if}

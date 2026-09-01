@@ -3,7 +3,12 @@
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { dateHint } from '../../core/calendar.js';
 	import { formatISO, parseFormatted, type DateFormat } from '../../core/date.js';
-	import { toneFocusWithinBorder, type Tone } from '../../core/tones.js';
+	import {
+		focusWithinRing,
+		toneFocusWithinBorder,
+		toneFocusWithinRing,
+		type Tone
+	} from '../../core/tones.js';
 	import Calendar from './Calendar.svelte';
 
 	interface Props {
@@ -94,7 +99,9 @@
 
 <div
 	bind:this={wrapper}
-	class="inline-flex w-full items-center gap-1 border bg-bg pr-1 pl-3.5 transition-colors duration-150 ease-brand-out
+	class="inline-flex w-full items-center gap-1 border bg-bg pr-1 pl-3.5 transition-colors duration-150 ease-brand-out {focusWithinRing} {toneFocusWithinRing[
+		tone
+	]}
 		{invalid ? 'border-danger' : `border-hairline ${toneFocusWithinBorder[tone]}`}
 		{disabled ? 'pointer-events-none opacity-50' : ''} {className}"
 >

@@ -23,6 +23,29 @@ export const lift = {
     danger: 'shadow-[0_5px_0_0_color-mix(in_oklab,var(--color-danger)_72%,black)] active:shadow-[0_2px_0_0_color-mix(in_oklab,var(--color-danger)_72%,black)]',
     neutral: 'shadow-[0_5px_0_0_color-mix(in_oklab,var(--color-neutral)_72%,black)] active:shadow-[0_2px_0_0_color-mix(in_oklab,var(--color-neutral)_72%,black)]'
 };
+/**
+ * The quiet lip, for a button that is not a solid fill: `soft` and `outline`.
+ *
+ * Drawn in the tone's own border colour — the line `outline` already carries —
+ * so the bottom reads as that border thickening rather than as a shadow stuck
+ * underneath. `soft` has no border of its own, so pairing the two here is what
+ * gives both variants the same edge: the only difference left between them is
+ * the face above it.
+ *
+ * Shortens by the same 3px the button travels, exactly like `lift`. Without
+ * that second step a pressed button just slides down with its shadow attached
+ * and never reads as pressed at all.
+ */
+export const liftSoft = {
+    brand: 'shadow-[0_5px_0_0_var(--color-brand-border)] active:shadow-[0_2px_0_0_var(--color-brand-border)]',
+    accent: 'shadow-[0_5px_0_0_var(--color-accent-border)] active:shadow-[0_2px_0_0_var(--color-accent-border)]',
+    violet: 'shadow-[0_5px_0_0_var(--color-violet-border)] active:shadow-[0_2px_0_0_var(--color-violet-border)]',
+    info: 'shadow-[0_5px_0_0_var(--color-info-border)] active:shadow-[0_2px_0_0_var(--color-info-border)]',
+    success: 'shadow-[0_5px_0_0_var(--color-success-border)] active:shadow-[0_2px_0_0_var(--color-success-border)]',
+    warning: 'shadow-[0_5px_0_0_var(--color-warning-border)] active:shadow-[0_2px_0_0_var(--color-warning-border)]',
+    danger: 'shadow-[0_5px_0_0_var(--color-danger-border)] active:shadow-[0_2px_0_0_var(--color-danger-border)]',
+    neutral: 'shadow-[0_5px_0_0_var(--color-neutral-border)] active:shadow-[0_2px_0_0_var(--color-neutral-border)]'
+};
 /** The same lip at 3px, for things too small to travel: icon tiles, dots. */
 export const liftSm = {
     brand: 'shadow-[0_3px_0_0_color-mix(in_oklab,var(--color-brand)_72%,black)]',

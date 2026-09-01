@@ -111,7 +111,7 @@
 							class="{link} {focusRing} {toneRing[tone]} {item.active
 								? toneSoft[tone]
 								: 'text-text-secondary hover:bg-bg-inset hover:text-text'} {item.disabled
-								? 'pointer-events-none opacity-50'
+								? 'pointer-events-none opacity-40'
 								: ''}"
 						>
 							{#if item.icon}<span class={iconMd}>{@render item.icon()}</span>{/if}
@@ -164,7 +164,7 @@
 					class="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 font-sans text-sm font-medium {item.active
 						? `${toneSoft[tone]}`
 						: 'text-text-secondary hover:bg-bg-inset'} {item.disabled
-						? 'pointer-events-none opacity-50'
+						? 'pointer-events-none opacity-40'
 						: ''}"
 				>
 					<span class="flex min-w-0 items-center gap-2.5">

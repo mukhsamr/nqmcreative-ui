@@ -128,6 +128,25 @@ export const toneFocusBorder = {
     danger: 'focus:border-danger',
     neutral: 'focus:border-neutral'
 };
+/**
+ * Focus-ring geometry for a shell that holds the real control — `Input`'s
+ * wrapper, an input group. The ring belongs on the box the reader sees, not on
+ * the bare `<input>` inside it, so it is keyed off a focused descendant.
+ * `:has(:focus-visible)` rather than `:focus-within` so a pointer click into a
+ * field does not draw a keyboard affordance.
+ */
+export const focusWithinRing = 'has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2';
+/** Ring colour for `focusWithinRing`. */
+export const toneFocusWithinRing = {
+    brand: 'has-[:focus-visible]:outline-brand',
+    accent: 'has-[:focus-visible]:outline-accent',
+    violet: 'has-[:focus-visible]:outline-violet',
+    info: 'has-[:focus-visible]:outline-info',
+    success: 'has-[:focus-visible]:outline-success',
+    warning: 'has-[:focus-visible]:outline-warning',
+    danger: 'has-[:focus-visible]:outline-danger',
+    neutral: 'has-[:focus-visible]:outline-neutral'
+};
 /** Border colour applied while a descendant has focus (wrapped controls). */
 export const toneFocusWithinBorder = {
     brand: 'focus-within:border-brand',

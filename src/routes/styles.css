@@ -292,11 +292,11 @@
 
 /* --- sprout --- */
 [data-style='sprout'] {
-	--color-bg: #fffefb;
-	--color-bg-alt: #f0fdf4;
-	--color-bg-inset: #e3f6e9;
-	--color-hairline: #ecefe7;
-	--color-hairline-strong: #d3e0d1;
+	--color-bg: #ffffff;
+	--color-bg-alt: #f7f7f4;
+	--color-bg-inset: #edede8;
+	--color-hairline: #e6e6e0;
+	--color-hairline-strong: #cfcfc7;
 	--color-text: #1a3a1f;
 	--color-text-secondary: #2f5135;
 	--color-text-muted: #5f6f62;
@@ -342,15 +342,15 @@
 
 .dark[data-style='sprout'],
 .dark [data-style='sprout'] {
-	--color-bg: #0e1a11;
-	--color-bg-alt: #14251a;
-	--color-bg-inset: #1b3020;
-	--color-hairline: #1e3524;
-	--color-hairline-strong: #2f4a36;
+	--color-bg: #17140e;
+	--color-bg-alt: #211c13;
+	--color-bg-inset: #2d261a;
+	--color-hairline: #2a2317;
+	--color-hairline-strong: #453a27;
 	--color-text: #f0f7f0;
 	--color-text-secondary: #cadfcd;
 	--color-text-muted: #94ad99;
-	--color-text-inverse: #0e1a11;
+	--color-text-inverse: #17140e;
 	--color-brand: #4ade80;
 	--color-brand-hover: #86efac;
 	--color-brand-light: #0f2f1c;
@@ -388,15 +388,15 @@
 @media (prefers-color-scheme: dark) {
 	:root:not(.light)[data-style='sprout'],
 	:root:not(.light) [data-style='sprout'] {
-		--color-bg: #0e1a11;
-		--color-bg-alt: #14251a;
-		--color-bg-inset: #1b3020;
-		--color-hairline: #1e3524;
-		--color-hairline-strong: #2f4a36;
+		--color-bg: #17140e;
+		--color-bg-alt: #211c13;
+		--color-bg-inset: #2d261a;
+		--color-hairline: #2a2317;
+		--color-hairline-strong: #453a27;
 		--color-text: #f0f7f0;
 		--color-text-secondary: #cadfcd;
 		--color-text-muted: #94ad99;
-		--color-text-inverse: #0e1a11;
+		--color-text-inverse: #17140e;
 		--color-brand: #4ade80;
 		--color-brand-hover: #86efac;
 		--color-brand-light: #0f2f1c;

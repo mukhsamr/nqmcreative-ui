@@ -12,5 +12,7 @@
 
 <label class="font-sans text-sm font-medium text-text {className}" {...rest}>
 	{@render children()}
-	{#if required}<span class="ml-0.5 text-danger" aria-hidden="true">*</span>{/if}
+	{#if required}<span class="ml-0.5 text-danger" aria-hidden="true">*</span><span class="sr-only"
+			>(required)</span
+		>{/if}
 </label>

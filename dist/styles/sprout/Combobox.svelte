@@ -3,7 +3,14 @@
 	import { anchored } from '../../core/actions/anchor.js';
 	import { clickOutside, portal } from '../../core/actions/dismissable.js';
 	import { ListCursor, groupItems, matchQuery, revealIndex } from '../../core/list.svelte.js';
-	import { toneFocusWithinBorder, toneSoft, toneText, type Tone } from '../../core/tones.js';
+	import {
+		focusWithinRing,
+		toneFocusWithinBorder,
+		toneFocusWithinRing,
+		toneSoft,
+		toneText,
+		type Tone
+	} from '../../core/tones.js';
 	import { iconMd } from './icon.js';
 	import { edge, soft } from './lift.js';
 
@@ -144,7 +151,9 @@
 
 <div
 	bind:this={wrapper}
-	class="relative inline-flex w-full items-center gap-2 rounded-xl border bg-bg pr-1.5 pl-3 {edge} transition-colors duration-150 ease-brand-out
+	class="relative inline-flex w-full items-center gap-2 rounded-xl border bg-bg pr-1.5 pl-3 {edge} transition-colors duration-150 ease-brand-out {focusWithinRing} {toneFocusWithinRing[
+		tone
+	]}
 		{invalid ? 'border-danger' : `border-hairline-strong ${toneFocusWithinBorder[tone]}`}
 		{disabled ? 'pointer-events-none opacity-50' : ''} {className}"
 >
@@ -178,7 +187,7 @@
 			type="button"
 			onclick={clear}
 			aria-label="Clear selection"
-			class="shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+			class="shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
 		>
 			<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 				<path

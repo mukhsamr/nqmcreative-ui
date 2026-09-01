@@ -42,7 +42,7 @@
 					<svelte:element
 						this={logo.href ? 'a' : 'div'}
 						href={logo.href}
-						class="flex items-center rounded transition-all duration-200 ease-brand-out {muted
+						class="flex items-center rounded-md transition-all duration-200 ease-brand-out {muted
 							? 'opacity-60 grayscale hover:opacity-100 hover:grayscale-0'
 							: ''}"
 					>

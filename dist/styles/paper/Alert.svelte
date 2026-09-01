@@ -40,7 +40,7 @@
 	const variants = $derived({
 		soft: `${toneSurface[tone]} border ${toneBorderSoft[tone]}`,
 		outline: `bg-bg shadow-xs border ${toneBorderSoft[tone]}`,
-		accent: `${toneSurface[tone]} border-l-4 ${toneBorder[tone]}`
+		accent: `${toneSurface[tone]} border-l-2 ${toneBorder[tone]}`
 	});
 
 	function dismiss() {
@@ -69,7 +69,7 @@
 
 		<div class="flex min-w-0 flex-1 flex-col gap-1">
 			{#if title}
-				<p class="text-sm leading-snug font-semibold {toneText[tone]}">{title}</p>
+				<p class="font-heading text-sm leading-snug font-semibold {toneText[tone]}">{title}</p>
 			{/if}
 			{#if children}
 				<div class="text-[13px] leading-relaxed text-text-secondary">{@render children()}</div>

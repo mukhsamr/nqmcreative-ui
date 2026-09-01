@@ -31,6 +31,14 @@ export declare function popupTrigger(node: HTMLElement, options: PopupTriggerOpt
  * wrapper, so screen readers announce the state on the thing being pressed.
  */
 export declare function describeTrigger(wrapper: HTMLElement | null, kind: 'menu' | 'dialog' | 'listbox', open: boolean): void;
+/**
+ * Points the real control inside a wrapper at the element that describes it —
+ * a tooltip's text. Same reason as `describeTrigger`: the control is whatever
+ * the consumer passed in a snippet, so the attribute has to be attached rather
+ * than written in the template. Without it a tooltip is decoration: sighted
+ * hover users get the hint, keyboard and screen-reader users get nothing.
+ */
+export declare function describedBy(wrapper: HTMLElement | null, id: string): void;
 /** The menu items a roving-focus menu should walk, in DOM order. */
 export declare function menuItems(menu: HTMLElement | null): HTMLElement[];
 /**

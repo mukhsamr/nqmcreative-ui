@@ -119,7 +119,7 @@
 			type="button"
 			{disabled}
 			onclick={() => input?.click()}
-			class="shrink-0 rounded-lg border border-hairline-strong bg-bg-alt font-sans font-medium text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current
+			class="shrink-0 rounded-xl border border-hairline-strong bg-bg-alt font-sans font-medium text-text-secondary transition-colors duration-150 hover:bg-bg-inset hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current
 				{buttons[size]}"
 		>
 			{label ?? 'Choose file'}
@@ -136,7 +136,7 @@
 				type="button"
 				onclick={clear}
 				aria-label="Remove"
-				class="mr-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
+				class="mr-1 shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
 			>
 				<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 					<path
@@ -184,7 +184,7 @@
 						type="button"
 						onclick={() => (files = files.filter((_, at) => at !== i))}
 						aria-label="Remove {file.name}"
-						class="-m-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
+						class="-m-1 shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
 					>
 						<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 							<path

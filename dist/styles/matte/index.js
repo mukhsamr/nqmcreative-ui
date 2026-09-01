@@ -6,7 +6,7 @@
  * the whole style.
  */
 /* --- shared behaviour --- */
-export { TONES, focusRing, peerFocusRing, toneBorder, toneBorderLeft, toneBorderSoft, toneFill, toneFocusBorder, toneFocusWithinBorder, toneHoverBorder, toneHoverText, tonePeerChecked, tonePeerFocus, toneRing, toneSoft, toneSoftHover, toneSolid, toneSolidHover, toneSurface, toneText, anchored, clickOutside, focusTrap, focusable, navigateList, portal, toast, applyTheme, storedTheme, toISO, fromISO, today, isSameDay, addDays, addMonths, monthGrid, weekdayNames, monthLabel, isOutOfRange, formatISO, parseFormatted } from '../../core/index.js';
+export { TONES, focusRing, peerFocusRing, toneBorder, toneBorderLeft, toneBorderSoft, toneFill, toneFocusBorder, toneFocusWithinBorder, focusWithinRing, toneFocusWithinRing, toneHoverBorder, toneHoverText, tonePeerChecked, tonePeerFocus, toneRing, toneSoft, toneSoftHover, toneSolid, toneSolidHover, toneSurface, toneText, anchored, clickOutside, focusTrap, focusable, navigateList, portal, toast, applyTheme, storedTheme, toISO, fromISO, today, isSameDay, addDays, addMonths, monthGrid, weekdayNames, monthLabel, isOutOfRange, formatISO, parseFormatted } from '../../core/index.js';
 /* --- actions --- */
 export { default as Button } from './Button.svelte';
 export { default as Link } from './Link.svelte';

@@ -63,7 +63,7 @@
 	}: Props = $props();
 
 	const base =
-		'inline-flex items-center justify-center gap-2 border font-sans font-medium whitespace-nowrap transition-all duration-150 ease-brand-out disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
+		'inline-flex items-center justify-center gap-2 border font-sans font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow,gap] duration-150 ease-brand-out disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
 
 	const sizes: Record<ButtonSize, string> = {
 		sm: 'h-8 px-3.5 text-[13px]',
@@ -105,6 +105,10 @@
 	const iconClass = $derived(size === 'sm' ? iconSm : iconMd);
 
 	async function handleClick(event: MouseEvent) {
+		if (inert) {
+			event.preventDefault();
+			return;
+		}
 		const result = onclick?.(event);
 		// Anything else is a plain handler: nothing to wait for, nothing to lock.
 		if (!(result instanceof Promise)) return;
@@ -123,7 +127,7 @@
 	disabled={href ? undefined : inert}
 	aria-disabled={href && inert ? 'true' : undefined}
 	aria-busy={busy ? 'true' : undefined}
-	role={href ? 'button' : undefined}
+	tabindex={href && inert ? -1 : undefined}
 	class="{base} {focusRing} {toneRing[tone]} {variantClass} {isLink
 		? ''
 		: iconOnly

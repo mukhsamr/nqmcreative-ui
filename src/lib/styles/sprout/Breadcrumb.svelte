@@ -30,7 +30,7 @@
 				{#if item.href && i < items.length - 1}
 					<a
 						href={item.href}
-						class="inline-flex items-center gap-1.5 rounded px-1 py-0.5 text-text-muted transition-colors duration-150 ease-brand-out hover:bg-bg-inset {toneHoverText[
+						class="inline-flex items-center gap-1.5 rounded-md px-1 py-0.5 text-text-muted transition-colors duration-150 ease-brand-out hover:bg-bg-inset {toneHoverText[
 							tone
 						]}"
 					>

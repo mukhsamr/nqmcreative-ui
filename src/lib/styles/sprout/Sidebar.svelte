@@ -36,6 +36,7 @@
 
 <script lang="ts">
 	import { iconMd } from './icon.js';
+	import { soft } from './lift.js';
 	import { focusRing, toneRing, toneSoft, type Tone } from '../../core/tones.js';
 
 	interface Props {
@@ -90,7 +91,7 @@
 	const surfaces: Record<SidebarVariant, string> = {
 		plain: 'h-full bg-transparent',
 		filled: 'h-full border-r border-hairline bg-bg-alt',
-		floating: 'm-3 h-[calc(100%-1.5rem)] rounded-2xl border border-hairline bg-bg-alt shadow-sm'
+		floating: `m-3 h-[calc(100%-1.5rem)] rounded-2xl border border-hairline bg-bg-alt ${soft}`
 	};
 
 	const row =

@@ -14,7 +14,7 @@
 		toneText,
 		type Tone
 	} from '../../core/tones.js';
-	import { edge, lift } from './lift.js';
+	import { lift, liftSoft } from './lift.js';
 
 	export type ButtonVariant = 'solid' | 'soft' | 'outline' | 'ghost' | 'link' | 'primary';
 	export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -92,11 +92,11 @@
 			case 'solid':
 				return `border-transparent ${toneSolid[tone]} ${toneSolidHover[tone]} ${lift[tone]}`;
 			case 'soft':
-				return `border-transparent ${toneSoft[tone]} ${toneSoftHover[tone]} ${edge}`;
+				return `border-transparent ${toneSoft[tone]} ${toneSoftHover[tone]} ${liftSoft[tone]}`;
 			// Outline keeps its own colours on hover — swapping to a solid fill is
 			// matte's move, and it fights sprout's soft surfaces.
 			case 'outline':
-				return `bg-bg ${edge} ${toneText[tone]} ${toneBorderSoft[tone]} hover:bg-bg-alt`;
+				return `bg-bg ${liftSoft[tone]} ${toneText[tone]} ${toneBorderSoft[tone]} hover:bg-bg-alt`;
 			// Nothing raised, so nothing to sink: ghost stays flat on the page.
 			case 'ghost':
 				return `border-transparent bg-transparent ${toneText[tone]} ${toneSoftHover[tone]} active:translate-y-0`;
@@ -116,6 +116,10 @@
 	const iconClass = $derived(size === 'sm' ? iconSm : iconMd);
 
 	async function handleClick(event: MouseEvent) {
+		if (inert) {
+			event.preventDefault();
+			return;
+		}
 		const result = onclick?.(event);
 		// Anything else is a plain handler: nothing to wait for, nothing to lock.
 		if (!(result instanceof Promise)) return;
@@ -134,7 +138,7 @@
 	disabled={href ? undefined : inert}
 	aria-disabled={href && inert ? 'true' : undefined}
 	aria-busy={busy ? 'true' : undefined}
-	role={href ? 'button' : undefined}
+	tabindex={href && inert ? -1 : undefined}
 	class="{base} {focusRing} {toneRing[tone]} {variantClass} {isLink
 		? ''
 		: iconOnly

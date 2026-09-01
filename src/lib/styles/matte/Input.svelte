@@ -1,7 +1,12 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import { toneFocusWithinBorder, type Tone } from '../../core/tones.js';
+	import {
+		focusWithinRing,
+		toneFocusWithinBorder,
+		toneFocusWithinRing,
+		type Tone
+	} from '../../core/tones.js';
 
 	export type InputSize = 'sm' | 'md' | 'lg';
 
@@ -37,7 +42,9 @@
 </script>
 
 <span
-	class="inline-flex w-full items-center gap-2 border bg-bg px-3.5 transition-colors duration-150 ease-brand-out
+	class="inline-flex w-full items-center gap-2 border bg-bg px-3.5 transition-colors duration-150 ease-brand-out {focusWithinRing} {toneFocusWithinRing[
+		tone
+	]}
 		{sizes[size]}
 		{invalid
 		? 'border-danger focus-within:border-danger'

@@ -38,6 +38,8 @@
 		...rest
 	}: Props = $props();
 
+	const uid = $props.id();
+
 	let dialog: HTMLDialogElement | null = $state(null);
 
 	const horizontal = $derived(side === 'left' || side === 'right');
@@ -80,6 +82,8 @@
 
 <dialog
 	bind:this={dialog}
+	aria-labelledby={title ? `${uid}-title` : undefined}
+	aria-describedby={description ? `${uid}-description` : undefined}
 	onclose={close}
 	onclick={(event) => {
 		if (dismissible && isBackdropClick(event, dialog)) close();
@@ -97,10 +101,12 @@
 				{#if icon}<span class={iconLg}>{@render icon()}</span>{/if}
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					{#if title}
-						<h2 class="font-heading text-base font-semibold text-text">{title}</h2>
+						<h2 id="{uid}-title" class="font-heading text-base font-semibold text-text">{title}</h2>
 					{/if}
 					{#if description}
-						<p class="font-sans text-[13px] text-text-muted">{description}</p>
+						<p id="{uid}-description" class="font-sans text-[13px] text-text-muted">
+							{description}
+						</p>
 					{/if}
 				</div>
 				{#if dismissible}

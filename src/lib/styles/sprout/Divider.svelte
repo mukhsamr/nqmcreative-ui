@@ -20,7 +20,7 @@
 		{...rest}
 	></div>
 {:else if label}
-	<div class="flex items-center gap-3 {className}" {...rest}>
+	<div role="separator" class="flex items-center gap-3 {className}" {...rest}>
 		<span class="h-px flex-1 bg-hairline"></span>
 		<span class="font-sans text-xs font-medium text-text-muted">{label}</span>
 		<span class="h-px flex-1 bg-hairline"></span>

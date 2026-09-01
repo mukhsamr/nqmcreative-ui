@@ -8,7 +8,7 @@
  * Styles are free to ignore any of it — but there is no `matte` version of a
  * focus trap, so none of them should have to write one.
  */
-export { TONES, focusRing, peerFocusRing, toneBorder, toneBorderLeft, toneBorderSoft, toneFill, toneFocusBorder, toneFocusWithinBorder, toneHoverBorder, toneHoverText, tonePeerChecked, tonePeerFocus, toneRing, toneSoft, toneSoftHover, toneSolid, toneSolidHover, toneSurface, toneText } from './tones.js';
+export { TONES, focusRing, peerFocusRing, toneBorder, toneBorderLeft, toneBorderSoft, toneFill, toneFocusBorder, toneFocusWithinBorder, focusWithinRing, toneFocusWithinRing, toneHoverBorder, toneHoverText, tonePeerChecked, tonePeerFocus, toneRing, toneSoft, toneSoftHover, toneSolid, toneSolidHover, toneSurface, toneText } from './tones.js';
 export type { Tone } from './tones.js';
 export { anchored } from './actions/anchor.js';
 export type { Placement, AnchorOptions } from './actions/anchor.js';

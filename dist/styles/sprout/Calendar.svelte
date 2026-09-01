@@ -189,7 +189,7 @@
 			type="button"
 			onclick={() => pick(now)}
 			disabled={blocked(now)}
-			class="self-start rounded px-1 text-[13px] font-medium transition-colors duration-150 disabled:pointer-events-none disabled:opacity-40 {toneText[
+			class="self-start rounded-md px-1 text-[13px] font-medium transition-colors duration-150 disabled:pointer-events-none disabled:opacity-40 {toneText[
 				tone
 			]} hover:underline hover:underline-offset-2 {focusRing} {toneRing[tone]}"
 		>

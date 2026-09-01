@@ -69,7 +69,7 @@
 
 		<div class="flex min-w-0 flex-1 flex-col gap-1">
 			{#if title}
-				<p class="text-[15px] leading-snug font-medium {toneText[tone]}">{title}</p>
+				<p class="font-heading text-[15px] leading-snug font-medium {toneText[tone]}">{title}</p>
 			{/if}
 			{#if children}
 				<div class="text-sm leading-relaxed text-text-secondary">{@render children()}</div>

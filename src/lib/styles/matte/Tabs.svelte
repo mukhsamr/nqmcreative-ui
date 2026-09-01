@@ -74,7 +74,7 @@
 			}`;
 		}
 		return `${base} h-9 px-4 ${
-			active ? 'bg-bg font-medium text-text' : 'text-text-secondary hover:text-text'
+			active ? `bg-bg font-medium ${toneText[tone]}` : 'text-text-secondary hover:text-text'
 		}`;
 	}
 </script>

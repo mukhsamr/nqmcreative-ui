@@ -29,7 +29,7 @@
 </script>
 
 {#if variant === 'text' && lines > 1}
-	<div class="flex w-full flex-col gap-2 {className}" {...rest}>
+	<div aria-hidden="true" class="flex w-full flex-col gap-2 {className}" {...rest}>
 		{#each { length: lines }, i (i)}
 			<div
 				class="h-4 animate-pulse rounded-md bg-bg-inset {i === lines - 1 ? 'w-2/3' : 'w-full'}"
@@ -39,6 +39,7 @@
 	</div>
 {:else}
 	<div
+		aria-hidden="true"
 		class="animate-pulse bg-bg-inset {variants[variant]} {className}"
 		style="{width ? `width:${width};` : ''}{height ? `height:${height};` : ''}"
 		{...rest}

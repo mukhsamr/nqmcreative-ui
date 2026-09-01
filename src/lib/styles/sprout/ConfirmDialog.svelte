@@ -36,6 +36,8 @@
 		children
 	}: Props = $props();
 
+	const uid = $props.id();
+
 	async function confirm() {
 		try {
 			loading = true;
@@ -55,6 +57,8 @@
 
 <Modal
 	bind:open
+	aria-labelledby="{uid}-title"
+	aria-describedby={description ? `${uid}-description` : undefined}
 	size="sm"
 	dismissible={!loading}
 	showClose={false}
@@ -73,9 +77,11 @@
 			{/if}
 		</span>
 		<div class="flex min-w-0 flex-1 flex-col gap-1.5">
-			<h2 class="font-heading text-base font-semibold text-text">{title}</h2>
+			<h2 id="{uid}-title" class="font-heading text-base font-semibold text-text">{title}</h2>
 			{#if description}
-				<p class="text-[13px] leading-relaxed text-text-secondary">{description}</p>
+				<p id="{uid}-description" class="text-[13px] leading-relaxed text-text-secondary">
+					{description}
+				</p>
 			{/if}
 			{#if children}
 				{@render children()}

@@ -107,6 +107,10 @@
 	const iconClass = $derived(size === 'sm' ? iconSm : iconMd);
 
 	async function handleClick(event: MouseEvent) {
+		if (inert) {
+			event.preventDefault();
+			return;
+		}
 		const result = onclick?.(event);
 		// Anything else is a plain handler: nothing to wait for, nothing to lock.
 		if (!(result instanceof Promise)) return;
@@ -125,7 +129,7 @@
 	disabled={href ? undefined : inert}
 	aria-disabled={href && inert ? 'true' : undefined}
 	aria-busy={busy ? 'true' : undefined}
-	role={href ? 'button' : undefined}
+	tabindex={href && inert ? -1 : undefined}
 	class="{base} {focusRing} {toneRing[tone]} {variantClass} {isLink
 		? ''
 		: iconOnly

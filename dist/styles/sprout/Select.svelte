@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLSelectAttributes } from 'svelte/elements';
-	import { toneFocusBorder, type Tone } from '../../core/tones.js';
+	import { focusRing, toneFocusBorder, toneRing, type Tone } from '../../core/tones.js';
 	import { edge } from './lift.js';
 
 	export interface SelectOption {
@@ -36,7 +36,9 @@
 	<select
 		bind:value
 		aria-invalid={invalid ? 'true' : undefined}
-		class="h-10 w-full appearance-none rounded-xl border bg-bg py-0 pr-9 pl-3 font-sans text-sm text-text {edge} transition-colors duration-150 ease-brand-out focus:outline-none disabled:pointer-events-none disabled:opacity-50
+		class="{focusRing} {toneRing[
+			tone
+		]} h-10 w-full appearance-none rounded-xl border bg-bg py-0 pr-9 pl-3 font-sans text-sm text-text {edge} transition-colors duration-150 ease-brand-out disabled:pointer-events-none disabled:opacity-50
 			{invalid ? 'border-danger' : `border-hairline-strong ${toneFocusBorder[tone]}`} {className}"
 		{...rest}
 	>

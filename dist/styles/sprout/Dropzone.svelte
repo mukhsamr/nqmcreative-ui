@@ -190,7 +190,7 @@
 						type="button"
 						onclick={() => remove(i)}
 						aria-label="Remove {file.name}"
-						class="-m-1 shrink-0 rounded p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
+						class="-m-1 shrink-0 rounded-xl p-1 text-text-muted transition-colors duration-150 hover:bg-bg-inset hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger"
 					>
 						<svg class="size-3.5" viewBox="0 0 14 14" fill="none" aria-hidden="true">
 							<path

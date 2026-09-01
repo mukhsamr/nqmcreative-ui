@@ -8,7 +8,7 @@ look. Eight tones, light and dark, no runtime dependencies.
 | -------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
 | `matte`  | `@nqmcreative/ui/matte`  | Flat and sharp-cornered — no radius, no shadow, no gloss. Hairline rules and mono micro-labels do the work borders usually do. |
 | `paper`  | `@nqmcreative/ui/paper`  | The neutral one. Start here if unsure: soft corners, light shadows, generous spacing, and nothing that fights the content.     |
-| `sprout` | `@nqmcreative/ui/sprout` | Warm and fully rounded — leaf green on cream, pill buttons, and a round display face. For school, community and family sites.  |
+| `sprout` | `@nqmcreative/ui/sprout` | Warm and fully rounded — leaf green on white, pill buttons, and a round display face. For school, community and family sites.  |
 
 The docs site lives in this repo — every component with a live demo, plus
 theming and contributing guides. `bun run dev` to read it.
