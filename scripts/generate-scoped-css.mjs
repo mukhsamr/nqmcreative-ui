@@ -32,6 +32,30 @@ function blockBody(css, selector) {
 }
 
 /**
+ * Every `@keyframes` block in the file, matched with balanced braces so the
+ * nested `from`/`to` rules don't end the block early. Keyframes are global —
+ * they can't be scoped to `[data-style]` — so the preview needs all three
+ * styles' animations present at once. Each style names its own (matte's
+ * shutter, paper's rise/drop, sprout's pop), so they coexist without clashing.
+ */
+function keyframeBlocks(css) {
+	const blocks = [];
+	const re = /@keyframes\s+([\w-]+)\s*\{/g;
+	let m;
+	while ((m = re.exec(css))) {
+		let depth = 0;
+		let i = css.indexOf('{', m.index);
+		for (; i < css.length; i++) {
+			if (css[i] === '{') depth++;
+			else if (css[i] === '}' && --depth === 0) break;
+		}
+		blocks.push({ name: m[1], text: css.slice(m.index, i + 1) });
+		re.lastIndex = i + 1;
+	}
+	return blocks;
+}
+
+/**
  * Custom properties only. `color-scheme` is deliberately dropped: it belongs to
  * the whole document, and setting it on a preview box would repaint the
  * surrounding page's form controls.
@@ -62,12 +86,18 @@ let out = `/*
 `;
 
 let baseline = null;
+/** Deduped across styles, first definition wins — `nqm-fade` is shared. */
+const keyframes = new Map();
 
 for (const style of STYLES) {
 	const css = await readFile(
 		new URL(`src/lib/styles/${style.name}/theme.css`, `file://${root}`),
 		'utf8'
 	);
+
+	for (const kf of keyframeBlocks(css)) {
+		if (!keyframes.has(kf.name)) keyframes.set(kf.name, kf.text);
+	}
 
 	const light = customProperties(blockBody(css, '@theme'));
 	const dark = customProperties(blockBody(css, '\n.dark'));
@@ -106,6 +136,11 @@ for (const style of STYLES) {
 		out += `\n.dark${scope},\n.dark ${scope} {\n${indent(dark, 1)}\n}\n`;
 		out += `\n@media (prefers-color-scheme: dark) {\n\t:root:not(.light)${scope},\n\t:root:not(.light) ${scope} {\n${indent(dark, 2)}\n\t}\n}\n`;
 	}
+}
+
+if (keyframes.size) {
+	out += `\n/* --- keyframes (global, not scoped) --- */\n`;
+	out += [...keyframes.values()].join('\n') + '\n';
 }
 
 const path = new URL('src/routes/styles.css', `file://${root}`);

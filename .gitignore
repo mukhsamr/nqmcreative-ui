@@ -36,3 +36,4 @@ vite.config.ts.timestamp-*
 *.tgz
 
 /.claude
+/.impeccable

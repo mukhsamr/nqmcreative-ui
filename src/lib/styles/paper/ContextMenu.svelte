@@ -78,7 +78,7 @@
 		role="menu"
 		aria-label={label ?? 'Menu'}
 		tabindex="-1"
-		class="z-50 flex max-h-[min(24rem,80vh)] min-w-48 flex-col overflow-y-auto rounded-lg border border-hairline bg-bg py-1 font-sans shadow-lg {menuClass}"
+		class="z-50 flex max-h-[min(24rem,80vh)] min-w-48 animate-reveal flex-col overflow-y-auto rounded-lg border border-hairline bg-bg py-1 font-sans shadow-lg {menuClass}"
 	>
 		{@render menu()}
 	</div>

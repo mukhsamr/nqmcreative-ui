@@ -54,6 +54,8 @@
 	--font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
 	--ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
 	--ease-brand-out: cubic-bezier(0.25, 1, 0.5, 1);
+	--animate-enter: nqm-fade 150ms var(--ease-brand-out);
+	--animate-reveal: nqm-shutter 160ms var(--ease-brand-out);
 }
 
 .dark[data-style='matte'],
@@ -159,10 +161,10 @@
 	--color-text-secondary: #4b5563;
 	--color-text-muted: #6b7280;
 	--color-text-inverse: #ffffff;
-	--color-brand: #4f46e5;
-	--color-brand-hover: #4338ca;
-	--color-brand-light: #eef2ff;
-	--color-brand-border: #c7d2fe;
+	--color-brand: #15803d;
+	--color-brand-hover: #166534;
+	--color-brand-light: #e8f6ee;
+	--color-brand-border: #a7d9b9;
 	--color-accent: #e11d48;
 	--color-accent-hover: #be123c;
 	--color-accent-light: #fff1f2;
@@ -196,6 +198,8 @@
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 	--ease-brand: cubic-bezier(0.4, 0, 0.2, 1);
 	--ease-brand-out: cubic-bezier(0, 0, 0.2, 1);
+	--animate-enter: nqm-rise 200ms var(--ease-brand-out);
+	--animate-reveal: nqm-drop 180ms var(--ease-brand-out);
 }
 
 .dark[data-style='paper'],
@@ -209,10 +213,10 @@
 	--color-text-secondary: #d1d5db;
 	--color-text-muted: #9ca3af;
 	--color-text-inverse: #0b0f19;
-	--color-brand: #818cf8;
-	--color-brand-hover: #a5b4fc;
-	--color-brand-light: #1e1b4b;
-	--color-brand-border: #3730a3;
+	--color-brand: #46a06a;
+	--color-brand-hover: #5cb47e;
+	--color-brand-light: #12281b;
+	--color-brand-border: #255034;
 	--color-accent: #fb7185;
 	--color-accent-hover: #fda4af;
 	--color-accent-light: #4c0519;
@@ -255,10 +259,10 @@
 		--color-text-secondary: #d1d5db;
 		--color-text-muted: #9ca3af;
 		--color-text-inverse: #0b0f19;
-		--color-brand: #818cf8;
-		--color-brand-hover: #a5b4fc;
-		--color-brand-light: #1e1b4b;
-		--color-brand-border: #3730a3;
+		--color-brand: #46a06a;
+		--color-brand-hover: #5cb47e;
+		--color-brand-light: #12281b;
+		--color-brand-border: #255034;
 		--color-accent: #fb7185;
 		--color-accent-hover: #fda4af;
 		--color-accent-light: #4c0519;
@@ -338,6 +342,8 @@
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 	--ease-brand: cubic-bezier(0.34, 1.4, 0.64, 1);
 	--ease-brand-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--animate-enter: nqm-pop 240ms var(--ease-brand);
+	--animate-reveal: nqm-pop 220ms var(--ease-brand);
 }
 
 .dark[data-style='sprout'],
@@ -429,5 +435,51 @@
 		--color-neutral-hover: #c7d8ca;
 		--color-neutral-light: #1b3020;
 		--color-neutral-border: #2f4a36;
+	}
+}
+
+/* --- keyframes (global, not scoped) --- */
+@keyframes nqm-fade {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes nqm-shutter {
+	from {
+		opacity: 0;
+		clip-path: inset(0 0 100% 0);
+	}
+	to {
+		opacity: 1;
+		/* Both ends must be inset() — animating to `none` (the default) can't
+		 * interpolate and the panel would snap open at the midpoint instead. */
+		clip-path: inset(0 0 0 0);
+	}
+}
+@keyframes nqm-rise {
+	from {
+		opacity: 0;
+		/* dialogs rise and grow a hair — a gentle zoom onto the page */
+		transform: translateY(8px) scale(0.98);
+		/* one layer, matching the panel's shadow-2xl, so box-shadow interpolates
+		 * to the resting shadow instead of snapping (a mismatched layer count is
+		 * discrete). The shadow deepens as the panel settles. */
+		box-shadow: 0 8px 20px -12px rgb(0 0 0 / 0.18);
+	}
+}
+@keyframes nqm-drop {
+	from {
+		opacity: 0;
+		transform: translateY(-6px);
+		/* two layers, matching the menus' shadow-lg — same reason as above */
+		box-shadow:
+			0 2px 6px -3px rgb(0 0 0 / 0.08),
+			0 1px 3px -2px rgb(0 0 0 / 0.06);
+	}
+}
+@keyframes nqm-pop {
+	from {
+		opacity: 0;
+		transform: scale(0.96);
 	}
 }

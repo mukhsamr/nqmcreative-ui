@@ -63,7 +63,10 @@
 	}: Props = $props();
 
 	const base =
-		'inline-flex items-center justify-center gap-2 rounded-md border font-sans font-medium whitespace-nowrap transition-colors duration-150 ease-brand-out disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
+		// The press: shadow is paper's language, so a click flattens the button
+		// onto the page (shadow drops) and dims it a notch. Snaps in at 75ms,
+		// settles back over the base 150ms on release.
+		'inline-flex items-center justify-center gap-2 rounded-md border font-sans font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow,filter] duration-150 ease-brand-out active:shadow-none active:brightness-95 active:duration-75 disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
 
 	const sizes: Record<ButtonSize, string> = {
 		sm: 'h-8 px-3 text-[13px]',

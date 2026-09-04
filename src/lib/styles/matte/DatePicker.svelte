@@ -169,7 +169,7 @@
 		use:anchored={{ anchor: wrapper, placement: 'bottom-start', offset: 4 }}
 		use:clickOutside={{ onoutside: () => (open = false), ignore: [wrapper] }}
 		id="{id ?? 'datepicker'}-calendar"
-		class="z-50 border border-hairline bg-bg"
+		class="z-50 animate-reveal border border-hairline bg-bg"
 	>
 		<Calendar
 			bind:value
