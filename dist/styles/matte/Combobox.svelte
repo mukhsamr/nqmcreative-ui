@@ -214,7 +214,7 @@
 		use:clickOutside={{ onoutside: () => (open = false), ignore: [wrapper] }}
 		id="{id ?? 'combobox'}-listbox"
 		role="listbox"
-		class="z-50 max-h-64 overflow-y-auto border border-hairline bg-bg py-1 font-sans"
+		class="z-50 max-h-64 animate-reveal overflow-y-auto border border-hairline bg-bg py-1 font-sans"
 	>
 		{#if flat.length === 0}
 			<p class="px-3 py-6 text-center text-sm text-text-muted">

@@ -29,10 +29,10 @@
 	--color-text-inverse: #ffffff;
 
 	/* --- brand / primary (indigo) --- */
-	--color-brand: #4f46e5;
-	--color-brand-hover: #4338ca;
-	--color-brand-light: #eef2ff;
-	--color-brand-border: #c7d2fe;
+	--color-brand: #15803d;
+	--color-brand-hover: #166534;
+	--color-brand-light: #e8f6ee;
+	--color-brand-border: #a7d9b9;
 
 	/* --- accent (rose) --- */
 	--color-accent: #e11d48;
@@ -95,9 +95,46 @@
 		'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
-	/* --- motion --- */
+	/* --- motion ---
+	 * paper enters by rising and fading — depth is its language, so overlays
+	 * settle onto the page rather than snapping or scaling in. One token per
+	 * overlay kind: `enter` for dialog panels + backdrops, `reveal` for anchored
+	 * menus and popovers. matte and sprout define these same two names their own
+	 * way, so an overlay's markup never changes between styles — only the values.
+	 */
 	--ease-brand: cubic-bezier(0.4, 0, 0.2, 1);
 	--ease-brand-out: cubic-bezier(0, 0, 0.2, 1);
+	--animate-enter: nqm-rise 200ms var(--ease-brand-out);
+	--animate-reveal: nqm-drop 180ms var(--ease-brand-out);
+}
+
+/* Enter-only, matching the Drawer: the native <dialog> and the {#if}-mounted
+ * popover each play these once on mount and leave instantly. */
+@keyframes nqm-fade {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes nqm-rise {
+	from {
+		opacity: 0;
+		/* dialogs rise and grow a hair — a gentle zoom onto the page */
+		transform: translateY(8px) scale(0.98);
+		/* one layer, matching the panel's shadow-2xl, so box-shadow interpolates
+		 * to the resting shadow instead of snapping (a mismatched layer count is
+		 * discrete). The shadow deepens as the panel settles. */
+		box-shadow: 0 8px 20px -12px rgb(0 0 0 / 0.18);
+	}
+}
+@keyframes nqm-drop {
+	from {
+		opacity: 0;
+		transform: translateY(-6px);
+		/* two layers, matching the menus' shadow-lg — same reason as above */
+		box-shadow:
+			0 2px 6px -3px rgb(0 0 0 / 0.08),
+			0 1px 3px -2px rgb(0 0 0 / 0.06);
+	}
 }
 
 /*
@@ -126,10 +163,10 @@
 	--color-text-muted: #9ca3af;
 	--color-text-inverse: #0b0f19;
 
-	--color-brand: #818cf8;
-	--color-brand-hover: #a5b4fc;
-	--color-brand-light: #1e1b4b;
-	--color-brand-border: #3730a3;
+	--color-brand: #46a06a;
+	--color-brand-hover: #5cb47e;
+	--color-brand-light: #12281b;
+	--color-brand-border: #255034;
 
 	--color-accent: #fb7185;
 	--color-accent-hover: #fda4af;
@@ -182,10 +219,10 @@
 		--color-text-muted: #9ca3af;
 		--color-text-inverse: #0b0f19;
 
-		--color-brand: #818cf8;
-		--color-brand-hover: #a5b4fc;
-		--color-brand-light: #1e1b4b;
-		--color-brand-border: #3730a3;
+		--color-brand: #46a06a;
+		--color-brand-hover: #5cb47e;
+		--color-brand-light: #12281b;
+		--color-brand-border: #255034;
 
 		--color-accent: #fb7185;
 		--color-accent-hover: #fda4af;
@@ -234,6 +271,20 @@
  * a wash — the text underneath keeps its own colour and its own contrast.
  */
 @layer base {
+	/* The one overlay surface a class can't reach: every <dialog> backdrop
+	 * fades with its panel. */
+	dialog::backdrop {
+		animation: nqm-fade 180ms var(--ease-brand-out);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animate-enter,
+		.animate-reveal,
+		dialog::backdrop {
+			animation: none;
+		}
+	}
+
 	::selection {
 		background-color: color-mix(in oklab, var(--color-brand) 24%, transparent);
 	}

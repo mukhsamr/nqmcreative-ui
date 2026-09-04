@@ -84,7 +84,7 @@
 		role="menu"
 		aria-label={label ?? 'Menu'}
 		tabindex="-1"
-		class="z-50 flex max-h-[min(24rem,80vh)] min-w-44 flex-col overflow-y-auto border border-hairline bg-bg py-1 font-sans {className}"
+		class="z-50 flex max-h-[min(24rem,80vh)] min-w-44 animate-reveal flex-col overflow-y-auto border border-hairline bg-bg py-1 font-sans {className}"
 	>
 		{@render children()}
 	</div>

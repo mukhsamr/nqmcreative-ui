@@ -160,7 +160,7 @@
 	onclick={(event) => {
 		if (event.target === dialog) open = false;
 	}}
-	class="mx-auto mt-[12vh] mb-auto w-[min(36rem,calc(100vw-2rem))] max-w-none border border-hairline bg-bg p-0 text-text backdrop:bg-text/40 {className}"
+	class="mx-auto mt-[12vh] mb-auto w-[min(36rem,calc(100vw-2rem))] max-w-none animate-enter border border-hairline bg-bg p-0 text-text backdrop:bg-text/40 {className}"
 >
 	<div use:focusTrap={{ autofocus: false }} onkeydown={onKeydown} role="none" class="flex flex-col">
 		<div class="flex items-center gap-3 border-b border-hairline px-3.5">

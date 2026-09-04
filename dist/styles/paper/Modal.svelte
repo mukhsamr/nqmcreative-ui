@@ -73,7 +73,7 @@
 	oncancel={(event) => {
 		if (!dismissible) event.preventDefault();
 	}}
-	class="m-auto w-[calc(100%-2rem)] rounded-xl border border-hairline bg-bg p-0 text-text shadow-2xl backdrop:bg-text/30 backdrop:backdrop-blur-[1px] {sizes[
+	class="m-auto w-[calc(100%-2rem)] animate-enter rounded-xl border border-hairline bg-bg p-0 text-text shadow-2xl backdrop:bg-text/30 backdrop:backdrop-blur-[1px] {sizes[
 		size
 	]} {className}"
 	{...rest}

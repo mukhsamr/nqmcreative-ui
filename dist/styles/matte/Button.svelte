@@ -63,7 +63,10 @@
 	}: Props = $props();
 
 	const base =
-		'inline-flex items-center justify-center gap-2 border font-sans font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow,gap] duration-150 ease-brand-out disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
+		// The press: matte can't sink or scale, so a click reads as the whole
+		// button dimming a notch (brightness, not a shadow or a transform).
+		// Snaps in at 75ms, settles back over the base 150ms on release.
+		'inline-flex items-center justify-center gap-2 border font-sans font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow,gap,filter] duration-150 ease-brand-out active:brightness-90 active:duration-75 disabled:opacity-50 disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:pointer-events-none';
 
 	const sizes: Record<ButtonSize, string> = {
 		sm: 'h-8 px-3.5 text-[13px]',

@@ -78,9 +78,37 @@
 	--font-heading: 'Sora', ui-sans-serif, system-ui, sans-serif;
 	--font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
 
-	/* --- motion --- */
+	/* --- motion ---
+	 * matte enters by fading and revealing along an axis — never by moving or
+	 * scaling (the style's first law). One token per overlay kind: `enter` for
+	 * dialog panels + backdrops, `reveal` for anchored menus and popovers.
+	 * paper and sprout define these same two names their own way, so an
+	 * overlay's markup never changes between styles — only these values do.
+	 */
 	--ease-brand: cubic-bezier(0.16, 1, 0.3, 1);
 	--ease-brand-out: cubic-bezier(0.25, 1, 0.5, 1);
+	--animate-enter: nqm-fade 150ms var(--ease-brand-out);
+	--animate-reveal: nqm-shutter 160ms var(--ease-brand-out);
+}
+
+/* Enter-only, matching the Drawer: the native <dialog> and the {#if}-mounted
+ * popover each play these once on mount and leave instantly. */
+@keyframes nqm-fade {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes nqm-shutter {
+	from {
+		opacity: 0;
+		clip-path: inset(0 0 100% 0);
+	}
+	to {
+		opacity: 1;
+		/* Both ends must be inset() — animating to `none` (the default) can't
+		 * interpolate and the panel would snap open at the midpoint instead. */
+		clip-path: inset(0 0 0 0);
+	}
 }
 
 /*
@@ -218,6 +246,20 @@
  * a wash — the text underneath keeps its own colour and its own contrast.
  */
 @layer base {
+	/* The one overlay surface a class can't reach: every <dialog> backdrop
+	 * fades with its panel. */
+	dialog::backdrop {
+		animation: nqm-fade 150ms var(--ease-brand-out);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animate-enter,
+		.animate-reveal,
+		dialog::backdrop {
+			animation: none;
+		}
+	}
+
 	::selection {
 		background-color: color-mix(in oklab, var(--color-brand) 24%, transparent);
 	}

@@ -77,7 +77,7 @@
 		role="dialog"
 		aria-label={title}
 		tabindex="-1"
-		class="z-50 flex max-w-xs flex-col gap-2 rounded-lg border border-hairline bg-bg p-4 font-sans shadow-lg {className}"
+		class="z-50 flex max-w-xs animate-reveal flex-col gap-2 rounded-lg border border-hairline bg-bg p-4 font-sans shadow-lg {className}"
 	>
 		{#if title}
 			<p class="font-heading text-sm font-semibold text-text">{title}</p>

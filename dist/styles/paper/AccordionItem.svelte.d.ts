@@ -1,7 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import { type Tone } from '../../core/tones.js';
-interface Props extends HTMLAttributes<HTMLDetailsElement> {
+interface Props extends HTMLAttributes<HTMLDivElement> {
     title: string;
     open?: boolean;
     tone?: Tone;
