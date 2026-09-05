@@ -4,6 +4,9 @@
 	import { count, components, styles } from '$site/catalogue.js';
 	import { docs } from '$site/docs.js';
 	import { UI } from '$site/ui.js';
+	import pkg from '../../../../package.json' with { type: 'json' };
+
+	const version = pkg.version;
 
 	let { data, children } = $props();
 
@@ -50,9 +53,17 @@
 		]}
 	>
 		{#snippet brand()}
-			<a href={base} class="font-heading text-base font-medium tracking-tight text-text">
-				nqm<span class="text-brand">.</span>ui
-			</a>
+			<div class="flex items-center gap-2">
+				<a href={base} class="font-heading text-base font-medium tracking-tight text-text">
+					nqm<span class="text-brand">.</span>ui
+				</a>
+				<span
+					class="rounded-full bg-brand-light px-1.5 py-0.5 font-mono text-[10px] leading-none tracking-wide text-brand"
+					title="Latest version"
+				>
+					v{version}
+				</span>
+			</div>
 		{/snippet}
 
 		{#snippet actions()}

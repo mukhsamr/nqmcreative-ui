@@ -90,10 +90,11 @@
 		fight over every colour.
 	</p>
 	<CodeBlock code={code.appCssPaper} label="src/app.css — paper" />
-	<ui.Alert tone="warning" title="The @source line is not optional">
-		Without it every component renders unstyled, with no error anywhere. Tailwind v4 skips
-		node_modules, so it never sees the class names that live inside the package. Point it at the
-		style you actually import — scanning the others only slows the build. Adjust the path to
+	<ui.Alert tone="warning" title="Both @source lines are not optional">
+		Without them components render unstyled, with no error anywhere. Tailwind v4 skips node_modules,
+		so it never sees the class names that live inside the package. Point it at the style you
+		actually import — scanning the other styles only slows the build — and at
+		<code class="font-mono">core</code>, where the shared tone colours live. Adjust the path to
 		wherever node_modules sits relative to that CSS file.
 	</ui.Alert>
 

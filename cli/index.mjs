@@ -389,9 +389,11 @@ async function init() {
 		`@import '@nqmcreative/ui/${style.name}/theme.css';`,
 		...(style.fonts ? [`@import '@nqmcreative/ui/${style.name}/fonts.css';`] : []),
 		``,
-		`/* Tailwind v4 skips node_modules — point it at this style's folder so`,
-		`   the class names used inside its components are generated. */`,
-		`@source '${source}/styles/${style.name}';`
+		`/* Tailwind v4 skips node_modules — point it at this style's folder and`,
+		`   the shared core, so the class names used inside the components (tone`,
+		`   colours and the like live in core) are generated. */`,
+		`@source '${source}/styles/${style.name}';`,
+		`@source '${source}/core';`
 	];
 
 	const css = await readOr(project.css);

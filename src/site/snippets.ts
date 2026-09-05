@@ -37,17 +37,19 @@ export const appCss = `@import 'tailwindcss';
 @import '@nqmcreative/ui/matte/theme.css';
 @import '@nqmcreative/ui/matte/fonts.css';
 
-/* Tailwind v4 skips node_modules — point it at the style's folder so the
-   class names used inside its components are generated. Only the style you
-   actually import needs to be scanned. */
-@source '../node_modules/@nqmcreative/ui/dist/styles/matte';`;
+/* Tailwind v4 skips node_modules — point it at the style's folder and the
+   shared core, so the class names used inside the components are generated.
+   Tone colours live in core, so both lines are needed. */
+@source '../node_modules/@nqmcreative/ui/dist/styles/matte';
+@source '../node_modules/@nqmcreative/ui/dist/core';`;
 
 export const appCssPaper = `@import 'tailwindcss';
 @import '@nqmcreative/ui/paper/theme.css';
 @import '@nqmcreative/ui/paper/fonts.css';
 
-/* Same idea, pointed at the other style's folder. */
-@source '../node_modules/@nqmcreative/ui/dist/styles/paper';`;
+/* Same idea, pointed at the other style's folder — plus the shared core. */
+@source '../node_modules/@nqmcreative/ui/dist/styles/paper';
+@source '../node_modules/@nqmcreative/ui/dist/core';`;
 
 export const layout = `<script lang="ts">
 	import '../app.css';
@@ -112,6 +114,7 @@ export const laravelCss = `@import 'tailwindcss';
 
 /* Two levels up from resources/css to the project root. */
 @source '../../node_modules/@nqmcreative/ui/dist/styles/matte';
+@source '../../node_modules/@nqmcreative/ui/dist/core';
 
 /* Your own markup, which lives outside this folder. */
 @source '../js';
@@ -281,8 +284,8 @@ export const toneRule = `<!-- Tailwind only sees literal class strings -->
 <div class={toneFill[tone]}>…</div>     <!-- correct -->`;
 
 export const borderRule = `<!-- two colours for the same property: CSS order decides, not class order -->
-<div class="border border-hairline border-brand">…</div>   <!-- unpredictable -->
-<div class="border border-hairline border-l-brand">…</div> <!-- fine -->`;
+border border-hairline border-brand     <!-- unpredictable -->
+border border-hairline border-l-brand   <!-- fine -->`;
 
 /* --------------------------------------------------------- form inputs -- */
 
